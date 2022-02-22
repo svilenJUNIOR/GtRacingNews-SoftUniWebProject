@@ -6,7 +6,6 @@
         public const string UnExistingEmail = "No account corresponds to that email!";
         public const string WrongEmailFormat = "Email must end with {0}";
 
-        public const string ExistingUsername = "There's an account corresponding to that username!";
         public const string UnExistingUsername = "No account corresponds to that username!";
         public const string WrongUsernameFormat = "Username must be between {0} and {1} characters!";
 
