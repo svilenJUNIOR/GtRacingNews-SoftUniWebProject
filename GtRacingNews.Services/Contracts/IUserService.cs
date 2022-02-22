@@ -1,8 +1,10 @@
-﻿namespace GtRacingNews.Services.Contracts
+﻿using GtRacingNews.Data.DataModels;
+
+namespace GtRacingNews.Services.Contracts
 {
     public interface IUserService
     {
-        void RegisterUser(string email, string password, string username);
+        User RegisterUser(string email, string password, string username);
         void LoginUser(string email, string password);
     }
 }

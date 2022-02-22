@@ -45,7 +45,7 @@ namespace GtRacingNews.Services.Service
             if (context.Users.Any(x => x.Username == model.Username))
                 errors.Add(Messages.ExistingUsername);
 
-            if (context.Users.Any(x => x.Password == model.Password))
+            if (context.Users.Any(x => x.Password == hasher.Hash(model.Password)))
                 errors.Add(Messages.ExistingPassword);
 
             return errors;

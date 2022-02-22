@@ -1,16 +1,40 @@
-﻿using GtRacingNews.ViewModels.User;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Service;
+using GtRacingNews.ViewModels.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Register() => View();
+        private readonly IValidator validator = new Validator();
+        private readonly IUserService userService = new UserService();
 
-        [HttpPost]
-        public IActionResult Register(RegisterUserFormModel model)
+        //private readonly UserManager<User> userManager;
+        //private readonly SignInManager<User> signInManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
+
+        //public UserController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        //{
+        //    this.userManager = userManager;
+        //    this.signInManager = signInManager;
+        //    this.roleManager = roleManager;
+        //}
+
+        public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            return View(model);
+            var errors = validator.ValidateUserRegistration(model);
+
+            if (errors.Count() == 0)
+            {
+                userService.RegisterUser(model.Email, model.Password, model.Username);
+
+                return Redirect("/");
+            }
+
+            return View("./Error", errors);
         }
 
     }

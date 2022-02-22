@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
+    <ProjectReference Include="..\GtRacingNews.MVC\GtRacingNews.ViewModels.csproj" />
+    <ProjectReference Include="..\GtRacingNews.Services\GtRacingNews.Services.csproj" />
   </ItemGroup>
 
 </Project>

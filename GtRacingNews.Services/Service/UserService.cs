@@ -10,10 +10,10 @@ namespace GtRacingNews.Services.Service
         private readonly GTNewsDbContext context = new GTNewsDbContext();
         public void LoginUser(string email, string password)
         {
-            throw new NotImplementedException();
+           
         }
 
-        public void RegisterUser(string email, string password, string username)
+        public User RegisterUser(string email, string password, string username)
         {
             var user = new User
             {
@@ -22,8 +22,10 @@ namespace GtRacingNews.Services.Service
                 Username = username,
             };
 
-            context.Users.Add(user);
-            context.SaveChanges();
+            //context.Users.Add(user);
+            //context.SaveChanges();
+
+            return user;
         }
     }
 }

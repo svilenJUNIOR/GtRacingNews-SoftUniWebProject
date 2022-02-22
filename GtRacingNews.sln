@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.Services", "Gt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.Common", "GtRacingNews.Common\GtRacingNews.Common.csproj", "{0EF46CE1-C7FE-4FF6-803A-1B2F5053B76D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.MVC", "GtRacingNews.MVC\GtRacingNews.MVC.csproj", "{E2D26D36-AB9A-49BE-A81A-6A977784F35D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.ViewModels", "GtRacingNews.MVC\GtRacingNews.ViewModels.csproj", "{E2D26D36-AB9A-49BE-A81A-6A977784F35D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
