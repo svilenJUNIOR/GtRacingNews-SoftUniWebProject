@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GtRacingNews.Common\GtRacingNews.Common.csproj" />
     <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
+    <ProjectReference Include="..\GtRacingNews\GtRacingNews.csproj" />
   </ItemGroup>
 
 </Project>
