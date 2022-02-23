@@ -15,5 +15,7 @@
         public const string PasswordsDontMatch = "Passwords don't match!";
 
         public const string ExistingNews = "News with that name alredy exists!";
+
+        public const string ExistingTeam = "Team with that name alredy exists!";
     }
 }

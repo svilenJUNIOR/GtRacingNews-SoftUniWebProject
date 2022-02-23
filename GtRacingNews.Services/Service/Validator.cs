@@ -3,6 +3,7 @@ using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using GtRacingNews.Common.Constants;
 using GtRacingNews.ViewModels.News;
+using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Service
 {
@@ -62,5 +63,14 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
+        public IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (context.Teams.Any(x => x.Name == model.Name))
+                errors.Add(Messages.ExistingTeam);
+
+            return errors;
+        }
     }
 }
