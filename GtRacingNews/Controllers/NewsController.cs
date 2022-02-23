@@ -35,6 +35,7 @@ namespace GtRacingNews.Controllers
                 .Select(x => new ShowAllNewsViewModel
                 {
                     Heading = x.Heading,
+                    ImgUrl = "https://www.linkpicture.com/q/NewsCardImg.jpg"
                 }).ToList();
 
             return View(news);
