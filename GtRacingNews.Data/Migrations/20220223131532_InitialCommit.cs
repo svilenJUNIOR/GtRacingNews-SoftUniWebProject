@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace GtRacingNews.Data.Data.Migrations
+namespace GtRacingNews.Data.Migrations
 {
     public partial class InitialCommit : Migration
     {
@@ -87,7 +87,8 @@ namespace GtRacingNews.Data.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeamId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -109,6 +110,7 @@ namespace GtRacingNews.Data.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Cup = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeamId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
