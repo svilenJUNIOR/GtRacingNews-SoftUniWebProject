@@ -13,5 +13,7 @@
         public const string WrongPasswordFormat = "Password must be between {0} and {1} characters!";
         public const string UnExistingPassword = "No account corresponds to that password!";
         public const string PasswordsDontMatch = "Passwords don't match!";
+
+        public const string ExistingNews = "News with that name alredy exists!";
     }
 }

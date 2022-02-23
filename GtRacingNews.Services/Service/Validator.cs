@@ -2,6 +2,7 @@
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using GtRacingNews.Common.Constants;
+using GtRacingNews.ViewModels.News;
 
 namespace GtRacingNews.Services.Service
 {
@@ -50,5 +51,16 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
+
+        public IEnumerable<string> ValidateAddNews(AddNewFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (context.News.Any(x => x.Heading == model.Heading))
+                errors.Add(Messages.ExistingNews);
+
+            return errors;
+        }
+
     }
 }
