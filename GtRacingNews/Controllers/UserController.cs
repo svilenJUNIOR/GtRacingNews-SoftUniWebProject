@@ -33,9 +33,18 @@ namespace GtRacingNews.Controllers
 
                 return Redirect("/");
             }
-
+            // use identity to complete
             return View("./Error", errors);
         }
 
+        //public async Task<IActionResult> Login(LoginUserFormModel model)
+        //{
+        //    return View();
+        //}
+
+        //public async Task<IActionResult> Logout()
+        //{
+        //    return View();
+        //}
     }
 }
