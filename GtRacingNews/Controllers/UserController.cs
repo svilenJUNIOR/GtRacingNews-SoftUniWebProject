@@ -1,8 +1,6 @@
-﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.User;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
@@ -22,9 +20,14 @@ namespace GtRacingNews.Controllers
         //    this.signInManager = signInManager;
         //    this.roleManager = roleManager;
         //}
+        public async Task<IActionResult> Register() => View();
 
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
+            if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.Email)
+                || string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.ConfirmPassword)) return Redirect("Register");
+
             var errors = validator.ValidateUserRegistration(model);
 
             if (errors.Count() == 0)
