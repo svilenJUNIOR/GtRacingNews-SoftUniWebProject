@@ -72,5 +72,15 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
+
+        public IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (context.Championships.Any(x => x.Name == model.Name))
+                errors.Add(Messages.ExistingChampionship);
+
+            return errors;
+        }
     }
 }

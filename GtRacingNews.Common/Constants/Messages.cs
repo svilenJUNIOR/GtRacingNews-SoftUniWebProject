@@ -17,5 +17,7 @@
         public const string ExistingNews = "News with that name alredy exists!";
 
         public const string ExistingTeam = "Team with that name alredy exists!";
+
+        public const string ExistingChampionship = "Championship with that name alredy exists!";
     }
 }

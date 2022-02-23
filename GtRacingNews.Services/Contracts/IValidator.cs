@@ -10,5 +10,6 @@ namespace GtRacingNews.Services.Contracts
         IEnumerable<string> ValidateUserLogin(LoginUserFormModel model);
         IEnumerable<string> ValidateAddNews(AddNewFormModel model);
         IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model);
+        IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model);
     }
 }
