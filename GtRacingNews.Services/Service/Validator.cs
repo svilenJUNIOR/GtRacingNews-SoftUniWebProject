@@ -4,6 +4,8 @@ using GtRacingNews.ViewModels.User;
 using GtRacingNews.Common.Constants;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Team;
+using GtRacingNews.ViewModels.Car;
+using GtRacingNews.ViewModels.Driver;
 
 namespace GtRacingNews.Services.Service
 {
@@ -79,6 +81,28 @@ namespace GtRacingNews.Services.Service
 
             if (context.Championships.Any(x => x.Name == model.Name))
                 errors.Add(Messages.ExistingChampionship);
+
+            return errors;
+        }
+        public IEnumerable<string> ValidateAddNewCar(AddNewCarFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (string.IsNullOrEmpty(model.Model))
+                errors.Add("model cannot be null");
+
+            if (string.IsNullOrEmpty(model.ImageUrl))
+                errors.Add("image cannot be null");
+
+            return errors;
+        }
+
+        public IEnumerable<string> ValidateAddNewDriver(AddNewDriverFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (context.Drivers.Any(x => x.Name == model.Name))
+                errors.Add("Driver exists");
 
             return errors;
         }

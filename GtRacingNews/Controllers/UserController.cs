@@ -34,11 +34,10 @@ namespace GtRacingNews.Controllers
 
             if (errors.Count() == 0)
             {
-                userService.RegisterUser(model.Email, model.Password, model.Username);
+                var result = await this.userManager.CreateAsync(userService.RegisterUser(model.Email, model.Password, model.Username));
 
                 return Redirect("/");
             }
-            // use identity to complete
             return View("./Error", errors);
         }
 
