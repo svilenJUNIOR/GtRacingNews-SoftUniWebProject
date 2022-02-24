@@ -15,7 +15,6 @@ namespace GtRacingNews.Data.DBContext
 
         public DbSet<User> Users { get; set; }
         public DbSet<Driver> Drivers { get; set; }
-        public DbSet<Car> Cars { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Championship> Championships { get; set; }
         public DbSet<News> News { get; set; }

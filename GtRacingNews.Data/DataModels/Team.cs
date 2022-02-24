@@ -8,7 +8,6 @@ namespace GtRacingNews.Data.DataModels
 
         [Required]
         public string Name { get; set; }
-        public ICollection<Car> Cars { get; set; } = new List<Car>();
         public ICollection<Driver> Drivers { get; set; } = new List<Driver>();
     }
 }
