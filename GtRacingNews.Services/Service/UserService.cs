@@ -22,8 +22,8 @@ namespace GtRacingNews.Services.Service
                 Username = username,
             };
 
-            //context.Users.Add(user);
-            //context.SaveChanges();
+            context.Users.Add(user);
+            context.SaveChanges();
 
             return user;
         }
