@@ -14,6 +14,9 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddNewDriverFormModel model)
         {
+            if (model.Age == null || string.IsNullOrEmpty(model.ImageUrl)
+                || string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Cup)) return Redirect("Add");
+
             var errors = validator.ValidateAddNewDriver(model);
 
             if (errors.Count() == 0)

@@ -14,6 +14,8 @@
         public const string UnExistingPassword = "No account corresponds to that password!";
         public const string PasswordsDontMatch = "Passwords don't match!";
 
+        public const string NullField = "The form contains empty fields!";
+
         public const string ExistingNews = "News with that name alredy exists!";
 
         public const string ExistingTeam = "Team with that name alredy exists!";

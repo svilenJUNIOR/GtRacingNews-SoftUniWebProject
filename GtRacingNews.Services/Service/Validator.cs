@@ -12,7 +12,6 @@ namespace GtRacingNews.Services.Service
     {
         private readonly IHasher hasher = new Hasher();
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-
         public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
         {
             var errors = new List<string>();

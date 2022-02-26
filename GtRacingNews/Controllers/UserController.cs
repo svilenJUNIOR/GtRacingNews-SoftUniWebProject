@@ -12,16 +12,16 @@ namespace GtRacingNews.Controllers
         private readonly IValidator validator = new Validator();
         private readonly IUserService userService = new UserService();
 
-        private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        //private readonly UserManager<User> userManager;
+        //private readonly SignInManager<User> signInManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
-        {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.roleManager = roleManager;
-        }
+        //public UserController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        //{
+        //    this.userManager = userManager;
+        //    this.signInManager = signInManager;
+        //    this.roleManager = roleManager;
+        //}
         public async Task<IActionResult> Register() => View();
 
         [HttpPost]
@@ -34,21 +34,11 @@ namespace GtRacingNews.Controllers
 
             if (errors.Count() == 0)
             {
-                var result = await this.userManager.CreateAsync(userService.RegisterUser(model.Email, model.Password, model.Username));
+                userService.RegisterUser(model.Email, model.Password, model.Username);
 
                 return Redirect("/");
             }
             return View("./Error", errors);
         }
-
-        //public async Task<IActionResult> Login(LoginUserFormModel model)
-        //{
-        //    return View();
-        //}
-
-        //public async Task<IActionResult> Logout()
-        //{
-        //    return View();
-        //}
     }
 }
