@@ -29,6 +29,7 @@ namespace GtRacingNews.Controllers
 
             return View("./Error", errors);
         }
+
         public async Task<IActionResult> All()
         {
             var drivers = context.Drivers
@@ -41,7 +42,27 @@ namespace GtRacingNews.Controllers
                 ImageUrl = x.ImageUrl
             }).ToList();
 
+
             return View(drivers);
+        }
+
+        public async Task<IActionResult> SeeAvailableTeams(int driverId)
+        {
+            var teams = context.Teams.Where(x => x.Drivers.Count() == 0)
+                .Select(x => new SeeAvailableTeamsViewModel
+                {
+                    DriverId = driverId,
+                    TeamId = x.Id,
+                    TeamLogo = x.LogoUrl,
+                    TeamName = x.Name,
+                }).ToList();
+            return View(teams);
+        }
+        public async Task<IActionResult> AddToTeam(int teamId, int driverId)
+        {
+            driverService.AddToTeam(teamId, driverId);
+
+            return Redirect("/");
         }
     }
 }

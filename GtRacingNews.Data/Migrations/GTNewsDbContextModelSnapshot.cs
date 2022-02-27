@@ -67,7 +67,7 @@ namespace GtRacingNews.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -169,9 +169,7 @@ namespace GtRacingNews.Data.Migrations
                 {
                     b.HasOne("GtRacingNews.Data.DataModels.Team", null)
                         .WithMany("Drivers")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeamId");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.News", b =>

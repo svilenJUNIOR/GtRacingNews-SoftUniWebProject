@@ -1,0 +1,6 @@
+﻿@foreach(var team in Model)
+{
+    <p>@team.TeamName</p>
+    <p>@team.TeamLogo</p>
+    <a href="/Driver/AddToTeam?teamId=@team.TeamId&driverId=@team.DriverId"class="btn btn-primary">Add to team</a>
+}

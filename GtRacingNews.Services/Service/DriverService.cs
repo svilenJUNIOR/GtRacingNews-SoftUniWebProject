@@ -14,10 +14,21 @@ namespace GtRacingNews.Services.Service
                 Name = name,
                 Cup = cup,
                 ImageUrl = imageUrl,
-                Age = age
+                Age = age,
             };
 
             context.Drivers.Add(driver);
+            context.SaveChanges();
+        }
+
+        public void AddToTeam(int teamId, int driverId)
+        {
+            var team = context.Teams.Where(x => x.Id == teamId).FirstOrDefault();
+
+            var driver = context.Drivers.Where(x => x.Id == driverId).FirstOrDefault();
+
+            team.Drivers.Add(driver);
+
             context.SaveChanges();
         }
     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220224101016_InitialCommit")]
-    partial class InitialCommit
+    [Migration("20220227142927_Initial commit")]
+    partial class Initialcommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,32 +23,6 @@ namespace GtRacingNews.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("GtRacingNews.Data.DataModels.Car", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Cars");
-                });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Championship", b =>
                 {
@@ -139,8 +113,16 @@ namespace GtRacingNews.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("CarModel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ChampionshipId")
                         .HasColumnType("int");
+
+                    b.Property<string>("LogoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -178,13 +160,6 @@ namespace GtRacingNews.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("GtRacingNews.Data.DataModels.Car", b =>
-                {
-                    b.HasOne("GtRacingNews.Data.DataModels.Team", null)
-                        .WithMany("Cars")
-                        .HasForeignKey("TeamId");
-                });
-
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Championship", b =>
                 {
                     b.HasOne("GtRacingNews.Data.DataModels.User", null)
@@ -220,8 +195,6 @@ namespace GtRacingNews.Data.Migrations
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Team", b =>
                 {
-                    b.Navigation("Cars");
-
                     b.Navigation("Drivers");
                 });
 
