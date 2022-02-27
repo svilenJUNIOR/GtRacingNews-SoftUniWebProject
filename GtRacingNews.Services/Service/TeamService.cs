@@ -17,5 +17,15 @@ namespace GtRacingNews.Services.Service
             context.Teams.Add(team);
             context.SaveChanges();
         }
+
+        public void AddTeamToChampionship(int teamId, string championshipName)
+        {
+            var team = context.Teams.Where(x => x.Id == teamId).FirstOrDefault();
+            var championship = context.Championships.Where(x => x.Name == championshipName).FirstOrDefault();
+
+            championship.Teams.Add(team);
+
+            context.SaveChanges();
+        }
     }
 }

@@ -41,17 +41,5 @@ namespace GtRacingNews.Controllers
 
             return View(championships);
         }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var championship = context.Championships
-                .Where(x => x.Id == id)
-                .Select(x => new ChampionshipDetailsViewModel
-                {
-                    TeamName = x.Teams.Where(x => x.Id == id).Select(x => x.Name).FirstOrDefault()
-                }).ToList();
-
-            return View(championship);
-        }
     }
 }

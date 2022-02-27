@@ -47,12 +47,9 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToChampionship(int id, AddChampionshipToTeamFormModel model)
         {
-            var team = context.Teams.Where(x => x.Id == id).FirstOrDefault();
-            var championship = context.Championships.Where(x => x.Name == model.Name).FirstOrDefault();
+            if (string.IsNullOrEmpty(model.Name)) return Redirect("AddToChampionship");
 
-            championship.Teams.Add(team);
-
-            context.SaveChanges();
+            teamService.AddTeamToChampionship(id, model.Name);
 
             return Redirect("/");
         }
