@@ -56,6 +56,9 @@ namespace GtRacingNews.Controllers
                     TeamLogo = x.LogoUrl,
                     TeamName = x.Name,
                 }).ToList();
+
+            if (teams.Count() == 0) return View("Empty");
+
             return View(teams);
         }
         public async Task<IActionResult> AddToTeam(int teamId, int driverId)
