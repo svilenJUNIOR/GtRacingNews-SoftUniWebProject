@@ -49,9 +49,15 @@ namespace GtRacingNews.Controllers
         {
             if (string.IsNullOrEmpty(model.Name)) return Redirect("AddToChampionship");
 
-            teamService.AddTeamToChampionship(id, model.Name);
+            var errors = validator.ValidateChampionshipToTeam(model);
 
-            return Redirect("/");
+            if (errors.Count() == 0)
+            {
+                teamService.AddTeamToChampionship(id, model.Name);
+                return Redirect("/");
+            }
+
+            return View("./Error", errors);
         }
     }
 }

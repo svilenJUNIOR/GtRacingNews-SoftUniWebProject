@@ -5,6 +5,7 @@ using GtRacingNews.Common.Constants;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Team;
 using GtRacingNews.ViewModels.Driver;
+using GtRacingNews.ViewModels.Championship;
 
 namespace GtRacingNews.Services.Service
 {
@@ -88,7 +89,17 @@ namespace GtRacingNews.Services.Service
             var errors = new List<string>();
 
             if (context.Drivers.Any(x => x.Name == model.Name))
-                errors.Add("Driver exists");
+                errors.Add(Messages.ExistingDriver);
+
+            return errors;
+        }
+
+        public IEnumerable<string> ValidateChampionshipToTeam(AddChampionshipToTeamFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (!context.Championships.Any(x => x.Name == model.Name))
+                errors.Add(Messages.NonExistingChampionship);
 
             return errors;
         }
