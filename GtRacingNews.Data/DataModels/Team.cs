@@ -10,5 +10,6 @@ namespace GtRacingNews.Data.DataModels
         public string Name { get; set; }
         public ICollection<Driver> Drivers { get; set; } = new List<Driver>();
         public string CarModel { get; set; }
+        public string LogoUrl { get; set; }
     }
 }
