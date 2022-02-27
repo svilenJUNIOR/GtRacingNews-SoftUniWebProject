@@ -1,15 +1,52 @@
-﻿<form method="post">
+﻿<h1 style="text-align:center">Add new racing team</h1>
+<div class="box">
+    <form method="post">
+        <table style="height: 200px">
+            <tr>
+                <td>
+                    <label for="name">Name</label>
+                </td>
+                <td width="100px">
+                    <input type="text" class="form-control" id="name" name="name" />
+                </td>
+            </tr>
 
-  <div class="mb-3">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" name="name" />
-  </div>
+            <tr>
+                <td>
+                    <label for="carModel">CarModel</label>
+                </td>
+                <td width="300px">
+                    <input type="text" class="form-control" id="carModel" name="carModel" />
+                </td>
+            </tr>
 
-  <div class="mb-3">
-    <label for="carModel">CarModel</label>
-    <input type="text" class="form-control" id="carModel" name="carModel" />
-  </div>
+            <tr>
+                <td>
+                    <label for="logoUrl">LogoUrl</label>
+                </td>
+                <td width="300px">
+                    <input type="text" class="form-control" id="logoUrl" name="logoUrl" />
+                </td>
+            </tr>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 
-</form>
+<style>
+    div.box {
+        margin-left: 420px;
+        text-align: center;
+        width: 450px;
+        height: 200px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+    }
+</style>

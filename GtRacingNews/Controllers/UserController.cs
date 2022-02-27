@@ -40,5 +40,7 @@ namespace GtRacingNews.Controllers
             }
             return View("./Error", errors);
         }
+
+        public async Task<IActionResult> Login() => View();
     }
 }

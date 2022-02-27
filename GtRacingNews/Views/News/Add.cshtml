@@ -1,15 +1,43 @@
-﻿<form method="post">
+﻿<h1 style="text-align:center">Add something interesting, others to read about</h1>
+<div class="box">
+    <form method="post">
+        <table style="height: 200px">
+            <tr>
+                <td>
+                    <label for="heading">Heading</label>
+                </td>
+                <td width="100px">
+                    <input type="text" class="form-control" id="heading" name="heading" />
+                </td>
+            </tr>
 
-  <div class="mb-3">
-    <label for="heading">Heading</label>
-    <input type="text" class="form-control" id="heading" name="heading" />
-  </div>
+            <tr>
+                <td>
+                    <label for="description">Description</label>
+                </td>
+                <td width="300px">
+                    <input type="text" class="form-control" id="description" name="description" />
+                </td>
+            </tr>
 
-  <div class="mb-3">
-    <label for="description">Description</label>
-    <input type="text" class="form-control" id="description" name="description" />
-  </div>
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
+<style>
+    div.box {
+        margin-left: 420px;
+        text-align: center;
+        width: 450px;
+        height: 200px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+    }
+</style>

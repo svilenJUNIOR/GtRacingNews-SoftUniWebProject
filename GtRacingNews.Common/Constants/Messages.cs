@@ -16,13 +16,13 @@
 
         public const string NullField = "The form contains empty fields!";
 
-        public const string ExistingNews = "News with that name alredy exists!";
+        public const string ExistingNews = "News with that name already exists!";
 
-        public const string ExistingTeam = "Team with that name alredy exists!";
+        public const string ExistingTeam = "Team with that name already exists!";
 
         public const string ExistingDriver = "Driver with that name alredy exists!";
 
-        public const string ExistingChampionship = "Championship with that name alredy exists!";
+        public const string ExistingChampionship = "Championship with that name already exists!";
         public const string NonExistingChampionship = "Championship with that does not exists!";
     }
 }
