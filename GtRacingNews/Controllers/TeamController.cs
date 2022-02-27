@@ -2,6 +2,7 @@
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Championship;
+using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +37,7 @@ namespace GtRacingNews.Controllers
                 .Select(x => new ViewAllTeamsViewModel
                 {
                     Name = x.Name,
-                    Id = x.Id,
+                    TeamId = x.Id,
                     LogoUrl = x.LogoUrl,
                 });
 
@@ -46,7 +47,7 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> AddToChampionship() => View();
 
         [HttpPost]
-        public async Task<IActionResult> AddToChampionship(int id, AddChampionshipToTeamFormModel model)
+        public async Task<IActionResult> AddToChampionship(int TeamId, AddChampionshipToTeamFormModel model)
         {
             if (string.IsNullOrEmpty(model.Name)) return Redirect("AddToChampionship");
 
@@ -54,11 +55,13 @@ namespace GtRacingNews.Controllers
 
             if (errors.Count() == 0)
             {
-                teamService.AddTeamToChampionship(id, model.Name);
+                teamService.AddTeamToChampionship(TeamId, model.Name);
                 return Redirect("/");
             }
 
             return View("./Error", errors);
         }
+
+
     }
 }

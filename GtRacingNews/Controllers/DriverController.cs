@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Driver;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace GtRacingNews.Controllers
     {
         private readonly IValidator validator = new Validator();
         private readonly IDriverService driverService= new DriverService();
+        private readonly GTNewsDbContext context = new GTNewsDbContext();
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]
@@ -26,6 +28,20 @@ namespace GtRacingNews.Controllers
             }
 
             return View("./Error", errors);
+        }
+        public async Task<IActionResult> All()
+        {
+            var drivers = context.Drivers
+            .Select(x => new ViewAllDriversViewModel
+            {
+                DriverId = x.Id,
+                Age = x.Age,
+                Cup = x.Cup,
+                Name = x.Name,
+                ImageUrl = x.ImageUrl
+            }).ToList();
+
+            return View(drivers);
         }
     }
 }
