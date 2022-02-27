@@ -7,11 +7,12 @@ namespace GtRacingNews.Services.Service
     public class TeamService : ITeamService
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-        public void AddNewTeam(string name)
+        public void AddNewTeam(string name, string carModel)
         {
             var team = new Team
             {
                 Name = name,
+                CarModel = carModel,
             };
 
             context.Teams.Add(team);

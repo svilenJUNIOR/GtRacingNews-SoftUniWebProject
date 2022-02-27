@@ -17,13 +17,13 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddTeamFormModel model)
         {
-            if (string.IsNullOrEmpty(model.Name)) return Redirect("Add");
+            if (string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.CarModel)) return Redirect("Add");
 
             var errors = validator.ValidateAddNewTeam(model);
 
             if (errors.Count() == 0)
             {
-                teamService.AddNewTeam(model.Name);
+                teamService.AddNewTeam(model.Name, model.CarModel);
                 return Redirect("/");
             }
 
