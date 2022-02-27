@@ -1,5 +1,7 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
+using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,7 @@ namespace GtRacingNews.Controllers
     {
         private readonly IValidator validator = new Validator();
         private readonly ITeamService teamService = new TeamService();
+        private readonly GTNewsDbContext context = new GTNewsDbContext();
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]
@@ -25,6 +28,33 @@ namespace GtRacingNews.Controllers
             }
 
             return View("./Error", errors);
+        }
+
+        public async Task<IActionResult> All()
+        {
+            var teams = context.Teams
+                .Select(x => new ViewAllTeamsViewModel
+                {
+                    Name = x.Name,
+                    Id = x.Id,
+                });
+
+            return View(teams);
+        }
+
+        public async Task<IActionResult> AddToChampionship() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> AddToChampionship(int id, AddChampionshipToTeamFormModel model)
+        {
+            var team = context.Teams.Where(x => x.Id == id).FirstOrDefault();
+            var championship = context.Championships.Where(x => x.Name == model.Name).FirstOrDefault();
+
+            championship.Teams.Add(team);
+
+            context.SaveChanges();
+
+            return Redirect("/");
         }
     }
 }

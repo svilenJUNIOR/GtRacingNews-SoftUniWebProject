@@ -1,8 +1,8 @@
 ﻿namespace GtRacingNews.ViewModels.Team
 {
-    public class TeamViewModel
+    public class ViewAllTeamsViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string ImageUrl { get; set; }
     }
 }
