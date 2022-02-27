@@ -1,13 +1,11 @@
 ﻿<div class="row">
     @foreach (var team in Model)
     {
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="@team.LogoUrl">
-                <div class="card-body">
-                    <h5 class="card-title">@team.Name</h5>
-                    <a href="/Team/AddToChampionship?teamId=@team.TeamId" class="btn btn-primary">Add to championship</a>
-                </div>
+        <div class="card" style="width: 18rem;">
+            <img src="@team.LogoUrl" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@team.Name</h5>
+            <a href="/Team/AddToChampionship?teamId=@team.TeamId" class="btn btn-primary">Add to championship</a>
             </div>
         </div>
     }

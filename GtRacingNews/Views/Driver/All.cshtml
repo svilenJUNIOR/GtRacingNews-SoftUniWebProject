@@ -1,14 +1,14 @@
 ﻿<div class="row">
-@foreach(var driver in Model)
-{
-    <div class="card" style="width: 18rem;">
-  <img src="@driver.ImageUrl" class="card-img-top">
-  <div class="card-body">
-    <h5 class="card-title">@driver.Name</h5>
-    <h5 class="card-title">@driver.Age</h5>
-    <h5 class="card-title">@driver.Cup</h5>
-  </div>
-  <a href="/Driver/SeeAvailableTeams?driverid=@driver.DriverId"class="btn btn-primary">Add to Team</a>
-</div>
-}
+    @foreach (var driver in Model)
+    {
+            <div class="card" style="width: 18rem;">
+                <img src="@driver.ImageUrl" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@driver.Name</h5>
+                    <h5 class="card-title">@driver.Age</h5>
+                    <h5 class="card-title">@driver.Cup</h5>
+                <a href="/Driver/SeeAvailableTeams?driverid=@driver.DriverId" class="btn btn-primary">Add to Team</a>
+                </div>
+            </div>
+    }
 </div>
