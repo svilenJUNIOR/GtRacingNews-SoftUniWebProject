@@ -103,5 +103,17 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
+
+        public IEnumerable<string> ValidateAddDriverToTeam(int teamId)
+        {
+            var errors = new List<string>();
+
+            var team = context.Teams.Where(x => x.Id == teamId).FirstOrDefault();
+
+            if (team.Drivers.Count() >= 3) errors.Add(Messages.DriverListFull);
+
+            return errors;
+        }
+
     }
 }

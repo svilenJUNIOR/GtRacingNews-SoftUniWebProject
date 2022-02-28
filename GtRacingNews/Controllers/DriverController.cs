@@ -64,9 +64,15 @@ namespace GtRacingNews.Controllers
         }
         public async Task<IActionResult> AddToTeam(int teamId, int driverId)
         {
-            driverService.AddToTeam(teamId, driverId);
+            var errors = validator.ValidateAddDriverToTeam(teamId);
 
-            return Redirect("/");
+            if (errors.Count() == 0)
+            {
+                driverService.AddToTeam(teamId, driverId);
+                return Redirect("/");
+            }
+
+            return View("./Error", errors);
         }
     }
 }
