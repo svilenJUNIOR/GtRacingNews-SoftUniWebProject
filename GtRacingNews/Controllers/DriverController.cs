@@ -48,7 +48,8 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> SeeAvailableTeams(int driverId)
         {
-            var teams = context.Teams.Where(x => x.Drivers.Count() == 0)
+            var teams = context.Teams.Where(x => x.Drivers.Count() < 3)
+
                 .Select(x => new SeeAvailableTeamsViewModel
                 {
                     DriverId = driverId,
