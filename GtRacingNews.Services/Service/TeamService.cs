@@ -17,7 +17,7 @@ namespace GtRacingNews.Services.Service
             };
 
             context.Teams.Add(team);
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
         public void AddTeamToChampionship(int teamId, string championshipName)
@@ -27,7 +27,7 @@ namespace GtRacingNews.Services.Service
 
             championship.Teams.Add(team);
 
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
     }
 }

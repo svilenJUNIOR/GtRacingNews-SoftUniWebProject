@@ -15,7 +15,7 @@ namespace GtRacingNews.Services.Service
             };
 
             context.Championships.Add(championship);
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
     }
 }

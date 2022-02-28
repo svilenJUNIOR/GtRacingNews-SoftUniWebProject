@@ -18,7 +18,7 @@ namespace GtRacingNews.Services.Service
             };
 
             context.Drivers.Add(driver);
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
         public void AddToTeam(int teamId, int driverId)
@@ -29,7 +29,7 @@ namespace GtRacingNews.Services.Service
 
             team.Drivers.Add(driver);
 
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
     }
 }
