@@ -32,6 +32,8 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> All()
         {
+            var driversTemp = context.Drivers.ToList();
+
             var drivers = context.Drivers
             .Select(x => new ViewAllDriversViewModel
             {
@@ -39,7 +41,7 @@ namespace GtRacingNews.Controllers
                 Age = x.Age,
                 Cup = x.Cup,
                 Name = x.Name,
-                ImageUrl = x.ImageUrl
+                ImageUrl = x.ImageUrl,
             }).ToList();
 
 
@@ -62,6 +64,7 @@ namespace GtRacingNews.Controllers
 
             return View(teams);
         }
+
         public async Task<IActionResult> AddToTeam(int teamId, int driverId)
         {
             var errors = validator.ValidateAddDriverToTeam(teamId);
