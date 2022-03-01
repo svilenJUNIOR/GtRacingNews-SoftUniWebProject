@@ -8,10 +8,22 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GtRacingNews.styles.css" asp-append-version="true" />
 </head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
+
+                @*side bar menu toggle button*@
+                <div id="main">
+                    <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+                </div>
+
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GtRacingNews</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -37,16 +49,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="Add">Add new team</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="All">View all teams</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="Add">Add new Championship</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="All">View all Championship</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="Add">Add new Driver</a>
                         </li>
                         <li class="nav-item">
@@ -56,6 +68,33 @@
                 </div>
             </div>
         </nav>
+
+        @*side bar menu*@
+        <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+            <button class="w3-bar-item w3-button w3-large"
+                    onclick="w3_close()">
+                Close &times;
+            </button>
+            <a href="/User/Register" class="w3-bar-item w3-button">Register</a>
+            <a href="#" class="w3-bar-item w3-button">Link 2</a>
+            <a href="#" class="w3-bar-item w3-button">Link 3</a>
+        </div>
+
+        <script>
+            function w3_open() {
+              document.getElementById("main").style.marginLeft = "0%";
+              document.getElementById("mySidebar").style.width = "15%";
+              document.getElementById("mySidebar").style.display = "block";
+              document.getElementById("openNav").style.display = 'none';
+            }
+            function w3_close() {
+              document.getElementById("main").style.marginLeft = "0%";
+              document.getElementById("mySidebar").style.display = "none";
+              document.getElementById("openNav").style.display = "block";
+            }
+        </script>
+        @*side bar menu end*@
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -63,11 +102,12 @@
         </main>
     </div>
 
-@*    <footer class="border-top footer text-muted">
+        <footer class="border-top footer text-muted navbar-dark bg-dark" >
         <div class="container">
-            &copy; 2022 - GtRacingNews - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2022 - GtRacingNews  <a class="text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>*@
+        </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
