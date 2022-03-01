@@ -6,6 +6,7 @@ using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Team;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.Championship;
+using GtRacingNews.ViewModels.Race;
 
 namespace GtRacingNews.Services.Service
 {
@@ -115,5 +116,14 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
+        public IEnumerable<string> ValidateAddRace(AddNewRaceFormModel model)
+        {
+            var errors = new List<string>();
+
+            if (context.Races.Any(x => x.Name == model.Name))
+                errors.Add(Messages.ExistingRace);
+
+            return errors;
+        }
     }
 }

@@ -20,6 +20,8 @@
 
         public const string ExistingTeam = "Team with that name already exists!";
 
+        public const string ExistingRace = "Race with that name already exists!";
+
         public const string ExistingDriver = "Driver with that name alredy exists!";
 
         public const string DriverListFull = "Maximum number or drivers reached!";

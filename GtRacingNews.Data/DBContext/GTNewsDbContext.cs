@@ -18,8 +18,7 @@ namespace GtRacingNews.Data.DBContext
         public DbSet<Team> Teams { get; set; }
         public DbSet<Championship> Championships { get; set; }
         public DbSet<News> News { get; set; }
-
-
+        public DbSet<Race> Races { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
