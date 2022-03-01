@@ -21,7 +21,7 @@
 
                 @*side bar menu toggle button*@
                 <div id="main">
-                    <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+                    <button id="openNav" class="w3-button w3-teal w3-xmedium" onclick="w3_open()">&#9776;</button>
                 </div>
 
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GtRacingNews</a>
@@ -70,20 +70,21 @@
         </nav>
 
         @*side bar menu*@
-        <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-            <button class="w3-bar-item w3-button w3-large"
+        <div class="w3-sidebar w3-bar-block w3-card w3-animate-left navbar-dark bg-dark" style="display:none" id="mySidebar">
+            <button class="w3-bar-item w3-button w3-large nav-link text-light"
                     onclick="w3_close()">
                 Close &times;
             </button>
-            <a href="/User/Register" class="w3-bar-item w3-button">Register</a>
-            <a href="#" class="w3-bar-item w3-button">Link 2</a>
-            <a href="#" class="w3-bar-item w3-button">Link 3</a>
+            <a href="/User/Register" class="w3-bar-item w3-button nav-link text-light">Register</a>
+            <a href="/User/Login" class="w3-bar-item w3-button nav-link text-light">LogIn</a>
+            <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
         </div>
 
         <script>
             function w3_open() {
               document.getElementById("main").style.marginLeft = "0%";
               document.getElementById("mySidebar").style.width = "15%";
+              document.getElementById("mySidebar").style.height = "80%";
               document.getElementById("mySidebar").style.display = "block";
               document.getElementById("openNav").style.display = 'none';
             }
