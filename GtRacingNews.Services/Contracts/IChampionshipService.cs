@@ -2,6 +2,6 @@
 {
     public interface IChampionshipService
     {
-        void AddNewChampionship(string name);
+        void AddNewChampionship(string name, string logoUrl);
     }
 }

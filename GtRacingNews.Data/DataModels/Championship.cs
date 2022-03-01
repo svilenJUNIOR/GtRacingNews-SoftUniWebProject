@@ -9,5 +9,7 @@ namespace GtRacingNews.Data.DataModels
         [Required]
         public string Name { get; set; }
         public ICollection<Team> Teams { get; set; } = new List<Team>();
+
+        public string LogoUrl { get; set; }
     }
 }

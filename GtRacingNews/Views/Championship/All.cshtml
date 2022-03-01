@@ -2,9 +2,9 @@
 @foreach(var championship in Model)
 {
     <div class="card" style="width: 18rem;">
-  <img src="http://www.dailysportscar.com/wp-content/uploads/2020/01/GT-World-Challenge-AWS-Logo.jpg" class="card-img-top">
+  <img src="@championship.LogoUrl" class="card-img-top">
   <div class="card-body">
-       <h5 class="card-title">@championship.Name</h5>
+       <h5>@championship.Name</h5>
   </div>
 </div>
 }

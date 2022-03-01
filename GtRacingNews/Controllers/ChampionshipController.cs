@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Championship;
@@ -23,7 +24,7 @@ namespace GtRacingNews.Controllers
 
             if (errors.Count() == 0)
             {
-                championshipService.AddNewChampionship(model.Name);
+                championshipService.AddNewChampionship(model.Name, model.LogoUrl);
                 return Redirect("/");
             }
 
@@ -37,6 +38,7 @@ namespace GtRacingNews.Controllers
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    LogoUrl = x.LogoUrl,
                 });
 
             return View(championships);
