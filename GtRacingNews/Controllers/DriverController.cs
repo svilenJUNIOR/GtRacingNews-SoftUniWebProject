@@ -9,9 +9,15 @@ namespace GtRacingNews.Controllers
     public class DriverController : Controller
     {
         private readonly IValidator validator = new Validator();
-        private readonly IDriverService driverService= new DriverService();
+        private readonly IDriverService driverService = new DriverService();
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-        public async Task<IActionResult> Add() => View();
+        public async Task<IActionResult> Add()
+        {
+            var teams = context.Teams.ToList();
+            AddNewDriverFormModel model = new AddNewDriverFormModel();
+            model.Teams = teams;
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Add(AddNewDriverFormModel model)
@@ -23,7 +29,7 @@ namespace GtRacingNews.Controllers
 
             if (errors.Count() == 0)
             {
-                driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age);
+                driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName);
                 return Redirect("/");
             }
 
@@ -46,36 +52,6 @@ namespace GtRacingNews.Controllers
 
 
             return View(drivers);
-        }
-
-        public async Task<IActionResult> SeeAvailableTeams(int driverId)
-        {
-            var teams = context.Teams.Where(x => x.Drivers.Count() < 3)
-
-                .Select(x => new SeeAvailableTeamsViewModel
-                {
-                    DriverId = driverId,
-                    TeamId = x.Id,
-                    TeamLogo = x.LogoUrl,
-                    TeamName = x.Name,
-                }).ToList();
-
-            if (teams.Count() == 0) return View("Empty");
-
-            return View(teams);
-        }
-
-        public async Task<IActionResult> AddToTeam(int teamId, int driverId)
-        {
-            var errors = validator.ValidateAddDriverToTeam(teamId);
-
-            if (errors.Count() == 0)
-            {
-                driverService.AddToTeam(teamId, driverId);
-                return Redirect("/");
-            }
-
-            return View("./Error", errors);
         }
     }
 }

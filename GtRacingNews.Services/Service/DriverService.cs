@@ -7,29 +7,21 @@ namespace GtRacingNews.Services.Service
     public class DriverService : IDriverService
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-        public void AddNewDriver(string name, string cup, string imageUrl, int age)
+        public async void AddNewDriver(string name, string cup, string imageUrl, int age, string teamName)
         {
+            var team = context.Teams.Where(x => x.Name == teamName).FirstOrDefault();
+
             var driver = new Driver
             {
                 Name = name,
                 Cup = cup,
                 ImageUrl = imageUrl,
                 Age = age,
+                TeamId = team.Id
             };
 
             context.Drivers.Add(driver);
-            context.SaveChangesAsync();
-        }
-
-        public void AddToTeam(int teamId, int driverId)
-        {
-            var team = context.Teams.Where(x => x.Id == teamId).FirstOrDefault();
-
-            var driver = context.Drivers.Where(x => x.Id == driverId).FirstOrDefault();
-
-            team.Drivers.Add(driver);
-
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
     }
 }

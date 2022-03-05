@@ -1,8 +1,9 @@
-﻿namespace GtRacingNews.Services.Contracts
+﻿using GtRacingNews.Data.DataModels;
+
+namespace GtRacingNews.Services.Contracts
 {
     public interface IDriverService
     {
-        void AddNewDriver(string name, string cup, string imageUrl, int age);
-        void AddToTeam(int teamId, int driverId);
+        void AddNewDriver(string name, string cup, string imageUrl, int age, string teamName);
     }
 }

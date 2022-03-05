@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GtRacingNews.Services\GtRacingNews.Services.csproj" />
+    <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
   </ItemGroup>
 
 </Project>

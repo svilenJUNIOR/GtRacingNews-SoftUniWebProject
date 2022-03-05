@@ -1,4 +1,6 @@
-﻿<h1 style="text-align:center">Add new racing driver</h1>
+﻿@model GtRacingNews.ViewModels.Driver.AddNewDriverFormModel
+
+<h1 style="text-align:center; color:white">Add new racing driver</h1>
 <div class="box">
     <form method="post">
         <table style="height: 300px">
@@ -38,6 +40,20 @@
                 </td>
             </tr>
 
+             <tr>
+                <td>
+                    <label for="teamName">TeamName</label>
+                </td>
+                <td>
+                    <select name="teamName" id="teamName">
+                        @foreach(var team in @Model.Teams)
+                        {
+                        <option value="@team.Name">@team.Name</option>
+                        }
+                     </select>
+                </td>
+            </tr>
+
             <tr>
                 <td>
                     <p>Submit</p>
@@ -57,5 +73,13 @@
         width: 450px;
         height: 300px;
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+        background-color:white;
     }
+
+        body {
+  background-image: url("https://www.linkpicture.com/q/race-track-finish-line-racing-night_115579-616_1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
 </style>
