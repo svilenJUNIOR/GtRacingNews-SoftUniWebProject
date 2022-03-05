@@ -1,15 +1,29 @@
 ﻿@model GtRacingNews.ViewModels.Championship.ViewDetailsViewModel
 
-<h1>@Model.ChampionshipName</h1>
+<table>
+    <tr><th colspan="2"><h1>@Model.ChampionshipName</h1></th></tr>
 
-@{
-    foreach (var key in Model.Drivers)
-    {
-        <p>@key.Key:</p>
-
-        foreach (var value in key.Value)
+    @{
+        foreach (var key in Model.Drivers)
         {
-            <p> @string.Join(", ", @value)</p>
+            <tr>
+                <td>
+                <h2>@key.Key</h2></td>
+                </tr>
+            foreach (var value in key.Value)
+            {
+                <tr>
+                    <td>
+                        <p> @string.Join(", ", @value)</p>
+                    </td>
+                </tr>
+            }
         }
     }
-}
+</table>
+
+<style>
+    table, th, td, tr {
+        border: 1px solid black;
+    }
+</style>

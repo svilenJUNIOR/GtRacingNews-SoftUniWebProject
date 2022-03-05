@@ -1,12 +1,36 @@
-﻿<div class="row">
-@foreach(var card in Model)
-{
+﻿@model List<GtRacingNews.ViewModels.News.ShowAllNewsViewModel>
+
+@*<div class="column">
+    @foreach (var card in Model)
+    {
     <div class="card" style="width: 18rem;">
-  <img src="@card.ImgUrl" class="card-img-top">
-  <div class="card-body">
+    <img src="@card.ImgUrl" class="card-img-top">
+    <div class="card-body">
     <h5 class="card-title">@card.Heading</h5>
     <a href="#" class="btn btn-primary">Read...</a>
-  </div>
-</div>
+    </div>
+    </div>
+    }
+    </div>*@
+<table>
+    @foreach (var card in @Model)
+    {
+        <tr>
+            <td style="width: 20px;">
+                <div style="width: 8rem;">
+                    <img src="@card.ImgUrl" class="card-img-top">
+                </div>
+            <td style="width: 500px;">
+                <p style="font-size: 20px; text-align:left">@card.Heading</p>
+            </td>
+        </tr>
+    }
+</table>
+
+<style>
+
+table, th, td {
+    border: 1px solid black;
+    background-color:white;
 }
-</div>
+</style>
