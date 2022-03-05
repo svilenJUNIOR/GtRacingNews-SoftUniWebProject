@@ -16,7 +16,7 @@ namespace GtRacingNews.Services.Service
             };
 
             context.Races.Add(race);
-            await context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

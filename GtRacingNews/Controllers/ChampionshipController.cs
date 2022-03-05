@@ -36,7 +36,7 @@ namespace GtRacingNews.Controllers
             var championships = context.Championships
                 .Select(x => new ViewAllChampionshipsViewModel
                 {
-                    Id = x.Id,
+                    ChampionshipId = x.Id,
                     Name = x.Name,
                     LogoUrl = x.LogoUrl,
                 });
@@ -44,16 +44,25 @@ namespace GtRacingNews.Controllers
             return View(championships);
         }
 
-        public void Temp()
+        public async Task<IActionResult> Details(int Id)
         {
-            var championship = context.Championships.Where(x => x.Id == 2).FirstOrDefault();
-            var teams = championship.Teams.ToList();
-            var drivers = new List<string>();
+            var championship = context.Championships.Where(x => x.Id == Id).FirstOrDefault();
+            var teams = context.Teams.Where(x => x.ChampionshipId == championship.Id).ToList();
+            var drivers = new Dictionary<string, List<string>>();
 
             foreach (var team in teams)
             {
-                drivers.Add(team.Drivers.Select(x => x.Name).FirstOrDefault());
+                var driversToAdd = context.Drivers.Where(x => x.TeamId == team.Id).Select(x => x.Name).ToList();
+                drivers.Add(team.Name, driversToAdd);
             }
+
+            ViewDetailsViewModel viewModel = new ViewDetailsViewModel();
+
+            viewModel.ChampionshipName = championship.Name;
+            viewModel.Drivers = drivers;
+            viewModel.Teams = teams;
+
+            return View(viewModel);
         }
     }
 }

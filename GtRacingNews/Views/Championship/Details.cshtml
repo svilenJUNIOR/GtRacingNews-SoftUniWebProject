@@ -1,0 +1,15 @@
+﻿@model GtRacingNews.ViewModels.Championship.ViewDetailsViewModel
+
+<h1>@Model.ChampionshipName</h1>
+
+@{
+    foreach (var key in Model.Drivers)
+    {
+        <p>@key.Key:</p>
+
+        foreach (var value in key.Value)
+        {
+            <p> @string.Join(", ", @value)</p>
+        }
+    }
+}
