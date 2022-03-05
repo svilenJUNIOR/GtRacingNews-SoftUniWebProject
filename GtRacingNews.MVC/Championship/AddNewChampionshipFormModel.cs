@@ -1,4 +1,4 @@
-﻿namespace GtRacingNews.ViewModels.Team
+﻿namespace GtRacingNews.ViewModels.Championship
 {
     public class AddNewChampionshipFormModel
     {

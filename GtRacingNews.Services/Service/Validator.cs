@@ -95,16 +95,6 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public IEnumerable<string> ValidateChampionshipToTeam(AddChampionshipToTeamFormModel model)
-        {
-            var errors = new List<string>();
-
-            if (!context.Championships.Any(x => x.Name == model.Name))
-                errors.Add(Messages.NonExistingChampionship);
-
-            return errors;
-        }
-
         public IEnumerable<string> ValidateAddDriverToTeam(int teamId)
         {
             var errors = new List<string>();

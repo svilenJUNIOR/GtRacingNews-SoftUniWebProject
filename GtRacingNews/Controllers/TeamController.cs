@@ -13,7 +13,16 @@ namespace GtRacingNews.Controllers
         private readonly IValidator validator = new Validator();
         private readonly ITeamService teamService = new TeamService();
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-        public async Task<IActionResult> Add() => View();
+        public async Task<IActionResult> Add()
+        {
+            AddTeamFormModel model = new AddTeamFormModel();
+
+            var championships = context.Championships.ToList();
+
+            model.Championships = championships;
+
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Add(AddTeamFormModel model)
@@ -24,7 +33,7 @@ namespace GtRacingNews.Controllers
 
             if (errors.Count() == 0)
             {
-                teamService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl);
+                teamService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
                 return Redirect("/");
             }
 
@@ -43,25 +52,5 @@ namespace GtRacingNews.Controllers
 
             return View(teams);
         }
-
-        public async Task<IActionResult> AddToChampionship() => View();
-
-        [HttpPost]
-        public async Task<IActionResult> AddToChampionship(int TeamId, AddChampionshipToTeamFormModel model)
-        {
-            if (string.IsNullOrEmpty(model.Name)) return Redirect("AddToChampionship");
-
-            var errors = validator.ValidateChampionshipToTeam(model);
-
-            if (errors.Count() == 0)
-            {
-                teamService.AddTeamToChampionship(TeamId, model.Name);
-                return Redirect("/");
-            }
-
-            return View("./Error", errors);
-        }
-
-
     }
 }

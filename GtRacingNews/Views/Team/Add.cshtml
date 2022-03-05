@@ -1,4 +1,6 @@
-﻿<h1 style="text-align:center; color:white">Add new racing team</h1>
+﻿@model GtRacingNews.ViewModels.Team.AddTeamFormModel
+
+<h1 style="text-align:center; color:white">Add new racing team</h1>
 <div class="box">
     <form method="post">
         <table style="height: 200px">
@@ -26,6 +28,20 @@
                 </td>
                 <td width="300px">
                     <input type="text" class="form-control" id="logoUrl" name="logoUrl" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="championshipName">ChampionshipName</label>
+                </td>
+                <td>
+                    <select name="championshipName" id="championshipName">
+                        @foreach(var championship in @Model.Championships)
+                        {
+                        <option value="@championship.Name">@championship.Name</option>
+                        }
+                     </select>
                 </td>
             </tr>
 
