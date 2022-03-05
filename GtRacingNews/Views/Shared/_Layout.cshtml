@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="~/GtRacingNews.styles.css" asp-append-version="true" />
 </head>
 
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
 
 <body>
     <header>
@@ -57,10 +55,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">See all Drivers</a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="Add">Add new race</a>
                         </li>
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">Racing calendar</a>
                         </li>
                     </ul>
@@ -80,17 +78,18 @@
         </div>
 
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-        <footer class="border-top footer text-muted navbar-dark bg-dark">
+    <footer class="border-top footer text-muted navbar-dark bg-dark">
         <div class="container">
-        &copy; 2022 - GtRacingNews  <a class="text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - GtRacingNews  <a class="text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-        </footer>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

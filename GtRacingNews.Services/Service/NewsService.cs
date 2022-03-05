@@ -8,7 +8,7 @@ namespace GtRacingNews.Services.Service
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
 
-        public void AddNews(string heading, string description)
+        public async void AddNews(string heading, string description)
         {
             var news = new News
             {
@@ -17,7 +17,7 @@ namespace GtRacingNews.Services.Service
             };
 
             context.News.Add(news);
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
     }
 }

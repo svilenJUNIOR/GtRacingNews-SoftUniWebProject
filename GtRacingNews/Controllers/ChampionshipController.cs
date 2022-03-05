@@ -43,5 +43,17 @@ namespace GtRacingNews.Controllers
 
             return View(championships);
         }
+
+        public void Temp()
+        {
+            var championship = context.Championships.Where(x => x.Id == 2).FirstOrDefault();
+            var teams = championship.Teams.ToList();
+            var drivers = new List<string>();
+
+            foreach (var team in teams)
+            {
+                drivers.Add(team.Drivers.Select(x => x.Name).FirstOrDefault());
+            }
+        }
     }
 }

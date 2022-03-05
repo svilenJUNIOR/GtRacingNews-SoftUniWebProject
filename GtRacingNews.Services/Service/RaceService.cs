@@ -7,7 +7,7 @@ namespace GtRacingNews.Services.Service
     public class RaceService : IRaceService
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-        public void AddNewRace(string name, string date)
+        public async void AddNewRace(string name, string date)
         {
             var race = new Race
             {
@@ -16,7 +16,7 @@ namespace GtRacingNews.Services.Service
             };
 
             context.Races.Add(race);
-            context.SaveChanges();
+            await context.SaveChanges();
         }
     }
 }
