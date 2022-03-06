@@ -7,3 +7,10 @@
         <p>@comment</p>
     }
 }
+<section id="CommentSection">
+    <form method="post" asp-controller="Comment" asp-action="Add">
+        <label for="description">Submit your comment</label>
+        <input type="text" class="form-control" id="description" name="description"/>
+        <button type="submit" class="btn btn-primary" name="newsId" value="@Model.NewsId">Submit</button>
+    </form>
+</section>

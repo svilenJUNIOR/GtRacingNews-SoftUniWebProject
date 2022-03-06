@@ -47,6 +47,7 @@ namespace GtRacingNews.Controllers
             var news = context.News.Where(x => x.Id == id)
                 .Select(n => new ReadNewsViewModel
                 {
+                    NewsId = n.Id,
                     Description = n.Description,
                     Comments = context.Comments.Where(x => x.NewsId == n.Id).Select(x => x.Description).ToList()
                 }).FirstOrDefault();
