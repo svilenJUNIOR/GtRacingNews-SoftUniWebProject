@@ -1,3 +1,9 @@
 ﻿@model GtRacingNews.ViewModels.News.ReadNewsViewModel
 
 <p>@Model.Description</p>
+@{
+    foreach (var comment in @Model.Comments)
+    {
+        <p>@comment</p>
+    }
+}

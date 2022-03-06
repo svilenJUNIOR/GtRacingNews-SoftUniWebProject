@@ -45,9 +45,10 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var news = context.News.Where(x => x.Id == id)
-                .Select(x => new ReadNewsViewModel
+                .Select(n => new ReadNewsViewModel
                 {
-                    Description = x.Description
+                    Description = n.Description,
+                    Comments = context.Comments.Where(x => x.NewsId == n.Id).Select(x => x.Description).ToList()
                 }).FirstOrDefault();
 
             return View(news);
