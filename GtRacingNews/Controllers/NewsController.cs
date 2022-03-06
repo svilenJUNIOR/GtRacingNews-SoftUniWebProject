@@ -34,9 +34,21 @@ namespace GtRacingNews.Controllers
             var news = context.News
                 .Select(x => new ShowAllNewsViewModel
                 {
+                    Id = x.Id,
                     Heading = x.Heading,
                     ImgUrl = "https://www.linkpicture.com/q/NewsCardImg.jpg"
                 }).ToList();
+
+            return View(news);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var news = context.News.Where(x => x.Id == id)
+                .Select(x => new ReadNewsViewModel
+                {
+                    Description = x.Description
+                }).FirstOrDefault();
 
             return View(news);
         }
