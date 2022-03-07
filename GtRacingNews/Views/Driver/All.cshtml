@@ -1,5 +1,7 @@
-﻿<div class="row">
-    @foreach (var driver in Model)
+﻿@model List<GtRacingNews.ViewModels.Driver.ViewAllDriversViewModel>
+
+<div class="row">
+    @foreach (var driver in @Model)
     {
 
         <div class="card" style="width: 18rem;">

@@ -45,9 +45,11 @@ namespace GtRacingNews.Controllers
             var teams = context.Teams
                 .Select(x => new ViewAllTeamsViewModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
-                    TeamId = x.Id,
                     LogoUrl = x.LogoUrl,
+                    CarModel = x.CarModel,
+                    Drivers = context.Drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList()
                 }).ToList();
 
             return View(teams);
