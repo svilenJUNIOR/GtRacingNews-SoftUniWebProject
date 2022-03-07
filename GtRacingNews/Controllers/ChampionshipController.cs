@@ -39,7 +39,8 @@ namespace GtRacingNews.Controllers
                     ChampionshipId = x.Id,
                     Name = x.Name,
                     LogoUrl = x.LogoUrl,
-                });
+                    Teams = context.Teams.Where(t => t.ChampionshipId == x.Id).Select(t => t.Name).ToList()
+                }).ToList();
 
             return View(championships);
         }
