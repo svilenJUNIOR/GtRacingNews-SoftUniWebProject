@@ -48,7 +48,7 @@ namespace GtRacingNews.Controllers
                     Name = x.Name,
                     TeamId = x.Id,
                     LogoUrl = x.LogoUrl,
-                });
+                }).ToList();
 
             return View(teams);
         }

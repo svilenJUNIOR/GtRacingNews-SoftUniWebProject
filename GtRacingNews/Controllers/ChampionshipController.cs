@@ -43,26 +43,5 @@ namespace GtRacingNews.Controllers
 
             return View(championships);
         }
-
-        public async Task<IActionResult> Details(int Id)
-        {
-            var championship = context.Championships.Where(x => x.Id == Id).FirstOrDefault();
-            var teams = context.Teams.Where(x => x.ChampionshipId == championship.Id).ToList();
-            var drivers = new Dictionary<string, List<string>>();
-
-            foreach (var team in teams)
-            {
-                var driversToAdd = context.Drivers.Where(x => x.TeamId == team.Id).Select(x => x.Name).ToList();
-                drivers.Add(team.Name, driversToAdd);
-            }
-
-            ViewDetailsViewModel viewModel = new ViewDetailsViewModel();
-
-            viewModel.ChampionshipName = championship.Name;
-            viewModel.Drivers = drivers;
-            viewModel.Teams = teams;
-
-            return View(viewModel);
-        }
     }
 }

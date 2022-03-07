@@ -1,11 +1,8 @@
 ﻿<div class="row">
     @foreach (var championship in Model)
     {
-          <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;">
             <img src="@championship.LogoUrl" class="card-img-top">
-            <div class="card-body">
-            <a class="btn btn-block btn-primary text-white mb-3" href="/Championship/Details?id=@championship.ChampionshipId">Details</a>
-            </div>
-            </div>
+        </div>
     }
 </div>

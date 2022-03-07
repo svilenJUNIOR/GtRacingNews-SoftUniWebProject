@@ -38,6 +38,7 @@ namespace GtRacingNews.Controllers
 
                 return Redirect("/");
             }
+
             return View("./Error", errors);
         }
 
