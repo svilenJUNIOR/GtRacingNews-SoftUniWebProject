@@ -1,20 +1,35 @@
 ﻿using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
-using GtRacingNews.ViewModels.User;
 using GtRacingNews.Common.Constants;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Team;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Race;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Service
 {
     public class Validator : IValidator
     {
-        private readonly IHasher hasher = new Hasher();
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-       
+
+        public IEnumerable<string> ValidateUserRegister(ModelStateDictionary modelState)
+        {
+            var errors = new List<string>();
+
+            if (!modelState.IsValid)
+            {
+                foreach (var values in modelState.Values)
+                {
+                    foreach (var modelError in values.Errors)
+                    {
+                        errors.Add(modelError.ErrorMessage);
+                    }
+                }
+            }
+            return errors;
+        }
 
         public IEnumerable<string> ValidateAddNews(AddNewFormModel model)
         {

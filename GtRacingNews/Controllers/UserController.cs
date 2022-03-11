@@ -9,25 +9,36 @@ namespace GtRacingNews.Controllers
     public class UserController : Controller
     {
         private readonly IUserService userService = new UserService();
+        private readonly IValidator validator = new Validator();
+        private readonly IGuard guard = new Guard();
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        
+
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public ActionResult Register() => View();
+        public IActionResult Register() => View();
+        public IActionResult Login() => View();
+
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            await userManager.CreateAsync(userService.RegisterUser(model));
-            return Redirect("/");
-        }
+            // checks for empty fields
+            var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
 
-        public ActionResult Login() => View();
+            // checks for wrong data
+            var dataErrors = validator.ValidateUserRegister(ModelState);
+
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+
+            else if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+
+            else await userManager.CreateAsync(userService.RegisterUser(model)); return Redirect("/");
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)

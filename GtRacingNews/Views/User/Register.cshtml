@@ -1,65 +1,43 @@
 ﻿  @model GtRacingNews.ViewModels.User.RegisterUserFormModel
 
 <h1 style="text-align:center; color:white">Create an account</h1>
-<div class="box">
 
-<div asp-validation-summary="ModelOnly"></div>
-<form method="post">
-    <div class="form-group">
-        <label asp-for="@Model.Email"></label>
-        <input asp-for="@Model.Email" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Password"></label>
-        <input asp-for="@Model.Password" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.ConfirmPassword"></label>
-        <input asp-for="@Model.ConfirmPassword" class="form-control">
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Username"></label>
-        <input asp-for="@Model.Username" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
-
-    @*<form method="post">
+<div class="box" >
+    <form method="post">
         <table style="height: 300px">
             <tr>
                 <td>
-                    <label for="email">Email</label>
+                    <label asp-for="@Model.Email"></label>
                 </td>
                 <td width="300px">
-                    <input asp-for="Email" type="text" class="form-control" id="email" name="email" placeholder="Must end with @@email.com" />
-                    <span asp-validation-for="Email"></span>
+                    <input asp-for="@Model.Email" class="form-control" placeholder="Must end with @@email.com">
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="password">Password</label>
+                    <label asp-for="@Model.Password"></label>
                 </td>
                 <td>
-                    <input type="password" class="form-control" id="password" name="password" />
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <label for="confirmPassword">Confirm Password</label>
-                </td>
-                <td>
-                    <input type="password" class="form-control" id="password" name="confirmPassword" />
+                    <input type="password" asp-for="@Model.Password" class="form-control">
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="username">Username</label>
+                    <label asp-for="@Model.ConfirmPassword"></label>
                 </td>
                 <td>
-                    <input type="text" class="form-control" id="username" name="username" />
+                    <input type="password" asp-for="@Model.ConfirmPassword" class="form-control">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label asp-for="@Model.Username"></label>
+                </td>
+                <td>
+                    <input asp-for="@Model.Username" class="form-control">
                 </td>
             </tr>
 
@@ -72,7 +50,7 @@
                 </td>
             </tr>
         </table>
-    </form>*@
+    </form>
 </div>
 
 <style>
