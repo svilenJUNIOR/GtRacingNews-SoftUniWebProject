@@ -15,12 +15,20 @@ namespace GtRacingNews.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Register() => View();
+        public ActionResult Register() => View();
 
         [HttpPost]
-        public IActionResult Register(RegisterUserFormModel model)
+        public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            return View(model);
+            var user = new IdentityUser();
+            user.Email = model.Email;
+            user.UserName = model.Username;
+            user.PasswordHash = model.Password;
+
+
+            var result = await this.userManager.CreateAsync(user);
+
+            return Redirect("/");
         }
     }
 }
