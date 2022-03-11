@@ -8,12 +8,14 @@ namespace GtRacingNews.Services.Service
         public ICollection<string> AgainstNull(params string[] args)
         {
             var errors = new List<string>();
+            bool check = false;
 
             foreach (var arg in args)
                 if (string.IsNullOrEmpty(arg) || string.IsNullOrWhiteSpace(arg))
-                    errors.Add(Messages.NullField);
+                    check = true;
 
-            errors.RemoveRange(1, errors.Count - 1);
+            if (check) errors.Add(Messages.NullField);
+
             return errors;
         }
     }
