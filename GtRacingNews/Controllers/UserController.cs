@@ -30,5 +30,17 @@ namespace GtRacingNews.Controllers
 
             return Redirect("/");
         }
+
+        public ActionResult Login() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginUserFormModel model)
+        {
+            var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
+
+            if (loggedInUser != null) await this.signInManager.SignInAsync(loggedInUser, true);
+
+            return Redirect("/");
+        }
     }
 }
