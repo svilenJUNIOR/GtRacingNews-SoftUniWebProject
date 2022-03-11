@@ -1,5 +1,6 @@
 ﻿using GtRacingNews.Services.Contracts;
 using GtRacingNews.Common.Constants;
+using GtRacingNews.ViewModels.User;
 
 namespace GtRacingNews.Services.Service
 {
@@ -17,6 +18,15 @@ namespace GtRacingNews.Services.Service
             if (check) errors.Add(Messages.NullField);
 
             return errors;
+        }
+
+        public bool AgainstInvalidEmail(string email)
+        {
+            bool check = false;
+
+            if (!email.EndsWith(Values.EndOfAnEmail)) check = true;
+
+            return check;
         }
     }
 }

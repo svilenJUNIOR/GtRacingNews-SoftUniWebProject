@@ -10,7 +10,7 @@
         public const string WrongUsernameFormat = "Username must be between {0} and {1} characters!";
 
         public const string ExistingPassword = "There's an account corresponding to that password!";
-        public const string WrongPasswordFormat = "Password must be between {0} and {1} characters!";
+        public const string WrongPasswordFormat = "Password must be at least {0} characters!";
         public const string UnExistingPassword = "No account corresponds to that password!";
         public const string PasswordsDontMatch = "Passwords don't match!";
 

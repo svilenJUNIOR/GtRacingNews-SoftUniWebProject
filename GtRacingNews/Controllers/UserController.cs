@@ -30,12 +30,17 @@ namespace GtRacingNews.Controllers
             // checks for empty fields
             var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
 
+            // checks for invalid email format
+            var isEmailValid = guard.AgainstInvalidEmail(model.Email);
+
             // checks for wrong data
             var dataErrors = validator.ValidateUserRegister(ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
             else if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+
+            else if (isEmailValid) return View("./Error", "Email must end with @email.com");
 
             else await userManager.CreateAsync(userService.RegisterUser(model)); return Redirect("/");
         }
