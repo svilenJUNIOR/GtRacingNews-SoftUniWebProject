@@ -6,6 +6,15 @@ namespace GtRacingNews.Data.DBContext
 {
     public class GTNewsDbContext : IdentityDbContext
     {
+        public GTNewsDbContext()
+        {
+
+        }
+        public GTNewsDbContext(DbContextOptions<GTNewsDbContext> options)
+           : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
