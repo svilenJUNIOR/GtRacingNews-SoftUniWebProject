@@ -33,6 +33,7 @@ namespace GtRacingNews.Data.DBContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
         }
     }
 }
