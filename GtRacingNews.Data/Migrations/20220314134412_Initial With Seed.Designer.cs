@@ -4,6 +4,7 @@ using GtRacingNews.Data.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    partial class GTNewsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220314134412_Initial With Seed")]
+    partial class InitialWithSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -480,22 +482,6 @@ namespace GtRacingNews.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0aba50d0-9907-4442-8bf7-75fd9a1047d3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0512ef3b-1e61-45d5-bccb-38a5b4d716a6",
-                            Email = "svilen@email.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "svilen123",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8d36433f-e04b-4eda-8176-2a73f4335eed",
-                            TwoFactorEnabled = false,
-                            UserName = "svilen"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
