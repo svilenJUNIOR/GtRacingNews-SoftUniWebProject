@@ -48,11 +48,16 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Email, model.Password);
-            var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
-
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await this.signInManager.SignInAsync(loggedInUser, true); return Redirect("/");
+            var dataErrors = validator.ValidateUserLogin(model);
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+            
+            else
+            {
+                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
+                await this.signInManager.SignInAsync(loggedInUser, true);
+            } return Redirect("/");
 
         }
     }

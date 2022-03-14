@@ -1,25 +1,35 @@
-﻿using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
-using GtRacingNews.Common.Constants;
-using GtRacingNews.ViewModels.News;
-using GtRacingNews.ViewModels.Team;
-using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.Championship;
+using GtRacingNews.ViewModels.Driver;
+using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using GtRacingNews.Data.DataModels;
-using System.Linq;
+using GtRacingNews.ViewModels.Team;
 using GtRacingNews.ViewModels.User;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Service
 {
     public class Validator : IValidator
     {
         private readonly GTNewsDbContext context;
-
-        public Validator(GTNewsDbContext context)
+        private readonly IHasher hasher;
+        public Validator(GTNewsDbContext context, IHasher hasher)
         {
             this.context = context;
+            this.hasher = hasher;
+        }
+
+        public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
+        {
+            var errors = new List<string>();
+            var users = context.Users.ToList();
+
+            if (!users.Any(x => x.Email == model.Email)) errors.Add(Messages.UnExistingEmail);
+            if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(Messages.UnExistingPassword);
+
+            return errors;
         }
         public IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model)
         {
