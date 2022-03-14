@@ -17,6 +17,7 @@ namespace GtRacingNews.Services.Contracts
         IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model);
         IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model);
         IEnumerable<string> ValidateAddNewDriver(AddNewDriverFormModel model);
-        IEnumerable<string> ValidateUserRegister(ModelStateDictionary ModelState);
+        IEnumerable<string> ValidateUserFormRegister(ModelStateDictionary ModelState);
+        IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model);
     }
 }

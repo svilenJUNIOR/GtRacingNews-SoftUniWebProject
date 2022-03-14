@@ -19,14 +19,5 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
-        public bool AgainstInvalidEmail(string email)
-        {
-            bool check = false;
-
-            if (!email.EndsWith(Values.EndOfAnEmail)) check = true;
-
-            return check;
-        }
     }
 }

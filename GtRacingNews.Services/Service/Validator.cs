@@ -8,6 +8,8 @@ using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Race;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using GtRacingNews.Data.DataModels;
+using System.Linq;
+using GtRacingNews.ViewModels.User;
 
 namespace GtRacingNews.Services.Service
 {
@@ -19,8 +21,27 @@ namespace GtRacingNews.Services.Service
         {
             this.context = context;
         }
+        public IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model)
+        {
+            var errors = new List<string>();
+            var users = context.Users.ToList();
 
-        public IEnumerable<string> ValidateUserRegister(ModelStateDictionary modelState)
+            if (users.Any(x => x.Email == model.Email)) errors.Add(Messages.ExistingEmail);
+            if (users.Any(x => x.UserName == model.Username)) errors.Add(Messages.ExistingUsername);
+            if (!model.Email.EndsWith("@email.com")) errors.Add(String.Format(Messages.WrongEmailFormat, Values.EndOfAnEmail));
+
+            if (model.Username.Length < Values.MinUsernameLength && model.Username.Length > Values.MaxUsernameLength)
+                errors.Add(string.Format(Messages.WrongUsernameFormat, Values.MinUsernameLength, Values.MaxUsernameLength));
+
+            if (model.Password.Length < Values.MinPasswordLength)
+                errors.Add(string.Format(Messages.WrongPasswordFormat, Values.MinUsernameLength));
+
+            if (model.Password != model.ConfirmPassword) errors.Add(Messages.PasswordsDontMatch);
+
+            return errors;
+        }
+
+        public IEnumerable<string> ValidateUserFormRegister(ModelStateDictionary modelState)
         {
             var errors = new List<string>();
 
@@ -34,6 +55,7 @@ namespace GtRacingNews.Services.Service
                     }
                 }
             }
+
             return errors;
         }
 

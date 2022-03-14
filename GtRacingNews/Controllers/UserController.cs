@@ -33,12 +33,13 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
-            var isEmailValid = guard.AgainstInvalidEmail(model.Email);
-            var dataErrors = validator.ValidateUserRegister(ModelState);
-
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
-            else if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-            else if (isEmailValid) return View("./Error", "Email must end with @email.com");
+
+            var formErrors = validator.ValidateUserFormRegister(ModelState);
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
+
+            var dataErrors = validator.ValidateUserRegister(model);
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
             else await userManager.CreateAsync(userService.RegisterUser(model)); return Redirect("/");
         }
@@ -47,14 +48,12 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Email, model.Password);
+            var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
-
-            if (loggedInUser == null) return View(" ", Messages.UnExistingUser);
-
             else await this.signInManager.SignInAsync(loggedInUser, true); return Redirect("/");
+
         }
     }
 }
