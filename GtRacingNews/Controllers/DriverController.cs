@@ -33,8 +33,11 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Add(AddNewDriverFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
+            var dataErrors = validator.ValidateAddNewDriver(model);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+
             else driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/");
         }
 

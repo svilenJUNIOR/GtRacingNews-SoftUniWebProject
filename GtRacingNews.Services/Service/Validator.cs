@@ -7,13 +7,13 @@ using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Race;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Services.Service
 {
     public class Validator : IValidator
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
-
         public IEnumerable<string> ValidateUserRegister(ModelStateDictionary modelState)
         {
             var errors = new List<string>();

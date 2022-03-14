@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
@@ -31,19 +32,12 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            // checks for empty fields
             var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
-
-            // checks for invalid email format
             var isEmailValid = guard.AgainstInvalidEmail(model.Email);
-
-            // checks for wrong data
             var dataErrors = validator.ValidateUserRegister(ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
-
             else if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-
             else if (isEmailValid) return View("./Error", "Email must end with @email.com");
 
             else await userManager.CreateAsync(userService.RegisterUser(model)); return Redirect("/");
@@ -52,11 +46,15 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
+            var nullErrors = guard.AgainstNull(model.Email, model.Password);
+
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+
             var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
 
-            if (loggedInUser != null) await this.signInManager.SignInAsync(loggedInUser, true);
+            if (loggedInUser == null) return View(" ", Messages.UnExistingUser);
 
-            return Redirect("/");
+            else await this.signInManager.SignInAsync(loggedInUser, true); return Redirect("/");
         }
     }
 }

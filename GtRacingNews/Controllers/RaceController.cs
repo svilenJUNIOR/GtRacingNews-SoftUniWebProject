@@ -27,8 +27,11 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Add(AddNewRaceFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Name, model.Date);
+            var dataErrors = validator.ValidateAddRace(model);
 
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+
             else raceService.AddNewRace(model.Name, model.Date); return Redirect("/");
         }
 

@@ -15,7 +15,7 @@ namespace GtRacingNews.Controllers
         private readonly GTNewsDbContext context;
         private readonly IGuard guard;
 
-        public TeamController(IValidator validator, ITeamService teamService, GTNewsDbContext context, IGuard guard)
+        public TeamController(IValidator validator, ITeamService teamService, IGuard guard, GTNewsDbContext context)
         {
             this.validator = validator;
             this.teamService = teamService;
@@ -38,8 +38,11 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Add(AddTeamFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
+            var dataErrors = validator.ValidateAddNewTeam(model);
 
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+
             else teamService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/");
         }
 
