@@ -49,7 +49,7 @@ namespace GtRacingNews.Controllers
                 {
                     NewsId = n.Id,
                     Description = n.Description,
-                    Comments = context.Comments.Where(x => x.NewsId == n.Id).Select(x => x.Description).ToList()
+                    Comments = context.Comments.Where(x => x.NewsId == n.Id).Select(x => x.UserName + " - " + x.Description).ToList()
                 }).FirstOrDefault();
 
             return View(news);

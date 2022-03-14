@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220314092226_Data seeding test")]
-    partial class Dataseedingtest
+    [Migration("20220314093855_InitialCommit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,31 +62,18 @@ namespace GtRacingNews.Data.Migrations
                     b.Property<int>("NewsId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NewsId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "I was starting to loose hope.",
-                            NewsId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Go go NISMO.",
-                            NewsId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "I told you Alex Buncombe is a fast pilot!!!",
-                            NewsId = 1
-                        });
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Driver", b =>
@@ -145,14 +132,6 @@ namespace GtRacingNews.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("News");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Finally some good news, for the Nismo motorsport team fans!",
-                            Heading = "Nissan Won Le Mans"
-                        });
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Race", b =>

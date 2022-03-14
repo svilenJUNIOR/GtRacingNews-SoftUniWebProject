@@ -10,5 +10,6 @@ namespace GtRacingNews.Data.DataModels
         [MaxLength(100)]
         public string Description { get; set; }
         public int NewsId { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -15,11 +15,6 @@ namespace GtRacingNews.Data
                     Description = "Finally some good news, for the Nismo motorsport team fans!"
                 }
             );
-            modelBuilder.Entity<Comment>().HasData(
-                new Comment { Id = 1, NewsId = 1, Description = "I was starting to loose hope." },
-                new Comment { Id = 2, NewsId = 1, Description = "Go go NISMO." },
-                new Comment { Id = 3, NewsId = 1, Description = "I told you Alex Buncombe is a fast pilot!!!" }
-            );
         }
     }
 }
