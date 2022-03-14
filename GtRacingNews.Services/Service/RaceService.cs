@@ -6,7 +6,11 @@ namespace GtRacingNews.Services.Service
 {
     public class RaceService : IRaceService
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly GTNewsDbContext context;
+        public RaceService(GTNewsDbContext context)
+        {
+            this.context = context;
+        }
         public async void AddNewRace(string name, string date)
         {
             var race = new Race

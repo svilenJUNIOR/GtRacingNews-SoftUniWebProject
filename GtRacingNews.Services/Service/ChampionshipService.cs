@@ -6,7 +6,12 @@ namespace GtRacingNews.Services.Service
 {
     public class ChampionshipService : IChampionshipService
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+
+        private readonly GTNewsDbContext context;
+        public ChampionshipService(GTNewsDbContext context)
+        {
+            this.context = context;
+        }
         public async void AddNewChampionship(string name, string logoUrl)
         {
             var championship = new Championship

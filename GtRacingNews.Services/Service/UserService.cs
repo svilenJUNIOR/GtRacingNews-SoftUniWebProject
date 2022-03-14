@@ -6,7 +6,13 @@ namespace GtRacingNews.Services.Service
 {
     public class UserService : IUserService
     {
-        private readonly IHasher hasher = new Hasher();
+        private readonly IHasher hasher;
+
+        public UserService(IHasher hasher)
+        {
+            this.hasher = hasher;
+        }
+
         public IdentityUser RegisterUser(RegisterUserFormModel model)
         {
             var user = new IdentityUser();

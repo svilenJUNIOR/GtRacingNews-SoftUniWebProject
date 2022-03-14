@@ -6,7 +6,11 @@ namespace GtRacingNews.Services.Service
 {
     public class NewsService : INewsService
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly GTNewsDbContext context;
+        public NewsService(GTNewsDbContext context)
+        {
+            this.context = context;
+        }
 
         public async void AddNews(string heading, string description)
         {

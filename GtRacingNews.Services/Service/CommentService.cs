@@ -6,7 +6,12 @@ namespace GtRacingNews.Services.Service
 {
     public class CommentService : ICommentService
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+
+        private readonly GTNewsDbContext context;
+        public CommentService(GTNewsDbContext context)
+        {
+            this.context = context;
+        }
         public async void AddNewComment(string Description, int newsId, string UserName)
         {
             var comment = new Comment
