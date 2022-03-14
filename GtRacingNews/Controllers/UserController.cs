@@ -8,17 +8,21 @@ namespace GtRacingNews.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService userService = new UserService();
-        private readonly IValidator validator = new Validator();
-        private readonly IGuard guard = new Guard();
+        private readonly IUserService userService;
+        private readonly IValidator validator;
+        private readonly IGuard guard;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
 
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, 
+            IUserService userService, IValidator validator, IGuard guard)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.userService = userService;
+            this.validator = validator;
+            this.guard = guard;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();

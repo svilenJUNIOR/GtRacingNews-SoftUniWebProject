@@ -10,9 +10,16 @@ namespace GtRacingNews.Controllers
 {
     public class ChampionshipController : Controller
     {
-        private readonly IValidator validator = new Validator();
-        private readonly IChampionshipService championshipService = new ChampionshipService();
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IValidator validator;
+        private readonly IChampionshipService championshipService;
+        private readonly GTNewsDbContext context;
+        public ChampionshipController(IValidator validator, IChampionshipService championshipService, GTNewsDbContext context)
+        {
+            this.validator = validator;
+            this.championshipService = championshipService;
+            this.context = context;
+        }
+
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]

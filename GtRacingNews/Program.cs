@@ -1,4 +1,6 @@
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,19 +18,17 @@ builder.Services.AddControllersWithViews()
     {
         
     });
-//builder.Services.AddRazorPages();
 
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    // Password settings.
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 1;
-});
-
+builder.Services.AddScoped<IChampionshipService, ChampionshipService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IGuard, Guard>();
+builder.Services.AddScoped<IHasher, Hasher>();
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<IRaceService, RaceService>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IValidator, Validator>();
 
 var app = builder.Build();
 

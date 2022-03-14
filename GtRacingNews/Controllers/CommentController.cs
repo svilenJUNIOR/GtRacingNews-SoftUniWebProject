@@ -11,10 +11,11 @@ namespace GtRacingNews.Controllers
     public class CommentController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        private readonly ICommentService commentService = new CommentService();
-        public CommentController(UserManager<IdentityUser> userManager)
+        private readonly ICommentService commentService;
+        public CommentController(UserManager<IdentityUser> userManager, ICommentService commentService)
         {
             this.userManager = userManager;
+            this.commentService = commentService;
         }
         public async Task<IActionResult> Add() => View();
 

@@ -8,9 +8,17 @@ namespace GtRacingNews.Controllers
 {
     public class RaceController : Controller
     {
-        private readonly IValidator validator = new Validator();
-        private readonly IRaceService raceService = new RaceService();
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IValidator validator;
+        private readonly IRaceService raceService;
+        private readonly GTNewsDbContext context;
+
+        public RaceController(IValidator validator, IRaceService raceService, GTNewsDbContext context)
+        {
+            this.validator = validator;
+            this.raceService = raceService;
+            this.context = context;
+        }
+
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]

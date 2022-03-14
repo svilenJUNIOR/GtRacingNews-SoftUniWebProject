@@ -10,9 +10,17 @@ namespace GtRacingNews.Controllers
 {
     public class TeamController : Controller
     {
-        private readonly IValidator validator = new Validator();
-        private readonly ITeamService teamService = new TeamService();
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IValidator validator;
+        private readonly ITeamService teamService;
+        private readonly GTNewsDbContext context;
+
+        public TeamController(IValidator validator, ITeamService teamService, GTNewsDbContext context)
+        {
+            this.validator = validator;
+            this.teamService = teamService;
+            this.context = context;
+        }
+
         public async Task<IActionResult> Add()
         {
             AddTeamFormModel model = new AddTeamFormModel();

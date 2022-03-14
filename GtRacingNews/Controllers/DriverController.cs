@@ -8,9 +8,17 @@ namespace GtRacingNews.Controllers
 {
     public class DriverController : Controller
     {
-        private readonly IValidator validator = new Validator();
-        private readonly IDriverService driverService = new DriverService();
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IValidator validator;
+        private readonly IDriverService driverService;
+        private readonly GTNewsDbContext context;
+
+        public DriverController(IValidator validator, IDriverService driverService, GTNewsDbContext context)
+        {
+            this.validator = validator;
+            this.driverService = driverService;
+            this.context = context;
+        }
+
         public async Task<IActionResult> Add()
         {
             var teams = context.Teams.ToList();
