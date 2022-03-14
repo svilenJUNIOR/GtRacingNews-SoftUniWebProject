@@ -3,6 +3,7 @@ using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Driver;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace GtRacingNews.Controllers
 {
@@ -23,7 +24,7 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> Add()
         {
-            var teams = context.Teams.ToList();
+            var teams = context.Teams.Where(x => x.Drivers.Count() < 3).ToList();
             AddNewDriverFormModel model = new AddNewDriverFormModel();
             model.Teams = teams;
             return View(model);

@@ -7,7 +7,7 @@ using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Race;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Identity;
+using GtRacingNews.Data.DataModels;
 
 namespace GtRacingNews.Services.Service
 {
@@ -67,17 +67,6 @@ namespace GtRacingNews.Services.Service
 
             if (context.Drivers.Any(x => x.Name == model.Name))
                 errors.Add(Messages.ExistingDriver);
-
-            return errors;
-        }
-
-        public IEnumerable<string> ValidateAddDriverToTeam(int teamId)
-        {
-            var errors = new List<string>();
-
-            var team = context.Teams.Where(x => x.Id == teamId).FirstOrDefault();
-
-            if (team.Drivers.Count() >= 3) errors.Add(Messages.DriverListFull);
 
             return errors;
         }

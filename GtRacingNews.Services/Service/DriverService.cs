@@ -7,6 +7,12 @@ namespace GtRacingNews.Services.Service
     public class DriverService : IDriverService
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IValidator validator;
+
+        public DriverService(IValidator validator)
+        {
+            this.validator = validator;
+        }
         public async void AddNewDriver(string name, string cup, string imageUrl, int age, string teamName)
         {
             var team = context.Teams.Where(x => x.Name == teamName).FirstOrDefault();

@@ -1,4 +1,5 @@
-﻿using GtRacingNews.ViewModels.Championship;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;
@@ -16,7 +17,6 @@ namespace GtRacingNews.Services.Contracts
         IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model);
         IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model);
         IEnumerable<string> ValidateAddNewDriver(AddNewDriverFormModel model);
-        IEnumerable<string> ValidateAddDriverToTeam(int teamId);
         IEnumerable<string> ValidateUserRegister(ModelStateDictionary ModelState);
     }
 }

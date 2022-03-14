@@ -26,7 +26,7 @@
 
         public const string ExistingDriver = "Driver with that name alredy exists!";
 
-        public const string DriverListFull = "Maximum number or drivers reached!";
+        public const string DriverInTeam = "The team already has a driver with that name!";
 
         public const string ExistingChampionship = "Championship with that name already exists!";
         public const string NonExistingChampionship = "Championship with that does not exists!";
