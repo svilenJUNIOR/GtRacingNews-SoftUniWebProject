@@ -11,12 +11,14 @@ namespace GtRacingNews.Controllers
         private readonly IValidator validator;
         private readonly INewsService newsService;
         private readonly GTNewsDbContext context;
+        private readonly IGuard guard;
 
-        public NewsController(IValidator validator, INewsService newsService, GTNewsDbContext context)
+        public NewsController(IValidator validator, INewsService newsService, GTNewsDbContext context, IGuard guard)
         {
             this.validator = validator;
             this.newsService = newsService;
             this.context = context;
+            this.guard = guard;
         }
 
         public IActionResult Add() => View();
@@ -24,17 +26,10 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddNewFormModel model)
         {
-            if (string.IsNullOrEmpty(model.Description) || string.IsNullOrEmpty(model.Heading)) return Redirect("Add");
+            var nullErrors = guard.AgainstNull(model.Heading, model.Description);
 
-            var errors = validator.ValidateAddNews(model);
-
-            if (errors.Count() == 0)
-            {
-                newsService.AddNews(model.Heading, model.Description);
-                return Redirect("/");
-            }
-
-            return View("./Error", errors);
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            else newsService.AddNews(model.Heading, model.Description); return Redirect("/");
         }
 
         public async Task<IActionResult> All()

@@ -11,12 +11,14 @@ namespace GtRacingNews.Controllers
         private readonly IValidator validator;
         private readonly IDriverService driverService;
         private readonly GTNewsDbContext context;
+        private readonly IGuard guard;
 
-        public DriverController(IValidator validator, IDriverService driverService, GTNewsDbContext context)
+        public DriverController(IValidator validator, IDriverService driverService, GTNewsDbContext context, IGuard guard)
         {
             this.validator = validator;
             this.driverService = driverService;
             this.context = context;
+            this.guard = guard;
         }
 
         public async Task<IActionResult> Add()
@@ -30,18 +32,10 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddNewDriverFormModel model)
         {
-            if (model.Age == null || string.IsNullOrEmpty(model.ImageUrl)
-                || string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Cup)) return Redirect("Add");
+            var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
 
-            var errors = validator.ValidateAddNewDriver(model);
-
-            if (errors.Count() == 0)
-            {
-                driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName);
-                return Redirect("/");
-            }
-
-            return View("./Error", errors);
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            else driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/");
         }
 
         public async Task<IActionResult> All()

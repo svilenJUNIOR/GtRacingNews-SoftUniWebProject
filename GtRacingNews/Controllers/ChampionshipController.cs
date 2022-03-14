@@ -12,12 +12,15 @@ namespace GtRacingNews.Controllers
     {
         private readonly IValidator validator;
         private readonly IChampionshipService championshipService;
+        private readonly IGuard guard;
         private readonly GTNewsDbContext context;
-        public ChampionshipController(IValidator validator, IChampionshipService championshipService, GTNewsDbContext context)
+        public ChampionshipController(IValidator validator, IChampionshipService championshipService, 
+            GTNewsDbContext context, IGuard guard)
         {
             this.validator = validator;
             this.championshipService = championshipService;
             this.context = context;
+            this.guard = guard;
         }
 
         public async Task<IActionResult> Add() => View();
@@ -25,17 +28,10 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddNewChampionshipFormModel model)
         {
-            if (string.IsNullOrEmpty(model.Name)) return Redirect("Add");
+            var nullErrors = guard.AgainstNull(model.Name, model.LogoUrl);
 
-            var errors = validator.ValidateAddNewChampionship(model);
-
-            if (errors.Count() == 0)
-            {
-                championshipService.AddNewChampionship(model.Name, model.LogoUrl);
-                return Redirect("/");
-            }
-
-            return View("./Error", errors);
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            else championshipService.AddNewChampionship(model.Name, model.LogoUrl); return Redirect("/");
         }
 
         public async Task<IActionResult> All()
