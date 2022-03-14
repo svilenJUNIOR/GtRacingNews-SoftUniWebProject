@@ -1,5 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Comments;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,13 +11,11 @@ namespace GtRacingNews.Controllers
     public class CommentController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-
+        private readonly ICommentService commentService = new CommentService();
         public CommentController(UserManager<IdentityUser> userManager)
         {
             this.userManager = userManager;
         }
-
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]
@@ -23,15 +23,7 @@ namespace GtRacingNews.Controllers
         {
             var user = await userManager.GetUserAsync(User);
 
-            var comment = new Comment
-            {
-                NewsId = newsId,
-                Description = model.Description,
-                UserName = user.UserName,
-            };
-
-            context.Comments.Add(comment);
-            context.SaveChanges();
+            commentService.AddNewComment(model.Description, newsId, user.UserName);
 
             return Redirect($"/News/Details?id={newsId}");
         }
