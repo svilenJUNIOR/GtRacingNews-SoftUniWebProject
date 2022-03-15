@@ -26,13 +26,13 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddNewFormModel model)
         {
-            var nullErrors = guard.AgainstNull(model.Heading, model.Description);
+            var nullErrors = guard.AgainstNull(model.Heading, model.Description, model.PictureUrl);
             var dataErrors = validator.ValidateAddNews(model);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else newsService.AddNews(model.Heading, model.Description); return Redirect("/");
+            else newsService.AddNews(model.Heading, model.Description, model.PictureUrl); return Redirect("/");
         }
 
         public async Task<IActionResult> All()
@@ -42,7 +42,7 @@ namespace GtRacingNews.Controllers
                 {
                     Id = x.Id,
                     Heading = x.Heading,
-                    ImgUrl = "https://www.linkpicture.com/q/NewsCardImg.jpg"
+                    ImgUrl = x.PictureUrl
                 }).ToList();
 
             return View(news);

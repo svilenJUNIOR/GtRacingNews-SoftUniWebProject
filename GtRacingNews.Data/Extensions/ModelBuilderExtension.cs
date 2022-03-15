@@ -42,13 +42,29 @@ namespace GtRacingNews.Data
                 {
                     Id = 1,
                     Description = "Finally some good news, for the Nismo motorsport team fans!",
-                    Heading = "Nissan has won LeMans"
+                    Heading = "Nissan has won LeMans",
+                    PictureUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg"
                 },
                 new News
                 {
                     Id = 2,
                     Description = "The new dates are 13-15 May!",
-                    Heading = "Bathurst 2022 with new dates!"
+                    Heading = "Bathurst 2022 with new dates!",
+                    PictureUrl = "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png"
+                },
+                new News
+                {
+                    Id = 3,
+                    Description = "Orange 1 fff racing reveals new team driver!",
+                    Heading = "The name of the newest driver is Mirko Bortolotti",
+                    PictureUrl = "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg"
+                },
+                new News
+                {
+                    Id = 4,
+                    Description = "Emil Fray steals the title!",
+                    Heading = "For some it's a beginners luck, for others Emil Fray kicks ass!",
+                    PictureUrl = "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg"
                 }
 
         );

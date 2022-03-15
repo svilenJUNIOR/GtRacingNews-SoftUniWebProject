@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GtRacingNews.Data.Migrations
 {
-    public partial class InitialWithSeed : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,8 +68,9 @@ namespace GtRacingNews.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Heading = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false)
+                    Heading = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
+                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,6 +264,11 @@ namespace GtRacingNews.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "4d52fc87-a22f-456b-973b-ad6afa0e7b60", "svilen@email.com", false, false, null, null, null, "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "a4944627-36eb-4612-bd35-b3a6a81498b8", false, "svilen" });
+
+            migrationBuilder.InsertData(
                 table: "Championships",
                 columns: new[] { "Id", "LogoUrl", "Name" },
                 values: new object[,]
@@ -274,11 +280,13 @@ namespace GtRacingNews.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "News",
-                columns: new[] { "Id", "Description", "Heading" },
+                columns: new[] { "Id", "Description", "Heading", "PictureUrl" },
                 values: new object[,]
                 {
-                    { 1, "Finally some good news, for the Nismo motorsport team fans!", "Nissan has won LeMans" },
-                    { 2, "The new dates are 13-15 May!", "Bathurst 2022 with new dates!" }
+                    { 1, "Finally some good news, for the Nismo motorsport team fans!", "Nissan has won LeMans", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg" },
+                    { 2, "The new dates are 13-15 May!", "Bathurst 2022 with new dates!", "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png" },
+                    { 3, "Orange 1 fff racing reveals new team driver!", "The name of the newest driver is Mirko Bortolotti", "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg" },
+                    { 4, "Emil Fray steals the title!", "For some it's a beginners luck, for others Emil Fray kicks ass!", "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg" }
                 });
 
             migrationBuilder.InsertData(

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220314135221_Add user to seed")]
-    partial class Addusertoseed
+    [Migration("20220315110604_Initial Commit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,8 +231,12 @@ namespace GtRacingNews.Data.Migrations
 
                     b.Property<string>("Heading")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -243,13 +247,29 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = 1,
                             Description = "Finally some good news, for the Nismo motorsport team fans!",
-                            Heading = "Nissan has won LeMans"
+                            Heading = "Nissan has won LeMans",
+                            PictureUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg"
                         },
                         new
                         {
                             Id = 2,
                             Description = "The new dates are 13-15 May!",
-                            Heading = "Bathurst 2022 with new dates!"
+                            Heading = "Bathurst 2022 with new dates!",
+                            PictureUrl = "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Orange 1 fff racing reveals new team driver!",
+                            Heading = "The name of the newest driver is Mirko Bortolotti",
+                            PictureUrl = "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Emil Fray steals the title!",
+                            Heading = "For some it's a beginners luck, for others Emil Fray kicks ass!",
+                            PictureUrl = "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg"
                         });
                 });
 
@@ -486,15 +506,15 @@ namespace GtRacingNews.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0aba50d0-9907-4442-8bf7-75fd9a1047d3",
+                            Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0512ef3b-1e61-45d5-bccb-38a5b4d716a6",
+                            ConcurrencyStamp = "4d52fc87-a22f-456b-973b-ad6afa0e7b60",
                             Email = "svilen@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "svilen123",
+                            PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8d36433f-e04b-4eda-8176-2a73f4335eed",
+                            SecurityStamp = "a4944627-36eb-4612-bd35-b3a6a81498b8",
                             TwoFactorEnabled = false,
                             UserName = "svilen"
                         });

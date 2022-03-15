@@ -12,12 +12,13 @@ namespace GtRacingNews.Services.Service
             this.context = context;
         }
 
-        public async void AddNews(string heading, string description)
+        public async void AddNews(string heading, string description, string pictureUrl)
         {
             var news = new News
             {
                 Heading = heading,
-                Description = description
+                Description = description,
+                PictureUrl = pictureUrl
             };
 
             context.News.Add(news);

@@ -1,4 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
+<h1>LATEST NEWS</h1>
+<section id="LatestNews">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@Model.PictureUrl" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Heading</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <a class="btn btn-block btn-primary text-white mb-3" href="/News/Details?id=@Model.Id">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <link rel="stylesheet" href="~/css/HomeCss/HomePage.css"></link>
