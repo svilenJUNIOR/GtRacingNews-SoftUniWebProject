@@ -506,13 +506,13 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d52fc87-a22f-456b-973b-ad6afa0e7b60",
+                            ConcurrencyStamp = "d7321078-115b-4772-be51-360fd38a273f",
                             Email = "svilen@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a4944627-36eb-4612-bd35-b3a6a81498b8",
+                            SecurityStamp = "8a79a054-33b8-4c5b-8245-8dd2a31b4547",
                             TwoFactorEnabled = false,
                             UserName = "svilen"
                         });

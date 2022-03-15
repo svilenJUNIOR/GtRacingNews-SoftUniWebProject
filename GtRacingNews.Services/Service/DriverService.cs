@@ -11,7 +11,7 @@ namespace GtRacingNews.Services.Service
         {
             this.context = context;
         }
-        public async void AddNewDriver(string name, string cup, string imageUrl, int age, string teamName)
+        public async Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName)
         {
             var team = context.Teams.Where(x => x.Name == teamName).FirstOrDefault();
 

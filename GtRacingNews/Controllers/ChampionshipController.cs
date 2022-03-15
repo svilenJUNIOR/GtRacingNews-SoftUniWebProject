@@ -34,7 +34,7 @@ namespace GtRacingNews.Controllers
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
-            else championshipService.AddNewChampionship(model.Name, model.LogoUrl); return Redirect("/");
+            else await championshipService.AddNewChampionship(model.Name, model.LogoUrl); return Redirect("/");
         }
 
         public async Task<IActionResult> All()

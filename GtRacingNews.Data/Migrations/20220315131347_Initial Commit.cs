@@ -266,7 +266,7 @@ namespace GtRacingNews.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "4d52fc87-a22f-456b-973b-ad6afa0e7b60", "svilen@email.com", false, false, null, null, null, "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "a4944627-36eb-4612-bd35-b3a6a81498b8", false, "svilen" });
+                values: new object[] { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "d7321078-115b-4772-be51-360fd38a273f", "svilen@email.com", false, false, null, null, null, "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "8a79a054-33b8-4c5b-8245-8dd2a31b4547", false, "svilen" });
 
             migrationBuilder.InsertData(
                 table: "Championships",

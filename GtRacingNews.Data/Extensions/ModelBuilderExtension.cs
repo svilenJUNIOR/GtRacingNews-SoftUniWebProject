@@ -55,8 +55,8 @@ namespace GtRacingNews.Data
                 new News
                 {
                     Id = 3,
-                    Description = "Orange 1 fff racing reveals new team driver!",
-                    Heading = "The name of the newest driver is Mirko Bortolotti",
+                    Description = "The name of the newest driver is Mirko Bortolotti",
+                    Heading = "Orange 1 fff racing reveals new team driver!",
                     PictureUrl = "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg"
                 },
                 new News

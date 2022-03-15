@@ -11,7 +11,7 @@ namespace GtRacingNews.Services.Service
         {
             this.context = context;
         }
-        public async void AddNewTeam(string name, string carModel, string logoUrl, string championshipName)
+        public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName)
         {
             var championship = context.Championships.Where(x => x.Name == championshipName).FirstOrDefault();
             

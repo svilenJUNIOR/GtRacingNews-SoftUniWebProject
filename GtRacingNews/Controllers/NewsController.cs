@@ -32,7 +32,7 @@ namespace GtRacingNews.Controllers
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else newsService.AddNews(model.Heading, model.Description, model.PictureUrl); return Redirect("/");
+            else await newsService.AddNews(model.Heading, model.Description, model.PictureUrl); return Redirect("All");
         }
 
         public async Task<IActionResult> All()

@@ -2,6 +2,6 @@
 {
     public interface IRaceService
     {
-        void AddNewRace(string name, string date);
+        Task AddNewRace(string name, string date);
     }
 }

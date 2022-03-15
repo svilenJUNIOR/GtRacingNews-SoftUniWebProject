@@ -11,7 +11,7 @@ namespace GtRacingNews.Services.Service
         {
             this.context = context;
         }
-        public async void AddNewRace(string name, string date)
+        public async Task AddNewRace(string name, string date)
         {
             var race = new Race
             {

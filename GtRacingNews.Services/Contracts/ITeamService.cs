@@ -2,6 +2,6 @@
 {
     public interface ITeamService
     {
-        void AddNewTeam(string name, string carModel, string logoUrl, string championshipName);
+        Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName);
     }
 }

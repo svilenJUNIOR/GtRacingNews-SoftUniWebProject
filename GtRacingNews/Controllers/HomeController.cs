@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Data.DBContext;
-using GtRacingNews.Models;
+﻿using GtRacingNews.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,18 +7,14 @@ namespace GtRacingNews.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly GTNewsDbContext context;
-        public HomeController(ILogger<HomeController> logger, GTNewsDbContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            this.context = context;
         }
 
         public IActionResult Index()
         {
-            var latesNews = context.News.OrderBy(x => x.Id).LastOrDefault();
-            latesNews.Description = latesNews.Description.Split(".")[0];
-            return View(latesNews);
+            return View();
         }
 
         public IActionResult Privacy()

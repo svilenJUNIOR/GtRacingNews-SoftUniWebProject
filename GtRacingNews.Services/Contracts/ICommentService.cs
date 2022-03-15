@@ -2,6 +2,6 @@
 {
     public interface ICommentService
     {
-        void AddNewComment(string Description, int newsId, string UserName);
+        Task AddNewComment(string Description, int newsId, string UserName);
     }
 }

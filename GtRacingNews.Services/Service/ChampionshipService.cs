@@ -12,7 +12,7 @@ namespace GtRacingNews.Services.Service
         {
             this.context = context;
         }
-        public async void AddNewChampionship(string name, string logoUrl)
+        public async Task AddNewChampionship(string name, string logoUrl)
         {
             var championship = new Championship
             {
