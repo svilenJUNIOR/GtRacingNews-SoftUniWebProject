@@ -1,0 +1,17 @@
+﻿table, th, td {
+    border: 5px solid black;
+    color: black;
+    width: 300px;
+    background-color: white;
+}
+
+.box {
+    margin-left: 1100px;
+}
+
+body {
+    background-image: url("https://www.westernadvocate.com.au/images/transform/v1/crop/frm/gfyFBZ2A3aREPWrpf4KzA3/d78be452-d5bd-4649-b4d1-f6aaa22014c2.jpg/r0_144_3098_1886_w1200_h678_fmax.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
