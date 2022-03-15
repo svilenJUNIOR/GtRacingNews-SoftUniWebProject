@@ -264,9 +264,18 @@ namespace GtRacingNews.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "54dc0a29-d2a1-45e4-8525-cb83292c09af", "07b9fcbe-a6e0-44bc-926f-d6d89102fab9", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "d7321078-115b-4772-be51-360fd38a273f", "svilen@email.com", false, false, null, null, null, "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "8a79a054-33b8-4c5b-8245-8dd2a31b4547", false, "svilen" });
+                values: new object[,]
+                {
+                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "0a281c14-d938-4bc9-bf42-a3409762e47b", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "5cdd4693-1dfc-4af0-a9b5-998e6b9342bf", false, "svilen1" },
+                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "c64f8d1c-a475-431b-adf5-b9b11ba79f57", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "ff86316d-a7a3-4f40-96cd-920f624b4bab", false, "svilen" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Championships",
@@ -285,7 +294,7 @@ namespace GtRacingNews.Data.Migrations
                 {
                     { 1, "Finally some good news, for the Nismo motorsport team fans!", "Nissan has won LeMans", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg" },
                     { 2, "The new dates are 13-15 May!", "Bathurst 2022 with new dates!", "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png" },
-                    { 3, "Orange 1 fff racing reveals new team driver!", "The name of the newest driver is Mirko Bortolotti", "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg" },
+                    { 3, "The name of the newest driver is Mirko Bortolotti", "Orange 1 fff racing reveals new team driver!", "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg" },
                     { 4, "Emil Fray steals the title!", "For some it's a beginners luck, for others Emil Fray kicks ass!", "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg" }
                 });
 
@@ -299,6 +308,11 @@ namespace GtRacingNews.Data.Migrations
                     { 3, "23/3/2022", "Imola 1000 kilometers" },
                     { 4, "4/08/2022", "Brands Hatch" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "54dc0a29-d2a1-45e4-8525-cb83292c09af", "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91" });
 
             migrationBuilder.InsertData(
                 table: "Comments",

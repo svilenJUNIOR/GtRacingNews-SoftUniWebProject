@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220315131347_Initial Commit")]
+    [Migration("20220315150416_Initial Commit")]
     partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,8 +260,8 @@ namespace GtRacingNews.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Orange 1 fff racing reveals new team driver!",
-                            Heading = "The name of the newest driver is Mirko Bortolotti",
+                            Description = "The name of the newest driver is Mirko Bortolotti",
+                            Heading = "Orange 1 fff racing reveals new team driver!",
                             PictureUrl = "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg"
                         },
                         new
@@ -412,6 +412,15 @@ namespace GtRacingNews.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "54dc0a29-d2a1-45e4-8525-cb83292c09af",
+                            ConcurrencyStamp = "07b9fcbe-a6e0-44bc-926f-d6d89102fab9",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -508,15 +517,33 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7321078-115b-4772-be51-360fd38a273f",
+                            ConcurrencyStamp = "c64f8d1c-a475-431b-adf5-b9b11ba79f57",
                             Email = "svilen@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "SVILEN@EMAIL.COM",
+                            NormalizedUserName = "SVILEN",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8a79a054-33b8-4c5b-8245-8dd2a31b4547",
+                            SecurityStamp = "ff86316d-a7a3-4f40-96cd-920f624b4bab",
                             TwoFactorEnabled = false,
                             UserName = "svilen"
+                        },
+                        new
+                        {
+                            Id = "084aa6d5-5f64-4754-98fb-3615d700587d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0a281c14-d938-4bc9-bf42-a3409762e47b",
+                            Email = "svilen1@email.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SVILEN1@EMAIL.COM",
+                            NormalizedUserName = "SVILEN1",
+                            PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5cdd4693-1dfc-4af0-a9b5-998e6b9342bf",
+                            TwoFactorEnabled = false,
+                            UserName = "svilen1"
                         });
                 });
 
@@ -582,6 +609,13 @@ namespace GtRacingNews.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
+                            RoleId = "54dc0a29-d2a1-45e4-8525-cb83292c09af"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

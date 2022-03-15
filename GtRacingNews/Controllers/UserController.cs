@@ -59,10 +59,12 @@ namespace GtRacingNews.Controllers
             var dataErrors = validator.ValidateUserLogin(model);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
+
             else
             {
-                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
+                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email.TrimEnd().TrimStart().ToString());
                 await this.signInManager.SignInAsync(loggedInUser, true);
+                //Console.WriteLine(this.User.IsInRole("admin"));
             }
             return Redirect("/");
         }

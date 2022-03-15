@@ -8,13 +8,38 @@ namespace GtRacingNews.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole<string>
+                {
+                    Id = "54dc0a29-d2a1-45e4-8525-cb83292c09af",
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
+                    ConcurrencyStamp = "07b9fcbe-a6e0-44bc-926f-d6d89102fab9"
+                }
+        );
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "54dc0a29-d2a1-45e4-8525-cb83292c09af",
+                    UserId = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91"
+                }
+        );
             modelBuilder.Entity<IdentityUser>().HasData(
                 new IdentityUser
                 {
+                    Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                     UserName = "svilen",
                     NormalizedUserName = "SVILEN",
                     Email = "svilen@email.com",
                     NormalizedEmail = "SVILEN@EMAIL.COM",
+                    PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
+                },
+                new IdentityUser
+                {
+                    UserName = "svilen1",
+                    NormalizedUserName = "SVILEN1",
+                    Email = "svilen1@email.com",
+                    NormalizedEmail = "SVILEN1@EMAIL.COM",
                     PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
                 }
         );

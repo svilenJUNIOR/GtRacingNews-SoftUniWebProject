@@ -5,13 +5,18 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews", "GtRacingNews\GtRacingNews.csproj", "{2D637CF4-F09B-4C11-B2CF-1A81A084A09B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.Data", "GtRacingNews.Data\GtRacingNews.Data.csproj", "{2B1E1B6F-9B5A-4EEC-84C0-1E11A31CD857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews.Data", "GtRacingNews.Data\GtRacingNews.Data.csproj", "{2B1E1B6F-9B5A-4EEC-84C0-1E11A31CD857}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.Services", "GtRacingNews.Services\GtRacingNews.Services.csproj", "{F6F10963-6A5B-46D8-8A88-0351AF24383B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews.Services", "GtRacingNews.Services\GtRacingNews.Services.csproj", "{F6F10963-6A5B-46D8-8A88-0351AF24383B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.Common", "GtRacingNews.Common\GtRacingNews.Common.csproj", "{0EF46CE1-C7FE-4FF6-803A-1B2F5053B76D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews.Common", "GtRacingNews.Common\GtRacingNews.Common.csproj", "{0EF46CE1-C7FE-4FF6-803A-1B2F5053B76D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtRacingNews.ViewModels", "GtRacingNews.MVC\GtRacingNews.ViewModels.csproj", "{E2D26D36-AB9A-49BE-A81A-6A977784F35D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews.ViewModels", "GtRacingNews.MVC\GtRacingNews.ViewModels.csproj", "{E2D26D36-AB9A-49BE-A81A-6A977784F35D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C03E4D7-717C-4BCA-8E7E-587A0A99DCEA}"
+	ProjectSection(SolutionItems) = preProject
+		README.MD = README.MD
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
