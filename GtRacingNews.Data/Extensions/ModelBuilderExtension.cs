@@ -11,9 +11,10 @@ namespace GtRacingNews.Data
             modelBuilder.Entity<IdentityUser>().HasData(
                 new IdentityUser
                 {
-                    Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                     UserName = "svilen",
+                    NormalizedUserName = "SVILEN",
                     Email = "svilen@email.com",
+                    NormalizedEmail = "SVILEN@EMAIL.COM",
                     PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
                 }
         );

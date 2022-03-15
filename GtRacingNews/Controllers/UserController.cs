@@ -16,7 +16,7 @@ namespace GtRacingNews.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
 
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, 
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
             IUserService userService, IValidator validator, IGuard guard)
         {
             this.userManager = userManager;
@@ -41,7 +41,12 @@ namespace GtRacingNews.Controllers
             var dataErrors = validator.ValidateUserRegister(model);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
-            else await userManager.CreateAsync(userService.RegisterUser(model)); return Redirect("/");
+            else
+            {
+                await userManager.CreateAsync(userService.RegisterUser(model));
+                await signInManager.SignInAsync(userService.RegisterUser(model), isPersistent: false);
+            }
+            return Redirect("/");
         }
 
         [HttpPost]
@@ -52,13 +57,20 @@ namespace GtRacingNews.Controllers
 
             var dataErrors = validator.ValidateUserLogin(model);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-            
+
             else
             {
                 var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
                 await this.signInManager.SignInAsync(loggedInUser, true);
-            } return Redirect("/");
+            }
+            return Redirect("/");
+        }
 
+        public async Task<IActionResult> Logout()
+        {
+            await this.signInManager.SignOutAsync();
+
+            return Redirect("/");
         }
     }
 }

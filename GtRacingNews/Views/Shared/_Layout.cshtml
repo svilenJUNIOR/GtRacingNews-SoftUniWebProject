@@ -20,11 +20,11 @@
 
                 @*side bar menu toggle button*@
                 <div id="main">
-                    <button id="openNav" class="w3-button w3-teal w3-xmedium" onclick="w3_open()">&#9776;</button>
+                    <button id="openNav" style="margin-right: 25px;" class="w3-button w3-teal w3-xmedium" onclick="w3_open()">&#9776;</button>
                 </div>
-                 @*side bar menu toggle button*@
+                @*side bar menu toggle button*@
 
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GtRacingNews</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Welcome @this.User.Identity.Name</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -32,36 +32,57 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
+                        @*/////////////// USER AREA ///////////////*@
+
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="Add">Add News</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">View all news</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">See all news</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="Add">Add new team</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="All">View all teams</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="Add">Add new Championship</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="All">View all Championship</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="Add">Add new Driver</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">View all Drivers</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">See all Drivers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="Add">Add new race</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">Racing calendar</a>
                         </li>
+
+                        @*/////////////// USER AREA ////////////////*@
+
+                        @*/////////////// ADMIN AREA ///////////////*@
+
+                        @if (this.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="News" asp-action="Add">Add News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Team" asp-action="Add">Add new team</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Championship" asp-action="Add">Add new Championship</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Driver" asp-action="Add">Add new Driver</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Race" asp-action="Add">Add new race</a>
+                            </li>
+                        }
+
+                        @*/////////////// ADMIN AREA ///////////////*@
+
                     </ul>
                 </div>
             </div>
@@ -73,9 +94,18 @@
                     onclick="w3_close()">
                 Close &times;
             </button>
-            <a href="/User/Register" class="w3-bar-item w3-button nav-link text-light">Register</a>
-            <a href="/User/Login" class="w3-bar-item w3-button nav-link text-light">LogIn</a>
-            <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
+            }
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a href="/User/Register" class="w3-bar-item w3-button nav-link text-light">Register</a>
+                <a href="/User/Login" class="w3-bar-item w3-button nav-link text-light">LogIn</a>
+            }
+
         </div>
 
     </header>
@@ -85,13 +115,13 @@
             @RenderBody()
         </main>
     </div>
-@*
-    <footer class="border-top footer text-muted navbar-dark bg-dark">
+    @*
+        <footer class="border-top footer text-muted navbar-dark bg-dark">
         <div class="container">
-            &copy; 2022 - GtRacingNews  <a class="text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2022 - GtRacingNews  <a class="text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
-*@
+        </footer>
+    *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
