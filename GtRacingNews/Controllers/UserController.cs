@@ -15,19 +15,20 @@ namespace GtRacingNews.Controllers
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IUserService userService, IValidator validator, IGuard guard)
+            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, IGuard guard)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.userService = userService;
             this.validator = validator;
             this.guard = guard;
+            this.roleManager = roleManager;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
-
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)

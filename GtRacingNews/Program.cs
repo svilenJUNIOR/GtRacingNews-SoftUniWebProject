@@ -12,6 +12,7 @@ builder.Services.AddDbContext<GTNewsDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GTNewsDbContext>();
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
