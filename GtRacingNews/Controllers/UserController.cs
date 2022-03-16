@@ -35,11 +35,6 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            model.Email = model.Email.Trim();
-            model.Password = model.Password.Trim();
-            model.Username = model.Username.Trim();
-            model.ConfirmPassword = model.ConfirmPassword.Trim();
-
             var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
@@ -51,6 +46,11 @@ namespace GtRacingNews.Controllers
 
             else
             {
+                model.Email = model.Email.Trim();
+                model.Password = model.Password.Trim();
+                model.Username = model.Username.Trim();
+                model.ConfirmPassword = model.ConfirmPassword.Trim();
+
                 await userManager.CreateAsync(userService.RegisterUser(model));
                 await signInManager.SignInAsync(userService.RegisterUser(model), isPersistent: false);
             }
@@ -60,9 +60,6 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
-            model.Email = model.Email.Trim();
-            model.Password = model.Password.Trim();
-
             var nullErrors = guard.AgainstNull(model.Email, model.Password);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
@@ -71,6 +68,9 @@ namespace GtRacingNews.Controllers
 
             else
             {
+                model.Email = model.Email.Trim();
+                model.Password = model.Password.Trim();
+
                 var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
                 await this.signInManager.SignInAsync(loggedInUser, true);
             }

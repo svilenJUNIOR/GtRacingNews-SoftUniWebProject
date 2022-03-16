@@ -13,6 +13,8 @@ namespace GtRacingNews.Data.DataModels
 
         [MaxLength(30)]
         public string CarModel { get; set; }
+
+        [Required]
         public string LogoUrl { get; set; }
         public int ChampionshipId { get; set; }
     }

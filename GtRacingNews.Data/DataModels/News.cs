@@ -14,6 +14,7 @@ namespace GtRacingNews.Data.DataModels
         [MaxLength(10000)]
         public string Description { get; set; }
 
+        [Required]
         public string PictureUrl { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
