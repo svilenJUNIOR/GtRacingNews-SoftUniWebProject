@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace GtRacingNews.Controllers
         private readonly IUserService userService;
         private readonly IValidator validator;
         private readonly IGuard guard;
-        private readonly GTNewsDbContext context;
+
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
@@ -27,7 +28,6 @@ namespace GtRacingNews.Controllers
             this.validator = validator;
             this.guard = guard;
             this.roleManager = roleManager;
-            this.context = context;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
@@ -38,6 +38,11 @@ namespace GtRacingNews.Controllers
             var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
+            model.Email = model.Email.Trim();
+            model.Password = model.Password.Trim();
+            model.Username = model.Username.Trim();
+            model.ConfirmPassword = model.ConfirmPassword.Trim();
+
             var formErrors = validator.ValidateUserFormRegister(ModelState);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
@@ -46,11 +51,6 @@ namespace GtRacingNews.Controllers
 
             else
             {
-                model.Email = model.Email.Trim();
-                model.Password = model.Password.Trim();
-                model.Username = model.Username.Trim();
-                model.ConfirmPassword = model.ConfirmPassword.Trim();
-
                 await userManager.CreateAsync(userService.RegisterUser(model));
                 await signInManager.SignInAsync(userService.RegisterUser(model), isPersistent: false);
             }
@@ -63,17 +63,15 @@ namespace GtRacingNews.Controllers
             var nullErrors = guard.AgainstNull(model.Email, model.Password);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
+            model.Email = model.Email.Trim();
+            model.Password = model.Password.Trim();
+
             var dataErrors = validator.ValidateUserLogin(model);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
-            else
-            {
-                model.Email = model.Email.Trim();
-                model.Password = model.Password.Trim();
+            var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
+            await this.signInManager.SignInAsync(loggedInUser, true);
 
-                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
-                await this.signInManager.SignInAsync(loggedInUser, true);
-            }
             return Redirect("/");
         }
 
