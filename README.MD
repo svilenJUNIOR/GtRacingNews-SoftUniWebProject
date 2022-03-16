@@ -16,7 +16,7 @@ The basic functionality is as it follows:
 
 User can:
 Browse trough: news / drivers / teams / the racing calendar / championships
-Comment under news, and have a list with news to read later in his/hers profile
+Comment under news
 
 Admin can:
 Browse trough and Add in: news / drivers / teams / the racing calendar / championships
@@ -24,3 +24,5 @@ Delete From : news / drivers / teams / the racing calendar / championships / use
 
 The guest user (not logged in) can:
 Browse trough: news
+
+NonImplementedFeature - Add to read later

@@ -236,6 +236,9 @@ namespace GtRacingNews.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReadLaterId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("News");
@@ -246,29 +249,48 @@ namespace GtRacingNews.Data.Migrations
                             Id = 1,
                             Description = "Finally some good news, for the Nismo motorsport team fans!",
                             Heading = "Nissan has won LeMans",
-                            PictureUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg"
+                            PictureUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg",
+                            ReadLaterId = 0
                         },
                         new
                         {
                             Id = 2,
                             Description = "The new dates are 13-15 May!",
                             Heading = "Bathurst 2022 with new dates!",
-                            PictureUrl = "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png"
+                            PictureUrl = "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png",
+                            ReadLaterId = 0
                         },
                         new
                         {
                             Id = 3,
                             Description = "The name of the newest driver is Mirko Bortolotti",
                             Heading = "Orange 1 fff racing reveals new team driver!",
-                            PictureUrl = "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg"
+                            PictureUrl = "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg",
+                            ReadLaterId = 0
                         },
                         new
                         {
                             Id = 4,
                             Description = "Emil Fray steals the title!",
                             Heading = "For some it's a beginners luck, for others Emil Fray kicks ass!",
-                            PictureUrl = "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg"
+                            PictureUrl = "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg",
+                            ReadLaterId = 0
                         });
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.NewsReadLater", b =>
+                {
+                    b.Property<int>("ReadLaterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NewsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReadLaterId", "NewsId");
+
+                    b.HasIndex("NewsId");
+
+                    b.ToTable("NewsReadLaters");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Race", b =>
@@ -317,6 +339,26 @@ namespace GtRacingNews.Data.Migrations
                             Date = "4/08/2022",
                             Name = "Brands Hatch"
                         });
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Readlater", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("NewsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReadLater");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Team", b =>
@@ -522,7 +564,7 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc07380f-76f9-426e-981a-871bf8e19e90",
+                            ConcurrencyStamp = "b6784a88-d0d1-426a-8f06-afe87e3a5206",
                             Email = "svilen@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -530,7 +572,7 @@ namespace GtRacingNews.Data.Migrations
                             NormalizedUserName = "SVILEN",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d13793e2-d5fa-4d2d-a1b9-73c00e05d36c",
+                            SecurityStamp = "36989a1d-a0c8-4d50-ae2e-0d6d5ef6d2ce",
                             TwoFactorEnabled = false,
                             UserName = "svilen"
                         },
@@ -538,7 +580,7 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "084aa6d5-5f64-4754-98fb-3615d700587d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c178aadc-3790-4988-be77-8717aef83f5c",
+                            ConcurrencyStamp = "aa65a062-77bd-4f7c-bab3-ff176880e488",
                             Email = "svilen1@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -546,7 +588,7 @@ namespace GtRacingNews.Data.Migrations
                             NormalizedUserName = "SVILEN1",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7d0c2150-1a64-4684-b4c8-4f27ba7dbc3a",
+                            SecurityStamp = "5bc1bb15-13d4-4cea-b9ed-77e441a93c5c",
                             TwoFactorEnabled = false,
                             UserName = "svilen1"
                         });
@@ -649,6 +691,21 @@ namespace GtRacingNews.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("NewsReadlater", b =>
+                {
+                    b.Property<int>("ReadLaterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReadlatersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReadLaterId", "ReadlatersId");
+
+                    b.HasIndex("ReadlatersId");
+
+                    b.ToTable("NewsReadlater");
+                });
+
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Comment", b =>
                 {
                     b.HasOne("GtRacingNews.Data.DataModels.News", null)
@@ -665,6 +722,25 @@ namespace GtRacingNews.Data.Migrations
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.NewsReadLater", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.News", "News")
+                        .WithMany()
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GtRacingNews.Data.DataModels.Readlater", "Readlater")
+                        .WithMany()
+                        .HasForeignKey("ReadLaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("News");
+
+                    b.Navigation("Readlater");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Team", b =>
@@ -723,6 +799,21 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NewsReadlater", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.News", null)
+                        .WithMany()
+                        .HasForeignKey("ReadLaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GtRacingNews.Data.DataModels.Readlater", null)
+                        .WithMany()
+                        .HasForeignKey("ReadlatersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,0 +1,8 @@
+﻿@model List<GtRacingNews.ViewModels.User.ReadLaterViewModel>
+
+@{
+    foreach (var news in Model)
+    {
+        <p>@news.News.Select(x => x.Description).FirstOrDefault()</p>
+    }
+}

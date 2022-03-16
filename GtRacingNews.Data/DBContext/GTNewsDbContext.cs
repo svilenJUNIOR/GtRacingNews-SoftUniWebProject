@@ -30,10 +30,15 @@ namespace GtRacingNews.Data.DBContext
         public DbSet<Race> Races { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Readlater> ReadLater { get; set; }
+        public DbSet<NewsReadLater> NewsReadLaters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<NewsReadLater>()
+        .HasKey(x => new { x.ReadLaterId, x.NewsId });
+
             modelBuilder.Seed();
         }
     }

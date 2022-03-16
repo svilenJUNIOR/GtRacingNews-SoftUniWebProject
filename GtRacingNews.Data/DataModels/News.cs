@@ -17,5 +17,9 @@ namespace GtRacingNews.Data.DataModels
         public string PictureUrl { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public int ReadLaterId { get; set; }
+
+        public ICollection<Readlater> Readlaters { get; set; }
     }
 }

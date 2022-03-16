@@ -70,7 +70,8 @@ namespace GtRacingNews.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Heading = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
-                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReadLaterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,6 +90,20 @@ namespace GtRacingNews.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Races", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReadLater",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NewsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReadLater", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,6 +256,54 @@ namespace GtRacingNews.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewsReadlater",
+                columns: table => new
+                {
+                    ReadLaterId = table.Column<int>(type: "int", nullable: false),
+                    ReadlatersId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsReadlater", x => new { x.ReadLaterId, x.ReadlatersId });
+                    table.ForeignKey(
+                        name: "FK_NewsReadlater_News_ReadLaterId",
+                        column: x => x.ReadLaterId,
+                        principalTable: "News",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NewsReadlater_ReadLater_ReadlatersId",
+                        column: x => x.ReadlatersId,
+                        principalTable: "ReadLater",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NewsReadLaters",
+                columns: table => new
+                {
+                    NewsId = table.Column<int>(type: "int", nullable: false),
+                    ReadLaterId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsReadLaters", x => new { x.ReadLaterId, x.NewsId });
+                    table.ForeignKey(
+                        name: "FK_NewsReadLaters_News_NewsId",
+                        column: x => x.NewsId,
+                        principalTable: "News",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NewsReadLaters_ReadLater_ReadLaterId",
+                        column: x => x.ReadLaterId,
+                        principalTable: "ReadLater",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Drivers",
                 columns: table => new
                 {
@@ -277,8 +340,8 @@ namespace GtRacingNews.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "c178aadc-3790-4988-be77-8717aef83f5c", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "7d0c2150-1a64-4684-b4c8-4f27ba7dbc3a", false, "svilen1" },
-                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "bc07380f-76f9-426e-981a-871bf8e19e90", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "d13793e2-d5fa-4d2d-a1b9-73c00e05d36c", false, "svilen" }
+                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "aa65a062-77bd-4f7c-bab3-ff176880e488", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "5bc1bb15-13d4-4cea-b9ed-77e441a93c5c", false, "svilen1" },
+                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "b6784a88-d0d1-426a-8f06-afe87e3a5206", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "36989a1d-a0c8-4d50-ae2e-0d6d5ef6d2ce", false, "svilen" }
                 });
 
             migrationBuilder.InsertData(
@@ -293,13 +356,13 @@ namespace GtRacingNews.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "News",
-                columns: new[] { "Id", "Description", "Heading", "PictureUrl" },
+                columns: new[] { "Id", "Description", "Heading", "PictureUrl", "ReadLaterId" },
                 values: new object[,]
                 {
-                    { 1, "Finally some good news, for the Nismo motorsport team fans!", "Nissan has won LeMans", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg" },
-                    { 2, "The new dates are 13-15 May!", "Bathurst 2022 with new dates!", "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png" },
-                    { 3, "The name of the newest driver is Mirko Bortolotti", "Orange 1 fff racing reveals new team driver!", "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg" },
-                    { 4, "Emil Fray steals the title!", "For some it's a beginners luck, for others Emil Fray kicks ass!", "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg" }
+                    { 1, "Finally some good news, for the Nismo motorsport team fans!", "Nissan has won LeMans", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg/1200px-Nissan_Motorsports_-_Nissan_GT-R_LM_Nismo_-23_%2818860958202%29.jpg", 0 },
+                    { 2, "The new dates are 13-15 May!", "Bathurst 2022 with new dates!", "https://upload.wikimedia.org/wikipedia/en/3/3a/Bathurst_12_hour_logo.png", 0 },
+                    { 3, "The name of the newest driver is Mirko Bortolotti", "Orange 1 fff racing reveals new team driver!", "https://www.orange1.eu/wp-content/uploads/2022/02/241309495_394364622049303_9048975734763248286_n-2.jpg", 0 },
+                    { 4, "Emil Fray steals the title!", "For some it's a beginners luck, for others Emil Fray kicks ass!", "https://www.rmpaint.com/sites/default/files/news/images/DJI_0631-Edit.jpg", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -407,6 +470,16 @@ namespace GtRacingNews.Data.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NewsReadlater_ReadlatersId",
+                table: "NewsReadlater",
+                column: "ReadlatersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NewsReadLaters_NewsId",
+                table: "NewsReadLaters",
+                column: "NewsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Teams_ChampionshipId",
                 table: "Teams",
                 column: "ChampionshipId");
@@ -436,6 +509,12 @@ namespace GtRacingNews.Data.Migrations
                 name: "Drivers");
 
             migrationBuilder.DropTable(
+                name: "NewsReadlater");
+
+            migrationBuilder.DropTable(
+                name: "NewsReadLaters");
+
+            migrationBuilder.DropTable(
                 name: "Races");
 
             migrationBuilder.DropTable(
@@ -445,10 +524,13 @@ namespace GtRacingNews.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Teams");
+
+            migrationBuilder.DropTable(
                 name: "News");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "ReadLater");
 
             migrationBuilder.DropTable(
                 name: "Championships");
