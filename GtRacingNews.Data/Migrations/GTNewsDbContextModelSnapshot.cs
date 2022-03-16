@@ -418,6 +418,13 @@ namespace GtRacingNews.Data.Migrations
                             ConcurrencyStamp = "07b9fcbe-a6e0-44bc-926f-d6d89102fab9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "1dc9f147-fba7-4356-b12d-00ed6213d0b4",
+                            ConcurrencyStamp = "186e73b1-8964-49e5-94cc-5cf1103361df",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -515,7 +522,7 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c64f8d1c-a475-431b-adf5-b9b11ba79f57",
+                            ConcurrencyStamp = "bc07380f-76f9-426e-981a-871bf8e19e90",
                             Email = "svilen@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -523,7 +530,7 @@ namespace GtRacingNews.Data.Migrations
                             NormalizedUserName = "SVILEN",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ff86316d-a7a3-4f40-96cd-920f624b4bab",
+                            SecurityStamp = "d13793e2-d5fa-4d2d-a1b9-73c00e05d36c",
                             TwoFactorEnabled = false,
                             UserName = "svilen"
                         },
@@ -531,7 +538,7 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "084aa6d5-5f64-4754-98fb-3615d700587d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a281c14-d938-4bc9-bf42-a3409762e47b",
+                            ConcurrencyStamp = "c178aadc-3790-4988-be77-8717aef83f5c",
                             Email = "svilen1@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -539,7 +546,7 @@ namespace GtRacingNews.Data.Migrations
                             NormalizedUserName = "SVILEN1",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5cdd4693-1dfc-4af0-a9b5-998e6b9342bf",
+                            SecurityStamp = "7d0c2150-1a64-4684-b4c8-4f27ba7dbc3a",
                             TwoFactorEnabled = false,
                             UserName = "svilen1"
                         });
@@ -613,6 +620,11 @@ namespace GtRacingNews.Data.Migrations
                         {
                             UserId = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             RoleId = "54dc0a29-d2a1-45e4-8525-cb83292c09af"
+                        },
+                        new
+                        {
+                            UserId = "084aa6d5-5f64-4754-98fb-3615d700587d",
+                            RoleId = "1dc9f147-fba7-4356-b12d-00ed6213d0b4"
                         });
                 });
 

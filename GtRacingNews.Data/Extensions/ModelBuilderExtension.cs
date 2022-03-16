@@ -15,6 +15,13 @@ namespace GtRacingNews.Data
                     Name = "Admin",
                     NormalizedName = "ADMIN",
                     ConcurrencyStamp = "07b9fcbe-a6e0-44bc-926f-d6d89102fab9"
+                },
+                new IdentityRole<string>
+                {
+                    Id = "1dc9f147-fba7-4356-b12d-00ed6213d0b4",
+                    Name = "User",
+                    NormalizedName = "USER",
+                    ConcurrencyStamp = "186e73b1-8964-49e5-94cc-5cf1103361df"
                 }
         );
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
@@ -22,6 +29,11 @@ namespace GtRacingNews.Data
                 {
                     RoleId = "54dc0a29-d2a1-45e4-8525-cb83292c09af",
                     UserId = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91"
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = "1dc9f147-fba7-4356-b12d-00ed6213d0b4",
+                    UserId = "084aa6d5-5f64-4754-98fb-3615d700587d"
                 }
         );
             modelBuilder.Entity<IdentityUser>().HasData(
@@ -36,6 +48,7 @@ namespace GtRacingNews.Data
                 },
                 new IdentityUser
                 {
+                    Id = "084aa6d5-5f64-4754-98fb-3615d700587d",
                     UserName = "svilen1",
                     NormalizedUserName = "SVILEN1",
                     Email = "svilen1@email.com",

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GtRacingNews.Data.Migrations
 {
-    public partial class InitialCommit : Migration
+    public partial class Initialcommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -266,15 +266,19 @@ namespace GtRacingNews.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "54dc0a29-d2a1-45e4-8525-cb83292c09af", "07b9fcbe-a6e0-44bc-926f-d6d89102fab9", "Admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "1dc9f147-fba7-4356-b12d-00ed6213d0b4", "186e73b1-8964-49e5-94cc-5cf1103361df", "User", "USER" },
+                    { "54dc0a29-d2a1-45e4-8525-cb83292c09af", "07b9fcbe-a6e0-44bc-926f-d6d89102fab9", "Admin", "ADMIN" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "0a281c14-d938-4bc9-bf42-a3409762e47b", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "5cdd4693-1dfc-4af0-a9b5-998e6b9342bf", false, "svilen1" },
-                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "c64f8d1c-a475-431b-adf5-b9b11ba79f57", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "ff86316d-a7a3-4f40-96cd-920f624b4bab", false, "svilen" }
+                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "c178aadc-3790-4988-be77-8717aef83f5c", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "7d0c2150-1a64-4684-b4c8-4f27ba7dbc3a", false, "svilen1" },
+                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "bc07380f-76f9-426e-981a-871bf8e19e90", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "d13793e2-d5fa-4d2d-a1b9-73c00e05d36c", false, "svilen" }
                 });
 
             migrationBuilder.InsertData(
@@ -312,7 +316,11 @@ namespace GtRacingNews.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "54dc0a29-d2a1-45e4-8525-cb83292c09af", "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91" });
+                values: new object[,]
+                {
+                    { "1dc9f147-fba7-4356-b12d-00ed6213d0b4", "084aa6d5-5f64-4754-98fb-3615d700587d" },
+                    { "54dc0a29-d2a1-45e4-8525-cb83292c09af", "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Comments",
