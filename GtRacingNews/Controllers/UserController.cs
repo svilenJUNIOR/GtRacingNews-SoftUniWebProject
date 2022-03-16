@@ -33,6 +33,11 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
+            model.Email = model.Email.Trim();
+            model.Password = model.Password.Trim();
+            model.Username = model.Username.Trim();
+            model.ConfirmPassword = model.ConfirmPassword.Trim();
+
             var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
@@ -53,18 +58,19 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
+            model.Email = model.Email.Trim();
+            model.Password = model.Password.Trim();
+
             var nullErrors = guard.AgainstNull(model.Email, model.Password);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
             var dataErrors = validator.ValidateUserLogin(model);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
-
             else
             {
-                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email.TrimEnd().TrimStart().ToString());
+                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
                 await this.signInManager.SignInAsync(loggedInUser, true);
-                //Console.WriteLine(this.User.IsInRole("admin"));
             }
             return Redirect("/");
         }
