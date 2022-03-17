@@ -6,6 +6,6 @@ namespace GtRacingNews.ViewModels.News
     {
         public int NewsId { get; set; }
         public string Description { get; set; }
-        public ICollection<string> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

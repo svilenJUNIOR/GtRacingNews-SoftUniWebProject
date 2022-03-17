@@ -43,6 +43,7 @@ namespace GtRacingNews.Controllers
             var races = context.Races
                 .Select(x => new ViewAllRacesViewModel
                 {
+                    Id = x.Id,
                     Date = x.Date,
                     Name = x.Name,
                 });

@@ -21,7 +21,12 @@
         @{
             foreach (var comment in @Model.Comments)
             {
-                <li>@comment</li>
+                <li>@comment.UserName - @comment.Description</li>
+
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a href="/Delete/DeleteComment?id=@comment.Id" class="btn btn-primary">Delete</a>
+                }
             }
         }
     </ul>

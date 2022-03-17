@@ -8,6 +8,12 @@
             <div class="card-body">
                 <h5 class="card-title"><strong>Name:</strong> @championship.Name</h5>
                 <h5 class="card-title"><strong>Teams:</strong> @string.Join(", ", @championship.Teams)</h5>
+
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a href="/Delete/DeleteChampionship?id=@championship.ChampionshipId" class="btn btn-primary">Delete</a>
+                }
+
             </div>
         </div>
     }
