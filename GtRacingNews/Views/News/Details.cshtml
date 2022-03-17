@@ -1,26 +1,30 @@
 ﻿@model GtRacingNews.ViewModels.News.ReadNewsViewModel
 
 <div class="box">
-<p>@Model.Description</p>
+    <p>@Model.Description</p>
 </div>
 
-<section id="CommentSection">
-    <form method="post" asp-controller="Comment" asp-action="Add">
-        <label for="description">Submit your comment</label>
-        <input type="text" class="form-control" id="description" name="description" placeholder="Must be less than 100 symbols"/>
-        <button type="submit" class="btn btn-primary" name="newsId" value="@Model.NewsId">Submit</button>
-    </form>
-</section>
+@if (this.User.Identity.IsAuthenticated)
+{
+    <section id="CommentSection">
+        <form method="post" asp-controller="Comment" asp-action="Add">
+            <label for="description">Submit your comment</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="Must be less than 100 symbols" />
+            <button type="submit" class="btn btn-primary" name="newsId" value="@Model.NewsId">Submit</button>
+        </form>
+    </section>
+}
+
 
 <section id="CommentList">
     <ul>
-@{
-    foreach (var comment in @Model.Comments)
-    {
-        <li>@comment</li>
-    }
-}
-</ul>
+        @{
+            foreach (var comment in @Model.Comments)
+            {
+                <li>@comment</li>
+            }
+        }
+    </ul>
 </section>
 
 <link rel="stylesheet" href="~/css/NewsCss/Details.css"></link>
