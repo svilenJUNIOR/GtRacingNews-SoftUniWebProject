@@ -1,4 +1,6 @@
-﻿using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Data.DBContext;
+using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
@@ -61,6 +63,7 @@ namespace GtRacingNews.Controllers
 
             return Redirect("/Race/All");
         }
+
         public async Task<IActionResult> DeleteComment(int Id)
         {
             var Comment = context.Comments.Where(x => x.Id == Id).FirstOrDefault();

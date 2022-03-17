@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GtRacingNews.Data.Migrations
 {
-    public partial class Initialcommit : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -231,7 +231,7 @@ namespace GtRacingNews.Data.Migrations
                         column: x => x.ChampionshipId,
                         principalTable: "Championships",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,7 +252,7 @@ namespace GtRacingNews.Data.Migrations
                         column: x => x.NewsId,
                         principalTable: "News",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,13 +270,13 @@ namespace GtRacingNews.Data.Migrations
                         column: x => x.ReadLaterId,
                         principalTable: "News",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_NewsReadlater_ReadLater_ReadlatersId",
                         column: x => x.ReadlatersId,
                         principalTable: "ReadLater",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -294,13 +294,13 @@ namespace GtRacingNews.Data.Migrations
                         column: x => x.NewsId,
                         principalTable: "News",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_NewsReadLaters_ReadLater_ReadLaterId",
                         column: x => x.ReadLaterId,
                         principalTable: "ReadLater",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -323,7 +323,7 @@ namespace GtRacingNews.Data.Migrations
                         column: x => x.TeamId,
                         principalTable: "Teams",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -340,8 +340,8 @@ namespace GtRacingNews.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "aa65a062-77bd-4f7c-bab3-ff176880e488", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "5bc1bb15-13d4-4cea-b9ed-77e441a93c5c", false, "svilen1" },
-                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "b6784a88-d0d1-426a-8f06-afe87e3a5206", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "36989a1d-a0c8-4d50-ae2e-0d6d5ef6d2ce", false, "svilen" }
+                    { "084aa6d5-5f64-4754-98fb-3615d700587d", 0, "7ca74e5f-30f1-4da8-a31d-7dbd02918842", "svilen1@email.com", false, false, null, "SVILEN1@EMAIL.COM", "SVILEN1", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "b9a02564-899e-4c71-938e-d64443f0e8c5", false, "svilen1" },
+                    { "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91", 0, "74e95d48-21d1-42cd-94bb-0765e8812372", "svilen@email.com", false, false, null, "SVILEN@EMAIL.COM", "SVILEN", "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8", null, false, "5461e398-5656-4d34-ba4c-31096794e01e", false, "svilen" }
                 });
 
             migrationBuilder.InsertData(

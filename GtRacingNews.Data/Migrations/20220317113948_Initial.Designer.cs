@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220316093238_Initial commit")]
-    partial class Initialcommit
+    [Migration("20220317113948_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -566,7 +566,7 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "8c31c2b7-ae56-45e1-8e40-4d596a5bbd91",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b6784a88-d0d1-426a-8f06-afe87e3a5206",
+                            ConcurrencyStamp = "74e95d48-21d1-42cd-94bb-0765e8812372",
                             Email = "svilen@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -574,7 +574,7 @@ namespace GtRacingNews.Data.Migrations
                             NormalizedUserName = "SVILEN",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36989a1d-a0c8-4d50-ae2e-0d6d5ef6d2ce",
+                            SecurityStamp = "5461e398-5656-4d34-ba4c-31096794e01e",
                             TwoFactorEnabled = false,
                             UserName = "svilen"
                         },
@@ -582,7 +582,7 @@ namespace GtRacingNews.Data.Migrations
                         {
                             Id = "084aa6d5-5f64-4754-98fb-3615d700587d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa65a062-77bd-4f7c-bab3-ff176880e488",
+                            ConcurrencyStamp = "7ca74e5f-30f1-4da8-a31d-7dbd02918842",
                             Email = "svilen1@email.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -590,7 +590,7 @@ namespace GtRacingNews.Data.Migrations
                             NormalizedUserName = "SVILEN1",
                             PasswordHash = "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5bc1bb15-13d4-4cea-b9ed-77e441a93c5c",
+                            SecurityStamp = "b9a02564-899e-4c71-938e-d64443f0e8c5",
                             TwoFactorEnabled = false,
                             UserName = "svilen1"
                         });
@@ -713,7 +713,7 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("GtRacingNews.Data.DataModels.News", null)
                         .WithMany("Comments")
                         .HasForeignKey("NewsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -722,7 +722,7 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("GtRacingNews.Data.DataModels.Team", null)
                         .WithMany("Drivers")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -731,13 +731,13 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("GtRacingNews.Data.DataModels.News", "News")
                         .WithMany()
                         .HasForeignKey("NewsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("GtRacingNews.Data.DataModels.Readlater", "Readlater")
                         .WithMany()
                         .HasForeignKey("ReadLaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("News");
@@ -750,7 +750,7 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("GtRacingNews.Data.DataModels.Championship", null)
                         .WithMany("Teams")
                         .HasForeignKey("ChampionshipId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -810,13 +810,13 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("GtRacingNews.Data.DataModels.News", null)
                         .WithMany()
                         .HasForeignKey("ReadLaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("GtRacingNews.Data.DataModels.Readlater", null)
                         .WithMany()
                         .HasForeignKey("ReadlatersId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
