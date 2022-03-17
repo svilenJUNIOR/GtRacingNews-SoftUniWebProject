@@ -2,4 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<link rel="stylesheet" href="~/css/HomeCss/HomePage.css"></link> 
+
+@{
+    if (this.User.IsInRole("Admin"))
+    {
+        <h1>Welcome Admin</h1>
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/HomeCss/HomePage.css"></link>
+    }
+}
