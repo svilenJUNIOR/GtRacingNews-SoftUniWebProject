@@ -3,6 +3,7 @@ using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Comments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +20,12 @@ namespace GtRacingNews.Controllers
             this.commentService = commentService;
             this.guard = guard;
         }
+
+        [Authorize]
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(AddNewCommentFormModel model, int newsId)
         {
             var user = await userManager.GetUserAsync(User);

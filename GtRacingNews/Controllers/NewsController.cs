@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.News;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
@@ -20,9 +21,11 @@ namespace GtRacingNews.Controllers
             this.guard = guard;
         }
 
+        [Authorize]
         public IActionResult Add() => View();
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(AddNewFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Heading, model.Description, model.PictureUrl);

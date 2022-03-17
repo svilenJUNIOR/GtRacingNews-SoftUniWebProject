@@ -4,6 +4,7 @@ using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Team;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
@@ -23,9 +24,11 @@ namespace GtRacingNews.Controllers
             this.guard = guard;
         }
 
+        [Authorize]
         public async Task<IActionResult> Add() => View();
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(AddNewChampionshipFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Name, model.LogoUrl);

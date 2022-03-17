@@ -1,8 +1,6 @@
-﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Data.DBContext;
-using GtRacingNews.Services.Contracts;
-using GtRacingNews.Services.Service;
+﻿using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +12,12 @@ namespace GtRacingNews.Controllers
         private readonly IValidator validator;
         private readonly IGuard guard;
 
-
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, IGuard guard, GTNewsDbContext context)
+            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, IGuard guard)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -75,6 +72,7 @@ namespace GtRacingNews.Controllers
             return Redirect("/");
         }
 
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();

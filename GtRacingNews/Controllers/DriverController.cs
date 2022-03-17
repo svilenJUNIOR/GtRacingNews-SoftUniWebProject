@@ -2,6 +2,7 @@
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Driver;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -22,6 +23,7 @@ namespace GtRacingNews.Controllers
             this.guard = guard;
         }
 
+        [Authorize]
         public async Task<IActionResult> Add()
         {
             var teams = context.Teams.Where(x => x.Drivers.Count() < 3).ToList();
@@ -31,6 +33,7 @@ namespace GtRacingNews.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(AddNewDriverFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
