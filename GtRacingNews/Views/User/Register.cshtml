@@ -19,7 +19,7 @@
                     <label asp-for="@Model.Password"></label>
                 </td>
                 <td>
-                    <input type="password" asp-for="@Model.Password" class="form-control">
+                    <input type="password" asp-for="@Model.Password" class="form-control" placeholder="Must be at least 6 symbols">
                 </td>
             </tr>
 
@@ -37,7 +37,7 @@
                     <label asp-for="@Model.Username"></label>
                 </td>
                 <td>
-                    <input asp-for="@Model.Username" class="form-control">
+                    <input asp-for="@Model.Username" class="form-control" placeholder="Must be at least 6 symbols">
                 </td>
             </tr>
 
@@ -54,5 +54,4 @@
 </div>
 
 <link rel="stylesheet" href="~/css/UserCss/Register.css"></link>
-
 

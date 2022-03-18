@@ -7,7 +7,7 @@ namespace GtRacingNews.ViewModels.Comments
     {
         [Required]
         [DisplayName("Submit your comment")]
-        [MaxLength(100)]
+        [MaxLength(100, ErrorMessage = "The description must be less than 100 symbols!")]
         public string Description { get; set; }
     }
 }
