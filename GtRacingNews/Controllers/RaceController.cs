@@ -1,25 +1,16 @@
 ﻿using GtRacingNews.Data.DBContext;
-using GtRacingNews.Services.Contracts;
-using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Race;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
 {
     public class RaceController : Controller
     {
-        private readonly IValidator validator;
-        private readonly IRaceService raceService;
         private readonly GTNewsDbContext context;
-        private readonly IGuard guard;
 
-        public RaceController(IValidator validator, IRaceService raceService, GTNewsDbContext context, IGuard guard)
+        public RaceController(GTNewsDbContext context)
         {
-            this.validator = validator;
-            this.raceService = raceService;
             this.context = context;
-            this.guard = guard;
         }
 
         public async Task<IActionResult> All()

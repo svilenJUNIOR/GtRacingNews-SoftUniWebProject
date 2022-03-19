@@ -45,9 +45,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
-                        @*/////////////// USER AREA ///////////////*@
-
-                        @if (this.User.Identity.IsAuthenticated)
+                        @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">View all news</a>
@@ -69,35 +67,6 @@
                                 <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">Racing calendar</a>
                             </li>
                         }
-
-                        @*/////////////// USER AREA ////////////////*@
-
-                        @*/////////////// ADMIN AREA ///////////////*@
-
-                        @if (this.User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Add" asp-action="AddNews">Add News</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Add" asp-action="AddTeam">Add new team</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Add" asp-action="AddChampionship">Add new Championship</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Add" asp-action="AddDriver">Add new Driver</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Add" asp-action="AddRace">Add new race</a>
-                            </li>
-                        }
-
-                        @*/////////////// ADMIN AREA ///////////////*@
 
                     </ul>
                 </div>

@@ -1,28 +1,16 @@
 ﻿using GtRacingNews.Data.DBContext;
-using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Championship;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
 {
     public class ChampionshipController : Controller
     {
-        private readonly IValidator validator;
-        private readonly IChampionshipService championshipService;
-        private readonly IGuard guard;
         private readonly GTNewsDbContext context;
-        public ChampionshipController(IValidator validator, IChampionshipService championshipService, 
-            GTNewsDbContext context, IGuard guard)
+        public ChampionshipController(GTNewsDbContext context)
         {
-            this.validator = validator;
-            this.championshipService = championshipService;
             this.context = context;
-            this.guard = guard;
         }
-
-
-
         public async Task<IActionResult> All()
         {
             var championships = context.Championships
