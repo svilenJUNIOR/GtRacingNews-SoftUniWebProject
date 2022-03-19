@@ -29,21 +29,15 @@ namespace GtRacingNews.Data.DBContext
         public DbSet<News> News { get; set; }
         public DbSet<Race> Races { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Readlater> ReadLater { get; set; }
-        public DbSet<NewsReadLater> NewsReadLaters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+                relationship.DeleteBehavior = DeleteBehavior.SetNull;
             }
 
             base.OnModelCreating(modelBuilder);
-
-
-            modelBuilder.Entity<NewsReadLater>()
-        .HasKey(x => new { x.ReadLaterId, x.NewsId });
 
             modelBuilder.Seed();
         }

@@ -1,10 +1,9 @@
-﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Data.DBContext;
-using GtRacingNews.ViewModels.Team;
+﻿using GtRacingNews.Data.DBContext;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
 {
+    [Area("Admin")]
     public class DeleteController : Controller
     {
         private readonly GTNewsDbContext context;

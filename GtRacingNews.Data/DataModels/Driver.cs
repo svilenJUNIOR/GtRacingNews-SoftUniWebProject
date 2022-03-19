@@ -21,6 +21,6 @@ namespace GtRacingNews.Data.DataModels
         [Required]
         public string ImageUrl { get; set; }
 
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
     }
 }
