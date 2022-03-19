@@ -14,7 +14,7 @@ namespace GtRacingNews.Controllers
 
         public IActionResult Index()
         {
-            if (!this.User.Identity.IsAuthenticated) return RedirectToAction("All", "News");
+            if (this.User.IsInRole("Admin")) return Redirect("Admin/Home");
             return View();
         }
 
