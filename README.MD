@@ -1,4 +1,4 @@
-The site to which i want to make a clone of is : https://www.gt-world-challenge-europe.com/news
+The site which inspired mine : https://www.gt-world-challenge-europe.com/news
 The basic idea of the project is a website specially dedicated to people with interest about the world
 of GT racing.
 
@@ -8,11 +8,14 @@ To login as an Admin use:
 Email: svilen@email.com
 Password: svilen123
 
-To login as a User use:
+To login as an User use:
 Email: svilen1@email.com
 Password: svilen123
 
-The basic functionality is as it follows:
+When you first open the app, you should be redirected to the guest page (area),
+you can login or register by opening the left-side menu!!!
+
+The functionality is as it follows:
 
 User can:
 Browse trough: news / drivers / teams / the racing calendar / championships
