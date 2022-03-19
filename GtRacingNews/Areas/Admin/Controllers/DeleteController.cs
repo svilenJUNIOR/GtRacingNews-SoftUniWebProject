@@ -1,9 +1,11 @@
 ﻿using GtRacingNews.Data.DBContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class DeleteController : Controller
     {
         private readonly GTNewsDbContext context;

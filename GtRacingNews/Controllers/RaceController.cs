@@ -22,22 +22,6 @@ namespace GtRacingNews.Controllers
             this.guard = guard;
         }
 
-        [Authorize]
-        public async Task<IActionResult> Add() => View();
-
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Add(AddNewRaceFormModel model)
-        {
-            var nullErrors = guard.AgainstNull(model.Name, model.Date);
-            var dataErrors = validator.ValidateAddRace(model);
-
-            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
-
-            else await raceService.AddNewRace(model.Name, model.Date); return Redirect("/");
-        }
-
         public async Task<IActionResult> All()
         {
             var races = context.Races
