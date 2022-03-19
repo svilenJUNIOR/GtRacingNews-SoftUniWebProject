@@ -71,16 +71,17 @@ namespace GtRacingNews.Areas.Admin.Controllers
         public async Task<IActionResult> AddChampionship() => View();
 
 
-
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddTeam(AddTeamFormModel model)
         {
             var nullErrors = guard.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
             var dataErrors = validator.ValidateAddNewTeam(model);
+            var formErrors = validator.ValidateAddTeamForm(model);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await teamService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
         }
@@ -91,9 +92,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             var nullErrors = guard.AgainstNull(model.Heading, model.Description, model.PictureUrl);
             var dataErrors = validator.ValidateAddNews(model);
+            var formErrors = validator.ValidateForm(ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await newsService.AddNews(model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
         }
@@ -104,9 +107,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             var nullErrors = guard.AgainstNull(model.Name, model.Date);
             var dataErrors = validator.ValidateAddRace(model);
+            var formErrors = validator.ValidateForm(ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await raceService.AddNewRace(model.Name, model.Date); return Redirect("/Admin/Home");
         }
@@ -117,9 +122,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
             var dataErrors = validator.ValidateAddNewDriver(model);
+            var formErrors = validator.ValidateForm(ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/Admin/Home");
         }
@@ -130,9 +137,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             var nullErrors = guard.AgainstNull(model.Name, model.LogoUrl);
             var dataErrors = validator.ValidateAddNewChampionship(model);
+            var formErrors = validator.ValidateForm(ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await championshipService.AddNewChampionship(model.Name, model.LogoUrl); return Redirect("/Admin/Home");
         }

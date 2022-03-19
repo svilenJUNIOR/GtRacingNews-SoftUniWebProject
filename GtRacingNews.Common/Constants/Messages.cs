@@ -18,6 +18,10 @@
         public const string UnExistingEmail = "No account corresponds to that email!";
         public const string UnExistingPassword = "No account corresponds to that password!";
 
+        ////////// Wrong add form /////////////
+        public const string LongerName = "Name cannot be more than 50 symbols!";       
+        public const string LongerCarModel = "Car model cannot be more than 30 symbols!";       
+
         public const string NullField = "The form contains empty fields!";
 
         public const string ExistingNews = "News with that name already exists!";

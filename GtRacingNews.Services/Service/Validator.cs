@@ -20,6 +20,23 @@ namespace GtRacingNews.Services.Service
             this.context = context;
             this.hasher = hasher;
         }
+        public IEnumerable<string> ValidateForm(ModelStateDictionary modelState)
+        {
+            var errors = new List<string>();
+
+            if (!modelState.IsValid)
+            {
+                foreach (var values in modelState.Values)
+                {
+                    foreach (var modelError in values.Errors)
+                    {
+                        errors.Add(modelError.ErrorMessage);
+                    }
+                }
+            }
+
+            return errors;
+        }
 
         public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
         {
@@ -50,25 +67,6 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
-        public IEnumerable<string> ValidateUserFormRegister(ModelStateDictionary modelState)
-        {
-            var errors = new List<string>();
-
-            if (!modelState.IsValid)
-            {
-                foreach (var values in modelState.Values)
-                {
-                    foreach (var modelError in values.Errors)
-                    {
-                        errors.Add(modelError.ErrorMessage);
-                    }
-                }
-            }
-
-            return errors;
-        }
-
         public IEnumerable<string> ValidateAddNews(AddNewFormModel model)
         {
             var errors = new List<string>();
@@ -78,7 +76,6 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
         public IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model)
         {
             var errors = new List<string>();
@@ -88,7 +85,16 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
+        public IEnumerable<string> ValidateAddTeamForm(AddTeamFormModel model)
+        {
+            var errors = new List<string>();
 
+            if (model.Name.Length > 50) errors.Add(Messages.LongerName);
+
+            if (model.CarModel.Length > 30) errors.Add(Messages.LongerCarModel);
+
+            return errors;
+        }
         public IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model)
         {
             var errors = new List<string>();
@@ -98,7 +104,6 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
         public IEnumerable<string> ValidateAddNewDriver(AddNewDriverFormModel model)
         {
             var errors = new List<string>();
@@ -108,7 +113,6 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
         public IEnumerable<string> ValidateAddRace(AddNewRaceFormModel model)
         {
             var errors = new List<string>();

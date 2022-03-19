@@ -12,13 +12,15 @@ namespace GtRacingNews.Services.Contracts
 {
     public interface IValidator
     {
+        IEnumerable<string> ValidateForm(ModelStateDictionary ModelState);
+        IEnumerable<string> ValidateAddTeamForm(AddTeamFormModel model);
+        
         IEnumerable<string> ValidateAddNews(AddNewFormModel model);
         IEnumerable<string> ValidateAddRace(AddNewRaceFormModel model);
         IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model);
         IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model);
         IEnumerable<string> ValidateAddNewDriver(AddNewDriverFormModel model);
-        IEnumerable<string> ValidateUserFormRegister(ModelStateDictionary ModelState);
-        IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model);
         IEnumerable<string> ValidateUserLogin(LoginUserFormModel model);
+        IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model);
     }
 }
