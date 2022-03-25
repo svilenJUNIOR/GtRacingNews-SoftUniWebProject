@@ -30,6 +30,7 @@ builder.Services.AddScoped<IRaceService, RaceService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
+builder.Services.AddScoped<ISeederService, Seeder>();
 
 var app = builder.Build();
 

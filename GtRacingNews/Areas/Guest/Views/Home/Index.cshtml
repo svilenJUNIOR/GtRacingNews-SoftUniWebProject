@@ -1,1 +1,25 @@
-﻿<p> hi looser </p>
+﻿@model List<GtRacingNews.Areas.Guest.ViewModels.ShowGuestNews>
+
+<div>
+    <p style="font-size:60px">For the best user experiense SIGN UP or LOG IN</p>
+</div>
+
+<ul>
+    <li>
+        <a href="/User/Register" style="font-size:30px">SIGN UP</a>
+    </li>
+    <li>
+        <a href="/User/Login" style="font-size:30px">Log in</a>
+
+    </li>
+</ul>
+
+
+
+<div class="row">
+    @foreach (var news in @Model)
+    {
+        <h1>@news.Heading</h1>
+        <p>@news.Description</p>
+    }
+</div>

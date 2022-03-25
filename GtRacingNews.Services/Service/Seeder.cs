@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace GtRacingNews.Services.Service
 {
-    public class Seeder
+    public class Seeder : ISeederService
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
 
