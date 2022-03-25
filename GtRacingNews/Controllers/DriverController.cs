@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Driver;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,22 @@ namespace GtRacingNews.Controllers
 
 
             return View(drivers);
+        }
+        public async Task<IActionResult> testov()
+        {
+            var seeder = new Seeder();
+
+            //await seeder.SeedUser();
+            //await seeder.SeedNews();
+            //await seeder.SeedComments();
+            //await seeder.SeedChampionship();
+            //await seeder.SeedTeams();
+            //await seeder.SeedDriver();
+            //await seeder.SeedRaces();
+            //await seeder.SeedRoles();
+            //await seeder.SeedUserRoles();
+
+            return Redirect("/");
         }
     }
 }

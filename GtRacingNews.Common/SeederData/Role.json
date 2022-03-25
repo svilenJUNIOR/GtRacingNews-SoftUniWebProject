@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Id": "54dc0a29-d2a1-45e4-8525-cb83292c09af",
+    "Name": "Admin",
+    "NormalizedName": "ADMIN",
+    "ConcurrencyStamp": "07b9fcbe-a6e0-44bc-926f-d6d89102fab9"
+  },
+  {
+    "Id":  "1dc9f147-fba7-4356-b12d-00ed6213d0b4",
+    "Name": "User",
+    "NormalizedName": "USER",
+    "ConcurrencyStamp": "186e73b1-8964-49e5-94cc-5cf1103361df"
+  }
+]

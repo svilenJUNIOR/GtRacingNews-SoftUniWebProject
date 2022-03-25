@@ -38,8 +38,6 @@ namespace GtRacingNews.Data.DBContext
             }
 
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Seed();
         }
     }
 }
