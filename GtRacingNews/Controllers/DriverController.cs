@@ -35,16 +35,16 @@ namespace GtRacingNews.Controllers
         {
             var seed = new Seeder();
 
-            //await seed.SeedUser();
-            //await seed.SeedRoles();
-            //await seed.SeedUserRoles();
+            await seed.SeedUser();
+            await seed.SeedRoles();
+            await seed.SeedUserRoles();
 
-            //await seed.SeedChampionship();
-            //await seed.SeedTeams();
-            //await seed.SeedDriver();
+            await seed.SeedChampionship();
+            await seed.SeedTeams();
+            await seed.SeedDriver();
             await seed.SeedNews();
-            //await seed.SeedComments();
-            //await seed.SeedRaces();
+            await seed.SeedComments();
+            await seed.SeedRaces();
 
             return Redirect("/");
         }
