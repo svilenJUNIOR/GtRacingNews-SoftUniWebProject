@@ -1,0 +1,90 @@
+﻿@model GtRacingNews.Areas.Admin.ViewModels.DeleteViewModel
+
+<div class="box">
+    <table>
+
+        <th colspan="2">DELETE TEAMS</th>
+        @foreach (var team in Model.Teams)
+        {
+            <tr>
+                <td>
+                    @team.Key
+                </td>
+                <td>
+                    <a href="DeleteTeam?id=@team.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <th colspan="2">DELETE CHAMPIONSHIPS</th>
+        @foreach (var championship in Model.Championships)
+        {
+            <tr>
+                <td>
+                    @championship.Key
+                </td>
+                <td>
+                    <a href="DeleteChampionship?id=@championship.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <th colspan="2">DELETE DRIVERS</th>
+        @foreach (var driver in Model.Drivers)
+        {
+            <tr>
+                <td>
+                    @driver.Key
+                </td>
+                <td>
+                    <a href="DeleteDriver?id=@driver.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <th colspan="2">DELETE NEWS</th>
+        @foreach (var news in Model.News)
+        {
+            <tr>
+                <td>
+                    @news.Key
+                </td>
+                <td>
+                    <a href="DeleteNews?id=@news.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <th colspan="2">DELETE RACES</th>
+        @foreach (var race in Model.Races)
+        {
+            <tr>
+                <td>
+                    @race.Key
+                </td>
+                <td>
+                    <a href="DeleteRace?id=@race.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        color: black;
+        width: 900px;
+        background-color: white;
+    }
+
+    .box {
+        margin-top: 50px;
+        margin-left: 100px;
+    }
+
+    body {
+        background-color: lightgray;
+    }
+</style>
