@@ -48,23 +48,23 @@
                         @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">View all news</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">NEWS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="All">View all teams</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="All">TEAMS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="All">View all Championship</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="All">CHAMPIONSHIPS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">View all Drivers</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">DRIVERS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">Racing calendar</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">RACING CALENDAR</a>
                             </li>
                         }
 

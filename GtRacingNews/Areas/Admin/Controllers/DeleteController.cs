@@ -25,6 +25,7 @@ namespace GtRacingNews.Controllers
             var Championships = context.Championships.ToList();
             var News = context.News.ToList();
             var Races = context.Races.ToList();
+            var Users = context.Users.ToList();
 
             foreach (var team in Teams)
             {
@@ -49,6 +50,11 @@ namespace GtRacingNews.Controllers
             foreach (var race in Races)
             {
                 deleteModel.Races.Add(race.Name, race.Id);
+            }
+
+            foreach (var user in Users)
+            {
+                deleteModel.Users.Add(user.UserName, user.Id);
             }
 
             return View(deleteModel);
@@ -109,6 +115,16 @@ namespace GtRacingNews.Controllers
             var Comment = context.Comments.Where(x => x.Id == Id).FirstOrDefault();
 
             context.Comments.Remove(Comment);
+            await context.SaveChangesAsync();
+
+            return Redirect("/");
+        }
+
+        public async Task<IActionResult> DeleteUser(string Id)
+        {
+            var user = context.Users.Where(x => x.Id == Id).FirstOrDefault();
+
+            context.Users.Remove(user);
             await context.SaveChangesAsync();
 
             return Redirect("/");

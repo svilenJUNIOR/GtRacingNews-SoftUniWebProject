@@ -1,8 +1,8 @@
 ﻿@model GtRacingNews.Areas.Admin.ViewModels.DeleteViewModel
 
 <div class="box">
-    <table>
 
+    <table>
         <th colspan="2">DELETE TEAMS</th>
         @foreach (var team in Model.Teams)
         {
@@ -15,7 +15,9 @@
                 </td>
             </tr>
         }
+    </table>
 
+    <table>
         <th colspan="2">DELETE CHAMPIONSHIPS</th>
         @foreach (var championship in Model.Championships)
         {
@@ -28,7 +30,10 @@
                 </td>
             </tr>
         }
+    </table>
 
+
+    <table>
         <th colspan="2">DELETE DRIVERS</th>
         @foreach (var driver in Model.Drivers)
         {
@@ -41,7 +46,10 @@
                 </td>
             </tr>
         }
+    </table>
 
+
+    <table>
         <th colspan="2">DELETE NEWS</th>
         @foreach (var news in Model.News)
         {
@@ -54,7 +62,10 @@
                 </td>
             </tr>
         }
+    </table>
 
+
+    <table>
         <th colspan="2">DELETE RACES</th>
         @foreach (var race in Model.Races)
         {
@@ -67,8 +78,23 @@
                 </td>
             </tr>
         }
-
     </table>
+
+    <table>
+        <th colspan="2">DELETE USERS</th>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>
+                    @user.Key
+                </td>
+                <td>
+                    <a href="DeleteUser?id=@user.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+
 </div>
 
 <style>
@@ -80,7 +106,6 @@
     }
 
     .box {
-        margin-top: 50px;
         margin-left: 100px;
     }
 

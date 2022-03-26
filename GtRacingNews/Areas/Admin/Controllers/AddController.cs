@@ -22,13 +22,12 @@ namespace GtRacingNews.Areas.Admin.Controllers
         private readonly IRaceService raceService;
         private readonly IDriverService driverService;
         private readonly IChampionshipService championshipService;
-        private readonly ISeederService seederService;
 
         private readonly GTNewsDbContext context;
 
         public AddController(IValidator validator, ITeamService teamService, IGuard guard, INewsService newsService,
-            IRaceService raceService, IDriverService driverService, IChampionshipService championshipService, 
-            ISeederService seederService ,GTNewsDbContext context)
+            IRaceService raceService, IDriverService driverService, IChampionshipService championshipService,
+               GTNewsDbContext context)
         {
             this.validator = validator;
             this.guard = guard;
@@ -38,7 +37,6 @@ namespace GtRacingNews.Areas.Admin.Controllers
             this.raceService = raceService;
             this.driverService = driverService;
             this.championshipService = championshipService;
-            this.seederService = seederService;
 
             this.context = context;
         }
@@ -147,22 +145,6 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await championshipService.AddNewChampionship(model.Name, model.LogoUrl); return Redirect("/Admin/Home");
-        }
-
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Seed()
-        {
-            await this.seederService.SeedUser();
-            await this.seederService.SeedNews();
-            await this.seederService.SeedComments();
-            await this.seederService.SeedChampionship();
-            await this.seederService.SeedTeams();
-            await this.seederService.SeedDriver();
-            await this.seederService.SeedRaces();
-            await this.seederService.SeedRoles();
-            await this.seederService.SeedUserRoles();
-
-            return Redirect("/");
         }
     }
 }
