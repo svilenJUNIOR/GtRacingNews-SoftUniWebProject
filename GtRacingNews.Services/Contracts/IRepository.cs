@@ -1,8 +1,8 @@
-﻿namespace GtRacingNews.Repository
+﻿namespace GtRacingNews.Services
 {
     public interface IRepository<TEntity> where TEntity : class
     {
         Task AddAsync(TEntity entity);
-        Task Remove(TEntity entity);
+        Task RemoveAsync(TEntity entity);
     }
 }

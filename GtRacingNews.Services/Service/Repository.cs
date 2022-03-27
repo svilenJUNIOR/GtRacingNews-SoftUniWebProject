@@ -1,6 +1,6 @@
 ﻿using GtRacingNews.Data.DBContext;
 
-namespace GtRacingNews.Repository
+namespace GtRacingNews.Services
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
@@ -12,7 +12,7 @@ namespace GtRacingNews.Repository
             await context.SaveChangesAsync();
         }
 
-        public async Task Remove(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
             context.Set<TEntity>().Remove(entity);
             await context.SaveChangesAsync();

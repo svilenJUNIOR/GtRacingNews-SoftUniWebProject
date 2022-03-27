@@ -1,7 +1,7 @@
 ﻿using GtRacingNews.Areas.Admin.ViewModels;
 using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
-using GtRacingNews.Repository;
+using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +11,11 @@ namespace GtRacingNews.Controllers
     [Authorize(Roles = "Admin")]
     public class DeleteController : Controller
     {
+        private readonly IDeleteService deleteService;
         private readonly GTNewsDbContext context;
-
-        public DeleteController(GTNewsDbContext context)
+        public DeleteController(IDeleteService deleteService, GTNewsDbContext context)
         {
+            this.deleteService = deleteService;
             this.context = context;
         }
 
@@ -64,73 +65,44 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> DeleteTeam(int Id)
         {
-            var team = context.Teams.Where(x => x.Id == Id).FirstOrDefault();
+            await deleteService.Delete("Team", Id); 
 
-
-            var repo = new Repository<Team>();
-
-            await repo.Remove(team);
-
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteChampionship(int Id)
         {
-            var Championship = context.Championships.Where(x => x.Id == Id).FirstOrDefault();
-
-            context.Championships.Remove(Championship);
-            await context.SaveChangesAsync();
-
+            await deleteService.Delete("Championship", Id);
             return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteDriver(int Id)
         {
-            var Driver = context.Drivers.Where(x => x.Id == Id).FirstOrDefault();
-
-            context.Drivers.Remove(Driver);
-            await context.SaveChangesAsync();
-
+            await deleteService.Delete("Driver", Id);
             return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteNews(int Id)
         {
-            var News = context.News.Where(x => x.Id == Id).FirstOrDefault();
-
-            context.News.Remove(News);
-            await context.SaveChangesAsync();
-
+            await deleteService.Delete("News", Id);
             return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteRace(int Id)
         {
-            var Race = context.Races.Where(x => x.Id == Id).FirstOrDefault();
-
-            context.Races.Remove(Race);
-            await context.SaveChangesAsync();
-
+            await deleteService.Delete("Race", Id);
             return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteComment(int Id)
         {
-            var Comment = context.Comments.Where(x => x.Id == Id).FirstOrDefault();
-
-            context.Comments.Remove(Comment);
-            await context.SaveChangesAsync();
-
+            await deleteService.Delete("Comment", Id);
             return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteUser(string Id)
         {
-            var user = context.Users.Where(x => x.Id == Id).FirstOrDefault();
-
-            context.Users.Remove(user);
-            await context.SaveChangesAsync();
-
+            await deleteService.Delete(Id);
             return Redirect("DeleteView");
         }
     }

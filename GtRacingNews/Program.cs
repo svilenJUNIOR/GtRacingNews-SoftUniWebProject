@@ -1,5 +1,5 @@
 using GtRacingNews.Data.DBContext;
-using GtRacingNews.Repository;
+using GtRacingNews.Services;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
@@ -27,6 +27,7 @@ builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
+builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
