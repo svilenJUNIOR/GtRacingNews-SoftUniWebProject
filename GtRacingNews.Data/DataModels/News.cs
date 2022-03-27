@@ -4,6 +4,12 @@ namespace GtRacingNews.Data.DataModels
 {
     public class News
     {
+        public News(string heading, string description, string pictureUrl)
+        {
+            this.Heading = heading;
+            this.Description = description;
+            this.PictureUrl = pictureUrl;
+        }
         public int Id { get; set; }
 
         [Required]

@@ -4,6 +4,11 @@ namespace GtRacingNews.Data.DataModels
 {
     public class Race
     {
+        public Race(string Name, string Date)
+        {
+            this.Name = Name;
+            this.Date = Date;
+        }
         public int Id { get; set; }
 
         [Required]

@@ -4,6 +4,11 @@ namespace GtRacingNews.Data.DataModels
 {
     public class Championship
     {
+        public Championship(string name, string logoUrl)
+        {
+            this.Name = name;
+            this.LogoUrl = logoUrl;
+        }
         public int Id { get; set; }
 
         [Required]

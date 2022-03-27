@@ -5,6 +5,14 @@ namespace GtRacingNews.Data.DataModels
 {
     public class Driver
     {
+        public Driver(string name, int age, string cup, string imageUrl, int? teamId)
+        {
+            this.Name = name;
+            this.Age = age;
+            this.Cup = cup;
+            this.ImageUrl = imageUrl;
+            this.TeamId = teamId;
+        }
         public int Id { get; set; }
 
         [Required]

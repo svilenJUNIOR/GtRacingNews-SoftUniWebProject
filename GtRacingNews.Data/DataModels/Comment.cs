@@ -4,6 +4,12 @@ namespace GtRacingNews.Data.DataModels
 {
     public class Comment
     {
+        public Comment(string description, int? newsId, string userName)
+        {
+            this.Description = description;
+            this.NewsId = newsId;
+            this.UserName = userName;
+        }
         public int Id { get; set; }
 
         [Required]

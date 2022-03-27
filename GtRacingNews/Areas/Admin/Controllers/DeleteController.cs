@@ -1,5 +1,7 @@
 ﻿using GtRacingNews.Areas.Admin.ViewModels;
+using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -64,8 +66,10 @@ namespace GtRacingNews.Controllers
         {
             var team = context.Teams.Where(x => x.Id == Id).FirstOrDefault();
 
-            context.Teams.Remove(team);
-            await context.SaveChangesAsync();
+
+            var repo = new Repository<Team>();
+
+            await repo.Remove(team);
 
             return Redirect("/");
         }
@@ -77,7 +81,7 @@ namespace GtRacingNews.Controllers
             context.Championships.Remove(Championship);
             await context.SaveChangesAsync();
 
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteDriver(int Id)
@@ -87,7 +91,7 @@ namespace GtRacingNews.Controllers
             context.Drivers.Remove(Driver);
             await context.SaveChangesAsync();
 
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteNews(int Id)
@@ -97,7 +101,7 @@ namespace GtRacingNews.Controllers
             context.News.Remove(News);
             await context.SaveChangesAsync();
 
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteRace(int Id)
@@ -107,7 +111,7 @@ namespace GtRacingNews.Controllers
             context.Races.Remove(Race);
             await context.SaveChangesAsync();
 
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteComment(int Id)
@@ -117,7 +121,7 @@ namespace GtRacingNews.Controllers
             context.Comments.Remove(Comment);
             await context.SaveChangesAsync();
 
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
 
         public async Task<IActionResult> DeleteUser(string Id)
@@ -127,7 +131,7 @@ namespace GtRacingNews.Controllers
             context.Users.Remove(user);
             await context.SaveChangesAsync();
 
-            return Redirect("/");
+            return Redirect("DeleteView");
         }
     }
 }

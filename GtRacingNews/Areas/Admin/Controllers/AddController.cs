@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
@@ -16,28 +17,15 @@ namespace GtRacingNews.Areas.Admin.Controllers
     {
         private readonly IValidator validator;
         private readonly IGuard guard;
-
-        private readonly ITeamService teamService;
-        private readonly INewsService newsService;
-        private readonly IRaceService raceService;
-        private readonly IDriverService driverService;
-        private readonly IChampionshipService championshipService;
+        private readonly IAddService addService;
 
         private readonly GTNewsDbContext context;
 
-        public AddController(IValidator validator, ITeamService teamService, IGuard guard, INewsService newsService,
-            IRaceService raceService, IDriverService driverService, IChampionshipService championshipService,
-               GTNewsDbContext context)
+        public AddController(IValidator validator, IAddService addService, IGuard guard,GTNewsDbContext context)
         {
             this.validator = validator;
             this.guard = guard;
-
-            this.teamService = teamService;
-            this.newsService = newsService;
-            this.raceService = raceService;
-            this.driverService = driverService;
-            this.championshipService = championshipService;
-
+            this.addService = addService;
             this.context = context;
         }
 
@@ -76,6 +64,8 @@ namespace GtRacingNews.Areas.Admin.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddTeam(AddTeamFormModel model)
         {
+            Type type = typeof(Team);
+
             var nullErrors = guard.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
             var dataErrors = validator.ValidateAddNewTeam(model);
             var formErrors = validator.ValidateAddTeamForm(model);
@@ -84,13 +74,15 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await teamService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
+            else await addService.AddNewTeam(type, model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddNews(AddNewFormModel model)
         {
+            Type type = typeof(News);
+
             var nullErrors = guard.AgainstNull(model.Heading, model.Description, model.PictureUrl);
             var dataErrors = validator.ValidateAddNews(model);
             var formErrors = validator.ValidateForm(ModelState);
@@ -99,13 +91,15 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await newsService.AddNews(model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
+            else await addService.AddNews(type, model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRace(AddNewRaceFormModel model)
         {
+            Type type = typeof(Race);
+
             var nullErrors = guard.AgainstNull(model.Name, model.Date);
             var dataErrors = validator.ValidateAddRace(model);
             var formErrors = validator.ValidateForm(ModelState);
@@ -114,13 +108,15 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await raceService.AddNewRace(model.Name, model.Date); return Redirect("/Admin/Home");
+            else await addService.AddNewRace(type, model.Name, model.Date); return Redirect("/Admin/Home");
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddDriver(AddNewDriverFormModel model)
         {
+            Type type = typeof(Driver);
+
             var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
             var dataErrors = validator.ValidateAddNewDriver(model);
             var formErrors = validator.ValidateForm(ModelState);
@@ -129,13 +125,15 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await driverService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/Admin/Home");
+            else await addService.AddNewDriver(type, model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/Admin/Home");
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddChampionship(AddNewChampionshipFormModel model)
         {
+            Type type = typeof(Championship);
+
             var nullErrors = guard.AgainstNull(model.Name, model.LogoUrl);
             var dataErrors = validator.ValidateAddNewChampionship(model);
             var formErrors = validator.ValidateForm(ModelState);
@@ -144,7 +142,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await championshipService.AddNewChampionship(model.Name, model.LogoUrl); return Redirect("/Admin/Home");
+            else await addService.AddNewChampionship(type, model.Name, model.LogoUrl); return Redirect("/Admin/Home");
         }
     }
 }

@@ -1,4 +1,5 @@
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Repository;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
@@ -20,17 +21,13 @@ builder.Services.AddControllersWithViews()
         
     });
 
-builder.Services.AddScoped<IChampionshipService, ChampionshipService>();
-builder.Services.AddScoped<ICommentService, CommentService>();
-builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IGuard, Guard>();
 builder.Services.AddScoped<IHasher, Hasher>();
-builder.Services.AddScoped<INewsService, NewsService>();
-builder.Services.AddScoped<IRaceService, RaceService>();
-builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
