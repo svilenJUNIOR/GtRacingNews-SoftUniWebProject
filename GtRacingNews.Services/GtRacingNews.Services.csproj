@@ -15,7 +15,6 @@
     <ProjectReference Include="..\GtRacingNews.Common\GtRacingNews.Common.csproj" />
     <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
     <ProjectReference Include="..\GtRacingNews.MVC\GtRacingNews.ViewModels.csproj" />
-    <ProjectReference Include="..\GtRacingNews.Repository\GtRacingNews.Repository.csproj" />
   </ItemGroup>
 
 </Project>
