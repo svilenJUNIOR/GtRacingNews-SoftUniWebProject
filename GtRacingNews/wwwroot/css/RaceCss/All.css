@@ -1,12 +1,5 @@
-﻿table, th, td {
-    border: 5px solid black;
-    color: black;
-    width: 300px;
-    background-color: white;
-}
-
-.box {
-    margin-left: 1100px;
+﻿.box {
+    margin-left: 1400px;
 }
 
 body {

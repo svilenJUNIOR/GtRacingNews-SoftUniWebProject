@@ -1,19 +1,10 @@
 ﻿<div class="box">
-    <table>
-        <tr> <th> Race </th> <th> Date </th> </tr>
+    <ul class="list-group">
         @foreach (var race in Model)
         {
-            <tr>
-                <td>
-                    @race.Name
-                </td>
-
-                <td>
-                    @race.Date
-                </td>
-            </tr>
+            <li class="list-group-item">@race.Name @race.Date</li>
         }
-    </table>
+    </ul>
 </div>
 
 <link rel="stylesheet" href="~/css/RaceCss/All.css"></link>
