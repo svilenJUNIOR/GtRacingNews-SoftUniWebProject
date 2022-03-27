@@ -94,12 +94,6 @@
             <div class="card-body">
                 <h5 class="card-title">@news.Heading</h5>
                 <h5 class="card-title"><a href="/News/Details?id=@news.Id" class="btn btn-primary">Read...</a></h5>
-
-                @if (this.User.IsInRole("Admin"))
-                {
-                    <a href="/Admin/Delete/DeleteNews?id=@news.Id" class="btn btn-primary">Delete</a>
-                }
-
             </div>
         </div>
     }

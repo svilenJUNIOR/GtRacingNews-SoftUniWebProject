@@ -9,12 +9,6 @@
                 <h5 class="card-title">Name: @driver.Name</h5>
                 <h5 class="card-title">Age: @driver.Age</h5>
                 <h5 class="card-title">Cup: @driver.Cup</h5>
-
-                @if (this.User.IsInRole("Admin"))
-                {
-                    <a href="/Admin/Delete/DeleteDriver?id=@driver.DriverId" class="btn btn-primary">Delete</a>
-                }
-
             </div>
         </div>
     }

@@ -13,64 +13,46 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <body>
-    <header>
+    <header> 
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
 
-                @*side bar menu toggle button*@
-                <div id="main">
-                    <button id="openNav" style="margin-right: 25px;" class="w3-button w3-teal w3-xmedium" onclick="w3_open()">&#9776;</button>
-                </div>
-                @*side bar menu toggle button*@
-
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Welcome @this.User.Identity.Name</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                }
-
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GT Racing News</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                }
-
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-
-                        @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">NEWS</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="All">TEAMS</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="All">CHAMPIONSHIPS</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">DRIVERS</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">RACING CALENDAR</a>
-                            </li>
-                        }
-
-                    </ul>
-                </div>
+            @*side bar menu toggle button*@
+            <div id="main">
+                <button id="openNav" style="margin-right: 25px;" class="w3-button w3-teal w3-xmedium" onclick="w3_open()">&#9776;</button>
             </div>
+            @*side bar menu toggle button*@
+
+            <h1 class="navbar-brand" >Welcome @this.User.Identity.Name</h1>
+
+            <ul class="navbar-nav" style=" float: none; position: absolute;  top: 50%; left: 50%; transform: translate(-50%, -50%);">
+
+                 <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="News" asp-action="All">NEWS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Team" asp-action="All">TEAMS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Championship" asp-action="All">CHAMPIONSHIPS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Driver" asp-action="All">DRIVERS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Race" asp-action="All">RACING CALENDAR</a>
+                </li>
+
+            </ul>
+
         </nav>
 
         @*side bar menu*@
@@ -79,18 +61,7 @@
                     onclick="w3_close()">
                 Close &times;
             </button>
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
-            }
-
-            @if (!User.Identity.IsAuthenticated)
-            {
-                <a href="/User/Register" class="w3-bar-item w3-button nav-link text-light">Register</a>
-                <a href="/User/Login" class="w3-bar-item w3-button nav-link text-light">LogIn</a>
-            }
-
+            <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
         </div>
         @*side bar menu*@
 
