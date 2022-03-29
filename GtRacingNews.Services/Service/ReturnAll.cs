@@ -16,6 +16,7 @@ namespace GtRacingNews.Services.Service
 
         public IEnumerable<object> All(string Entity)
         {
+            
             if (Entity == "Teams")
             {
                 var teams = context.Teams
@@ -25,7 +26,9 @@ namespace GtRacingNews.Services.Service
                     Name = x.Name,
                     LogoUrl = x.LogoUrl,
                     CarModel = x.CarModel,
-                    Drivers = context.Drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList()
+                    ChampionshipName = context.Championships.Where(c => c.Id == x.ChampionshipId).FirstOrDefault().Name,
+                    Drivers = context.Drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList(),
+
                 }).ToList();
 
                 return teams;
@@ -62,6 +65,7 @@ namespace GtRacingNews.Services.Service
                 var drivers = context.Drivers
                    .Select(x => new ViewAllDriversViewModel
                    {
+                       
                        DriverId = x.Id,
                        Age = x.Age,
                        Cup = x.Cup,

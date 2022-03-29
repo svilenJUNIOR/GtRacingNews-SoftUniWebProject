@@ -1,0 +1,98 @@
+﻿@model List<GtRacingNews.ViewModels.Team.ViewAllTeamsViewModel>
+
+<div class="box">
+    <h2 style="text-align:center; font-size: 30px">GT Europe Challenge By Fanatec</h2>
+</div>
+
+<div class="row" style="margin-left: 150px">
+    @foreach (var team in Model)
+    {
+        @if (@team.ChampionshipName == "GT Europe Challenge By Fanatec")
+        {
+            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
+                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
+                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
+                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
+                </div>
+            </div>
+        }
+
+    }
+
+</div>
+
+<div class="box">
+    <h2 style="text-align:center; font-size: 30px">Super GT</h2>
+</div>
+
+<div class="row" style="margin-left: 150px">
+    @foreach (var team in Model)
+    {
+        @if (@team.ChampionshipName == "Super GT")
+        {
+            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
+                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
+                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
+                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
+                </div>
+            </div>
+        }
+
+    }
+</div>
+
+<div class="box">
+    <h2 style="text-align:center; font-size: 30px">British GT</h2>
+</div>
+
+<div class="row" style="margin-left: 150px">
+    @foreach (var team in Model)
+    {
+        @if (@team.ChampionshipName == "British GT")
+        {
+            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
+                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
+                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
+                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
+                </div>
+            </div>
+        }
+
+    }
+</div>
+
+<div class="box">
+    <h2 style="text-align:center; font-size: 30px">Fia Wec</h2>
+</div>
+
+<div class="row" style="margin-left: 150px">
+    @foreach (var team in Model)
+    {
+        @if (@team.ChampionshipName == "Fia Wec")
+        {
+            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
+                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
+                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
+                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
+                </div>
+            </div>
+        }
+
+    }
+</div>
+
+<style>
+    div.box {
+        box-shadow: 0px 0px 10px 0px black;
+        background-color: lightgray;
+    }
+</style>
+<link rel="stylesheet" href="~/css/TeamCss/All.css"></link>
