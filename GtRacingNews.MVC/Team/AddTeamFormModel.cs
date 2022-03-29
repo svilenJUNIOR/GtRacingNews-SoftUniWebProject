@@ -16,6 +16,6 @@ namespace GtRacingNews.ViewModels.Team
         public string LogoUrl { get; set; }
 
         public string ChampionshipName { get; set; }
-        public ICollection<Data.DataModels.Championship> Championships { get; set; }
+        public ICollection<Data.DataModels.Championship> Championships { get; set; } = new List<Data.DataModels.Championship>();
     }
 }

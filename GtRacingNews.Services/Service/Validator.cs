@@ -1,11 +1,6 @@
 ﻿using GtRacingNews.Common.Constants;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
-using GtRacingNews.ViewModels.Championship;
-using GtRacingNews.ViewModels.Driver;
-using GtRacingNews.ViewModels.News;
-using GtRacingNews.ViewModels.Race;
-using GtRacingNews.ViewModels.Team;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -20,6 +15,20 @@ namespace GtRacingNews.Services.Service
             this.context = context;
             this.hasher = hasher;
         }
+        public ICollection<string> AgainstNull(params string[] args)
+        {
+            var errors = new List<string>();
+            bool check = false;
+
+            foreach (var arg in args)
+                if (string.IsNullOrEmpty(arg) || string.IsNullOrWhiteSpace(arg))
+                    check = true;
+
+            if (check) errors.Add(Messages.NullField);
+
+            return errors;
+        }
+
         public IEnumerable<string> ValidateForm(ModelStateDictionary modelState)
         {
             var errors = new List<string>();
@@ -67,58 +76,41 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-        public IEnumerable<string> ValidateAddNews(AddNewFormModel model)
+
+        public IEnumerable<string> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
         {
             var errors = new List<string>();
 
-            if (context.News.Any(x => x.Heading == model.Heading))
-                errors.Add(Messages.ExistingNews);
+            switch (dbset)
+            {
+                case "News": 
+                    if (context.News.Any(x => x.Heading == check)) errors.Add(Messages.ExistingNews); break;
 
-            return errors;
-        }
-        public IEnumerable<string> ValidateAddNewTeam(AddTeamFormModel model)
-        {
-            var errors = new List<string>();
+                case "Team":
+                    if (context.Teams.Any(x => x.Name == check)) errors.Add(Messages.ExistingTeam); break;
 
-            if (context.Teams.Any(x => x.Name == model.Name))
-                errors.Add(Messages.ExistingTeam);
+                case "Championship":
+                    if (context.Championships.Any(x => x.Name == check)) errors.Add(Messages.ExistingChampionship); break;
 
-            return errors;
-        }
-        public IEnumerable<string> ValidateAddTeamForm(AddTeamFormModel model)
-        {
-            var errors = new List<string>();
+                case "Driver":
+                    if (context.Drivers.Any(x => x.Name == check)) errors.Add(Messages.ExistingDriver); break;
 
-            if (model.Name.Length > 50) errors.Add(Messages.LongerName);
+                case "Race":
+                    if (context.Races.Any(x => x.Name == check)) errors.Add(Messages.ExistingRace); break;
 
-            if (model.CarModel.Length > 30) errors.Add(Messages.LongerCarModel);
+                default: break;
+            }
 
-            return errors;
-        }
-        public IEnumerable<string> ValidateAddNewChampionship(AddNewChampionshipFormModel model)
-        {
-            var errors = new List<string>();
-
-            if (context.Championships.Any(x => x.Name == model.Name))
-                errors.Add(Messages.ExistingChampionship);
-
-            return errors;
-        }
-        public IEnumerable<string> ValidateAddNewDriver(AddNewDriverFormModel model)
-        {
-            var errors = new List<string>();
-
-            if (context.Drivers.Any(x => x.Name == model.Name))
-                errors.Add(Messages.ExistingDriver);
-
-            return errors;
-        }
-        public IEnumerable<string> ValidateAddRace(AddNewRaceFormModel model)
-        {
-            var errors = new List<string>();
-
-            if (context.Races.Any(x => x.Name == model.Name))
-                errors.Add(Messages.ExistingRace);
+            if (!modelState.IsValid)
+            {
+                foreach (var values in modelState.Values)
+                {
+                    foreach (var modelError in values.Errors)
+                    {
+                        errors.Add(modelError.ErrorMessage);
+                    }
+                }
+            }
 
             return errors;
         }

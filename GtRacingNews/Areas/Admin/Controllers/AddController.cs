@@ -1,7 +1,6 @@
 ﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
-using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
@@ -17,15 +16,12 @@ namespace GtRacingNews.Areas.Admin.Controllers
     public class AddController : Controller
     {
         private readonly IValidator validator;
-        private readonly IGuard guard;
         private readonly IAddService addService;
         private readonly GTNewsDbContext context;
 
-        public AddController(IValidator validator, IAddService addService, 
-            IGuard guard,GTNewsDbContext context)
+        public AddController(IValidator validator, IAddService addService, GTNewsDbContext context)
         {
             this.validator = validator;
-            this.guard = guard;
             this.addService = addService;
             this.context = context;
         }
@@ -67,13 +63,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             Type type = typeof(Team);
 
-            var nullErrors = guard.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
-            var dataErrors = validator.ValidateAddNewTeam(model);
-            var formErrors = validator.ValidateAddTeamForm(model);
+            var nullErrors = validator.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
+            var dataErrors = validator.ValidateObject("team", model.Name, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             await addService.AddNewTeam(type, model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
         }
@@ -84,13 +78,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             Type type = typeof(News);
 
-            var nullErrors = guard.AgainstNull(model.Heading, model.Description, model.PictureUrl);
-            var dataErrors = validator.ValidateAddNews(model);
-            var formErrors = validator.ValidateForm(ModelState);
+            var nullErrors = validator.AgainstNull(model.Heading, model.Description, model.PictureUrl);
+            var dataErrors = validator.ValidateObject("News", model.Heading, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             await addService.AddNews(type, model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
         }
@@ -101,13 +93,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             Type type = typeof(Race);
 
-            var nullErrors = guard.AgainstNull(model.Name, model.Date);
-            var dataErrors = validator.ValidateAddRace(model);
-            var formErrors = validator.ValidateForm(ModelState);
+            var nullErrors = validator.AgainstNull(model.Name, model.Date);
+            var dataErrors = validator.ValidateObject("Race", model.Name, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await addService.AddNewRace(type, model.Name, model.Date); return Redirect("/Admin/Home");
         }
@@ -118,13 +108,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             Type type = typeof(Driver);
 
-            var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
-            var dataErrors = validator.ValidateAddNewDriver(model);
-            var formErrors = validator.ValidateForm(ModelState);
+            var nullErrors = validator.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
+            var dataErrors = validator.ValidateObject("Driver", model.Name, ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await addService.AddNewDriver(type, model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/Admin/Home");
         }
@@ -135,13 +123,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
         {
             Type type = typeof(Championship);
 
-            var nullErrors = guard.AgainstNull(model.Name, model.LogoUrl);
-            var dataErrors = validator.ValidateAddNewChampionship(model);
-            var formErrors = validator.ValidateForm(ModelState);
+            var nullErrors = validator.AgainstNull(model.Name, model.LogoUrl);
+            var dataErrors = validator.ValidateObject("Championship", model.Name, ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
 
             else await addService.AddNewChampionship(type, model.Name, model.LogoUrl); return Redirect("/Admin/Home");
         }

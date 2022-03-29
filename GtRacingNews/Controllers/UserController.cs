@@ -10,20 +10,18 @@ namespace GtRacingNews.Controllers
     {
         private readonly IUserService userService;
         private readonly IValidator validator;
-        private readonly IGuard guard;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, IGuard guard)
+            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.userService = userService;
             this.validator = validator;
-            this.guard = guard;
             this.roleManager = roleManager;
         }
         public IActionResult Register() => View();
@@ -32,7 +30,7 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
+            var nullErrors = validator.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
             model.Email = model.Email.Trim();
@@ -57,7 +55,7 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
-            var nullErrors = guard.AgainstNull(model.Email, model.Password);
+            var nullErrors = validator.AgainstNull(model.Email, model.Password);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
             model.Email = model.Email.Trim();

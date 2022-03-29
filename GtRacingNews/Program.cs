@@ -21,7 +21,6 @@ builder.Services.AddControllersWithViews()
         
     });
 
-builder.Services.AddScoped<IGuard, Guard>();
 builder.Services.AddScoped<IHasher, Hasher>();
 builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();

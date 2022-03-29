@@ -7,6 +7,7 @@ namespace GtRacingNews.Services.Service
     public class AddService : IAddService
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
+
         private readonly IRepository<Team> teamRepository;
         private readonly IRepository<Championship> championshipRepository;
         private readonly IRepository<Comment> commentRepository;

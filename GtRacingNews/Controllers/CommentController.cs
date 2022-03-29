@@ -10,13 +10,13 @@ namespace GtRacingNews.Controllers
     public class CommentController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        private readonly IGuard guard;
         private readonly IAddService addService;
-        public CommentController(UserManager<IdentityUser> userManager, IGuard guard, IAddService addService)
+        private readonly IValidator validator;
+        public CommentController(UserManager<IdentityUser> userManager,IAddService addService, IValidator validator)
         {
             this.userManager = userManager;
-            this.guard = guard;
             this.addService = addService;
+            this.validator = validator;
         }
 
         [Authorize]
@@ -30,7 +30,7 @@ namespace GtRacingNews.Controllers
 
             var user = await userManager.GetUserAsync(User);
 
-            var nullErrors = guard.AgainstNull(user.UserName, model.Description);
+            var nullErrors = validator.AgainstNull(user.UserName, model.Description);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
