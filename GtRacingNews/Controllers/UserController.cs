@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Data.DBContext;
-using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +15,9 @@ namespace GtRacingNews.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly GTNewsDbContext context;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, GTNewsDbContext context, IUserService userService, IValidator validator, IGuard guard)
+            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, IGuard guard)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -27,7 +25,6 @@ namespace GtRacingNews.Controllers
             this.validator = validator;
             this.guard = guard;
             this.roleManager = roleManager;
-            this.context = context;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();

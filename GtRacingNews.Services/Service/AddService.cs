@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Data;
-using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 
@@ -56,19 +55,19 @@ namespace GtRacingNews.Services.Service
 
             var driver = Activator.CreateInstance(type, name, age, cup, imageUrl, team.Id);
 
-            driverRepository.AddAsync((Driver)driver);
+            await driverRepository.AddAsync((Driver)driver);
         }
         public async Task AddNews(Type type, string heading, string description, string pictureUrl)
         {
             var news = Activator.CreateInstance(type, heading, description, pictureUrl);
 
-            newsRepository.AddAsync((News)news);
+            await newsRepository.AddAsync((News)news);
         }
         public async Task AddNewRace(Type type, string name, string date)
         {
             var race = Activator.CreateInstance(type, name, date);
 
-            raceRepository.AddAsync((Race)race);
+            await raceRepository.AddAsync((Race)race);
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
-using GtRacingNews.Common.Constants;
-using GtRacingNews.ViewModels.User;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Services.Contracts;
 
 namespace GtRacingNews.Services.Service
 {
