@@ -66,7 +66,6 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> DeleteTeam(int Id)
         {
             await deleteService.Delete("Team", Id); 
-
             return Redirect("DeleteView");
         }
 

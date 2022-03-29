@@ -41,19 +41,16 @@ namespace GtRacingNews.Services.Service
         public async Task AddNewChampionship(Type type, string name, string logoUrl)
         {
             var championship = Activator.CreateInstance(type, name, logoUrl);
-
             await championshipRepository.AddAsync((Championship)championship);
         }
         public async Task AddNewComment(Type type, string Description, int newsId, string UserName)
         {
             var comment = Activator.CreateInstance(type, Description, newsId, UserName);
-
             await commentRepository.AddAsync((Comment)comment);
         }
         public async Task AddNewDriver(Type type, string name, string cup, string imageUrl, int age, string teamName)
         {
             var team = context.Teams.Where(x => x.Name == teamName).FirstOrDefault();
-
             var driver = Activator.CreateInstance(type, name, age, cup, imageUrl, team.Id);
 
             await driverRepository.AddAsync((Driver)driver);
@@ -61,13 +58,11 @@ namespace GtRacingNews.Services.Service
         public async Task AddNews(Type type, string heading, string description, string pictureUrl)
         {
             var news = Activator.CreateInstance(type, heading, description, pictureUrl);
-
             await newsRepository.AddAsync((News)news);
         }
         public async Task AddNewRace(Type type, string name, string date)
         {
             var race = Activator.CreateInstance(type, name, date);
-
             await raceRepository.AddAsync((Race)race);
         }
     }

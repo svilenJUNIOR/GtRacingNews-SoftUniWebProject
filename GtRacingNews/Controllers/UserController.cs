@@ -39,9 +39,9 @@ namespace GtRacingNews.Controllers
             model.ConfirmPassword = model.ConfirmPassword.Trim();
 
             var formErrors = validator.ValidateForm(ModelState);
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
-
             var dataErrors = validator.ValidateUserRegister(model);
+
+            if (formErrors.Count() > 0) return View("./Error", formErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
             else
