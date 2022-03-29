@@ -2,19 +2,19 @@
 
 namespace GtRacingNews.Services
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly GTNewsDbContext context = new GTNewsDbContext();
 
-        public async Task AddAsync(TEntity entity)
+        public async Task AddAsync(T entity)
         {
-            await context.Set<TEntity>().AddAsync(entity);
+            await context.Set<T>().AddAsync(entity);
             await context.SaveChangesAsync();
         }
 
-        public async Task RemoveAsync(TEntity entity)
+        public async Task RemoveAsync(T entity)
         {
-            context.Set<TEntity>().Remove(entity);
+            context.Set<T>().Remove(entity);
             await context.SaveChangesAsync();
         }
     }

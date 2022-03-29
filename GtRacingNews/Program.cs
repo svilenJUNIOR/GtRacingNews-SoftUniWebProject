@@ -28,6 +28,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
+builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();

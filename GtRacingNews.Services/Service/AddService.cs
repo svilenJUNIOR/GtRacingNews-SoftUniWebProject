@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data;
+using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 

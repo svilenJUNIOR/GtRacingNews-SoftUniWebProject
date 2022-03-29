@@ -1,29 +1,12 @@
-﻿using GtRacingNews.Data.DBContext;
-using GtRacingNews.ViewModels.Race;
+﻿using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
 {
     public class RaceController : Controller
     {
-        private readonly GTNewsDbContext context;
-
-        public RaceController(GTNewsDbContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task<IActionResult> All()
-        {
-            var races = context.Races
-                .Select(x => new ViewAllRacesViewModel
-                {
-                    Id = x.Id,
-                    Date = x.Date,
-                    Name = x.Name,
-                });
-
-            return View(races);
-        }
+        private readonly IReturnAll returnAll;
+        public RaceController(IReturnAll returnAll) => this.returnAll = returnAll;
+        public async Task<IActionResult> All() => View(returnAll.All("Races"));
     }
 }

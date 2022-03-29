@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Service;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
@@ -18,10 +19,10 @@ namespace GtRacingNews.Areas.Admin.Controllers
         private readonly IValidator validator;
         private readonly IGuard guard;
         private readonly IAddService addService;
-
         private readonly GTNewsDbContext context;
 
-        public AddController(IValidator validator, IAddService addService, IGuard guard,GTNewsDbContext context)
+        public AddController(IValidator validator, IAddService addService, 
+            IGuard guard,GTNewsDbContext context)
         {
             this.validator = validator;
             this.guard = guard;
@@ -74,7 +75,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await addService.AddNewTeam(type, model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
+            await addService.AddNewTeam(type, model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
         }
 
         [HttpPost]
@@ -91,7 +92,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (formErrors.Count() > 0) return View("./Error", formErrors);
 
-            else await addService.AddNews(type, model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
+            await addService.AddNews(type, model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
         }
 
         [HttpPost]
