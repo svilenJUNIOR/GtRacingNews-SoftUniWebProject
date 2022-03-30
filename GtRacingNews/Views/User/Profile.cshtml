@@ -1,0 +1,59 @@
+﻿@model GtRacingNews.ViewModels.User.CreatePremiumFormModel
+
+<h1 style="text-align:center; color:white">Premium Profile Setup</h1>
+<div class="box">
+    <form method="post">
+        <table style="height: 300px">
+
+            <tr>
+                <td>
+                    <label for="age">Age</label>
+                </td>
+                <td>
+                    <input type="number" class="form-control" id="age" name="age" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="address">Address</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="address" name="address" />
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                    <label for="roles">Roles</label>
+                </td>
+                <td>
+                    <select name="roles" id="roles">
+                        @foreach (var role in @Model.Roles)
+                        {
+                            @if (@role == "Admin")
+                            {
+                                    <option value="role">@role - 10$</option>
+                            }
+                            
+                            @if (@role == "Moderator")
+                            {
+                                    <option value="role">@role - 5$</option>
+                            }
+                        }
+                     </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<link rel="stylesheet" href="~/css/PremiumCss/Add.css"></link>

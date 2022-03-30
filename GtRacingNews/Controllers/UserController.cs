@@ -26,6 +26,16 @@ namespace GtRacingNews.Controllers
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
+        public IActionResult Profile()
+        {
+            CreatePremiumFormModel model = new CreatePremiumFormModel();
+
+            var roles = this.roleManager.Roles.Where(x => x.Name != "User").Select(x => x.Name).ToList();
+            
+            model.Roles = roles;
+
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
@@ -76,6 +86,14 @@ namespace GtRacingNews.Controllers
             await this.signInManager.SignOutAsync();
 
             return Redirect("/");
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Profile(CreatePremiumFormModel model)
+        {
+            return View();
         }
     }
 }
