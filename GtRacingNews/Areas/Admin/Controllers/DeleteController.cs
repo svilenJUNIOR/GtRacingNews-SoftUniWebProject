@@ -102,10 +102,10 @@ namespace GtRacingNews.Controllers
             return Redirect("DeleteView");
         }
 
-        public async Task<IActionResult> DeleteComment(int Id)
+        public async Task<IActionResult> DeleteComment(int Id, int newsId)
         {
             await deleteService.Delete("Comment", Id);
-            return Redirect("DeleteView");
+            return Redirect($"/All/NewsDetails?id={newsId}");
         }
 
         public async Task<IActionResult> DeleteUser(string Id)
