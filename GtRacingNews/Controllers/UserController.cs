@@ -31,7 +31,7 @@ namespace GtRacingNews.Controllers
             CreatePremiumFormModel model = new CreatePremiumFormModel();
 
             var roles = this.roleManager.Roles.Where(x => x.Name != "User").Select(x => x.Name).ToList();
-            
+
             model.Roles = roles;
 
             return View(model);
@@ -93,7 +93,13 @@ namespace GtRacingNews.Controllers
         [Authorize]
         public async Task<IActionResult> Profile(CreatePremiumFormModel model)
         {
-            return View();
+            var nullErrors = validator.AgainstNull(model.Address, model.Age.ToString());
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+
+            var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
+            await this.userManager.AddToRoleAsync(currentUser, model.Role);
+            return Redirect("/");
         }
     }
 }

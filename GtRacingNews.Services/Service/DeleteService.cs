@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Services.Service
 {
-    public class DeleteService: IDeleteService
+    public class DeleteService : IDeleteService
     {
         private readonly GTNewsDbContext context;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IRepository<Team> teamRepository;
         private readonly IRepository<Championship> championshipRepository;
         private readonly IRepository<Comment> commentRepository;
@@ -18,6 +19,7 @@ namespace GtRacingNews.Services.Service
 
         public DeleteService(
             GTNewsDbContext context,
+            RoleManager<IdentityRole> roleManager,
             IRepository<Team> teamRepository,
             IRepository<Championship> championshipRepository,
             IRepository<Comment> commentRepository,
@@ -27,6 +29,7 @@ namespace GtRacingNews.Services.Service
             IRepository<IdentityUser> userRepository)
         {
             this.context = context;
+            this.roleManager = roleManager;
             this.teamRepository = teamRepository;
             this.championshipRepository = championshipRepository;
             this.commentRepository = commentRepository;
@@ -74,11 +77,19 @@ namespace GtRacingNews.Services.Service
                     break;
             }
         }
-        public async Task Delete(string id)
+        public async Task Delete(string type, string id)
         {
-            var user = context.Users.Where(x => x.Id == id).FirstOrDefault();
-
-            await userRepository.RemoveAsync(user);
+            if (type == "User")
+            {
+                var user = context.Users.Where(x => x.Id == id).FirstOrDefault();
+                await userRepository.RemoveAsync(user);
+            }
+         
+            if (type == "Role")
+            {
+                var role = roleManager.Roles.Where(x => x.Id == id).FirstOrDefault();
+                await roleManager.DeleteAsync(role);
+            }
         }
     }
 }

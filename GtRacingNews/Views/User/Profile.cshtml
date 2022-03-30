@@ -25,20 +25,20 @@
 
              <tr>
                 <td>
-                    <label for="roles">Roles</label>
+                    <label for="role">Role</label>
                 </td>
                 <td>
-                    <select name="roles" id="roles">
+                    <select name="role" id="role">
                         @foreach (var role in @Model.Roles)
                         {
                             @if (@role == "Admin")
                             {
-                                    <option value="role">@role - 10$</option>
+                                    <option value="@role">@role - 10$</option>
                             }
                             
                             @if (@role == "Moderator")
                             {
-                                    <option value="role">@role - 5$</option>
+                                    <option value="@role">@role - 5$</option>
                             }
                         }
                      </select>

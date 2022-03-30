@@ -8,5 +8,6 @@
         public Dictionary<string, int> News  = new Dictionary<string, int>();
         public Dictionary<string, int> Races  = new Dictionary<string, int>();
         public Dictionary<string, string> Users  = new Dictionary<string, string>();
+        public Dictionary<string, string> Roles  = new Dictionary<string, string>();
     }
 }

@@ -3,6 +3,7 @@ using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Controllers
@@ -13,10 +14,12 @@ namespace GtRacingNews.Controllers
     {
         private readonly IDeleteService deleteService;
         private readonly GTNewsDbContext context;
-        public DeleteController(IDeleteService deleteService, GTNewsDbContext context)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public DeleteController(IDeleteService deleteService, GTNewsDbContext context, RoleManager<IdentityRole> roleManager)
         {
             this.deleteService = deleteService;
             this.context = context;
+            this.roleManager = roleManager;
         }
 
         public async Task<IActionResult> DeleteView()
@@ -29,6 +32,7 @@ namespace GtRacingNews.Controllers
             var News = context.News.ToList();
             var Races = context.Races.ToList();
             var Users = context.Users.ToList();
+            var Roles = roleManager.Roles.ToList();
 
             foreach (var team in Teams)
             {
@@ -58,6 +62,11 @@ namespace GtRacingNews.Controllers
             foreach (var user in Users)
             {
                 deleteModel.Users.Add(user.UserName, user.Id);
+            }
+
+            foreach (var role in Roles)
+            {
+                deleteModel.Roles.Add(role.Name, role.Id);
             }
 
             return View(deleteModel);
@@ -101,7 +110,13 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> DeleteUser(string Id)
         {
-            await deleteService.Delete(Id);
+            await deleteService.Delete("User", Id);
+            return Redirect("DeleteView");
+        }
+
+        public async Task<IActionResult> DeleteRole(string Id)
+        {
+            await deleteService.Delete("Role", Id);
             return Redirect("DeleteView");
         }
     }

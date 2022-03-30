@@ -95,6 +95,21 @@
         }
     </table>
 
+    <table>
+        <th colspan="2">DELETE ROLES</th>
+        @foreach (var role in Model.Roles)
+        {
+            <tr>
+                <td>
+                    @role.Key
+                </td>
+                <td>
+                    <a href="DeleteRole?id=@role.Value" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+
 </div>
 
 <style>
