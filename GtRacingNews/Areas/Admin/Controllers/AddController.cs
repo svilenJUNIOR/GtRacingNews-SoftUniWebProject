@@ -5,8 +5,10 @@ using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;
+using GtRacingNews.ViewModels.Role;
 using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Areas.Admin.Controllers
@@ -17,13 +19,16 @@ namespace GtRacingNews.Areas.Admin.Controllers
     {
         private readonly IValidator validator;
         private readonly IAddService addService;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly GTNewsDbContext context;
 
-        public AddController(IValidator validator, IAddService addService, GTNewsDbContext context)
+        public AddController(IValidator validator, IAddService addService, GTNewsDbContext context,
+            RoleManager<IdentityRole> roleManager)
         {
             this.validator = validator;
             this.addService = addService;
             this.context = context;
+            this.roleManager = roleManager;
         }
 
         [Authorize(Roles = "Admin")]
@@ -40,6 +45,9 @@ namespace GtRacingNews.Areas.Admin.Controllers
 
         [Authorize(Roles = "Admin")]
         public IActionResult AddNews() => View();
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddRole() => View();
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRace() => View();
@@ -120,6 +128,21 @@ namespace GtRacingNews.Areas.Admin.Controllers
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
             else await addService.AddNewChampionship(typeof(Championship), model.Name, model.LogoUrl); return Redirect("/Admin/Home");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddRole(AddNewRoleFormModel model)
+        {
+            if (model.Name is null) return View();
+            if (roleManager.Roles.Any(x => x.NormalizedName == model.Name.ToUpperInvariant()))
+                return View("./Error", new string[] { "Role with that name already exists" });
+
+            var role = new IdentityRole();
+            role.Name = model.Name;
+
+            await this.roleManager.CreateAsync(role);
+            return Redirect("/Admin/Home");
         }
     }
 }
