@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220329081921_initial")]
+    [Migration("20220330075955_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,12 @@ namespace GtRacingNews.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Championships");
                 });
@@ -98,10 +103,15 @@ namespace GtRacingNews.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.HasIndex("TeamId");
 
@@ -130,9 +140,38 @@ namespace GtRacingNews.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("ProfileId");
+
                     b.ToTable("News");
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProfileType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Race", b =>
@@ -152,7 +191,12 @@ namespace GtRacingNews.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Races");
                 });
@@ -182,9 +226,14 @@ namespace GtRacingNews.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChampionshipId");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Teams");
                 });
@@ -391,6 +440,14 @@ namespace GtRacingNews.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Championship", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyChampionships")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Comment", b =>
                 {
                     b.HasOne("GtRacingNews.Data.DataModels.News", null)
@@ -401,9 +458,30 @@ namespace GtRacingNews.Data.Migrations
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Driver", b =>
                 {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyDrivers")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("GtRacingNews.Data.DataModels.Team", null)
                         .WithMany("Drivers")
                         .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.News", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyNews")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Race", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyRaces")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
@@ -412,6 +490,11 @@ namespace GtRacingNews.Data.Migrations
                     b.HasOne("GtRacingNews.Data.DataModels.Championship", null)
                         .WithMany("Teams")
                         .HasForeignKey("ChampionshipId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyTeams")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
@@ -474,6 +557,19 @@ namespace GtRacingNews.Data.Migrations
             modelBuilder.Entity("GtRacingNews.Data.DataModels.News", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Profile", b =>
+                {
+                    b.Navigation("MyChampionships");
+
+                    b.Navigation("MyDrivers");
+
+                    b.Navigation("MyNews");
+
+                    b.Navigation("MyRaces");
+
+                    b.Navigation("MyTeams");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Team", b =>
