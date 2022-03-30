@@ -14,5 +14,13 @@
     "Email": "svilen1@email.com",
     "NormalizedEmail": "SVILEN1@EMAIL.COM",
     "PasswordHash": "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
+  },
+  {
+    "Id": "a1dca104-1948-4d00-a471-4a4b1f95bb98",
+    "UserName": "svilen2",
+    "NormalizedUserName": "SVILEN2",
+    "Email": "svilen2@email.com",
+    "NormalizedEmail": "SVILEN2@EMAIL.COM",
+    "PasswordHash": "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
   }
 ]
