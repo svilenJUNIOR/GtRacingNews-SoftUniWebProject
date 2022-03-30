@@ -14,7 +14,7 @@ namespace GtRacingNews.Services
         ICollection<T> GettAll<T>() where T : class;
 
         Team FindTeamById(int Id);
-        Championship FindChampionshipById(int Id);
+        Championship FindChampionshipById(int? Id);
         Driver FindDriverById(int Id);
         Comment FindCommentById(int Id);
         Race FindRaceById(int Id);

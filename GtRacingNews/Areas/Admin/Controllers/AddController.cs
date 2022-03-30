@@ -85,8 +85,8 @@ namespace GtRacingNews.Areas.Admin.Controllers
             var nullErrors = validator.AgainstNull(model.Heading, model.Description, model.PictureUrl);
             var dataErrors = validator.ValidateObject("News", model.Heading, ModelState);
 
-            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
             await addService.AddNews(typeof(News), model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
         }

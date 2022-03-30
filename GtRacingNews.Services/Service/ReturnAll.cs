@@ -18,15 +18,15 @@ namespace GtRacingNews.Services.Service
         public IEnumerable<object> All(string Entity)
         {
 
-            if (Entity == "Teams")  return repository.GettAll<Team>();
+            if (Entity == "Teams")  return bindService.TeamBind(repository.GettAll<Team>());
 
-            if (Entity == "Races") return repository.GettAll<Race>();
+            if (Entity == "Races") return bindService.RaceBind(repository.GettAll<Race>());
              
             if (Entity == "News") return bindService.NewsBind(repository.GettAll<News>());
 
-            if (Entity == "Drivers") return repository.GettAll<Driver>();
+            if (Entity == "Drivers") return bindService.DriverBind(repository.GettAll<Driver>());
 
-            if (Entity == "Championships") return repository.GettAll<Championship>();
+            if (Entity == "Championships") return bindService.ChampionshipBind(repository.GettAll<Championship>());
 
             return null;
         }

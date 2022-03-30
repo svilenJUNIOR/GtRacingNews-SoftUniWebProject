@@ -7,6 +7,6 @@
         public string LogoUrl { get; set; }
         public string CarModel { get; set; }
         public string ChampionshipName { get; set; }
-        public ICollection<string> Drivers { get; set; }
+        public ICollection<string> Drivers { get; set; } = new List<string>();
     }
 }

@@ -48,7 +48,7 @@ namespace GtRacingNews.Services
 
         public ICollection<T> GettAll<T>() where T : class => context.Set<T>().ToList();
         public Team FindTeamById(int Id) => context.Teams.Where(x => x.Id == Id).FirstOrDefault();
-        public Championship FindChampionshipById(int Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();
+        public Championship FindChampionshipById(int? Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();
         public Driver FindDriverById(int Id) => context.Drivers.Where(x => x.Id == Id).FirstOrDefault();
         public Comment FindCommentById(int Id) => context.Comments.Where(x => x.Id == Id).FirstOrDefault();
         public Race FindRaceById(int Id) => context.Races.Where(x => x.Id == Id).FirstOrDefault();
