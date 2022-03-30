@@ -6,64 +6,42 @@ namespace GtRacingNews.Services.Service
 {
     public class AddService : IAddService
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
-
-        private readonly IRepository<Team> teamRepository;
-        private readonly IRepository<Championship> championshipRepository;
-        private readonly IRepository<Comment> commentRepository;
-        private readonly IRepository<Race> raceRepository;
-        private readonly IRepository<Driver> driverRepository;
-        private readonly IRepository<News> newsRepository;
-
-        public AddService(
-            IRepository<Team> teamRepository, 
-            IRepository<Championship> championshipRepository,
-            IRepository<Comment> commentRepository,
-            IRepository<Race> raceRepository,
-            IRepository<Driver> driverRepository,
-            IRepository<News> newsRepository)
-        {
-            this.teamRepository = teamRepository;
-            this.championshipRepository = championshipRepository;
-            this.commentRepository = commentRepository;
-            this.raceRepository = raceRepository;
-            this.driverRepository = driverRepository;
-            this.newsRepository = newsRepository;
-        }
+        private readonly IRepository repository;
+        public AddService(IRepository repository) => this.repository = repository;
 
         public async Task AddNewTeam(Type type, string name, string carModel, string logoUrl, string championshipName)
         {
-            var championship = context.Championships.Where(x => x.Name == championshipName).FirstOrDefault();
+            var championship = repository.FindChampionshipByName(championshipName);
             var team = Activator.CreateInstance(type, name, carModel, logoUrl, championship.Id);
 
-            await teamRepository.AddAsync((Team)team);
+            await repository.AddAsync<Team>((Team)team);
         }
         public async Task AddNewChampionship(Type type, string name, string logoUrl)
         {
             var championship = Activator.CreateInstance(type, name, logoUrl);
-            await championshipRepository.AddAsync((Championship)championship);
+            await repository.AddAsync<Championship>((Championship)championship);
         }
         public async Task AddNewComment(Type type, string Description, int newsId, string UserName)
         {
             var comment = Activator.CreateInstance(type, Description, newsId, UserName);
-            await commentRepository.AddAsync((Comment)comment);
+            await repository.AddAsync<Comment>((Comment)comment);
         }
         public async Task AddNewDriver(Type type, string name, string cup, string imageUrl, int age, string teamName)
         {
-            var team = context.Teams.Where(x => x.Name == teamName).FirstOrDefault();
+            var team = repository.FindTeamByName(teamName);
             var driver = Activator.CreateInstance(type, name, age, cup, imageUrl, team.Id);
 
-            await driverRepository.AddAsync((Driver)driver);
+            await repository.AddAsync<Driver>((Driver)driver);
         }
         public async Task AddNews(Type type, string heading, string description, string pictureUrl)
         {
             var news = Activator.CreateInstance(type, heading, description, pictureUrl);
-            await newsRepository.AddAsync((News)news);
+            await repository.AddAsync<News>((News)news);
         }
         public async Task AddNewRace(Type type, string name, string date)
         {
             var race = Activator.CreateInstance(type, name, date);
-            await raceRepository.AddAsync((Race)race);
+            await repository.AddAsync<Race>((Race)race);
         }
     }
 }

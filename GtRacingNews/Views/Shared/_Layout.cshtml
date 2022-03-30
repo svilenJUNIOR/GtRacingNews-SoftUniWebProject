@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <body>
-    <header> 
+    <header>
 
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
 
@@ -23,11 +23,11 @@
             </div>
             @*side bar menu toggle button*@
 
-            <h1 class="navbar-brand" >Welcome @this.User.Identity.Name</h1>
+            <h1 class="navbar-brand">Welcome @this.User.Identity.Name</h1>
 
             <ul class="navbar-nav" style="float: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
                 </li>
 
@@ -62,7 +62,14 @@
                 Close &times;
             </button>
             <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
-            <a href="/User/Profile" class="w3-bar-item w3-button nav-link text-light">Create a premium profile</a>
+            @if (!this.User.IsInRole("Moderator"))
+            {
+                <a href="/User/Profile" class="w3-bar-item w3-button nav-link text-light">Create a premium profile</a>
+            }
+            @if (this.User.IsInRole("Moderator"))
+            {
+                <p>he moderator</p>
+            }
         </div>
         @*side bar menu*@
 

@@ -8,7 +8,8 @@ namespace GtRacingNews.Services.Service
 {
     public class Seeder : ISeederService
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IRepository repository;
+        public Seeder(IRepository repository) => this.repository = repository;
 
         public async Task SeedDriver()
         {
@@ -16,8 +17,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Driver>>(jsonString);
 
-            await context.Drivers.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<Driver>(toAdd);
         }
 
         public async Task SeedTeams()
@@ -26,8 +26,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Team>>(jsonString);
 
-            await context.Teams.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<Team>(toAdd);
         }
 
         public async Task SeedChampionship()
@@ -36,8 +35,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Championship>>(jsonString);
 
-            await context.Championships.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<Championship>(toAdd);
         }
 
         public async Task SeedComments()
@@ -46,8 +44,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Comment>>(jsonString);
 
-            await context.Comments.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<Comment>(toAdd);
         }
 
         public async Task SeedNews()
@@ -56,8 +53,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<News>>(jsonString);
 
-            await context.News.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<News>(toAdd);
         }
 
         public async Task SeedRaces()
@@ -66,8 +62,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Race>>(jsonString);
 
-            await context.Races.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<Race>(toAdd);
         }
 
         public async Task SeedRoles()
@@ -76,8 +71,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityRole>>(jsonString);
 
-            await context.Roles.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<IdentityRole>(toAdd);
         }
 
         public async Task SeedUser()
@@ -86,8 +80,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityUser>>(jsonString);
 
-            await context.Users.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<IdentityUser>(toAdd);
         }
 
         public async Task SeedUserRoles()
@@ -96,8 +89,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityUserRole<string>>>(jsonString);
 
-            await context.UserRoles.AddRangeAsync(toAdd);
-            await context.SaveChangesAsync();
+            await repository.AddRangeAsync<IdentityUserRole<string>>(toAdd);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 
@@ -7,89 +6,24 @@ namespace GtRacingNews.Services.Service
 {
     public class DeleteService : IDeleteService
     {
-        private readonly GTNewsDbContext context;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IRepository<Team> teamRepository;
-        private readonly IRepository<Championship> championshipRepository;
-        private readonly IRepository<Comment> commentRepository;
-        private readonly IRepository<Race> raceRepository;
-        private readonly IRepository<Driver> driverRepository;
-        private readonly IRepository<News> newsRepository;
-        private readonly IRepository<IdentityUser> userRepository;
+        private readonly IRepository repository;
 
-        public DeleteService(
-            GTNewsDbContext context,
-            RoleManager<IdentityRole> roleManager,
-            IRepository<Team> teamRepository,
-            IRepository<Championship> championshipRepository,
-            IRepository<Comment> commentRepository,
-            IRepository<Race> raceRepository,
-            IRepository<Driver> driverRepository,
-            IRepository<News> newsRepository,
-            IRepository<IdentityUser> userRepository)
-        {
-            this.context = context;
-            this.roleManager = roleManager;
-            this.teamRepository = teamRepository;
-            this.championshipRepository = championshipRepository;
-            this.commentRepository = commentRepository;
-            this.raceRepository = raceRepository;
-            this.driverRepository = driverRepository;
-            this.newsRepository = newsRepository;
-            this.userRepository = userRepository;
-        }
+        public DeleteService(IRepository repository) => this.repository = repository;
 
         public async Task Delete(string collection, int id)
         {
-            switch (collection)
-            {
-                case "Team":
-                    var team = context.Teams.Where(t => t.Id == id).FirstOrDefault();
-                    await teamRepository.RemoveAsync(team);
-                    break;
-
-                case "Championship":
-                    var championship = context.Championships.Where(t => t.Id == id).FirstOrDefault();
-                    await championshipRepository.RemoveAsync(championship);
-                    break;
-
-                case "Comment":
-                    var comment = context.Comments.Where(t => t.Id == id).FirstOrDefault();
-                    await commentRepository.RemoveAsync(comment);
-                    break;
-
-                case "Race":
-                    var race = context.Races.Where(t => t.Id == id).FirstOrDefault();
-                    await raceRepository.RemoveAsync(race);
-                    break;
-
-                case "Driver":
-                    var driver = context.Drivers.Where(t => t.Id == id).FirstOrDefault();
-                    await driverRepository.RemoveAsync(driver);
-                    break;
-
-                case "News":
-                    var news = context.News.Where(t => t.Id == id).FirstOrDefault();
-                    await newsRepository.RemoveAsync(news);
-                    break;
-
-                default:
-                    break;
-            }
+            if (collection == "Team") await repository.RemoveAsync<Team>(repository.FindTeamById(id));
+            if (collection == "Championship") await repository.RemoveAsync<Championship>(repository.FindChampionshipById(id));
+            if (collection == "Driver") await repository.RemoveAsync<Driver>(repository.FindDriverById(id));
+            if (collection == "Comment") await repository.RemoveAsync<Comment>(repository.FindCommentById(id));
+            if (collection == "Race") await repository.RemoveAsync<Race>(repository.FindRaceById(id));
+            if (collection == "News") await repository.RemoveAsync<News>(repository.FindNewsById(id));
         }
         public async Task Delete(string type, string id)
         {
-            if (type == "User")
-            {
-                var user = context.Users.Where(x => x.Id == id).FirstOrDefault();
-                await userRepository.RemoveAsync(user);
-            }
+            if (type == "User") await repository.RemoveAsync<IdentityUser<string>>(repository.FindUserById(id));
          
-            if (type == "Role")
-            {
-                var role = roleManager.Roles.Where(x => x.Id == id).FirstOrDefault();
-                await roleManager.DeleteAsync(role);
-            }
+            if (type == "Role") await repository.RemoveAsync<IdentityRole<string>>(repository.FindRoleById(id));
         }
     }
 }

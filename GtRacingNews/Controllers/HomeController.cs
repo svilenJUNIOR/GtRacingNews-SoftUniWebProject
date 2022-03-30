@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Models;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,22 +9,25 @@ namespace GtRacingNews.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger) => _logger = logger;
+        private readonly ISeederService seederService;
+        public HomeController(ILogger<HomeController> logger, ISeederService seederService)
+        {
+            _logger = logger;
+            this.seederService = seederService;
+        }
 
         public async Task<IActionResult> testov()
         {
-            var seed = new Seeder();
-
-            await seed.SeedUser();
-            await seed.SeedRoles();
-            await seed.SeedUserRoles();
-
-            await seed.SeedChampionship();
-            await seed.SeedTeams();
-            await seed.SeedDriver();
-            await seed.SeedNews();
-            await seed.SeedComments();
-            await seed.SeedRaces();
+            await seederService.SeedUser();
+            await seederService.SeedRoles();
+            await seederService.SeedUserRoles();
+                  
+            await seederService.SeedChampionship();
+            await seederService.SeedTeams();
+            await seederService.SeedDriver();
+            await seederService.SeedNews();
+            await seederService.SeedComments();
+            await seederService.SeedRaces();
 
             return Redirect("/");
         }

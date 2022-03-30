@@ -70,7 +70,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
         public async Task<IActionResult> AddTeam(AddTeamFormModel model)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
-            var dataErrors = validator.ValidateObject("team", model.Name, ModelState);
+            var dataErrors = validator.ValidateObject("Team", model.Name, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
