@@ -19,12 +19,12 @@ you can login or register by clicking the links!!!
 
 The functionality is as it follows:
 
-Guests can - Browse trough: news
+Guests (not logged) can - Browse trough: news
 
-Users can - Browse trough: news / drivers / teams / the racing calendar / championships and comment under news
+Users (logged not in role) can - Browse trough: news / drivers / teams / the racing calendar / championships and comment under news
 
-Moderators can - Browse / Add - news / drivers / teams / the racing calendar / championships
+Moderators (logged in role) can - Browse / Add - news / drivers / teams / the racing calendar / championships
 
-Admins can - Browse / Add / Delete - from EVERYTHING / Add roles and asigning users to roles
+Admins (logged in role) can - Browse / Add / Delete - from EVERYTHING / Add roles and asigning users to roles
 
 NonImplementedFeature - Add to read later

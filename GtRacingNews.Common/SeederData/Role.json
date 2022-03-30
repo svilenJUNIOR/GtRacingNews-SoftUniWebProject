@@ -6,9 +6,9 @@
     "ConcurrencyStamp": "07b9fcbe-a6e0-44bc-926f-d6d89102fab9"
   },
   {
-    "Id":  "1dc9f147-fba7-4356-b12d-00ed6213d0b4",
-    "Name": "User",
-    "NormalizedName": "USER",
-    "ConcurrencyStamp": "186e73b1-8964-49e5-94cc-5cf1103361df"
+    "Id": "58534cd3-b259-4279-8e29-6a621bd4a7f4",
+    "Name": "Moderator",
+    "NormalizedName": "MODERATOR",
+    "ConcurrencyStamp": "ce279cf0-ea75-4b2b-bed6-5a4a92153c3f"
   }
 ]
