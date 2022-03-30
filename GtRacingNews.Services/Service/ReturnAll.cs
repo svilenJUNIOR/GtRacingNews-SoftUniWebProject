@@ -8,8 +8,12 @@ namespace GtRacingNews.Services.Service
     public class ReturnAll : IReturnAll
     {
         private readonly IRepository repository;
-
-        public ReturnAll(IRepository repository) => this.repository = repository;
+        private readonly IBindService bindService;
+        public ReturnAll(IRepository repository, IBindService bindService)
+        {
+            this.repository = repository;
+            this.bindService = bindService;
+        }
 
         public IEnumerable<object> All(string Entity)
         {
@@ -18,7 +22,7 @@ namespace GtRacingNews.Services.Service
 
             if (Entity == "Races") return repository.GettAll<Race>();
              
-            if (Entity == "News") return repository.GettAll<News>();
+            if (Entity == "News") return bindService.NewsBind(repository.GettAll<News>());
 
             if (Entity == "Drivers") return repository.GettAll<Driver>();
 
