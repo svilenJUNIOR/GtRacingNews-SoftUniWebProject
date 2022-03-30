@@ -34,7 +34,7 @@ namespace GtRacingNews.Controllers
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await addService.AddNewComment(type, model.Description, newsId, user.UserName); return Redirect($"/News/Details?id={newsId}");
+            else await addService.AddNewComment(type, model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
         }
     }
 }

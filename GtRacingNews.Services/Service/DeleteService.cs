@@ -21,9 +21,9 @@ namespace GtRacingNews.Services.Service
         }
         public async Task Delete(string type, string id)
         {
-            if (type == "User") await repository.RemoveAsync<IdentityUser<string>>(repository.FindUserById(id));
+            if (type == "User") await repository.RemoveAsync<IdentityUser>(repository.FindUserById(id));
          
-            if (type == "Role") await repository.RemoveAsync<IdentityRole<string>>(repository.FindRoleById(id));
+            if (type == "Role") await repository.RemoveAsync<IdentityRole>(repository.FindRoleById(id));
         }
     }
 }
