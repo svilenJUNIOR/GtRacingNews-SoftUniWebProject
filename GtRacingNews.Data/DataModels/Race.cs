@@ -15,7 +15,7 @@ namespace GtRacingNews.Data.DataModels
         [MaxLength(50)]
         public string Name { get; set; }
         public string Date { get; set; }
-        public int? ProfileId { get; set; }
+        public string? UserId { get; set; }
 
     }
 }

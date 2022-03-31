@@ -4,6 +4,7 @@ using GtRacingNews.Data.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.MIgrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    partial class GTNewsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220331085518_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,10 +41,15 @@ namespace GtRacingNews.Data.MIgrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Championships");
                 });
@@ -99,13 +106,18 @@ namespace GtRacingNews.Data.MIgrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.HasIndex("TeamId");
 
@@ -134,10 +146,15 @@ namespace GtRacingNews.Data.MIgrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("News");
                 });
@@ -187,10 +204,15 @@ namespace GtRacingNews.Data.MIgrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Races");
                 });
@@ -220,12 +242,17 @@ namespace GtRacingNews.Data.MIgrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ChampionshipId");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Teams");
                 });
@@ -432,6 +459,14 @@ namespace GtRacingNews.Data.MIgrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Championship", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyChampionships")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Comment", b =>
                 {
                     b.HasOne("GtRacingNews.Data.DataModels.News", null)
@@ -442,9 +477,30 @@ namespace GtRacingNews.Data.MIgrations
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Driver", b =>
                 {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyDrivers")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("GtRacingNews.Data.DataModels.Team", null)
                         .WithMany("Drivers")
                         .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.News", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyNews")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Race", b =>
+                {
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyRaces")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
@@ -453,6 +509,11 @@ namespace GtRacingNews.Data.MIgrations
                     b.HasOne("GtRacingNews.Data.DataModels.Championship", null)
                         .WithMany("Teams")
                         .HasForeignKey("ChampionshipId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("GtRacingNews.Data.DataModels.Profile", null)
+                        .WithMany("MyTeams")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 
@@ -515,6 +576,19 @@ namespace GtRacingNews.Data.MIgrations
             modelBuilder.Entity("GtRacingNews.Data.DataModels.News", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("GtRacingNews.Data.DataModels.Profile", b =>
+                {
+                    b.Navigation("MyChampionships");
+
+                    b.Navigation("MyDrivers");
+
+                    b.Navigation("MyNews");
+
+                    b.Navigation("MyRaces");
+
+                    b.Navigation("MyTeams");
                 });
 
             modelBuilder.Entity("GtRacingNews.Data.DataModels.Team", b =>

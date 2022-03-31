@@ -24,7 +24,7 @@ namespace GtRacingNews.Data.DataModels
         public string PictureUrl { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
-        public int? ProfileId { get; set; }
+        public string? UserId { get; set; }
 
     }
 }

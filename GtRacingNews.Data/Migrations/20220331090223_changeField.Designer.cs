@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.MIgrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220331082821_initial")]
-    partial class initial
+    [Migration("20220331090223_changeField")]
+    partial class changeField
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,9 @@ namespace GtRacingNews.Data.MIgrations
 
                     b.Property<int?>("ProfileId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -109,6 +112,9 @@ namespace GtRacingNews.Data.MIgrations
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
@@ -142,6 +148,9 @@ namespace GtRacingNews.Data.MIgrations
 
                     b.Property<int?>("ProfileId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -198,6 +207,9 @@ namespace GtRacingNews.Data.MIgrations
                     b.Property<int?>("ProfileId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
@@ -232,6 +244,9 @@ namespace GtRacingNews.Data.MIgrations
 
                     b.Property<int?>("ProfileId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

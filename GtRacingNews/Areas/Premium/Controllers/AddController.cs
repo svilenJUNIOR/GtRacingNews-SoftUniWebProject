@@ -19,16 +19,17 @@ namespace GtRacingNews.Areas.Premium.Controllers
     {
         private readonly IValidator validator;
         private readonly IAddService addService;
+        private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly GTNewsDbContext context;
-
         public AddController(IValidator validator, IAddService addService, GTNewsDbContext context,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             this.validator = validator;
             this.addService = addService;
             this.context = context;
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         [Authorize(Roles = "Moderator, Admin")]
@@ -69,69 +70,89 @@ namespace GtRacingNews.Areas.Premium.Controllers
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddTeam(AddTeamFormModel model)
         {
+            bool isModerator = this.User.IsInRole("Moderator");
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
             var nullErrors = validator.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
             var dataErrors = validator.ValidateObject("Team", model.Name, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            await addService.AddNewTeam(typeof(Team), model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName); return Redirect("/Admin/Home");
+            await addService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName, isModerator, user.Id); 
+            return Redirect("/");
         }
 
         [HttpPost]
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddNews(AddNewFormModel model)
         {
+            bool isModerator = this.User.IsInRole("Moderator");
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
             var nullErrors = validator.AgainstNull(model.Heading, model.Description, model.PictureUrl);
             var dataErrors = validator.ValidateObject("News", model.Heading, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            await addService.AddNews(typeof(News), model.Heading, model.Description, model.PictureUrl); return Redirect("/Admin/Home");
+            await addService.AddNews(model.Heading, model.Description, model.PictureUrl, isModerator, user.Id);
+            return Redirect("/");
         }
 
         [HttpPost]
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddRace(AddNewRaceFormModel model)
         {
+            bool isModerator = this.User.IsInRole("Moderator");
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
             var nullErrors = validator.AgainstNull(model.Name, model.Date);
             var dataErrors = validator.ValidateObject("Race", model.Name, ModelState);
 
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await addService.AddNewRace(typeof(Race), model.Name, model.Date); return Redirect("/Admin/Home");
+            else await addService.AddNewRace(model.Name, model.Date, isModerator, user.Id);
+            return Redirect("/");
         }
 
         [HttpPost]
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddDriver(AddNewDriverFormModel model)
         {
+            bool isModerator = this.User.IsInRole("Moderator");
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
             var nullErrors = validator.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
             var dataErrors = validator.ValidateObject("Driver", model.Name, ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
-            else await addService.AddNewDriver(typeof(Driver), model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName); return Redirect("/Admin/Home");
+            else await addService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName, isModerator, user.Id);
+            return Redirect("/");
         }
 
         [HttpPost]
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddChampionship(AddNewChampionshipFormModel model)
         {
+            bool isModerator = this.User.IsInRole("Moderator");
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
             var nullErrors = validator.AgainstNull(model.Name, model.LogoUrl);
             var dataErrors = validator.ValidateObject("Championship", model.Name, ModelState);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
             if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
-            else await addService.AddNewChampionship(typeof(Championship), model.Name, model.LogoUrl); return Redirect("/Admin/Home");
+            else await addService.AddNewChampionship(model.Name, model.LogoUrl, isModerator, user.Id);
+            return Redirect("/");
         }
 
         [HttpPost]
-        [Authorize(Roles = "Moderator, Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRole(AddNewRoleFormModel model)
         {
             if (model.Name is null) return View();

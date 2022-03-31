@@ -4,6 +4,8 @@
     {
         public Task SeedDriver();
 
+        public Task SeedProfiles();
+
         public Task SeedTeams();
 
         public Task SeedChampionship();

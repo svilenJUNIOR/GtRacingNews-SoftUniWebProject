@@ -106,7 +106,7 @@ namespace GtRacingNews.Controllers
 
             await this.userManager.AddToRoleAsync(currentUser, model.Role);
 
-            await this.addService.AddNewProfile(typeof(Profile), model.Address, model.Age, currentUser.Id, model.Role);
+            await this.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role);
             return Redirect("/");
         }
 

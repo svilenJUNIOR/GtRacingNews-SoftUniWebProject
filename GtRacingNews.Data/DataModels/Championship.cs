@@ -17,7 +17,7 @@ namespace GtRacingNews.Data.DataModels
         public ICollection<Team> Teams { get; set; } = new List<Team>();
 
         public string LogoUrl { get; set; }
-        public int? ProfileId { get; set; }
+        public string? UserId { get; set; }
 
     }
 }

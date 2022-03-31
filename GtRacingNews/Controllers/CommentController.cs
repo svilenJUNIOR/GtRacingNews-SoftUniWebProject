@@ -26,15 +26,13 @@ namespace GtRacingNews.Controllers
         [Authorize]
         public async Task<IActionResult> Add(AddNewCommentFormModel model, int newsId)
         {
-            Type type = typeof(Comment);
-
             var user = await userManager.GetUserAsync(User);
 
             var nullErrors = validator.AgainstNull(user.UserName, model.Description);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await addService.AddNewComment(type, model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
+            else await addService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
         }
     }
 }

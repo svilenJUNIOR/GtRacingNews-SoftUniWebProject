@@ -22,8 +22,4 @@
     <ProjectReference Include="..\GtRacingNews.Services\GtRacingNews.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Guest\Data\" />
-  </ItemGroup>
-
 </Project>

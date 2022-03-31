@@ -91,5 +91,14 @@ namespace GtRacingNews.Services.Service
 
             await repository.AddRangeAsync<IdentityUserRole<string>>(toAdd);
         }
+
+        public async Task SeedProfiles()
+        {
+            var jsonString = File.ReadAllText(@"C:\Users\svile\OneDrive\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Profile.json");
+
+            var toAdd = JsonConvert.DeserializeObject<List<Profile>>(jsonString);
+
+            await repository.AddRangeAsync<Profile>(toAdd);
+        }
     }
 }

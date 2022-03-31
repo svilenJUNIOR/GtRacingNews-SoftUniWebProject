@@ -8,44 +8,51 @@ namespace GtRacingNews.Services.Service
         private readonly IRepository repository;
         public AddService(IRepository repository) => this.repository = repository;
 
-        public async Task AddNewTeam(Type type, string name, string carModel, string logoUrl, string championshipName)
+        public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
         {
             var championship = repository.FindChampionshipByName(championshipName);
-            var team = Activator.CreateInstance(type, name, carModel, logoUrl, championship.Id);
+            var team = new Team(name, carModel, logoUrl, championship.Id);
+
+            if (isModerator) team.UserId = userId;
 
             await repository.AddAsync<Team>((Team)team);
         }
-        public async Task AddNewChampionship(Type type, string name, string logoUrl)
+        public async Task AddNewChampionship(string name, string logoUrl, bool isModerator, string userId)
         {
-            var championship = Activator.CreateInstance(type, name, logoUrl);
+            var championship = new Championship(name, logoUrl);
+            if (isModerator) championship.UserId = userId;
             await repository.AddAsync<Championship>((Championship)championship);
         }
-        public async Task AddNewComment(Type type, string Description, int newsId, string UserName)
-        {
-            var comment = Activator.CreateInstance(type, Description, newsId, UserName);
-            await repository.AddAsync<Comment>((Comment)comment);
-        }
-        public async Task AddNewDriver(Type type, string name, string cup, string imageUrl, int age, string teamName)
+        public async Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName, bool isModerator, string userId)
         {
             var team = repository.FindTeamByName(teamName);
-            var driver = Activator.CreateInstance(type, name, age, cup, imageUrl, team.Id);
+            var driver = new Driver(name,age,cup,imageUrl, team.Id);
+
+            if (isModerator) driver.UserId = userId;
 
             await repository.AddAsync<Driver>((Driver)driver);
         }
-        public async Task AddNews(Type type, string heading, string description, string pictureUrl)
+        public async Task AddNews(string heading, string description, string pictureUrl, bool isModerator, string userId)
         {
-            var news = Activator.CreateInstance(type, heading, description, pictureUrl);
+            var news = new News(heading, description, pictureUrl);
+            if (isModerator) news.UserId = userId;
             await repository.AddAsync<News>((News)news);
         }
-        public async Task AddNewRace(Type type, string name, string date)
+        public async Task AddNewRace( string name, string date, bool isModerator, string userId)
         {
-            var race = Activator.CreateInstance(type, name, date);
+            var race = new Race(name, date);
+            if (isModerator) race.UserId = userId;
             await repository.AddAsync<Race>((Race)race);
         }
-        public async Task AddNewProfile(Type type, string address, int age, string userId, string profileType)
+        public async Task AddNewProfile(string address, int age, string userId, string profileType)
         {
-            var profile = Activator.CreateInstance(type, age, profileType, userId, address);
+            var profile = new Profile(age, profileType, userId, address);
             await repository.AddAsync<Profile>((Profile)profile);
+        }
+        public async Task AddNewComment(string Description, int newsId, string UserName)
+        {
+            var comment = new Comment(Description, newsId, UserName);
+            await repository.AddAsync<Comment>((Comment)comment);
         }
     }
 }

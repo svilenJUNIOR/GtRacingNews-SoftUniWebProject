@@ -2,12 +2,12 @@
 {
     public interface IAddService
     {
-        Task AddNewTeam(Type type, string name, string carModel, string logoUrl, string championshipName);
-        Task AddNewChampionship(Type type, string name, string logoUrl);
-        Task AddNewComment(Type type, string Description, int newsId, string UserName);
-        Task AddNewDriver(Type type, string name, string cup, string imageUrl, int age, string teamName);
-        Task AddNews(Type type, string heading, string description, string pictureUrl);
-        Task AddNewRace(Type type, string name, string date);
-        Task AddNewProfile(Type type, string address, int age, string userId, string profileType);
+        Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId);
+        Task AddNewChampionship(string name, string logoUrl, bool isModerator, string userId);
+        Task AddNewComment(string Description, int newsId, string UserName);
+        Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName, bool isModerator, string userId);
+        Task AddNews(string heading, string description, string pictureUrl, bool isModerator, string userId);
+        Task AddNewRace(string name, string date, bool isModerator, string userId);
+        Task AddNewProfile(string address, int age, string userId, string profileType);
     }
 }

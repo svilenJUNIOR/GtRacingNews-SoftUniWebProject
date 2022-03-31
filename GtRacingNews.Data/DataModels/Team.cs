@@ -24,6 +24,6 @@ namespace GtRacingNews.Data.DataModels
         [Required]
         public string LogoUrl { get; set; }
         public int? ChampionshipId { get; set; }
-        public int? ProfileId { get; set; }
+        public string? UserId { get; set; }
     }
 }

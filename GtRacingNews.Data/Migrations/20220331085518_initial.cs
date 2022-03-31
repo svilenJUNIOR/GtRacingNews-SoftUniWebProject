@@ -178,6 +178,7 @@ namespace GtRacingNews.Data.MIgrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -200,6 +201,7 @@ namespace GtRacingNews.Data.MIgrations
                     Heading = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -221,6 +223,7 @@ namespace GtRacingNews.Data.MIgrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -244,6 +247,7 @@ namespace GtRacingNews.Data.MIgrations
                     CarModel = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     LogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChampionshipId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -295,6 +299,7 @@ namespace GtRacingNews.Data.MIgrations
                     Cup = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeamId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

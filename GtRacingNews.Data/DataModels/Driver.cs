@@ -30,7 +30,7 @@ namespace GtRacingNews.Data.DataModels
         public string ImageUrl { get; set; }
 
         public int? TeamId { get; set; }
-        public int? ProfileId { get; set; }
+        public string? UserId { get; set; }
 
     }
 }
