@@ -18,7 +18,7 @@ namespace GtRacingNews.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, 
+            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator,
             IAddService addService)
         {
             this.userManager = userManager;
@@ -30,6 +30,8 @@ namespace GtRacingNews.Controllers
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
+        public IActionResult ChangePassword() => View();
+        public IActionResult ForgotPassword() => View();
         public IActionResult Profile()
         {
             CreatePremiumFormModel model = new CreatePremiumFormModel();
@@ -106,6 +108,19 @@ namespace GtRacingNews.Controllers
 
             await this.addService.AddNewProfile(typeof(Profile), model.Address, model.Age, currentUser.Id, model.Role);
             return Redirect("/");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordFormModel model)
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordFormModel model)
+        {
+            return View();
         }
     }
 }

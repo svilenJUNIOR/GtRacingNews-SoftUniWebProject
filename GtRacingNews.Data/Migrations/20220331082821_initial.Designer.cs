@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GtRacingNews.Data.Migrations
+namespace GtRacingNews.Data.MIgrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220330130341_Initial")]
-    partial class Initial
+    [Migration("20220331082821_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

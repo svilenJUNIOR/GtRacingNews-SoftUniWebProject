@@ -11,10 +11,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GtRacingNews.Areas.Admin.Controllers
+namespace GtRacingNews.Areas.Premium.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area("Premium")]
+    [Authorize(Roles = "Moderator, Admin")]
     public class AddController : Controller
     {
         private readonly IValidator validator;
@@ -31,7 +31,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
             this.roleManager = roleManager;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddTeam()
         {
             AddTeamFormModel model = new AddTeamFormModel();
@@ -43,16 +43,16 @@ namespace GtRacingNews.Areas.Admin.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public IActionResult AddNews() => View();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public IActionResult AddRole() => View();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddRace() => View();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddDriver()
         {
             var teams = context.Teams.Where(x => x.Drivers.Count() < 3).ToList();
@@ -61,12 +61,12 @@ namespace GtRacingNews.Areas.Admin.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddChampionship() => View();
 
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddTeam(AddTeamFormModel model)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
@@ -79,7 +79,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddNews(AddNewFormModel model)
         {
             var nullErrors = validator.AgainstNull(model.Heading, model.Description, model.PictureUrl);
@@ -92,7 +92,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddRace(AddNewRaceFormModel model)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.Date);
@@ -105,7 +105,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddDriver(AddNewDriverFormModel model)
         {
             var nullErrors = validator.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
@@ -118,7 +118,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddChampionship(AddNewChampionshipFormModel model)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.LogoUrl);
@@ -131,7 +131,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddRole(AddNewRoleFormModel model)
         {
             if (model.Name is null) return View();

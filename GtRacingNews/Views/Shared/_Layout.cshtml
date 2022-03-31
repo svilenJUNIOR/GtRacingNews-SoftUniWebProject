@@ -61,14 +61,23 @@
                     onclick="w3_close()">
                 Close &times;
             </button>
-            <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
-            @if (!this.User.IsInRole("Moderator"))
+
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
+            }
+            @if (!this.User.IsInRole("Moderator") && this.User.Identity.IsAuthenticated)
             {
                 <a href="/User/Profile" class="w3-bar-item w3-button nav-link text-light">Become Premium Member</a>
             }
             @if (this.User.IsInRole("Moderator"))
             {
-                <p class="w3-bar-item w3-button nav-link text-light">Moderator</p>
+                <a href="/User/ChangePassword" class="w3-bar-item w3-button nav-link text-light">Change Password</a>
+                <a href="/Premium/Add/AddTeam" class="w3-bar-item w3-button nav-link text-light">Add Team</a>
+                <a href="/Premium/Add/AddNews" class="w3-bar-item w3-button nav-link text-light">Add News</a>
+                <a href="/Premium/Add/AddRace" class="w3-bar-item w3-button nav-link text-light">Add Race</a>
+                <a href="/Premium/Add/AddDriver" class="w3-bar-item w3-button nav-link text-light">Add Driver</a>
+                <a href="/Premium/Add/AddChampionship" class="w3-bar-item w3-button nav-link text-light">Add Championship</a>
             }
         </div>
         @*side bar menu*@

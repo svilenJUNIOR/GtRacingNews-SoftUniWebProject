@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GtRacingNews.Data.Migrations
+namespace GtRacingNews.Data.MIgrations
 {
     [DbContext(typeof(GTNewsDbContext))]
     partial class GTNewsDbContextModelSnapshot : ModelSnapshot
