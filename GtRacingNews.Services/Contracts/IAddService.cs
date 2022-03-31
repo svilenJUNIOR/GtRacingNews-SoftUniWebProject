@@ -8,6 +8,6 @@
         Task AddNewDriver(Type type, string name, string cup, string imageUrl, int age, string teamName);
         Task AddNews(Type type, string heading, string description, string pictureUrl);
         Task AddNewRace(Type type, string name, string date);
-
+        Task AddNewProfile(Type type, string address, int age, string userId, string profileType);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 
 namespace GtRacingNews.Services.Service
@@ -42,6 +41,11 @@ namespace GtRacingNews.Services.Service
         {
             var race = Activator.CreateInstance(type, name, date);
             await repository.AddAsync<Race>((Race)race);
+        }
+        public async Task AddNewProfile(Type type, string address, int age, string userId, string profileType)
+        {
+            var profile = Activator.CreateInstance(type, age, profileType, userId, address);
+            await repository.AddAsync<Profile>((Profile)profile);
         }
     }
 }

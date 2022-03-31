@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,19 +11,22 @@ namespace GtRacingNews.Controllers
     {
         private readonly IUserService userService;
         private readonly IValidator validator;
+        private readonly IAddService addService;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator)
+            RoleManager<IdentityRole> roleManager, IUserService userService, IValidator validator, 
+            IAddService addService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.userService = userService;
             this.validator = validator;
             this.roleManager = roleManager;
+            this.addService = addService;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
@@ -99,6 +103,8 @@ namespace GtRacingNews.Controllers
             var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
             await this.userManager.AddToRoleAsync(currentUser, model.Role);
+
+            await this.addService.AddNewProfile(typeof(Profile), model.Address, model.Age, currentUser.Id, model.Role);
             return Redirect("/");
         }
     }

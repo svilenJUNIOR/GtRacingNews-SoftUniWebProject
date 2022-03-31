@@ -64,11 +64,11 @@
             <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
             @if (!this.User.IsInRole("Moderator"))
             {
-                <a href="/User/Profile" class="w3-bar-item w3-button nav-link text-light">Create a premium profile</a>
+                <a href="/User/Profile" class="w3-bar-item w3-button nav-link text-light">Become Premium Member</a>
             }
             @if (this.User.IsInRole("Moderator"))
             {
-                <p>he moderator</p>
+                <p class="w3-bar-item w3-button nav-link text-light">Moderator</p>
             }
         </div>
         @*side bar menu*@

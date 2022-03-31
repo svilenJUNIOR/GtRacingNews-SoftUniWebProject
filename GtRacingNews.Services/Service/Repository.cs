@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace GtRacingNews.Services
 {
