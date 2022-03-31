@@ -44,9 +44,9 @@ namespace GtRacingNews.Services.Service
             if (isModerator) race.UserId = userId;
             await repository.AddAsync<Race>((Race)race);
         }
-        public async Task AddNewProfile(string address, int age, string userId, string profileType)
+        public async Task AddNewProfile(string address, int age, string userId, string profileType, string profilePicture)
         {
-            var profile = new Profile(age, profileType, userId, address);
+            var profile = new Profile(age, profileType, userId, address, profilePicture);
             await repository.AddAsync<Profile>((Profile)profile);
         }
         public async Task AddNewComment(string Description, int newsId, string UserName)

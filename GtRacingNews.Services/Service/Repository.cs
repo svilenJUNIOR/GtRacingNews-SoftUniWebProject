@@ -47,6 +47,7 @@ namespace GtRacingNews.Services
             return role;
         }
 
+        public Profile FindProfileByUserId(string Id) => context.Profiles.Where(x => x.UserId == Id).FirstOrDefault();
         public ICollection<T> GettAll<T>() where T : class => context.Set<T>().ToList();
         public Team FindTeamById(int Id) => context.Teams.Where(x => x.Id == Id).FirstOrDefault();
         public Championship FindChampionshipById(int? Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();

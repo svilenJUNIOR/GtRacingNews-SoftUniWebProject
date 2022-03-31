@@ -23,7 +23,7 @@ Guests (not logged) can - Browse trough: news
 
 Users (logged not in role) can - Browse trough: news / drivers / teams / the racing calendar / championships and comment under news
 
-Moderators (logged in role) can - Browse / Add - news / drivers / teams / the racing calendar / championships / comment under news / change their password
+Moderators (logged in role) can - Browse / Add - news / drivers / teams / the racing calendar / championships / comment under news / change their password / create a profile
 
 Admins (logged in role) can - Browse / Add / Delete - from EVERYTHING / Add roles and asigning users to roles
 

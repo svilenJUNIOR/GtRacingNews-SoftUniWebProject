@@ -8,6 +8,6 @@
         Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName, bool isModerator, string userId);
         Task AddNews(string heading, string description, string pictureUrl, bool isModerator, string userId);
         Task AddNewRace(string name, string date, bool isModerator, string userId);
-        Task AddNewProfile(string address, int age, string userId, string profileType);
+        Task AddNewProfile(string address, int age, string userId, string profileType, string profilePicture);
     }
 }
