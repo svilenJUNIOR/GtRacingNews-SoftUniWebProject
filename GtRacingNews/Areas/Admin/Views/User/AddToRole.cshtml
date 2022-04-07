@@ -1,0 +1,48 @@
+﻿@model GtRacingNews.Areas.Admin.ViewModels.RoleToUserViewModel
+
+<h1>Add User To Role</h1>
+<div class="box">
+    <form method="Post">
+        <table style="height: 200px">
+
+            <tr>
+                <td width="100px">
+                    <label for="role">Role</label>
+                </td>
+                <td>
+                    <select name="role" id="role">
+                        @foreach (var role in @Model.Roles)
+                        {
+                            <option value="@role">@role</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="user">User</label>
+                </td>
+                <td>
+                    <select name="user" id="user">
+                        @foreach (var user in @Model.Users)
+                        {
+                            <option value="@user">@user</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<link rel="stylesheet" href="~/css/AdminCss/UserToRole.css"></link>

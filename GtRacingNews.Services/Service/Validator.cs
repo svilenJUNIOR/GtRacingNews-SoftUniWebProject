@@ -84,16 +84,16 @@ namespace GtRacingNews.Services.Service
             if (dbset == "Team")
                 if (repository.FindTeamByName(check) != null) errors.Add(Messages.ExistingTeam);
 
-            if (dbset == "Championship") 
+            if (dbset == "Championship")
                 if (repository.FindChampionshipByName(check) != null) errors.Add(Messages.ExistingChampionship);
 
-            if (dbset == "News") 
+            if (dbset == "News")
                 if (repository.FindNewsByName(check) != null) errors.Add(Messages.ExistingNews);
 
-            if (dbset == "Race") 
+            if (dbset == "Race")
                 if (repository.FindRaceByName(check) != null) errors.Add(Messages.ExistingRace);
 
-            if (dbset == "Driver") 
+            if (dbset == "Driver")
                 if (repository.FindDriverByName(check) != null) errors.Add(Messages.ExistingDriver);
 
             if (!modelState.IsValid)

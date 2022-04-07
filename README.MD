@@ -21,10 +21,10 @@ The functionality is as it follows:
 
 Guests (not logged) can - Browse trough: news
 
-Users (logged not in role) can - Browse trough: news / drivers / teams / the racing calendar / championships and comment under news
+Users can - Browse trough: news / drivers / teams / the racing calendar / championships and comment under news
 
-Moderators (logged in role) can - Browse / Add - news / drivers / teams / the racing calendar / championships / comment under news / change their password / create a profile
+Moderators can - Browse / Add: news / drivers / teams / the racing calendar / championships / comment under news AND change their password / create a profile / delete the items they've added
 
-Admins (logged in role) can - Browse / Add / Delete - from EVERYTHING / Add roles and asigning users to roles
+Admins can - Browse / Add / Delete - from EVERYTHING / Add roles and asigning users to roles
 
 NonImplementedFeature - Add to read later

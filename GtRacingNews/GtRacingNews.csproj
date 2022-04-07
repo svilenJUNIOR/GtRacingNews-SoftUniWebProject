@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <UserSecretsId>aspnet-GTRacingNews-E47E440A-36AC-433F-AED2-CE12F26D2917</UserSecretsId>
   </PropertyGroup>

@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -30,7 +29,6 @@ namespace GtRacingNews.Controllers
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
-        public IActionResult ChangePassword() => View();
         public IActionResult ForgotPassword() => View();
         public IActionResult Profile()
         {
@@ -108,19 +106,6 @@ namespace GtRacingNews.Controllers
 
             await this.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
             return Redirect("/");
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> ChangePassword(ChangePasswordFormModel model)
-        {
-            return View();
-        }
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordFormModel model)
-        {
-            return View();
         }
     }
 }

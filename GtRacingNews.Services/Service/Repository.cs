@@ -15,7 +15,6 @@ namespace GtRacingNews.Services
             this.roleManager = roleManager;
             this.context = context;
         }
-
         public async Task AddAsync<T>(T newItem) where T : class
         {
             await context.Set<T>().AddAsync(newItem);
@@ -47,8 +46,9 @@ namespace GtRacingNews.Services
             return role;
         }
 
+        public void SaveChangesAsync() => this.context.SaveChangesAsync();
         public Profile FindProfileByUserId(string Id) => context.Profiles.Where(x => x.UserId == Id).FirstOrDefault();
-        public ICollection<T> GettAll<T>() where T : class => context.Set<T>().ToList();
+        public List<T> GettAll<T>() where T : class => context.Set<T>().ToList();
         public Team FindTeamById(int Id) => context.Teams.Where(x => x.Id == Id).FirstOrDefault();
         public Championship FindChampionshipById(int? Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();
         public Driver FindDriverById(int Id) => context.Drivers.Where(x => x.Id == Id).FirstOrDefault();

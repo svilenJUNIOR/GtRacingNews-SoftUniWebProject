@@ -5,13 +5,14 @@ namespace GtRacingNews.Services
 {
     public interface IRepository
     {
+        void SaveChangesAsync();
         Task AddAsync<T>(T newItem) where T : class;
         Task AddRangeAsync<T>(List<T> newItems) where T : class;
         Task RemoveAsync<T>(T Item) where T : class;
         IdentityUser FindUserByEmail(string email);
         IdentityUser FindUserById(string Id);
         IdentityRole FindRoleById(string Id);
-        ICollection<T> GettAll<T>() where T : class;
+        List<T> GettAll<T>() where T : class;
 
         Team FindTeamById(int Id);
         Profile FindProfileByUserId(string Id);

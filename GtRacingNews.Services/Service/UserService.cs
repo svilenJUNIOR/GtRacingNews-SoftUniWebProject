@@ -7,7 +7,14 @@ namespace GtRacingNews.Services.Service
     public class UserService : IUserService
     {
         private readonly IHasher hasher;
-        public UserService(IHasher hasher) => this.hasher = hasher;
+        private readonly IValidator validator;
+        private readonly IRepository repository;
+        public UserService(IHasher hasher, IValidator validator, IRepository repository)
+        {
+            this.hasher = hasher;
+            this.validator = validator;
+            this.repository = repository;
+        }
 
         public IdentityUser RegisterUser(RegisterUserFormModel model)
         {

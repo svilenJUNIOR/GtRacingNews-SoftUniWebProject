@@ -13,5 +13,6 @@ namespace GtRacingNews.Services.Contracts
         IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model);
 
         IEnumerable<string> ValidateObject(string dbset, string check, ModelStateDictionary ModelState);
+        
     }
 }
