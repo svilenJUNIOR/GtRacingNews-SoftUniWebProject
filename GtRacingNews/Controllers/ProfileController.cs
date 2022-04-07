@@ -43,9 +43,6 @@ namespace GtRacingNews.Controllers
             var news = this.repository.GettAll<News>().Where(x => x.UserId == currentUser.Id).ToList();
             var bindNews = bindService.NewsBind(news);
 
-            if (model.Age.ToString() is null || model.Address is null)
-                return RedirectToAction("Profile", "User");
-
             model.Teams = bindTeams.ToList();
             model.Championships = bindChamps.ToList();
             model.Drivers = bindDrivers.ToList();

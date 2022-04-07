@@ -1,0 +1,30 @@
+﻿.child {
+    box-shadow: 0px 0px 10px 0px black;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+img {
+    background-color: white;
+    height: 200px;
+    width: 200px;
+}
+
+div.box {
+    box-shadow: 0px 0px 10px 0px black;
+    background-color: white;
+}
+
+div#profilePicture {
+    box-shadow: 0px 0px 10px 0px black;
+    background-color: white;
+    width: 200px;
+    margin-left: 450px;
+}
+
+div#myItems {
+    margin-top: 15px;
+    box-shadow: 0px 0px 10px 0px black;
+    background-color: ivory;
+}
