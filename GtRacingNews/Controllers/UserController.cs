@@ -29,7 +29,6 @@ namespace GtRacingNews.Controllers
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
-        public IActionResult ForgotPassword() => View();
         public IActionResult Profile()
         {
             CreatePremiumFormModel model = new CreatePremiumFormModel();

@@ -1,5 +1,4 @@
 ﻿using GtRacingNews.Areas.Admin.ViewModels;
-using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
