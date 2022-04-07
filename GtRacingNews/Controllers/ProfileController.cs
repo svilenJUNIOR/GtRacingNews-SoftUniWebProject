@@ -12,13 +12,15 @@ namespace GtRacingNews.Controllers
     {
         private readonly IRepository repository;
         private readonly IBindService bindService;
+        private readonly IDeleteService deleteService;
         private readonly UserManager<IdentityUser> userManager;
         public ProfileController(IRepository repository, UserManager<IdentityUser> userManager,
-            IBindService bindService)
+            IBindService bindService, IDeleteService deleteService)
         {
             this.repository = repository;
             this.userManager = userManager;
             this.bindService = bindService;
+            this.deleteService = deleteService;
         }
        
         public async Task<IActionResult> MyProfile()
@@ -54,6 +56,36 @@ namespace GtRacingNews.Controllers
             model.ProfilePicture = userProfile.ProfilePicture;
 
             return View(model);
+        }
+
+        public async Task<IActionResult> DeleteTeam(int Id)
+        {
+            await deleteService.Delete("Team", Id);
+            return Redirect("MyProfile");
+        }
+
+        public async Task<IActionResult> DeleteChampionship(int Id)
+        {
+            await deleteService.Delete("Championship", Id);
+            return Redirect("MyProfile");
+        }
+
+        public async Task<IActionResult> DeleteDriver(int Id)
+        {
+            await deleteService.Delete("Driver", Id);
+            return Redirect("MyProfile");
+        }
+
+        public async Task<IActionResult> DeleteNews(int Id)
+        {
+            await deleteService.Delete("News", Id);
+            return Redirect("MyProfile");
+        }
+
+        public async Task<IActionResult> DeleteRace(int Id)
+        {
+            await deleteService.Delete("Race", Id);
+            return Redirect("MyProfile");
         }
     }
 }
