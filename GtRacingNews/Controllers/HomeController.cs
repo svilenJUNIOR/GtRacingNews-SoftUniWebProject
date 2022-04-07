@@ -16,7 +16,7 @@ namespace GtRacingNews.Controllers
             this.seederService = seederService;
         }
 
-        public async Task<IActionResult> testov()
+        public async Task<IActionResult> Seed()
         {
             await seederService.SeedUser();
             await seederService.SeedRoles();
