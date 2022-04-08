@@ -1,4 +1,6 @@
-In order to start and test the app correctly. When you first open the project go to /Home/Seed
+In order to start and test the app correctly after you migrate the base, you have to seed it with data!
+When you start the app you will be at the Guest/Home page in order to seed tha data GOTO /Home/Seed
+NOT Guest/Home/Seed JUST /Home/Seed
 
 To login as an Admin use:
 Email: svilen@email.com
@@ -11,9 +13,6 @@ Password: svilen123
 To login as an User use:
 Email: svilen2@email.com
 Password: svilen123
-
-When you first open the app, you should be redirected to the guest page (area),
-you can login or register by clicking the links!!!
 
 The functionality is as it follows:
 
