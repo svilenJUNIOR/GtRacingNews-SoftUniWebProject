@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GtRacingNews.Data.Migrations
 {
     [DbContext(typeof(GTNewsDbContext))]
-    [Migration("20220408075805_Initial")]
-    partial class Initial
+    [Migration("20220417104305_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

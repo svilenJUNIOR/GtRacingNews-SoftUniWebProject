@@ -21,6 +21,11 @@ builder.Services.AddControllersWithViews()
         
     });
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("localhost");
+});
+
 builder.Services.AddScoped<IHasher, Hasher>();
 builder.Services.AddScoped<IBindService, BindService>();
 builder.Services.AddScoped<IAddService, AddService>();
