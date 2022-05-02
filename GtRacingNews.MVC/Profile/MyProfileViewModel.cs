@@ -13,7 +13,7 @@ namespace GtRacingNews.ViewModels.Profile
         public string Address { get; set; }
         public string Email { get; set; }
         public string ProfilePicture { get; set; }
-        public DeleteViewModel DeleteViewModel { get; set; } = new DeleteViewModel();
+        public DeleteFormModel DeleteViewModel { get; set; } = new DeleteFormModel();
 
         public List<ViewAllTeamsViewModel> Teams = new List<ViewAllTeamsViewModel>();
         public List<ViewAllChampionshipsViewModel> Championships = new List<ViewAllChampionshipsViewModel>();

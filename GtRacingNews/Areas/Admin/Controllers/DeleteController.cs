@@ -23,7 +23,7 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> DeleteView()
         {
-            var deleteModel = new DeleteViewModel();
+            var deleteModel = new DeleteFormModel();
 
             var Teams = repository.GettAll<Team>();
             var Drivers = repository.GettAll<Driver>();
