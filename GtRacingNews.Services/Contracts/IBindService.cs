@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Areas.Guest.ViewModels;
+using GtRacingNews.Data.DataModels;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
@@ -14,5 +15,6 @@ namespace GtRacingNews.Services.Contracts
         ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind);
         ICollection<ViewAllRacesViewModel> RaceBind(ICollection<Race> racesToBind);
         ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind);
+        ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind);
     }
 }

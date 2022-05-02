@@ -1,5 +1,8 @@
 ﻿using GtRacingNews.Areas.Guest.ViewModels;
+using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services;
+using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Areas.Guest.Controllers
@@ -7,18 +10,19 @@ namespace GtRacingNews.Areas.Guest.Controllers
     [Area("Guest")]
     public class HomeController : Controller
     {
-        private readonly GTNewsDbContext context = new GTNewsDbContext();
+        private readonly IBindService bindService;
+        private readonly IRepository repository;
+        public HomeController(IBindService bindService, IRepository repository) 
+        {
+            this.bindService = bindService;
+            this.repository = repository;
+        } 
         public IActionResult Index()
         {
-            var news = context.News
-              .Select(x => new ShowGuestNews
-              {
-                  Id = x.Id,
-                  Heading = x.Heading,
-                  Description = x.Description
-              }).ToList();
+            var newsToBind = repository.GettAll<News>();
+            var bindedNews = bindService.GuestNewsBind(newsToBind);
 
-            return View(news);
+            return View(bindedNews);
         }
     }
 }

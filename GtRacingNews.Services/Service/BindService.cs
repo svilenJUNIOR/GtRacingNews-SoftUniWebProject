@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Areas.Guest.ViewModels;
+using GtRacingNews.Data.DataModels;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
@@ -81,6 +82,19 @@ namespace GtRacingNews.Services.Service
             }).ToList();
 
             return bindedTeams;
+        }
+
+        public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind)
+        {
+            var bindedNews = newsToBind
+              .Select(x => new ShowGuestNews
+              {
+                  Id = x.Id,
+                  Heading = x.Heading,
+                  Description = x.Description
+              }).ToList();
+
+            return bindedNews;
         }
     }
 }
