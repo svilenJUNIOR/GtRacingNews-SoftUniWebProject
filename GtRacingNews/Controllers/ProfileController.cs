@@ -2,7 +2,6 @@
 using GtRacingNews.Services;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Profile;
-using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,33 +57,9 @@ namespace GtRacingNews.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> DeleteTeam(int Id)
+        public async Task<IActionResult> Delete(string collection, int Id)
         {
-            await deleteService.Delete("Team", Id);
-            return Redirect("MyProfile");
-        }
-
-        public async Task<IActionResult> DeleteChampionship(int Id)
-        {
-            await deleteService.Delete("Championship", Id);
-            return Redirect("MyProfile");
-        }
-
-        public async Task<IActionResult> DeleteDriver(int Id)
-        {
-            await deleteService.Delete("Driver", Id);
-            return Redirect("MyProfile");
-        }
-
-        public async Task<IActionResult> DeleteNews(int Id)
-        {
-            await deleteService.Delete("News", Id);
-            return Redirect("MyProfile");
-        }
-
-        public async Task<IActionResult> DeleteRace(int Id)
-        {
-            await deleteService.Delete("Race", Id);
+            await deleteService.Delete(collection, Id);
             return Redirect("MyProfile");
         }
     }

@@ -1,4 +1,5 @@
-﻿using GtRacingNews.ViewModels.Championship;
+﻿using GtRacingNews.Areas.Admin.ViewModels;
+using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;
@@ -12,6 +13,7 @@ namespace GtRacingNews.ViewModels.Profile
         public string Address { get; set; }
         public string Email { get; set; }
         public string ProfilePicture { get; set; }
+        public DeleteViewModel DeleteViewModel { get; set; } = new DeleteViewModel();
 
         public List<ViewAllTeamsViewModel> Teams = new List<ViewAllTeamsViewModel>();
         public List<ViewAllChampionshipsViewModel> Championships = new List<ViewAllChampionshipsViewModel>();
