@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GtRacingNews.Common\GtRacingNews.Common.csproj" />
+  </ItemGroup>
+
 </Project>

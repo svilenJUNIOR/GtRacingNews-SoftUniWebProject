@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ namespace GtRacingNews.Data.DBContext
 {
     public class GTNewsDbContext : IdentityDbContext
     {
+        private readonly ConnectionString connectionString = new ConnectionString();
         public GTNewsDbContext()
         {
 
@@ -19,7 +21,7 @@ namespace GtRacingNews.Data.DBContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=GTNews;Integrated Security=true;");
+                optionsBuilder.UseSqlServer(connectionString.SqlConnectionString);
             }
         }
 

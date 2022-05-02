@@ -70,6 +70,7 @@ namespace GtRacingNews.Services.Service
         public ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind)
         {
             var drivers = repository.GettAll<Driver>();
+            var championships = repository.GettAll<Team>();
 
             var bindedTeams = teamsToBind.Select(x => new ViewAllTeamsViewModel
             {

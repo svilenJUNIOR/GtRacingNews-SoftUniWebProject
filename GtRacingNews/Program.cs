@@ -1,3 +1,4 @@
+using GtRacingNews.Common.Constants;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Services;
 using GtRacingNews.Services.Contracts;
@@ -5,11 +6,14 @@ using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
+
+ConnectionString ConnectionString = new ConnectionString();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<GTNewsDbContext>(options =>
-    options.UseSqlServer("Server=.;Database=GTNews;Integrated Security=true;"));
+    options.UseSqlServer(ConnectionString.SqlConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
