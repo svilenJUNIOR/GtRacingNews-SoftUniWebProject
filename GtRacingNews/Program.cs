@@ -27,6 +27,7 @@ builder.Services.AddControllersWithViews()
 
 
 builder.Services.AddScoped<IHasher, Hasher>();
+builder.Services.AddScoped<IEngine, Engine>();
 builder.Services.AddScoped<IBindService, BindService>();
 builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();

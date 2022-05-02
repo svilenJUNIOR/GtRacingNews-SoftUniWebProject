@@ -77,7 +77,7 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public IEnumerable<string> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
+        public ICollection<string> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
         {
             var errors = new List<string>();
 

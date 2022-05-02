@@ -9,11 +9,7 @@ namespace GtRacingNews.Controllers
     {
         private readonly IReturnAll returnAll;
         public AllController(IReturnAll returnAll) => this.returnAll = returnAll;
-        public void aa()
-        {
-            var name = RouteData.Values["action"].ToString();
 
-        }
         public async Task<IActionResult> AllChampionships() => View(returnAll.All("Championships"));
         public async Task<IActionResult> AllDrivers() => View(returnAll.All("Drivers"));
         public async Task<IActionResult> AllNews() => View(returnAll.All("News"));
