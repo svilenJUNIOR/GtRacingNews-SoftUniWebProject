@@ -2,6 +2,14 @@
 {
     public class DeleteViewModel
     {
+        public string TeamCollection = "Team";
+        public string DriverCollection = "Driver";
+        public string ChampionshipCollection = "Championship";
+        public string NewsCollection = "News";
+        public string RaceCollection = "Race";
+        public string UserCollection = "User";
+        public string RoleCollection = "Role";
+
         public Dictionary<string, int> Teams  = new Dictionary<string, int>();
         public Dictionary<string, int> Drivers  = new Dictionary<string, int>();
         public Dictionary<string, int> Championships  = new Dictionary<string, int>();

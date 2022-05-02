@@ -2,6 +2,7 @@
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
 
 namespace GtRacingNews.Controllers
@@ -33,7 +34,7 @@ namespace GtRacingNews.Controllers
             return Redirect("/");
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (this.User.IsInRole("Admin")) return Redirect("Admin/Home");
 

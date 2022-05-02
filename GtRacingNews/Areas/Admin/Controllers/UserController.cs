@@ -11,10 +11,7 @@ namespace GtRacingNews.Areas.Admin.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
 
-        public UserController(UserManager<IdentityUser> userManager)
-        {
-            this.userManager = userManager;
-        }
+        public UserController(UserManager<IdentityUser> userManager) => this.userManager = userManager;
         public IActionResult AddToRole()
         {
             var model = new RoleToUserViewModel();

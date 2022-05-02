@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace GtRacingNews.Controllers
 {

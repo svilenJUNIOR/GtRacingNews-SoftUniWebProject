@@ -1,5 +1,7 @@
 ﻿using GtRacingNews.Areas.Admin.ViewModels;
+using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,28 +14,27 @@ namespace GtRacingNews.Controllers
     public class DeleteController : Controller
     {
         private readonly IDeleteService deleteService;
-        private readonly GTNewsDbContext context;
-        private readonly RoleManager<IdentityRole> roleManager;
-        public DeleteController(IDeleteService deleteService, GTNewsDbContext context, RoleManager<IdentityRole> roleManager)
+        private readonly IRepository repository;
+        public DeleteController(IDeleteService deleteService, RoleManager<IdentityRole> roleManager,
+            IRepository repository)
         {
             this.deleteService = deleteService;
-            this.context = context;
-            this.roleManager = roleManager;
+            this.repository = repository;
         }
 
         public async Task<IActionResult> DeleteView()
         {
             var deleteModel = new DeleteViewModel();
 
-            var Teams = context.Teams.ToList();
-            var Drivers = context.Drivers.ToList();
-            var Championships = context.Championships.ToList();
-            var News = context.News.ToList();
-            var Races = context.Races.ToList();
-            var Users = context.Users.ToList();
-            var Roles = roleManager.Roles.ToList();
+            var Teams = repository.GettAll<Team>();
+            var Drivers = repository.GettAll<Driver>();
+            var Championships = repository.GettAll<Championship>();
+            var News = repository.GettAll<News>();
+            var Races = repository.GettAll<Race>();
+            var Users = repository.GettAll<IdentityUser>();
+            var Roles = repository.GettAll<IdentityRole>();
 
-            foreach (var team in Teams)
+            foreach (var team in Teams) 
             {
                 deleteModel.Teams.Add(team.Name, team.Id);
             }
@@ -71,33 +72,9 @@ namespace GtRacingNews.Controllers
             return View(deleteModel);
         }
 
-        public async Task<IActionResult> DeleteTeam(int Id)
+        public async Task<IActionResult> Delete(string collection, int Id)
         {
-            await deleteService.Delete("Team", Id); 
-            return Redirect("DeleteView");
-        }
-
-        public async Task<IActionResult> DeleteChampionship(int Id)
-        {
-            await deleteService.Delete("Championship", Id);
-            return Redirect("DeleteView");
-        }
-
-        public async Task<IActionResult> DeleteDriver(int Id)
-        {
-            await deleteService.Delete("Driver", Id);
-            return Redirect("DeleteView");
-        }
-
-        public async Task<IActionResult> DeleteNews(int Id)
-        {
-            await deleteService.Delete("News", Id);
-            return Redirect("DeleteView");
-        }
-
-        public async Task<IActionResult> DeleteRace(int Id)
-        {
-            await deleteService.Delete("Race", Id);
+            await deleteService.Delete(collection, Id);
             return Redirect("DeleteView");
         }
 
@@ -105,18 +82,6 @@ namespace GtRacingNews.Controllers
         {
             await deleteService.Delete("Comment", Id);
             return Redirect($"/All/NewsDetails?id={newsId}");
-        }
-
-        public async Task<IActionResult> DeleteUser(string Id)
-        {
-            await deleteService.Delete("User", Id);
-            return Redirect("DeleteView");
-        }
-
-        public async Task<IActionResult> DeleteRole(string Id)
-        {
-            await deleteService.Delete("Role", Id);
-            return Redirect("DeleteView");
         }
     }
 }
