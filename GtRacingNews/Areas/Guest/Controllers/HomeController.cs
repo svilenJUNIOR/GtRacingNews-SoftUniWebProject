@@ -1,6 +1,4 @@
-﻿using GtRacingNews.Areas.Guest.ViewModels;
-using GtRacingNews.Data.DataModels;
-using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Services;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;

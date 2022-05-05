@@ -28,7 +28,8 @@ namespace GtRacingNews.Areas.Premium.Controllers
             this.userManager = userManager;
             this.engine = engine;
         }
-        private async Task<IdentityUser> user() => await this.userManager.FindByNameAsync(this.User.Identity.Name);
+        private async Task<IdentityUser> user() 
+            => await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddTeam()
