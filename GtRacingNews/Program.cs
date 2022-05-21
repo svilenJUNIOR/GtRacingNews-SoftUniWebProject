@@ -1,5 +1,9 @@
 using GtRacingNews.Common.Constants;
 using GtRacingNews.Data.DBContext;
+using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Repository.Repositories;
+using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,10 +39,10 @@ builder.Services.AddScoped<MongoDbContext, MongoDbContext>();
 ////builder.Services.AddScoped<IAddService, AddService>();
 //builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddScoped<IValidator, Validator>();
-//builder.Services.AddScoped<ISeederService, Seeder>();
+builder.Services.AddScoped<ISeederService, Seeder>();
 //builder.Services.AddScoped<IDeleteService, DeleteService>();
 ////builder.Services.AddScoped<IReturnAll, ReturnAll>();
-////builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<ISqlRepoisitory, SqlRepository>();
 
 var app = builder.Build();
 
