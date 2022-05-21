@@ -19,8 +19,8 @@ namespace GtRacingNews.Areas.Premium.Controllers
         private readonly IEngine engine;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly GTNewsDbContext context;
-        public AddController(GTNewsDbContext context,
+        private readonly SqlDBContext context;
+        public AddController(SqlDBContext context,
             RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, IEngine engine)
         {
             this.context = context;

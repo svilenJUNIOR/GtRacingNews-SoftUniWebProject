@@ -1,6 +1,8 @@
-﻿namespace GtRacingNews.Repository.Repositories
+﻿using GtRacingNews.Repositorys.Repositories;
+
+namespace GtRacingNews.Repository.Repositories
 {
-    public class MongoRepository : Repository
+    public class MongoRepository : BaseRepository
     {
         public override List<string> GetAllNames(string name)
         {

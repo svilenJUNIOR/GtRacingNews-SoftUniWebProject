@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GtRacingNews.Data.DBContext
 {
-    public class GTNewsDbContext : IdentityDbContext
+    public class SqlDBContext : IdentityDbContext
     {
         private readonly ConnectionString connectionString = new ConnectionString();
-        public GTNewsDbContext()
+        public SqlDBContext()
         {
 
         }
-        public GTNewsDbContext(DbContextOptions<GTNewsDbContext> options)
+        public SqlDBContext(DbContextOptions<SqlDBContext> options)
            : base(options)
         {
         }

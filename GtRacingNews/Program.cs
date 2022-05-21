@@ -12,13 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 ConnectionString ConnectionString = new ConnectionString();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<GTNewsDbContext>(options =>
+builder.Services.AddDbContext<SqlDBContext>(options =>
     options.UseSqlServer(ConnectionString.SqlConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<GTNewsDbContext>();
+    .AddEntityFrameworkStores<SqlDBContext>();
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
@@ -28,14 +28,14 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddScoped<IHasher, Hasher>();
 builder.Services.AddScoped<IEngine, Engine>();
-builder.Services.AddScoped<IBindService, BindService>();
-builder.Services.AddScoped<IAddService, AddService>();
+//builder.Services.AddScoped<IBindService, BindService>();
+//builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
-builder.Services.AddScoped<IReturnAll, ReturnAll>();
-builder.Services.AddScoped<IRepository, Repository>();
+//builder.Services.AddScoped<IReturnAll, ReturnAll>();
+//builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

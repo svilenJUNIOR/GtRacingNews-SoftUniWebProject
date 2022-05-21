@@ -1,8 +1,8 @@
-﻿using GTNewsSecondVersion.Repository.Contracts;
+﻿using GtRacingNews.Repository.Contracts;
 
-namespace GTNewsSecondVersion.Repository.Repositories
+namespace GtRacingNews.Repositorys.Repositories
 {
-    public class Repository : IRepository
+    public class BaseRepository : IRepository
     {
         public virtual List<string> GetAllNames(string name)
         {

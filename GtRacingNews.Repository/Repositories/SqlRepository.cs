@@ -1,6 +1,8 @@
-﻿namespace GtRacingNews.Repository.Repositories
+﻿using GtRacingNews.Repositorys.Repositories;
+
+namespace GtRacingNews.Repository.Repositories
 {
-    public class SqlRepository : Repository
+    public class SqlRepository : BaseRepository
     {
         public override List<string> GetAllNames(string name)
         {

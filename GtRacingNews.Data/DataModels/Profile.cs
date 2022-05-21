@@ -1,4 +1,8 @@
-﻿namespace GtRacingNews.Data.DataModels
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+
+namespace GtRacingNews.Data.DataModels
 {
     public class Profile
     {
@@ -10,7 +14,10 @@
             this.Address = Address;
             this.ProfilePicture = profilePicture;
         }
-        public int Id { get; set; }
+        [Key]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string ProfilePicture { get; set; }
         public int Age { get; set; }
         public string ProfileType { get; set; }

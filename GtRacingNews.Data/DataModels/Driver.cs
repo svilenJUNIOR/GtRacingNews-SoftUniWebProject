@@ -1,11 +1,13 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GtRacingNews.Data.DataModels
 {
     public class Driver
     {
-        public Driver(string name, int age, string cup, string imageUrl, int? teamId)
+        public Driver(string name, int age, string cup, string imageUrl, string? teamId)
         {
             this.Name = name;
             this.Age = age;
@@ -13,7 +15,10 @@ namespace GtRacingNews.Data.DataModels
             this.ImageUrl = imageUrl;
             this.TeamId = teamId;
         }
-        public int Id { get; set; }
+        [Key]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [MaxLength(30)]
@@ -29,7 +34,7 @@ namespace GtRacingNews.Data.DataModels
         [Required]
         public string ImageUrl { get; set; }
 
-        public int? TeamId { get; set; }
+        public string? TeamId { get; set; }
         public string? UserId { get; set; }
 
     }
