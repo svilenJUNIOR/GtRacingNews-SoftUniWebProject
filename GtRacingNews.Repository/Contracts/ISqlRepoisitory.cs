@@ -1,9 +1,9 @@
 ﻿using GtRacingNews.Data.DataModels;
 using Microsoft.AspNetCore.Identity;
 
-namespace GtRacingNews.Services
+namespace GtRacingNews.Repository.Contracts
 {
-    public interface IRepository
+    public interface ISqlRepoisitory
     {
         void SaveChangesAsync();
         Task AddAsync<T>(T newItem) where T : class;
@@ -14,13 +14,13 @@ namespace GtRacingNews.Services
         IdentityRole FindRoleById(string Id);
         List<T> GettAll<T>() where T : class;
 
-        Team FindTeamById(int Id);
+        Team FindTeamById(string Id);
         Profile FindProfileByUserId(string Id);
-        Championship FindChampionshipById(int? Id);
-        Driver FindDriverById(int Id);
-        Comment FindCommentById(int Id);
-        Race FindRaceById(int Id);
-        News FindNewsById(int Id);
+        Championship FindChampionshipById(string? Id);
+        Driver FindDriverById(string Id);
+        Comment FindCommentById(string Id);
+        Race FindRaceById(string Id);
+        News FindNewsById(string Id);
 
         Team FindTeamByName(string name);
         Championship FindChampionshipByName(string name);
