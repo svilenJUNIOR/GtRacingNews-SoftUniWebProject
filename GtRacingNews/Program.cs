@@ -1,8 +1,5 @@
 using GtRacingNews.Common.Constants;
 using GtRacingNews.Data.DBContext;
-using GtRacingNews.Services;
-using GtRacingNews.Services.Contracts;
-using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,17 +22,23 @@ builder.Services.AddControllersWithViews()
         
     });
 
+////////////////// MONGO MONGO MONGO //////////////////
+builder.Services.Configure<MongoSetUp>(
+    builder.Configuration.GetSection("MongoSettings"));
+////////////////// MONGO MONGO MONGO //////////////////
 
-builder.Services.AddScoped<IHasher, Hasher>();
-builder.Services.AddScoped<IEngine, Engine>();
-//builder.Services.AddScoped<IBindService, BindService>();
-//builder.Services.AddScoped<IAddService, AddService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IValidator, Validator>();
-builder.Services.AddScoped<ISeederService, Seeder>();
-builder.Services.AddScoped<IDeleteService, DeleteService>();
-//builder.Services.AddScoped<IReturnAll, ReturnAll>();
-//builder.Services.AddScoped<IRepository, Repository>();
+
+builder.Services.AddScoped<MongoDbContext, MongoDbContext>();
+//builder.Services.AddScoped<IHasher, Hasher>();
+//builder.Services.AddScoped<IEngine, Engine>();
+////builder.Services.AddScoped<IBindService, BindService>();
+////builder.Services.AddScoped<IAddService, AddService>();
+//builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<IValidator, Validator>();
+//builder.Services.AddScoped<ISeederService, Seeder>();
+//builder.Services.AddScoped<IDeleteService, DeleteService>();
+////builder.Services.AddScoped<IReturnAll, ReturnAll>();
+////builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

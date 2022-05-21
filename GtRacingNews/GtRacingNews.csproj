@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
     <ProjectReference Include="..\GtRacingNews.MVC\GtRacingNews.ViewModels.csproj" />
-    <ProjectReference Include="..\GtRacingNews.Services\GtRacingNews.Services.csproj" />
   </ItemGroup>
 
 </Project>

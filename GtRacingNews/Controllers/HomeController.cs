@@ -1,8 +1,7 @@
-﻿using GtRacingNews.Models;
-using GtRacingNews.Services.Contracts;
-using GtRacingNews.Services.Service;
+﻿using GtRacingNews.Data.DBContext;
+using GtRacingNews.Models;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
 
 namespace GtRacingNews.Controllers
@@ -10,35 +9,39 @@ namespace GtRacingNews.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ISeederService seederService;
-        public HomeController(ILogger<HomeController> logger, ISeederService seederService)
+        private readonly MongoDbContext mongoDbContext;
+        //private readonly ISeederService seederService;
+        public HomeController(ILogger<HomeController> logger, MongoDbContext mongoDbContext /*, ISeederService seederService*/)
         {
+            this.mongoDbContext = mongoDbContext;
             _logger = logger;
-            this.seederService = seederService;
+            //this.seederService = seederService;
         }
 
-        public async Task<IActionResult> Seed()
-        {
-            await seederService.SeedUser();
-            await seederService.SeedRoles();
-            await seederService.SeedUserRoles();
+        //public async Task<IActionResult> Seed()
+        //{
+        //    mongoDbContext.create();
 
-            await seederService.SeedChampionship();
-            await seederService.SeedTeams();
-            await seederService.SeedDriver();
-            await seederService.SeedNews();
-            await seederService.SeedComments();
-            await seederService.SeedRaces();
-            await seederService.SeedProfiles();
+        //    await seederService.SeedUser();
+        //    await seederService.SeedRoles();
+        //    await seederService.SeedUserRoles();
 
-            return Redirect("/");
-        }
+        //    await seederService.SeedChampionship();
+        //    await seederService.SeedTeams();
+        //    await seederService.SeedDriver();
+        //    await seederService.SeedNews();
+        //    await seederService.SeedComments();
+        //    await seederService.SeedRaces();
+        //    await seederService.SeedProfiles();
+
+        //    return Redirect("/");
+        //}
 
         public async Task<IActionResult> Index()
         {
-            if (this.User.IsInRole("Admin")) return Redirect("Admin/Home");
-
-            if (this.User.Identity.IsAuthenticated == false) return Redirect("Guest/Home");
+            //if (this.User.IsInRole("Admin")) return Redirect("Admin/Home");
+            //
+            //if (this.User.Identity.IsAuthenticated == false) return Redirect("Guest/Home");
 
             return View();
         }
