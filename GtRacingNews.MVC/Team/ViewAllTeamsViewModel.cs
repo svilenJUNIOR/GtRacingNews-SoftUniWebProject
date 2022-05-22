@@ -2,7 +2,7 @@
 {
     public class ViewAllTeamsViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string LogoUrl { get; set; }
         public string CarModel { get; set; }

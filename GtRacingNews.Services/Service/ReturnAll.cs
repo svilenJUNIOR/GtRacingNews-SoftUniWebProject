@@ -1,49 +1,50 @@
-﻿//using GtRacingNews.Data.DataModels;
-//using GtRacingNews.Data.DBContext;
-//using GtRacingNews.Services.Contracts;
-//using GtRacingNews.ViewModels.News;
+﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Data.DBContext;
+using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Contracts;
+using GtRacingNews.ViewModels.News;
 
-//namespace GtRacingNews.Services.Service
-//{
-//    public class ReturnAll : IReturnAll
-//    {
-//        private readonly IRepository repository;
-//        private readonly IBindService bindService;
-//        public ReturnAll(IRepository repository, IBindService bindService)
-//        {
-//            this.repository = repository;
-//            this.bindService = bindService;
-//        }
+namespace GtRacingNews.Services.Service
+{
+    public class ReturnAll : IReturnAll
+    {
+        private readonly ISqlRepoisitory sqlRepository;
+        private readonly IBindService bindService;
+        public ReturnAll(ISqlRepoisitory sqlRepository, IBindService bindService)
+        {
+            this.sqlRepository = sqlRepository;
+            this.bindService = bindService;
+        }
 
-//        public IEnumerable<object> All(string Entity)
-//        {
+        public IEnumerable<object> All(string Entity)
+        {
 
-//            if (Entity == "Teams")  return bindService.TeamBind(repository.GettAll<Team>());
+            if (Entity == "Teams") return bindService.TeamBind(sqlRepository.GettAll<Team>());
 
-//            if (Entity == "Races") return bindService.RaceBind(repository.GettAll<Race>());
-             
-//            if (Entity == "News") return bindService.NewsBind(repository.GettAll<News>());
+            if (Entity == "Races") return bindService.RaceBind(sqlRepository.GettAll<Race>());
 
-//            if (Entity == "Drivers") return bindService.DriverBind(repository.GettAll<Driver>());
+            if (Entity == "News") return bindService.NewsBind(sqlRepository.GettAll<News>());
 
-//            if (Entity == "Championships") return bindService.ChampionshipBind(repository.GettAll<Championship>());
+            if (Entity == "Drivers") return bindService.DriverBind(sqlRepository.GettAll<Driver>());
 
-//            return null;
-//        }
+            if (Entity == "Championships") return bindService.ChampionshipBind(sqlRepository.GettAll<Championship>());
 
-//        public ReadNewsViewModel NewsDeatils(int newsId)
-//        {
-//            var context = new SqlDBContext();
+            return null;
+        }
 
-//            var news = context.News.Where(x => x.Id == newsId)
-//                .Select(n => new ReadNewsViewModel
-//                {
-//                    NewsId = n.Id,
-//                    Description = n.Description,
-//                    Comments = context.Comments.Where(x => x.NewsId == n.Id).ToList()
-//                }).FirstOrDefault();
+        public ReadNewsViewModel NewsDeatils(string newsId)
+        {
+            var context = new SqlDBContext();
 
-//            return news;
-//        }
-//    }
-//}
+            var news = context.News.Where(x => x.Id == newsId)
+                .Select(n => new ReadNewsViewModel
+                {
+                    NewsId = n.Id,
+                    Description = n.Description,
+                    Comments = context.Comments.Where(x => x.NewsId == n.Id).ToList()
+                }).FirstOrDefault();
+
+            return news;
+        }
+    }
+}

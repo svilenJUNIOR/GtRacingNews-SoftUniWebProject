@@ -2,7 +2,7 @@
 {
     public class ViewAllDriversViewModel
     {
-        public int DriverId { get; set; }
+        public string DriverId { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Cup { get; set; }
