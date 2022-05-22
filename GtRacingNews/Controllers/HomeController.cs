@@ -40,9 +40,9 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //if (this.User.IsInRole("Admin")) return Redirect("Admin/Home");
+            if (this.User.IsInRole("Admin")) return Redirect("Admin/Home");
 
-            //if (this.User.Identity.IsAuthenticated == false) return Redirect("Guest/Home");
+            if (this.User.Identity.IsAuthenticated == false) return Redirect("Guest/Home");
 
             return View();
         }
