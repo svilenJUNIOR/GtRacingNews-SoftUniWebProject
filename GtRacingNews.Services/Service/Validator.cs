@@ -10,8 +10,8 @@ namespace GtRacingNews.Services.Service
     public class Validator : IValidator
     {
         private readonly IHasher hasher;
-        private readonly ISqlRepoisitory sqlRepoisitory;
-        public Validator(IHasher hasher, ISqlRepoisitory sqlRepoisitory)
+        private readonly ISqlRepository sqlRepoisitory;
+        public Validator(IHasher hasher, ISqlRepository sqlRepoisitory)
         {
             this.hasher = hasher;
             this.sqlRepoisitory = sqlRepoisitory;

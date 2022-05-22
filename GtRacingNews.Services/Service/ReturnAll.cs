@@ -7,9 +7,9 @@ namespace GtRacingNews.Services.Service
 {
     public class ReturnAll : IReturnAll
     {
-        private readonly ISqlRepoisitory sqlRepository;
+        private readonly ISqlRepository sqlRepository;
         private readonly IBindService bindService;
-        public ReturnAll(ISqlRepoisitory sqlRepository, IBindService bindService)
+        public ReturnAll(ISqlRepository sqlRepository, IBindService bindService)
         {
             this.sqlRepository = sqlRepository;
             this.bindService = bindService;

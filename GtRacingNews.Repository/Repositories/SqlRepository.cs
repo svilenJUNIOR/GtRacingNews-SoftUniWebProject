@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Repository.Repositories
 {
-    public class SqlRepository : ISqlRepoisitory
+    public class SqlRepository : ISqlRepository
     {
         private readonly SqlDBContext context;
         private readonly RoleManager<IdentityRole> roleManager;

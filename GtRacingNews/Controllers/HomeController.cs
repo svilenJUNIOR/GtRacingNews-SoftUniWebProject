@@ -9,31 +9,26 @@ namespace GtRacingNews.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
-        private readonly MongoDbContext mongoDbContext;
-        private readonly ISeederService seederService;
-        public HomeController(ILogger<HomeController> logger, MongoDbContext mongoDbContext,
-            ISeederService seederService)
+        private readonly IEngine engine;
+        public HomeController(ILogger<HomeController> logger,IEngine engine)
         {
             this.logger = logger;
-            this.mongoDbContext = mongoDbContext;
-            this.seederService = seederService;
+            this.engine = engine;
         }
 
         public async Task<IActionResult> Seed()
         {
-            //mongoDbContext.create();
+            await this.engine.seeder.SeedUser();
+            await this.engine.seeder.SeedRoles();
+            await this.engine.seeder.SeedUserRoles();
 
-            await seederService.SeedUser();
-            await seederService.SeedRoles();
-            await seederService.SeedUserRoles();
-
-            await seederService.SeedChampionship();
-            await seederService.SeedTeams();
-            await seederService.SeedDriver();
-            await seederService.SeedNews();
-            await seederService.SeedComments();
-            await seederService.SeedRaces();
-            await seederService.SeedProfiles();
+            await this.engine.seeder.SeedChampionship();
+            await this.engine.seeder.SeedTeams();
+            await this.engine.seeder.SeedDriver();
+            await this.engine.seeder.SeedNews();
+            await this.engine.seeder.SeedComments();
+            await this.engine.seeder.SeedRaces();
+            await this.engine.seeder.SeedProfiles();
 
             return Redirect("/");
         }

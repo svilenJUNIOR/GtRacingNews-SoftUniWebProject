@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
@@ -19,11 +19,8 @@ namespace GtRacingNews.Areas.Premium.Controllers
         private readonly IEngine engine;
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly SqlDBContext context;
-        public AddController(SqlDBContext context,
-            RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, IEngine engine)
+        public AddController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, IEngine engine)
         {
-            this.context = context;
             this.roleManager = roleManager;
             this.userManager = userManager;
             this.engine = engine;
@@ -36,7 +33,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
         {
             AddTeamFormModel model = new AddTeamFormModel();
 
-            var championships = context.Championships.ToList();
+            var championships = engine.sqlRepository.GettAll<Championship>().ToList();
 
             model.Championships = championships;
 
@@ -55,7 +52,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddDriver()
         {
-            var teams = context.Teams.Where(x => x.Drivers.Count() < 3).ToList();
+            var teams = engine.sqlRepository.GettAll<Team>().Where(x => x.Drivers.Count() < 3).ToList();
             AddNewDriverFormModel model = new AddNewDriverFormModel();
             model.Teams = teams;
             return View(model);

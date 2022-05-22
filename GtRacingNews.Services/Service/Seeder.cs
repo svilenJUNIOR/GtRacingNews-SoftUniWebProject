@@ -8,9 +8,9 @@ namespace GtRacingNews.Services.Service
 {
     public class Seeder : ISeederService
     {
-        private readonly ISqlRepoisitory sqlRepository;
+        private readonly ISqlRepository sqlRepository;
 
-        public Seeder(ISqlRepoisitory sqlRepoisitory)
+        public Seeder(ISqlRepository sqlRepoisitory)
         {
             this.sqlRepository = sqlRepoisitory;
         }

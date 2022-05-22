@@ -38,7 +38,7 @@ builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
-builder.Services.AddScoped<ISqlRepoisitory, SqlRepository>();
+builder.Services.AddScoped<ISqlRepository, SqlRepository>();
 
 var app = builder.Build();
 

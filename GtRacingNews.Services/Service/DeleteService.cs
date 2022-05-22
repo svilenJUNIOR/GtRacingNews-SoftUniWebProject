@@ -7,9 +7,9 @@ namespace GtRacingNews.Services.Service
 {
     public class DeleteService : IDeleteService
     {
-        private readonly ISqlRepoisitory sqlRepository;
+        private readonly ISqlRepository sqlRepository;
 
-        public DeleteService(ISqlRepoisitory sqlRepository) => this.sqlRepository = sqlRepository;
+        public DeleteService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
 
         public async Task Delete(string collection, string id)
         {

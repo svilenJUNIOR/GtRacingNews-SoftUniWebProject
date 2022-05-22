@@ -9,13 +9,12 @@ namespace GtRacingNews.Controllers
     public class CommentController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        private readonly IAddService addService;
-        private readonly IValidator validator;
-        public CommentController(UserManager<IdentityUser> userManager, IAddService addService, IValidator validator)
+        private readonly IEngine engine;
+
+        public CommentController(UserManager<IdentityUser> userManager, IEngine engine)
         {
             this.userManager = userManager;
-            this.addService = addService;
-            this.validator = validator;
+            this.engine = engine;
         }
 
         [Authorize]
@@ -27,11 +26,11 @@ namespace GtRacingNews.Controllers
         {
             var user = await userManager.GetUserAsync(User);
 
-            var nullErrors = validator.AgainstNull(user.UserName, model.Description);
+            var nullErrors = engine.validator.AgainstNull(user.UserName, model.Description);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await addService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
+            else await engine.addService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
         }
     }
 }

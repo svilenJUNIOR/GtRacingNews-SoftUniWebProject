@@ -1,5 +1,4 @@
 ﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Profile;
 using Microsoft.AspNetCore.Identity;
@@ -9,40 +8,35 @@ namespace GtRacingNews.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly ISqlRepoisitory sqlRepository;
-        private readonly IBindService bindService;
-        private readonly IDeleteService deleteService;
         private readonly UserManager<IdentityUser> userManager;
-        public ProfileController(ISqlRepoisitory sqlRepository, UserManager<IdentityUser> userManager,
-            IBindService bindService, IDeleteService deleteService)
+        private readonly IEngine engine;
+        public ProfileController(IEngine engine, UserManager<IdentityUser> userManager)
         {
-            this.sqlRepository = sqlRepository;
+            this.engine = engine;
             this.userManager = userManager;
-            this.bindService = bindService;
-            this.deleteService = deleteService;
         }
 
         public async Task<IActionResult> MyProfile()
         {
             var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
-            var userProfile = sqlRepository.FindProfileByUserId(currentUser.Id);
+            var userProfile = engine.sqlRepository.FindProfileByUserId(currentUser.Id);
 
             var model = new MyProfileViewModel();
 
-            var teams = this.sqlRepository.GettAll<Team>().Where(x => x.UserId == currentUser.Id).ToList();
-            var bindTeams = bindService.TeamBind(teams);
+            var teams = this.engine.sqlRepository.GettAll<Team>().Where(x => x.UserId == currentUser.Id).ToList();
+            var bindTeams = engine.bindService.TeamBind(teams);
 
-            var champs = this.sqlRepository.GettAll<Championship>().Where(x => x.UserId == currentUser.Id).ToList();
-            var bindChamps = bindService.ChampionshipBind(champs);
+            var champs = this.engine.sqlRepository.GettAll<Championship>().Where(x => x.UserId == currentUser.Id).ToList();
+            var bindChamps = engine.bindService.ChampionshipBind(champs);
 
-            var drivers = this.sqlRepository.GettAll<Driver>().Where(x => x.UserId == currentUser.Id).ToList();
-            var bindDrivers = bindService.DriverBind(drivers);
+            var drivers = this.engine.sqlRepository.GettAll<Driver>().Where(x => x.UserId == currentUser.Id).ToList();
+            var bindDrivers = engine.bindService.DriverBind(drivers);
 
-            var races = this.sqlRepository.GettAll<Race>().Where(x => x.UserId == currentUser.Id).ToList();
-            var bindRaces = bindService.RaceBind(races);
+            var races = this.engine.sqlRepository.GettAll<Race>().Where(x => x.UserId == currentUser.Id).ToList();
+            var bindRaces = engine.bindService.RaceBind(races);
 
-            var news = this.sqlRepository.GettAll<News>().Where(x => x.UserId == currentUser.Id).ToList();
-            var bindNews = bindService.NewsBind(news);
+            var news = this.engine.sqlRepository.GettAll<News>().Where(x => x.UserId == currentUser.Id).ToList();
+            var bindNews = engine.bindService.NewsBind(news);
 
             model.Teams = bindTeams.ToList();
             model.Championships = bindChamps.ToList();
@@ -59,7 +53,7 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> Delete(string collection, string Id)
         {
-            await deleteService.Delete(collection, Id);
+            await engine.deleteService.Delete(collection, Id);
             return Redirect("MyProfile");
         }
     }

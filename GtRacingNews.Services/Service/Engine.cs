@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
@@ -10,12 +11,38 @@ namespace GtRacingNews.Services.Service
 {
     public class Engine : IEngine
     {
-        private readonly IValidator validator;
-        private readonly IAddService addService;
-        public Engine(IValidator validator, IAddService addService)
+        public IAddService addService { get; set; }
+        public IBindService bindService { get; set; }
+        public IDeleteService deleteService { get; set; }
+        public IHasher hasher { get; set; }
+        public IReturnAll returnAll { get; set; }
+        public ISeederService seeder { get; set; }
+        public IUserService userService { get; set; }
+        public IValidator validator { get; set; }
+        public ISqlRepository sqlRepository { get; set; }
+
+        public Engine
+            (
+                IAddService addService,
+                IBindService bindService,
+                IDeleteService deleteService,
+                IHasher hasher,
+                IReturnAll returnAll,
+                ISeederService seeder,
+                IUserService userService,
+                IValidator validator,
+                ISqlRepository sqlRepository
+            )
         {
-            this.validator = validator;
             this.addService = addService;
+            this.bindService = bindService;
+            this.deleteService = deleteService;
+            this.hasher = hasher;
+            this.returnAll = returnAll;
+            this.seeder = seeder;
+            this.userService = userService;
+            this.validator = validator;
+            this.sqlRepository = sqlRepository;
         }
 
         public async Task<ICollection<string>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState)

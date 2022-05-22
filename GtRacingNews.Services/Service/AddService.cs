@@ -6,8 +6,8 @@ namespace GtRacingNews.Services.Service
 {
     public class AddService : IAddService
     {
-        private readonly ISqlRepoisitory sqlRepository;
-        public AddService(ISqlRepoisitory sqlRepository) => this.sqlRepository = sqlRepository;
+        private readonly ISqlRepository sqlRepository;
+        public AddService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
 
         public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
         {

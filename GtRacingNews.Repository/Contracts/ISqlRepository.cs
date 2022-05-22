@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Repository.Contracts
 {
-    public interface ISqlRepoisitory
+    public interface ISqlRepository
     {
         void SaveChangesAsync();
         Task AddAsync<T>(T newItem) where T : class;

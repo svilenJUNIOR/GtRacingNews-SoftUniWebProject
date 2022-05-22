@@ -7,14 +7,14 @@ namespace GtRacingNews.Controllers
     [Authorize]
     public class AllController : Controller
     {
-        private readonly IReturnAll returnAll;
-        public AllController(IReturnAll returnAll) => this.returnAll = returnAll;
+        private readonly IEngine engine;
+        public AllController(IEngine engine) => this.engine = engine;
 
-        public async Task<IActionResult> AllChampionships() => View(returnAll.All("Championships"));
-        public async Task<IActionResult> AllDrivers() => View(returnAll.All("Drivers"));
-        public async Task<IActionResult> AllNews() => View(returnAll.All("News"));
-        public async Task<IActionResult> NewsDetails(string Id) => View(returnAll.NewsDeatils(Id));
-        public async Task<IActionResult> AllRaces() => View(returnAll.All("Races"));
-        public async Task<IActionResult> AllTeams() => View(returnAll.All("Teams"));
+        public async Task<IActionResult> AllChampionships() => View(engine.returnAll.All("Championships"));
+        public async Task<IActionResult> AllDrivers() => View(engine.returnAll.All("Drivers"));
+        public async Task<IActionResult> AllNews() => View(engine.returnAll.All("News"));
+        public async Task<IActionResult> NewsDetails(string Id) => View(engine.returnAll.NewsDeatils(Id));
+        public async Task<IActionResult> AllRaces() => View(engine.returnAll.All("Races"));
+        public async Task<IActionResult> AllTeams() => View(engine.returnAll.All("Teams"));
     }
 }
