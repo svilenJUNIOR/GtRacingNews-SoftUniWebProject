@@ -1,5 +1,4 @@
 ﻿using GtRacingNews.Common.Constants;
-using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
@@ -9,13 +8,9 @@ namespace GtRacingNews.Services.Service
 {
     public class Validator : IValidator
     {
-        private readonly IHasher hasher;
-        private readonly ISqlRepository sqlRepoisitory;
-        public Validator(IHasher hasher, ISqlRepository sqlRepoisitory)
-        {
-            this.hasher = hasher;
-            this.sqlRepoisitory = sqlRepoisitory;
-        }
+        private readonly IEngine engine;
+        public Validator(IEngine engine) => this.engine = engine;
+
         public ICollection<string> AgainstNull(params string[] args)
         {
             var errors = new List<string>();
@@ -29,7 +24,6 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
         public IEnumerable<string> ValidateForm(ModelStateDictionary modelState)
         {
             var errors = new List<string>();
@@ -47,21 +41,20 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
         public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
         {
             var errors = new List<string>();
-            var users = sqlRepoisitory.GettAll<IdentityUser>();
+            var users = engine.sqlRepository.GettAll<IdentityUser>();
 
             if (!users.Any(x => x.Email == model.Email)) errors.Add(Messages.UnExistingEmail);
-            if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(Messages.UnExistingPassword);
+            if (!users.Any(x => x.PasswordHash == engine.hasher.Hash(model.Password))) errors.Add(Messages.UnExistingPassword);
 
             return errors;
         }
         public IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model)
         {
             var errors = new List<string>();
-            var users = sqlRepoisitory.GettAll<IdentityUser>();
+            var users = engine.sqlRepository.GettAll<IdentityUser>();
 
             if (users.Any(x => x.Email == model.Email)) errors.Add(Messages.ExistingEmail);
             if (users.Any(x => x.UserName == model.Username)) errors.Add(Messages.ExistingUsername);
@@ -77,25 +70,24 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
         public ICollection<string> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
         {
             var errors = new List<string>();
 
             if (dbset == "Team")
-                if (sqlRepoisitory.FindTeamByName(check) != null) errors.Add(Messages.ExistingTeam);
+                if (engine.sqlRepository.FindTeamByName(check) != null) errors.Add(Messages.ExistingTeam);
 
             if (dbset == "Championship")
-                if (sqlRepoisitory.FindChampionshipByName(check) != null) errors.Add(Messages.ExistingChampionship);
+                if (engine.sqlRepository.FindChampionshipByName(check) != null) errors.Add(Messages.ExistingChampionship);
 
             if (dbset == "News")
-                if (sqlRepoisitory.FindNewsByName(check) != null) errors.Add(Messages.ExistingNews);
+                if (engine.sqlRepository.FindNewsByName(check) != null) errors.Add(Messages.ExistingNews);
 
             if (dbset == "Race")
-                if (sqlRepoisitory.FindRaceByName(check) != null) errors.Add(Messages.ExistingRace);
+                if (engine.sqlRepository.FindRaceByName(check) != null) errors.Add(Messages.ExistingRace);
 
             if (dbset == "Driver")
-                if (sqlRepoisitory.FindDriverByName(check) != null) errors.Add(Messages.ExistingDriver);
+                if (engine.sqlRepository.FindDriverByName(check) != null) errors.Add(Messages.ExistingDriver);
 
             if (!modelState.IsValid)
             {

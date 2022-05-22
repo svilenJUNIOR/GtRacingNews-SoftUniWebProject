@@ -6,8 +6,8 @@ namespace GtRacingNews.Services.Service
 {
     public class UserService : IUserService
     {
-        private readonly IHasher hasher;
-        public UserService(IHasher hasher) => this.hasher = hasher;
+        private readonly IEngine engine;
+        public UserService(IEngine engine) => this.engine = engine;
 
         public IdentityUser RegisterUser(RegisterUserFormModel model)
         {
@@ -15,7 +15,7 @@ namespace GtRacingNews.Services.Service
 
             user.Email = model.Email;
             user.UserName = model.Username;
-            user.PasswordHash = hasher.Hash(model.Password);
+            user.PasswordHash = engine.hasher.Hash(model.Password);
 
             return user;
         }
