@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
@@ -9,11 +10,11 @@ namespace GtRacingNews.Services.Service
     public class Validator : IValidator
     {
         private readonly IHasher hasher;
-        private readonly IRepository repository;
-        public Validator(IHasher hasher, IRepository repository)
+        private readonly ISqlRepoisitory sqlRepoisitory;
+        public Validator(IHasher hasher, ISqlRepoisitory sqlRepoisitory)
         {
             this.hasher = hasher;
-            this.repository = repository;
+            this.sqlRepoisitory = sqlRepoisitory;
         }
         public ICollection<string> AgainstNull(params string[] args)
         {
@@ -50,7 +51,7 @@ namespace GtRacingNews.Services.Service
         public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
         {
             var errors = new List<string>();
-            var users = repository.GettAll<IdentityUser>();
+            var users = sqlRepoisitory.GettAll<IdentityUser>();
 
             if (!users.Any(x => x.Email == model.Email)) errors.Add(Messages.UnExistingEmail);
             if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(Messages.UnExistingPassword);
@@ -60,7 +61,7 @@ namespace GtRacingNews.Services.Service
         public IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model)
         {
             var errors = new List<string>();
-            var users = repository.GettAll<IdentityUser>();
+            var users = sqlRepoisitory.GettAll<IdentityUser>();
 
             if (users.Any(x => x.Email == model.Email)) errors.Add(Messages.ExistingEmail);
             if (users.Any(x => x.UserName == model.Username)) errors.Add(Messages.ExistingUsername);
@@ -82,19 +83,19 @@ namespace GtRacingNews.Services.Service
             var errors = new List<string>();
 
             if (dbset == "Team")
-                if (repository.FindTeamByName(check) != null) errors.Add(Messages.ExistingTeam);
+                if (sqlRepoisitory.FindTeamByName(check) != null) errors.Add(Messages.ExistingTeam);
 
             if (dbset == "Championship")
-                if (repository.FindChampionshipByName(check) != null) errors.Add(Messages.ExistingChampionship);
+                if (sqlRepoisitory.FindChampionshipByName(check) != null) errors.Add(Messages.ExistingChampionship);
 
             if (dbset == "News")
-                if (repository.FindNewsByName(check) != null) errors.Add(Messages.ExistingNews);
+                if (sqlRepoisitory.FindNewsByName(check) != null) errors.Add(Messages.ExistingNews);
 
             if (dbset == "Race")
-                if (repository.FindRaceByName(check) != null) errors.Add(Messages.ExistingRace);
+                if (sqlRepoisitory.FindRaceByName(check) != null) errors.Add(Messages.ExistingRace);
 
             if (dbset == "Driver")
-                if (repository.FindDriverByName(check) != null) errors.Add(Messages.ExistingDriver);
+                if (sqlRepoisitory.FindDriverByName(check) != null) errors.Add(Messages.ExistingDriver);
 
             if (!modelState.IsValid)
             {
