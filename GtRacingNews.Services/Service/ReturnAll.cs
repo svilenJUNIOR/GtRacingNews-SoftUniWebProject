@@ -1,5 +1,4 @@
 ﻿using GtRacingNews.Data.DataModels;
-using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.News;
@@ -34,14 +33,13 @@ namespace GtRacingNews.Services.Service
 
         public ReadNewsViewModel NewsDeatils(string newsId)
         {
-            var context = new SqlDBContext();
 
-            var news = context.News.Where(x => x.Id == newsId)
+            var news = sqlRepository.GettAll<News>().Where(x => x.Id == newsId)
                 .Select(n => new ReadNewsViewModel
                 {
                     NewsId = n.Id,
                     Description = n.Description,
-                    Comments = context.Comments.Where(x => x.NewsId == n.Id).ToList()
+                    Comments = sqlRepository.GettAll<Comment>().Where(x => x.NewsId == n.Id).ToList()
                 }).FirstOrDefault();
 
             return news;

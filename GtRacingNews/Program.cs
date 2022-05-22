@@ -1,4 +1,3 @@
-using GtRacingNews.Common.Constants;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Repository.Repositories;
@@ -7,14 +6,11 @@ using GtRacingNews.Services.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-ConnectionString ConnectionString = new ConnectionString();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("SqlConnectionString");
 builder.Services.AddDbContext<SqlDBContext>(options =>
-    options.UseSqlServer(ConnectionString.SqlConnectionString));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnectionString")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -33,12 +29,12 @@ builder.Services.Configure<MongoSetUp>(
 
 
 builder.Services.AddScoped<MongoDbContext, MongoDbContext>();
-//builder.Services.AddScoped<IHasher, Hasher>();
+builder.Services.AddScoped<IHasher, Hasher>();
 //builder.Services.AddScoped<IEngine, Engine>();
 builder.Services.AddScoped<IBindService, BindService>();
-////builder.Services.AddScoped<IAddService, AddService>();
-//builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<IValidator, Validator>();
+builder.Services.AddScoped<IAddService, AddService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
 //builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
