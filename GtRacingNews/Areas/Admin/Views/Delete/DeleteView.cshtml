@@ -89,7 +89,7 @@
                     @user.Key
                 </td>
                 <td>
-                    <a href="Delete?id=@user.Value&collection=@Model.CollectionNames.UserCollection" class="btn btn-primary">Delete</a>
+                    <a href="DeleteUserOrRole?id=@user.Value&collection=@Model.CollectionNames.UserCollection" class="btn btn-primary">Delete</a>
                 </td>
             </tr>
         }
@@ -104,7 +104,7 @@
                     @role.Key
                 </td>
                 <td>
-                    <a href="Delete?id=@role.Value&collection=@Model.CollectionNames.RoleCollection" class="btn btn-primary">Delete</a>
+                    <a href="DeleteUserOrRole?id=@role.Value&collection=@Model.CollectionNames.RoleCollection" class="btn btn-primary">Delete</a>
                 </td>
             </tr>
         }

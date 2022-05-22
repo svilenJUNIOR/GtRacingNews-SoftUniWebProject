@@ -56,6 +56,12 @@ namespace GtRacingNews.Controllers
             return Redirect("DeleteView");
         }
 
+        public async Task<IActionResult> DeleteUserOrRole(string collection, string id)
+        {
+            await engine.deleteService.DeleteUserOrRole(collection, id);
+            return Redirect("DeleteView");
+        }
+
         public async Task<IActionResult> DeleteComment(string Id, string newsId)
         {
             await engine.deleteService.Delete("Comment", Id);
