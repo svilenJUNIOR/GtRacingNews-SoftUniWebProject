@@ -30,13 +30,13 @@ builder.Services.Configure<MongoSetUp>(
 
 builder.Services.AddScoped<MongoDbContext, MongoDbContext>();
 builder.Services.AddScoped<IHasher, Hasher>();
-//builder.Services.AddScoped<IEngine, Engine>();
+builder.Services.AddScoped<IEngine, Engine>();
 builder.Services.AddScoped<IBindService, BindService>();
 builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<ISeederService, Seeder>();
-//builder.Services.AddScoped<IDeleteService, DeleteService>();
+builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped<ISqlRepoisitory, SqlRepository>();
 
