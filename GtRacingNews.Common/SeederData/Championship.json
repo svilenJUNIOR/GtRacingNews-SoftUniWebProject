@@ -1,17 +1,21 @@
 ﻿[
   {
+    "Id": "485d08fa-ba67-42cc-92d2-e8e937dcc44a",
     "LogoUrl": "https://www.gt-world-challenge-europe.com/assets/img/fanatec-gtwc-europe-aws.png",
     "Name": "GT Europe Challenge By Fanatec"
   },
   {
+    "Id": "d26ee9f9-8d70-450e-bf42-f999c55da6db",
     "LogoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/SUPER_GT_logo.svg/640px-SUPER_GT_logo.svg.png",
     "Name": "Super GT"
   },
   {
+    "Id": "5669d00d-380c-47b0-be65-89e0a51ab203",
     "LogoUrl": "https://www.britishgt.com/timthumb.php?w=1600&src=%2Fimages%2F%2Fnews%2FIntelligent_Money_web.jpg",
     "Name": "British GT"
   },
   {
+    "Id": "cb26e725-66ed-4d14-8e40-8f674f24f477",
     "LogoUrl": "https://www.lemans.org/media/cache/api_news_large/assets/fileuploads/57/4f/574f54f88503b.jpeg",
     "Name": "Fia Wec"
   }

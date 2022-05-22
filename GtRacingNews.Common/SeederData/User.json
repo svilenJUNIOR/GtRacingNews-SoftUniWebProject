@@ -1,5 +1,6 @@
 ﻿[
   {
+    "Id": "4c4072c8-b124-4086-b3e1-ff68d9158f1c",
     "UserName": "svilen",
     "NormalizedUserName": "SVILEN",
     "Email": "svilen@email.com",
@@ -7,6 +8,7 @@
     "PasswordHash": "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
   },
   {
+    "Id": "c23fe609-8a69-409d-910f-82d92fa7e620",
     "UserName": "svilen1",
     "NormalizedUserName": "SVILEN1",
     "Email": "svilen1@email.com",
@@ -14,6 +16,7 @@
     "PasswordHash": "be7241573aeb418fd695ba0262f4cad259a5b55fc715eb19c233cf02554813a8"
   },
   {
+    "Id": "d84a2a55-4f40-487c-8ced-60451eb1e695",
     "UserName": "svilen2",
     "NormalizedUserName": "SVILEN2",
     "Email": "svilen2@email.com",

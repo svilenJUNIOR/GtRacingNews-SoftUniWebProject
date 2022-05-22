@@ -25,7 +25,7 @@ namespace GtRacingNews.Controllers
 
             await seederService.SeedUser();
             await seederService.SeedRoles();
-            //await seederService.SeedUserRoles();
+            await seederService.SeedUserRoles();
 
             await seederService.SeedChampionship();
             await seederService.SeedTeams();

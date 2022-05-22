@@ -1,10 +1,12 @@
 ﻿[
   {
+    "Id": "f0bb433a-ba30-45ef-925b-207e9f7b29c4",
     "Name": "Admin",
     "NormalizedName": "ADMIN",
     "ConcurrencyStamp": "07b9fcbe-a6e0-44bc-926f-d6d89102fab9"
   },
   {
+    "Id": "fc80de23-ee8a-4d2a-b77c-766e11182b22",
     "Name": "Moderator",
     "NormalizedName": "MODERATOR",
     "ConcurrencyStamp": "ce279cf0-ea75-4b2b-bed6-5a4a92153c3f"
