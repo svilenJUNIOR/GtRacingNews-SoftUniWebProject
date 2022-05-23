@@ -12,8 +12,8 @@ namespace GtRacingNews.Services.Service
 {
     public class BindService : IBindService
     {
-        private readonly IEngine engine;
-        public BindService (IEngine engine) => this.engine = engine;
+        private readonly ISqlRepository sqlRepository;
+        public BindService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
 
         public ICollection<ShowAllNewsViewModel> NewsBind(ICollection<News> newsToBind)
         {

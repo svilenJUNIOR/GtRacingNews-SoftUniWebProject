@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Data.DataModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
@@ -7,8 +8,8 @@ namespace GtRacingNews.Services.Service
 {
     public class Seeder : ISeederService
     {
-        private readonly IEngine engine;
-        public Seeder(IEngine engine) => this.engine = engine;
+        private readonly ISqlRepository sqlRepository;
+        public Seeder(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
 
         public async Task SeedDriver()
         {
@@ -16,7 +17,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Driver>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<Driver>(toAdd);
+            await sqlRepository.AddRangeAsync<Driver>(toAdd);
         }
 
         public async Task SeedTeams()
@@ -25,7 +26,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Team>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<Team>(toAdd);
+            await sqlRepository.AddRangeAsync<Team>(toAdd);
         }
 
         public async Task SeedChampionship()
@@ -34,7 +35,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Championship>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<Championship>(toAdd);
+            await sqlRepository.AddRangeAsync<Championship>(toAdd);
         }
 
         public async Task SeedComments()
@@ -43,7 +44,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Comment>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<Comment>(toAdd);
+            await sqlRepository.AddRangeAsync<Comment>(toAdd);
         }
 
         public async Task SeedNews()
@@ -52,7 +53,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<News>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<News>(toAdd);
+            await sqlRepository.AddRangeAsync<News>(toAdd);
         }
 
         public async Task SeedRaces()
@@ -61,7 +62,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Race>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<Race>(toAdd);
+            await sqlRepository.AddRangeAsync<Race>(toAdd);
         }
 
         public async Task SeedRoles()
@@ -70,7 +71,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityRole>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<IdentityRole>(toAdd);
+            await sqlRepository.AddRangeAsync<IdentityRole>(toAdd);
         }
 
         public async Task SeedUser()
@@ -79,7 +80,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityUser>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<IdentityUser>(toAdd);
+            await sqlRepository.AddRangeAsync<IdentityUser>(toAdd);
         }
 
         public async Task SeedUserRoles()
@@ -88,7 +89,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityUserRole<string>>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<IdentityUserRole<string>>(toAdd);
+            await sqlRepository.AddRangeAsync<IdentityUserRole<string>>(toAdd);
         }
 
         public async Task SeedProfiles()
@@ -97,7 +98,7 @@ namespace GtRacingNews.Services.Service
 
             var toAdd = JsonConvert.DeserializeObject<List<Profile>>(jsonString);
 
-            await engine.sqlRepository.AddRangeAsync<Profile>(toAdd);
+            await sqlRepository.AddRangeAsync<Profile>(toAdd);
         }
     }
 }
