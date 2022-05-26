@@ -7,39 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
-    <Compile Include="obj\Debug\net6.0\GtRacingNews.ViewModels.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net6.0\GtRacingNews.ViewModels.GlobalUsings.g.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="bin\Debug\net6.0\GtRacingNews.ViewModels.deps.json" />
-    <Content Include="obj\Debug\net6.0\GtRacingNews.ViewModels.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\GtRacingNews.ViewModels.csproj.nuget.dgspec.json" />
-    <Content Include="obj\project.assets.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Debug\net6.0\GtRacingNews.Data.dll" />
-    <None Include="bin\Debug\net6.0\GtRacingNews.Data.pdb" />
-    <None Include="bin\Debug\net6.0\GtRacingNews.ViewModels.dll" />
-    <None Include="bin\Debug\net6.0\GtRacingNews.ViewModels.pdb" />
-    <None Include="bin\Debug\net6.0\ref\GtRacingNews.ViewModels.dll" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.assets.cache" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.csproj.AssemblyReference.cache" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.csproj.CopyComplete" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.dll" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="obj\Debug\net6.0\GtRacingNews.ViewModels.pdb" />
-    <None Include="obj\Debug\net6.0\ref\GtRacingNews.ViewModels.dll" />
-    <None Include="obj\GtRacingNews.ViewModels.csproj.nuget.g.props" />
-    <None Include="obj\GtRacingNews.ViewModels.csproj.nuget.g.targets" />
-    <None Include="obj\project.nuget.cache" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GtRacingNews.Common\GtRacingNews.Common.csproj" />
     <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
   </ItemGroup>

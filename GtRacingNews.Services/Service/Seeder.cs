@@ -9,7 +9,17 @@ namespace GtRacingNews.Services.Service
     public class Seeder : ISeederService
     {
         private readonly ISqlRepository sqlRepository;
-        public Seeder(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
+        private readonly IMongoRepository mongoRepository;
+        public Seeder(ISqlRepository sqlRepository)
+        {
+            this.sqlRepository = sqlRepository;
+            this.mongoRepository = mongoRepository;
+        }
+
+        public async void MongoSeeder()
+        {
+            mongoRepository.Seeder();
+        }
 
         public async Task SeedDriver()
         {

@@ -19,6 +19,7 @@ namespace GtRacingNews.Services.Contracts
         public IUserService userService { get; set; }
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
+        public IMongoRepository mongoRepository { get; set; }
         public IProfileService profileService { get; set; }
 
         Task<ICollection<string>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState);
