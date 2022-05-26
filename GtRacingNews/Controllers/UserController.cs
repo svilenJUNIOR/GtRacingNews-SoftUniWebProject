@@ -55,14 +55,11 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
-            var nullErrors = engine.validator.AgainstNull(model.Email, model.Password);
-            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            var dataErrors = engine.validator.ValidateUserLogin(model);
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
             model.Email = model.Email.Trim();
             model.Password = model.Password.Trim();
-
-            var dataErrors = engine.validator.ValidateUserLogin(model);
-            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
             var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
             await this.signInManager.SignInAsync(loggedInUser, true);

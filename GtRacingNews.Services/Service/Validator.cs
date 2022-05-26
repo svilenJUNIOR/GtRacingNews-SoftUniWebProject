@@ -31,6 +31,9 @@ namespace GtRacingNews.Services.Service
         }
         public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
         {
+            var nullErrors = AgainstNull(model.Password, model.Email);
+            if (nullErrors.Count() > 0) return nullErrors;
+
             var errors = new List<string>();
             var users = sqlRepository.GettAll<IdentityUser>();
 
