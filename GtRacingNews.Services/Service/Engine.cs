@@ -20,6 +20,7 @@ namespace GtRacingNews.Services.Service
         public IUserService userService { get; set; }
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
+        public IProfileService profileService { get; set; }
 
         public Engine
             (
@@ -31,7 +32,8 @@ namespace GtRacingNews.Services.Service
                 ISeederService seeder,
                 IUserService userService,
                 IValidator validator,
-                ISqlRepository sqlRepository
+                ISqlRepository sqlRepository,
+                IProfileService profileService
             )
         {
             this.addService = addService;
@@ -43,6 +45,7 @@ namespace GtRacingNews.Services.Service
             this.userService = userService;
             this.validator = validator;
             this.sqlRepository = sqlRepository;
+            this.profileService = profileService;
         }
 
         public async Task<ICollection<string>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState)

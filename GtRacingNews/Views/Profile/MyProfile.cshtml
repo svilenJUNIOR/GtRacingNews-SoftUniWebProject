@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><strong>Name:</strong> @championship.Name</h5>
                     <h5 class="card-title"><strong>Teams:</strong> @string.Join(", ", @championship.Teams)</h5>
-                    <h5 class="card-title"><a href="/Profile/DeleteC?id=@championship.ChampionshipId&collection=@Model.DeleteViewModel.CollectionNames.ChampionshipCollection" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/Delete?id=@championship.ChampionshipId&collection=@Model.DeleteViewModel.CollectionNames.ChampionshipCollection" class="btn btn-primary">Delete</a></h5>
                 </div>
             </div>
         }
