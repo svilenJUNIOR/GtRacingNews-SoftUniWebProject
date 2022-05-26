@@ -29,9 +29,30 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-        public IEnumerable<string> ValidateForm(ModelStateDictionary modelState)
+        public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
         {
             var errors = new List<string>();
+            var users = sqlRepository.GettAll<IdentityUser>();
+
+            if (!users.Any(x => x.Email == model.Email)) errors.Add(Messages.UnExistingEmail);
+            if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(Messages.UnExistingPassword);
+
+            return errors;
+        }
+        public IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary modelState)
+        {
+            var nullErrors = AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
+            if (nullErrors.Count() > 0) return nullErrors;
+
+            var errors = new List<string>();
+            var users = sqlRepository.GettAll<IdentityUser>();
+
+            if (users.Any(x => x.Email == model.Email)) errors.Add(Messages.ExistingEmail);
+            if (users.Any(x => x.UserName == model.Username)) errors.Add(Messages.ExistingUsername);
+            if (!model.Email.EndsWith("@email.com")) errors.Add(String.Format(Messages.WrongEmailFormat, Values.EndOfAnEmail));
+
+            if (model.Username.Length < Values.MinUsernameLength && model.Username.Length > Values.MaxUsernameLength)
+                errors.Add(string.Format(Messages.WrongUsernameFormat, Values.MinUsernameLength, Values.MaxUsernameLength));
 
             if (!modelState.IsValid)
             {
@@ -43,35 +64,6 @@ namespace GtRacingNews.Services.Service
                     }
                 }
             }
-
-            return errors;
-        }
-        public IEnumerable<string> ValidateUserLogin(LoginUserFormModel model)
-        {
-            var errors = new List<string>();
-            var users = sqlRepository.GettAll<IdentityUser>();
-
-            if (!users.Any(x => x.Email == model.Email)) errors.Add(Messages.UnExistingEmail);
-            if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(Messages.UnExistingPassword);
-
-            return errors;
-        }
-        public IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model)
-        {
-            var errors = new List<string>();
-            var users = sqlRepository.GettAll<IdentityUser>();
-
-            if (users.Any(x => x.Email == model.Email)) errors.Add(Messages.ExistingEmail);
-            if (users.Any(x => x.UserName == model.Username)) errors.Add(Messages.ExistingUsername);
-            if (!model.Email.EndsWith("@email.com")) errors.Add(String.Format(Messages.WrongEmailFormat, Values.EndOfAnEmail));
-
-            if (model.Username.Length < Values.MinUsernameLength && model.Username.Length > Values.MaxUsernameLength)
-                errors.Add(string.Format(Messages.WrongUsernameFormat, Values.MinUsernameLength, Values.MaxUsernameLength));
-
-            if (model.Password.Length < Values.MinPasswordLength)
-                errors.Add(string.Format(Messages.WrongPasswordFormat, Values.MinUsernameLength));
-
-            if (model.Password != model.ConfirmPassword) errors.Add(Messages.PasswordsDontMatch);
 
             return errors;
         }

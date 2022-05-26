@@ -28,7 +28,7 @@ namespace GtRacingNews.Controllers
         {
             CreatePremiumFormModel model = new CreatePremiumFormModel();
 
-            var roles = this.roleManager.Roles.Where(x => x.Name != "User").Select(x => x.Name).ToList();
+            var roles = this.roleManager.Roles.Select(x => x.Name).ToList();
 
             model.Roles = roles;
 
@@ -38,25 +38,17 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            var nullErrors = engine.validator.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
-            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            var dataErrors = engine.validator.ValidateUserRegister(model, ModelState);
+            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
 
             model.Email = model.Email.Trim();
             model.Password = model.Password.Trim();
             model.Username = model.Username.Trim();
             model.ConfirmPassword = model.ConfirmPassword.Trim();
 
-            var formErrors = engine.validator.ValidateForm(ModelState);
-            var dataErrors = engine.validator.ValidateUserRegister(model);
-
-            if (formErrors.Count() > 0) return View("./Error", formErrors);
-            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
-
-            else
-            {
-                await userManager.CreateAsync(engine.userService.RegisterUser(model));
-                await signInManager.SignInAsync(engine.userService.RegisterUser(model), isPersistent: false);
-            }
+            await userManager.CreateAsync(engine.userService.RegisterUser(model));
+            await signInManager.SignInAsync(engine.userService.RegisterUser(model), isPersistent: false);
+           
             return Redirect("/");
         }
 

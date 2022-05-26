@@ -7,10 +7,8 @@ namespace GtRacingNews.Services.Contracts
     {
         ICollection<string> AgainstNull(params string[] args);
 
-        IEnumerable<string> ValidateForm(ModelStateDictionary modelState);
-       
         IEnumerable<string> ValidateUserLogin(LoginUserFormModel model);
-        IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model);
+        IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary ModelState);
 
         ICollection<string> ValidateObject(string dbset, string check, ModelStateDictionary ModelState);
         
