@@ -29,11 +29,6 @@ namespace GtRacingNews.Data.DBContext
                 { "Cup", "Pro" },
                 { "ImageUrl", "https://www.intercontinentalgtchallenge.com/timthumb.php?w=640&src=%2Fimages%2Fdrivers%2FRolf_Ineichen2018.jpg"},
                 { "TeamId", "a158bc3a-1de8-421e-8e83-925089919d78" },
-                { "Name", "Rolf Ineichen" },
-                { "Age", 43 },
-                { "Cup", "Pro" },
-                { "ImageUrl", "https://www.intercontinentalgtchallenge.com/timthumb.php?w=640&src=%2Fimages%2Fdrivers%2FRolf_Ineichen2018.jpg"},
-                { "TeamId", "a158bc3a-1de8-421e-8e83-925089919d78" },
             };
             await collection.InsertOneAsync(drivers);
 

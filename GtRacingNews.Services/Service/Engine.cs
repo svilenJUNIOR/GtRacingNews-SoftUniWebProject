@@ -14,40 +14,30 @@ namespace GtRacingNews.Services.Service
         public IAddService addService { get; set; }
         public IBindService bindService { get; set; }
         public IDeleteService deleteService { get; set; }
-        public IHasher hasher { get; set; }
         public IReturnAll returnAll { get; set; }
         public ISeederService seeder { get; set; }
-        public IUserService userService { get; set; }
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
-        public IProfileService profileService { get; set; }
         public IMongoRepository mongoRepository { get; set; }
-
         public Engine
             (
                 IAddService addService,
                 IBindService bindService,
                 IDeleteService deleteService,
-                IHasher hasher,
                 IReturnAll returnAll,
                 ISeederService seeder,
-                IUserService userService,
                 IValidator validator,
                 ISqlRepository sqlRepository,
-                IProfileService profileService,
                 IMongoRepository mongoRepository
             )
         {
             this.addService = addService;
             this.bindService = bindService;
             this.deleteService = deleteService;
-            this.hasher = hasher;
             this.returnAll = returnAll;
             this.seeder = seeder;
-            this.userService = userService;
             this.validator = validator;
             this.sqlRepository = sqlRepository;
-            this.profileService = profileService;
             this.mongoRepository = mongoRepository;
         }
 

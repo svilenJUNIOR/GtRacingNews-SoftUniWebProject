@@ -17,7 +17,7 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> Seed()
         {
-            engine.mongoRepository.Seeder();
+            //engine.mongoRepository.Seeder();
 
             //await this.engine.seeder.SeedUser();
             //await this.engine.seeder.SeedRoles();

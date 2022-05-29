@@ -67,15 +67,6 @@ namespace GtRacingNews.Controllers
             return Redirect("/");
         }
 
-        [Authorize]
-        public async Task<IActionResult> Logout()
-        {
-            await this.signInManager.SignOutAsync();
-
-            return Redirect("/");
-        }
-
-
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Profile(CreatePremiumFormModel model)
@@ -88,6 +79,14 @@ namespace GtRacingNews.Controllers
             await this.userManager.AddToRoleAsync(currentUser, model.Role);
 
             await this.engine.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
+            return Redirect("/");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await this.signInManager.SignOutAsync();
+
             return Redirect("/");
         }
     }
