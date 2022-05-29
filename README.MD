@@ -1,3 +1,8 @@
+The goal is to make a real world web application, with ASP .NET CORE.
+The app will fetch data from both mssql and mongo db.
+The mongoRepository and DBContext are currently under implementation.
+If you want to test the application (MsSql) read the bellow passage.
+
 In order to start and test the app correctly after you migrate the base, you have to seed it with data!
 When you start the app you will be at the Guest/Home page in order to seed tha data GOTO /Home/Seed
 NOT Guest/Home/Seed JUST /Home/Seed
