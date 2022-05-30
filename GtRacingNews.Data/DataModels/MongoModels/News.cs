@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace GtRacingNews.Data.DataModels
+namespace GtRacingNews.Data.DataModels.MongoModels
 {
     public class News
     {

@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,5 @@
-﻿using GtRacingNews.Areas.Admin.ViewModels;
-using GtRacingNews.ViewModels.Championship;
+﻿using GtRacingNews.ViewModels.Championship;
+using GtRacingNews.ViewModels.Delete;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;

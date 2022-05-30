@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

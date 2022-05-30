@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.MongoModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using MongoDB.Driver;

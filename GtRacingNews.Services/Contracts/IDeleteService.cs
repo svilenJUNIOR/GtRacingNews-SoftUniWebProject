@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Areas.Admin.ViewModels;
+﻿using GtRacingNews.ViewModels.Delete;
 
 namespace GtRacingNews.Services.Contracts
 {

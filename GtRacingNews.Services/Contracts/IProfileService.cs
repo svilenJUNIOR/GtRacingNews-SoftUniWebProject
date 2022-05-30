@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.ViewModels.Profile;
 using Microsoft.AspNetCore.Identity;
 

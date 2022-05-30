@@ -2,18 +2,15 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace GtRacingNews.Data.DataModels
+namespace GtRacingNews.Data.DataModels.MongoModels
 {
-    public class Team
+    public class Championship
     {
-        public Team(string name, string carModel, string logoUrl, string? ChampionshipId)
+        public Championship(string name, string logoUrl)
         {
             this.Name = name;
-            this.CarModel = carModel;
             this.LogoUrl = logoUrl;
-            this.ChampionshipId = ChampionshipId;
         }
-        
         [Key]
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -22,14 +19,10 @@ namespace GtRacingNews.Data.DataModels
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-        public ICollection<Driver> Drivers { get; set; } = new List<Driver>();
+        public ICollection<Team> Teams { get; set; } = new List<Team>();
 
-        [MaxLength(30)]
-        public string CarModel { get; set; }
-
-        [Required]
         public string LogoUrl { get; set; }
-        public string? ChampionshipId { get; set; }
         public string? UserId { get; set; }
+
     }
 }

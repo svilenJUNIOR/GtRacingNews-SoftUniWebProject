@@ -1,7 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
-using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace GtRacingNews.Data.DBContext

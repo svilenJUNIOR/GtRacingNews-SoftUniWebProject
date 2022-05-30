@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Areas.Guest.ViewModels;
-using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;

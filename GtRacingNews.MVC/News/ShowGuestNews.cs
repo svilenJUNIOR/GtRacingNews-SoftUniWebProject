@@ -1,4 +1,4 @@
-﻿namespace GtRacingNews.Areas.Guest.ViewModels
+﻿namespace GtRacingNews.ViewModels.News
 {
     public class ShowGuestNews
     {

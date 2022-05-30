@@ -1,7 +1,7 @@
-﻿using GtRacingNews.Areas.Admin.ViewModels;
-using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.ViewModels.Delete;
 using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Services.Service

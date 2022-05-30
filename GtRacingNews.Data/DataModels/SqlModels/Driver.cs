@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GtRacingNews.Data.DataModels
+namespace GtRacingNews.Data.DataModels.SqlModels
 {
     public class Driver
     {

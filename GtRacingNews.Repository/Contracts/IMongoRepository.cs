@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Data.DataModels;
+﻿using GtRacingNews.Data.DataModels.MongoModels;
 using MongoDB.Driver;
 
 namespace GtRacingNews.Repository.Contracts
