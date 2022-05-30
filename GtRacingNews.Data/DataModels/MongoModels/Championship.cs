@@ -14,7 +14,7 @@ namespace GtRacingNews.Data.DataModels.MongoModels
         [Key]
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -22,7 +22,5 @@ namespace GtRacingNews.Data.DataModels.MongoModels
         public ICollection<Team> Teams { get; set; } = new List<Team>();
 
         public string LogoUrl { get; set; }
-        public string? UserId { get; set; }
-
     }
 }

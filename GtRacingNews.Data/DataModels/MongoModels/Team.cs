@@ -6,18 +6,17 @@ namespace GtRacingNews.Data.DataModels.MongoModels
 {
     public class Team
     {
-        public Team(string name, string carModel, string logoUrl, string? ChampionshipId)
+        public Team(string name, string carModel, string logoUrl)
         {
             this.Name = name;
             this.CarModel = carModel;
             this.LogoUrl = logoUrl;
-            this.ChampionshipId = ChampionshipId;
         }
         
         [Key]
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -29,7 +28,5 @@ namespace GtRacingNews.Data.DataModels.MongoModels
 
         [Required]
         public string LogoUrl { get; set; }
-        public string? ChampionshipId { get; set; }
-        public string? UserId { get; set; }
     }
 }

@@ -14,13 +14,11 @@ namespace GtRacingNews.Data.DataModels.MongoModels
         [Key]
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
         public string Date { get; set; }
-        public string? UserId { get; set; }
-
     }
 }
