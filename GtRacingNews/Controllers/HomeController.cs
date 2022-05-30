@@ -18,6 +18,11 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> Seed()
         {
+            MongoDbContext context = new MongoDbContext();
+            context.delete();
+            context.create();
+
+
             await this.engine.mongoSeeder.SeedChampionship();
             await this.engine.mongoSeeder.SeedTeams();
             await this.engine.mongoSeeder.SeedDriver();

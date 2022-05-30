@@ -24,17 +24,23 @@ namespace GtRacingNews.Data.DBContext
             return db.GetCollection<T>(name);
         }
 
-        //public void create()
-        //{
-        //    var client = new MongoClient("mongodb://localhost:27017");
-        //    var db = client.GetDatabase("GTNews");
-        //    db.CreateCollection("Teams");
-        //    db.CreateCollection("Championships");
-        //    db.CreateCollection("Comments");
-        //    db.CreateCollection("Drivers");
-        //    db.CreateCollection("News");
-        //    db.CreateCollection("Profile");
-        //    db.CreateCollection("Race");
-        //}
+        public void create()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var db = client.GetDatabase("GTNews");
+            db.CreateCollection("Teams");
+            db.CreateCollection("Championships");
+            db.CreateCollection("Comments");
+            db.CreateCollection("Drivers");
+            db.CreateCollection("News");
+            db.CreateCollection("Profiles");
+            db.CreateCollection("Races");
+        }
+
+        public void delete()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            client.DropDatabase("GTNews");
+        }
     }
 }
