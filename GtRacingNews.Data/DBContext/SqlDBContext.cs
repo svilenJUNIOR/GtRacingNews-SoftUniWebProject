@@ -17,10 +17,6 @@ namespace GtRacingNews.Data.DBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    optionsBuilder.UseSqlServer(connectionString.SqlConnectionString);
-            //}
         }
 
         public DbSet<Driver> Drivers { get; set; }

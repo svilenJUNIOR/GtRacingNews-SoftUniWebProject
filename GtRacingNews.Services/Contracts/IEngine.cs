@@ -14,9 +14,12 @@ namespace GtRacingNews.Services.Contracts
         public IBindService bindService { get; set; }
         public IDeleteService deleteService { get; set; }
         public IReturnAll returnAll { get; set; }
-        public ISeederService seeder { get; set; }
+        public ISqlSeeder seeder { get; set; }
         public IValidator validator { get; set; }
+        public IProfileService profileService { get; set; }
         public ISqlRepository sqlRepository { get; set; }
+        public IUserService userService { get; set; }
+        public IMongoSeeder mongoSeeder { get; set; }
         public IMongoRepository mongoRepository { get; set; }
 
         Task<ICollection<string>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState);

@@ -35,11 +35,12 @@ builder.Services.AddScoped<IBindService, BindService>();
 builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
-builder.Services.AddScoped<ISeederService, Seeder>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
+builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
 builder.Services.AddScoped<IMongoRepository, MongoRepository>();
+builder.Services.AddScoped<IMongoSeeder, MongoSeeder>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 
 var app = builder.Build();

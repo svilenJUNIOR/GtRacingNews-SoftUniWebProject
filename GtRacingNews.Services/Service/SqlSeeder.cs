@@ -6,21 +6,10 @@ using Newtonsoft.Json;
 
 namespace GtRacingNews.Services.Service
 {
-    public class Seeder : ISeederService
+    public class SqlSeeder : ISqlSeeder
     {
         private readonly ISqlRepository sqlRepository;
-        private readonly IMongoRepository mongoRepository;
-        public Seeder(ISqlRepository sqlRepository)
-        {
-            this.sqlRepository = sqlRepository;
-            this.mongoRepository = mongoRepository;
-        }
-
-        public async void MongoSeeder()
-        {
-            mongoRepository.Seeder();
-        }
-
+        public SqlSeeder(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
         public async Task SeedDriver()
         {
             var jsonString = File.ReadAllText(@"C:\Users\svile\OneDrive\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Driver.json");

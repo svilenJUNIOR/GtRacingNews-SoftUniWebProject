@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
+using MongoDB.Driver;
 
 namespace GtRacingNews.Repository.Repositories
 {
@@ -10,10 +11,9 @@ namespace GtRacingNews.Repository.Repositories
         public MongoRepository (MongoDbContext mongoDbContext)
             => this.mongoDbContext = mongoDbContext;
 
-        public async void Seeder()
-        {
-            this.mongoDbContext.Seed();
-        }
+
+        public IMongoCollection<T> GettAll<T>(string name) =>
+           mongoDbContext.GetCollection<T>(name);
 
         public Task AddAsync<T>(T newItem) where T : class
         {
@@ -81,11 +81,6 @@ namespace GtRacingNews.Repository.Repositories
         }
 
         public Team FindTeamByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<T> GettAll<T>() where T : class
         {
             throw new NotImplementedException();
         }

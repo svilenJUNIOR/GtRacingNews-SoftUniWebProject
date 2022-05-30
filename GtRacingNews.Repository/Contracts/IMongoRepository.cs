@@ -1,15 +1,15 @@
 ﻿using GtRacingNews.Data.DataModels;
+using MongoDB.Driver;
 
 namespace GtRacingNews.Repository.Contracts
 {
     public interface IMongoRepository
     {
-        void Seeder();
         void SaveChangesAsync();
         Task AddAsync<T>(T newItem) where T : class;
         Task AddRangeAsync<T>(List<T> newItems) where T : class;
         Task RemoveAsync<T>(T Item) where T : class;
-        List<T> GettAll<T>() where T : class;
+        IMongoCollection<T> GettAll<T>(string name);
 
         Team FindTeamById(string Id);
         Profile FindProfileByUserId(string Id);

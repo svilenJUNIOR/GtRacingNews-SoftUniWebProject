@@ -1,6 +1,6 @@
 ﻿namespace GtRacingNews.Services.Contracts
 {
-    public interface ISeederService
+    public interface ISqlSeeder
     {
         public Task SeedDriver();
 
