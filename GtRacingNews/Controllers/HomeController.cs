@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Data.DBContext;
+using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -17,8 +18,9 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> Seed()
         {
-            engine.mongoSeeder.SeedDriver();
-
+            MongoDbContext context = new MongoDbContext();
+            context.create();
+            //engine.mongoSeeder.SeedDriver();
             //await this.engine.SqlSeeder.SeedUser();
             //await this.engine.SqlSeeder.SeedRoles();
             //await this.engine.SqlSeeder.SeedUserRoles();
