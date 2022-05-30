@@ -2,18 +2,18 @@
 {
     public interface IMongoSeeder
     {
-        public void SeedDriver();
+        public Task SeedDriver();
 
-        public void SeedProfiles();
+        public Task SeedProfiles();
 
-        public void SeedTeams();
+        public Task SeedTeams();
 
-        public void SeedChampionship();
+        public Task SeedChampionship();
 
-        public void SeedComments();
+        public Task SeedComments();
 
-        public void SeedNews();
+        public Task SeedNews();
 
-        public void SeedRaces();
+        public Task SeedRaces();
     }
 }

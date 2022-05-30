@@ -13,6 +13,7 @@ namespace GtRacingNews.Data.DataModels.MongoModels
             this.Cup = cup;
             this.ImageUrl = imageUrl;
         }
+
         [Key]
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

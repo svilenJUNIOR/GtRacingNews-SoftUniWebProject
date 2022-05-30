@@ -12,51 +12,49 @@ namespace GtRacingNews.Services.Service
         public MongoSeeder(IMongoRepository mongoRepository) 
             => this.mongoRepository = mongoRepository;
 
-        public void SeedDriver()
+        public async Task SeedDriver()
         {
             var collection = mongoRepository.GettAll<BsonDocument>("Drivers");
 
-            var driversJson = File.ReadAllText(@"C:\Users\svile\OneDrive\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\MongoSeederData\Driver.json");
+            var driversJson = await File.ReadAllTextAsync(@"C:\Users\svile\OneDrive\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\MongoSeederData\Driver.json");
 
             var drivers = JsonConvert.DeserializeObject<List<Driver>>(driversJson);
             
             foreach (var driver in drivers)
             {
-                var id = new BsonObjectId(new ObjectId(driver.Id)).ToString();
-                driver.Id = id;
                 var bson = driver.ToBsonDocument();
                 var document = BsonDocument.Create(bson);
                 
-                collection.InsertOneAsync(document);
+                await collection.InsertOneAsync(document);
             }
         }
 
-        public void SeedChampionship()
+        public async Task SeedChampionship()
         {
             throw new NotImplementedException();
         }
 
-        public void SeedComments()
+        public async Task SeedComments()
         {
             throw new NotImplementedException();
         }
 
-        public void SeedNews()
+        public async Task SeedNews()
         {
             throw new NotImplementedException();
         }
 
-        public void SeedProfiles()
+        public async Task SeedProfiles()
         {
             throw new NotImplementedException();
         }
 
-        public void SeedRaces()
+        public async Task SeedRaces()
         {
             throw new NotImplementedException();
         }
 
-        public void SeedTeams()
+        public async Task SeedTeams()
         {
             throw new NotImplementedException();
         }
