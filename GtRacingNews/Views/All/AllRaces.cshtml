@@ -1,8 +1,127 @@
-﻿    <ul class="list-group" style="margin-left: 1000px;">
-        @foreach (var race in Model)
-        {
-            <li class="list-group-item" style="width: 400px;">@race.Name - @race.Date</li>
-        }
-    </ul>
+﻿@using GtRacingNews.ViewModels.Race
+@model List<ViewAllRacesViewModel>
+
+@{
+<div class="first">
+    <div style="margin-top:15px">
+        <table style="width: 400px;">
+            <th colspan="2" style="border: 1px solid black; background-color: white; text-align: center">GT World challenge Europe</th>
+            @foreach (var race in Model)
+            {
+                if (@race.ChampionshipName == "GT Europe Challenge By Fanatec")
+                {
+                    <tr style="border: 1px solid black; background-color: white">
+                        <td style="border: 1px solid black; background-color: white">
+                            @race.Name - @race.Date 
+
+                           @{
+                               if (@race.HasFinishied)
+                               {
+                                   <a href="/Race/Result?championshipName=@race.ChampionshipName" class="btn btn-primary">Results</a>
+                               }
+                               else
+                               {
+                                   <button disabled style="color: black">Not Finished Yet!</button>
+                               }
+                           }
+                           
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div style="margin-top:15px">
+        <table style="width: 400px;">
+            <th style="border: 1px solid black; background-color: white; text-align: center">Super GT</th>
+            @foreach (var race in Model)
+            {
+                if (@race.ChampionshipName == "Super GT")
+                {
+                    <tr style="border: 1px solid black; background-color: white">
+                        <td style="border: 1px solid black; background-color: white">
+                            @race.Name - @race.Date
+
+                            @{
+                               if (@race.HasFinishied)
+                               {
+                                   <a href="/Race/Result?championshipName=@race.ChampionshipName" class="btn btn-primary">Results</a>
+                               }
+                               else
+                               {
+                                   <button disabled style="color: black">Not Finished Yet!</button>
+                               }
+                           }
+
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+<div class="second">
+    <div style="margin-top:15px">
+        <table style="width: 400px;">
+            <th style="border: 1px solid black; background-color: white;  text-align: center">British GT</th>
+            @foreach (var race in Model)
+            {
+                if (@race.ChampionshipName == "British GT")
+                {
+                    <tr style="border: 1px solid black; background-color: white">
+                        <td style="border: 1px solid black; background-color: white">
+                            @race.Name - @race.Date
+
+                            @{
+                               if (@race.HasFinishied)
+                               {
+                                   <a href="/Race/Result?championshipName=@race.ChampionshipName" class="btn btn-primary">Results</a>
+                               }
+                               else
+                               {
+                                   <button disabled style="color: black">Not Finished Yet!</button>
+                               }
+                           }
+
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+    <div style="margin-top:15px">
+        <table style="width: 400px;">
+            <th style="border: 1px solid black; background-color: white;  text-align: center">International GT Open</th>
+            @foreach (var race in Model)
+            {
+                if (@race.ChampionshipName == "International GT Open")
+                {
+                    <tr style="border: 1px solid black; background-color: white">
+                        <td style="border: 1px solid black; background-color: white">
+                            @race.Name - @race.Date
+
+                            @{
+                               if (@race.HasFinishied)
+                               {
+                                   <a href="/Race/Result?championshipName=@race.ChampionshipName" class="btn btn-primary">Results</a>
+                               }
+                               else
+                               {
+                                   <button disabled style="color: black">Not Finished Yet!</button>
+                               }
+                           }
+
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+}
+
 
 <link rel="stylesheet" href="~/css/RaceCss/All.css"></link>

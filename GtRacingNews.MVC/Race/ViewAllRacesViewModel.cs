@@ -5,5 +5,7 @@
         public string Id { get; set; }
         public string Name { get; set; }
         public string Date { get; set; }
+        public string ChampionshipName { get; set; }
+        public bool HasFinishied { get; set; }
     }
 }

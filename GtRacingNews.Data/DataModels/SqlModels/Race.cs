@@ -21,6 +21,6 @@ namespace GtRacingNews.Data.DataModels.SqlModels
         public string Name { get; set; }
         public string Date { get; set; }
         public string? UserId { get; set; }
-
+        public string? ChampionshipId { get; set; }
     }
 }

@@ -62,8 +62,18 @@ namespace GtRacingNews.Services.Service
                 Name = x.Name,
                 Date = x.Date,
                 Id = x.Id,
+                ChampionshipName = this.sqlRepository.GettAll<Championship>()
+                .Where(c => c.Id == x.ChampionshipId).Select(x => x.Name).FirstOrDefault(),
+                HasFinishied = false
             }).ToList();
 
+            for (int i = 0; i < bindedRaces.Count(); i++)
+            {
+                DateTime date = DateTime.Parse(bindedRaces[i].Date);
+                if (date < DateTime.Now) bindedRaces[i].HasFinishied = true;
+            }
+
+            bindedRaces = bindedRaces.OrderBy(x => DateTime.Parse(x.Date)).ToList();
             return bindedRaces;
         }
 
