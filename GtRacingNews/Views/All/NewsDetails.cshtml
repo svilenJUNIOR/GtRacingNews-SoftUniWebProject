@@ -15,6 +15,10 @@
     </section>
 }
 
+@if (!this.User.Identity.IsAuthenticated)
+{
+    <p>Create an account or log in into an existing one, if you want to publish a comment!</p>
+}
 
 <section id="CommentList">
     <ul>
