@@ -1,0 +1,74 @@
+﻿ <header>
+
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+
+            @*side bar menu toggle button*@
+            <div id="main">
+                <button id="openNav" style="margin-right: 25px;" class="w3-button w3-teal w3-xmedium" onclick="w3_open()">&#9776;</button>
+            </div>
+            @*side bar menu toggle button*@
+
+            <h1 class="navbar-brand">Welcome @this.User.Identity.Name</h1>
+
+            <ul class="navbar-nav" style="float: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="All" asp-action="AllNews">NEWS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="All" asp-action="AllTeams">TEAMS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="All" asp-action="AllChampionships">CHAMPIONSHIPS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="All" asp-action="AllDrivers">DRIVERS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="" asp-controller="All" asp-action="AllRaces">RACING CALENDAR</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        @*side bar menu*@
+        <div class="w3-sidebar w3-bar-block w3-card w3-animate-left navbar-dark bg-dark" style="display:none" id="mySidebar">
+            <button class="w3-bar-item w3-button w3-large nav-link text-light"
+                    onclick="w3_close()">
+                Close &times;
+            </button>
+
+            @if (!this.User.IsInRole("Moderator") && !this.User.IsInRole("Admin") && this.User.Identity.IsAuthenticated)
+            {
+                <a href="/User/Profile" class="w3-bar-item w3-button nav-link text-light">Become Premium Member</a>
+            }
+
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <a href="/User/Logout" class="w3-bar-item w3-button nav-link text-light">Logout</a>
+            }
+            @if (this.User.IsInRole("Moderator") && this.User.Identity.IsAuthenticated)
+            {
+                <a href="/Profile/MyProfile" class="w3-bar-item w3-button nav-link text-light">My Profile</a>
+            }
+            @if (this.User.IsInRole("Moderator"))
+            {
+                <a href="/Premium/Add/AddTeam" class="w3-bar-item w3-button nav-link text-light">Add Team</a>
+                <a href="/Premium/Add/AddNews" class="w3-bar-item w3-button nav-link text-light">Add News</a>
+                <a href="/Premium/Add/AddRace" class="w3-bar-item w3-button nav-link text-light">Add Race</a>
+                <a href="/Premium/Add/AddDriver" class="w3-bar-item w3-button nav-link text-light">Add Driver</a>
+                <a href="/Premium/Add/AddChampionship" class="w3-bar-item w3-button nav-link text-light">Add Championship</a>
+            }
+        </div>
+        @*side bar menu*@
+
+    </header>
