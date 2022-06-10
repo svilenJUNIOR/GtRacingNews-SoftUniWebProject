@@ -1,4 +1,6 @@
-﻿<h1 style="text-align:center; color:white">Add new race</h1>
+﻿@await Html.PartialAsync("PartialHeader");
+
+<h1 style="text-align:center; color:white">Add new race</h1>
 <div class="box">
     <form method="post">
         <table style="height: 200px">
@@ -7,7 +9,7 @@
                     <label for="name">Name</label>
                 </td>
                 <td width="100px">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Must be less than 50 symbols"/>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Must be less than 50 symbols" />
                 </td>
             </tr>
 
@@ -16,7 +18,7 @@
                     <label for="date">Date</label>
                 </td>
                 <td width="300px">
-                    <input type="text" class="form-control" id="date" name="date" placeholder="dd/mm/yyyy"/>
+                    <input type="text" class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" />
                 </td>
             </tr>
 
@@ -33,3 +35,7 @@
 </div>
 
 <link rel="stylesheet" href="~/css/Add.css"></link>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="~/js/OpenSideMenu.js"></script>
+<script src="~/js/CloseSideMenu.js"></script>

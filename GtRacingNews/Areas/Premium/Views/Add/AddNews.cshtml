@@ -1,4 +1,6 @@
-﻿<h1 style="text-align:center; color:white">Add something interesting, others to read about</h1>
+﻿@await Html.PartialAsync("PartialHeader");
+
+<h1 style="text-align:center; color:white">Add something interesting, others to read about</h1>
 <div class="box">
     <form method="post">
         <table style="height: 200px">
@@ -7,7 +9,7 @@
                     <label for="heading">Heading</label>
                 </td>
                 <td width="100px">
-                    <input type="text" class="form-control" id="heading" name="heading" placeholder="Must be less than 100 symbols"/>
+                    <input type="text" class="form-control" id="heading" name="heading" placeholder="Must be less than 100 symbols" />
                 </td>
             </tr>
 
@@ -16,7 +18,7 @@
                     <label for="description">Description</label>
                 </td>
                 <td width="300px">
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Must be less than 10000 symbols"/>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Must be less than 10000 symbols" />
                 </td>
             </tr>
 
@@ -42,3 +44,7 @@
 </div>
 
 <link rel="stylesheet" href="~/css/Add.css"></link>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="~/js/OpenSideMenu.js"></script>
+<script src="~/js/CloseSideMenu.js"></script>

@@ -1,4 +1,5 @@
 ﻿@model GtRacingNews.ViewModels.Driver.AddNewDriverFormModel
+@await Html.PartialAsync("PartialHeader");
 
 <h1 style="text-align:center; color:white">Add new racing driver</h1>
 <div class="box">
@@ -9,7 +10,7 @@
                     <label for="name">Name</label>
                 </td>
                 <td width="300px">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Must be less than 30 symbols"/>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Must be less than 30 symbols" />
                 </td>
             </tr>
 
@@ -27,7 +28,7 @@
                     <label for="cup">Cup</label>
                 </td>
                 <td>
-                    <input type="text" class="form-control" id="cup" name="cup" placeholder="Must be less than 10 symbols"/>
+                    <input type="text" class="form-control" id="cup" name="cup" placeholder="Must be less than 10 symbols" />
                 </td>
             </tr>
 
@@ -40,17 +41,17 @@
                 </td>
             </tr>
 
-             <tr>
+            <tr>
                 <td>
                     <label for="teamName">TeamName</label>
                 </td>
                 <td>
                     <select name="teamName" id="teamName">
-                        @foreach(var team in @Model.Teams)
+                        @foreach (var team in @Model.Teams)
                         {
-                        <option value="@team.Name">@team.Name</option>
+                            <option value="@team.Name">@team.Name</option>
                         }
-                     </select>
+                    </select>
                 </td>
             </tr>
 
@@ -67,3 +68,7 @@
 </div>
 
 <link rel="stylesheet" href="~/css/Add.css"></link>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="~/js/OpenSideMenu.js"></script>
+<script src="~/js/CloseSideMenu.js"></script>
