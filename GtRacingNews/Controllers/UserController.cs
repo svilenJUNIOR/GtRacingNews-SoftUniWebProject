@@ -38,48 +38,77 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserFormModel model)
         {
-            var dataErrors = engine.validator.ValidateUserRegister(model, ModelState);
-            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+            try
+            {
+                var dataErrors = engine.validator.ValidateUserRegister(model, ModelState);
 
-            model.Email = model.Email.Trim();
-            model.Password = model.Password.Trim();
-            model.Username = model.Username.Trim();
-            model.ConfirmPassword = model.ConfirmPassword.Trim();
+                model.Email = model.Email.Trim();
+                model.Password = model.Password.Trim();
+                model.Username = model.Username.Trim();
+                model.ConfirmPassword = model.ConfirmPassword.Trim();
 
-            await userManager.CreateAsync(engine.userService.RegisterUser(model));
-            await signInManager.SignInAsync(engine.userService.RegisterUser(model), isPersistent: false);
-           
-            return Redirect("/");
+                await userManager.CreateAsync(engine.userService.RegisterUser(model));
+                await signInManager.SignInAsync(engine.userService.RegisterUser(model), isPersistent: false);
+
+                return Redirect("/");
+            }
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginUserFormModel model)
         {
-            var dataErrors = engine.validator.ValidateUserLogin(model);
-            if (dataErrors.Count() > 0) return View("./Error", dataErrors);
+            try
+            {
+                var dataErrors = engine.validator.ValidateUserLogin(model);
 
-            model.Email = model.Email.Trim();
-            model.Password = model.Password.Trim();
+                model.Email = model.Email.Trim();
+                model.Password = model.Password.Trim();
 
-            var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
-            await this.signInManager.SignInAsync(loggedInUser, true);
+                var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
+                await this.signInManager.SignInAsync(loggedInUser, true);
 
-            return Redirect("/");
+                return Redirect("/");
+            }
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Profile(CreatePremiumFormModel model)
         {
-            var nullErrors = engine.validator.AgainstNull(model.Address, model.Age.ToString());
-            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            try
+            {
+                var nullErrors = engine.validator.AgainstNull(model.Address, model.Age.ToString());
+                var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
-            var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+                await this.userManager.AddToRoleAsync(currentUser, model.Role);
+                await this.engine.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
+               
+                return Redirect("/");
+            }
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
 
-            await this.userManager.AddToRoleAsync(currentUser, model.Role);
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
 
-            await this.engine.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
-            return Redirect("/");
+                return View("./Error", errors);
+            }
         }
 
         [Authorize]
