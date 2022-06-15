@@ -28,6 +28,6 @@ namespace GtRacingNews.Services.Contracts
         Task<ICollection<Exception>> AddDriver(bool isModerator, string userId, AddNewDriverFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddChampionship(bool isModerator, string userId, AddNewChampionshipFormModel model, string type, ModelStateDictionary modelState);
 
-        ICollection<Exception> CollectErrors(ICollection<string> dataErrors, ICollection<string> nullErrors, ModelStateDictionary modelState);
+        ICollection<Exception> CollectErrors(IEnumerable<Exception> dataErrors, IEnumerable<Exception> nullErrors, ModelStateDictionary modelState);
     }
 }

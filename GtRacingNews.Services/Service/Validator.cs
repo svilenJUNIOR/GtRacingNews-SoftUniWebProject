@@ -16,7 +16,7 @@ namespace GtRacingNews.Services.Service
             this.sqlRepository = sqlRepository;
             this.hasher = hasher;
         }
-        public ICollection<Exception> AgainstNull(params string[] args)
+        public IEnumerable<Exception> AgainstNull(params string[] args)
         {
             var errors = new List<Exception>();
             bool check = false;
@@ -27,10 +27,9 @@ namespace GtRacingNews.Services.Service
 
             if (check) errors.Add(new ArgumentException(Messages.NullField));
 
-            return errors;
+            return ThrowErrors(errors);
         }
-
-        public ICollection<Exception> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
+        public IEnumerable<Exception> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
         {
             var errors = new List<Exception>();
 
@@ -53,7 +52,7 @@ namespace GtRacingNews.Services.Service
 
             if (modelStateErrors.Count() > 0) errors.AddRange(modelStateErrors);
 
-            return errors;
+            return ThrowErrors(errors);
         }
         public IEnumerable<Exception> ValidateUserLogin(LoginUserFormModel model)
         {
@@ -66,7 +65,7 @@ namespace GtRacingNews.Services.Service
             if (!users.Any(x => x.Email == model.Email)) errors.Add(new ArgumentException(Messages.UnExistingEmail));
             if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(new ArgumentException(Messages.UnExistingPassword));
 
-            return errors;
+            return ThrowErrors(errors);
         }
         public IEnumerable<Exception> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary modelState)
         {
@@ -86,7 +85,7 @@ namespace GtRacingNews.Services.Service
 
             if (modelStateErrors.Count() > 0) errors.AddRange(modelStateErrors);
 
-            return errors;
+            return ThrowErrors(errors);
         }
 
         private IEnumerable<Exception> CheckModelState(ModelStateDictionary modelState)
@@ -99,6 +98,11 @@ namespace GtRacingNews.Services.Service
                         errors.Add(new ArgumentException(modelError.ErrorMessage));
 
             return errors;
+        }
+        public IEnumerable<Exception> ThrowErrors(ICollection<Exception> errors)
+        {
+            if (errors.Count == 0) return new List<Exception>();
+            throw new AggregateException(errors);
         }
     }
 }

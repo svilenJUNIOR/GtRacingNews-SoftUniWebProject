@@ -111,15 +111,15 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public ICollection<Exception> CollectErrors(ICollection<string> dataErrors, ICollection<string> nullErrors, ModelStateDictionary modelState)
+        public ICollection<Exception> CollectErrors(IEnumerable<Exception> dataErrors, IEnumerable<Exception> nullErrors, ModelStateDictionary modelState)
         {
             var errors = new List<Exception>();
 
             if (dataErrors.Count() > 0)
-                foreach (var error in dataErrors) errors.Add(new ArgumentException(error));
+                foreach (var error in dataErrors) errors.Add(new ArgumentException(error.Message));
 
             if (nullErrors.Count() > 0)
-                foreach (var error in nullErrors) errors.Add(new ArgumentException(error));
+                foreach (var error in nullErrors) errors.Add(new ArgumentException(error.Message));
 
             if (!modelState.IsValid)
                 foreach (var values in modelState.Values)
