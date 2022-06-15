@@ -51,7 +51,7 @@ namespace GtRacingNews.Services.Service
             this.userService = userService;
         }
 
-        public async Task<ICollection<string>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState)
+        public async Task<ICollection<Exception>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
             var dataErrors = validator.ValidateObject(type, model.Name, modelState);
@@ -63,7 +63,7 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public async Task<ICollection<string>> AddNews(bool isModerator, string userId, AddNewFormModel model, string type, ModelStateDictionary modelState)
+        public async Task<ICollection<Exception>> AddNews(bool isModerator, string userId, AddNewFormModel model, string type, ModelStateDictionary modelState)
         {
             var nullErrors = validator.AgainstNull(model.Heading, model.Description, model.PictureUrl);
             var dataErrors = validator.ValidateObject("News", model.Heading, modelState);
@@ -75,7 +75,7 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public async Task<ICollection<string>> AddRace(bool isModerator, string userId, AddNewRaceFormModel model, string type, ModelStateDictionary modelState)
+        public async Task<ICollection<Exception>> AddRace(bool isModerator, string userId, AddNewRaceFormModel model, string type, ModelStateDictionary modelState)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.Date);
             var dataErrors = validator.ValidateObject("Race", model.Name, modelState);
@@ -87,7 +87,7 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public async Task<ICollection<string>> AddDriver(bool isModerator, string userId, AddNewDriverFormModel model, string type, ModelStateDictionary modelState)
+        public async Task<ICollection<Exception>> AddDriver(bool isModerator, string userId, AddNewDriverFormModel model, string type, ModelStateDictionary modelState)
         {
             var nullErrors = validator.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
             var dataErrors = validator.ValidateObject("Driver", model.Name, modelState);
@@ -99,7 +99,7 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public async Task<ICollection<string>> AddChampionship(bool isModerator, string userId, AddNewChampionshipFormModel model, string type, ModelStateDictionary modelState)
+        public async Task<ICollection<Exception>> AddChampionship(bool isModerator, string userId, AddNewChampionshipFormModel model, string type, ModelStateDictionary modelState)
         {
             var nullErrors = validator.AgainstNull(model.Name, model.LogoUrl);
             var dataErrors = validator.ValidateObject("Championship", model.Name, modelState);
@@ -111,32 +111,24 @@ namespace GtRacingNews.Services.Service
             return errors;
         }
 
-        public ICollection<string> CollectErrors(ICollection<string> dataErrors, ICollection<string> nullErrors, ModelStateDictionary modelState)
+        public ICollection<Exception> CollectErrors(ICollection<string> dataErrors, ICollection<string> nullErrors, ModelStateDictionary modelState)
         {
-            var errors = new List<string>();
+            var errors = new List<Exception>();
 
             if (dataErrors.Count() > 0)
-            {
-                foreach (var error in dataErrors) errors.Add(error);
-            }
+                foreach (var error in dataErrors) errors.Add(new ArgumentException(error));
 
             if (nullErrors.Count() > 0)
-            {
-                foreach (var error in nullErrors) errors.Add(error);
-            }
+                foreach (var error in nullErrors) errors.Add(new ArgumentException(error));
 
             if (!modelState.IsValid)
-            {
                 foreach (var values in modelState.Values)
-                {
                     foreach (var modelError in values.Errors)
-                    {
-                        errors.Add(modelError.ErrorMessage);
-                    }
-                }
-            }
+                        errors.Add(new ArgumentException(modelError.ErrorMessage));
 
-            return errors;
+            if (errors.Count == 0) return new List<Exception>();
+
+            throw new AggregateException(errors);
         }
     }
 }

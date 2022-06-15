@@ -68,10 +68,19 @@ namespace GtRacingNews.Areas.Premium.Controllers
         {
             bool isModerator = this.User.IsInRole("Moderator");
 
-            var result = await engine.AddTeam(isModerator, this.user().Result.Id, model, "Team", ModelState);
-            if (result.Count() > 0) return View("./Error", result);
+            try
+            {
+                var result = await engine.AddTeam(isModerator, this.user().Result.Id, model, "Team", ModelState);
+                return Redirect("/");
+            }
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
 
-            return Redirect("/");
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
@@ -80,10 +89,20 @@ namespace GtRacingNews.Areas.Premium.Controllers
         {
             bool isModerator = this.User.IsInRole("Moderator");
 
-            var result = await engine.AddNews(isModerator, this.user().Result.Id, model, "News", ModelState);
-            if (result.Count() > 0) return View("./Error", result);
+            try
+            {
+                var result = await engine.AddNews(isModerator, this.user().Result.Id, model, "News", ModelState);
+                return Redirect("/");
 
-            return Redirect("/");
+            }
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
@@ -92,10 +111,20 @@ namespace GtRacingNews.Areas.Premium.Controllers
         {
             bool isModerator = this.User.IsInRole("Moderator");
 
-            var result = await engine.AddRace(isModerator, this.user().Result.Id, model, "Race", ModelState);
-            if (result.Count() > 0) return View("./Error", result);
+            try
+            {
+                var result = await engine.AddRace(isModerator, this.user().Result.Id, model, "Race", ModelState);
+                return Redirect("/");
+            }
 
-            return Redirect("/");
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
@@ -104,10 +133,20 @@ namespace GtRacingNews.Areas.Premium.Controllers
         {
             bool isModerator = this.User.IsInRole("Moderator");
 
-            var result = await engine.AddDriver(isModerator, this.user().Result.Id, model, "Driver", ModelState);
-            if (result.Count() > 0) return View("./Error", result);
+            try
+            {
+                var result = await engine.AddDriver(isModerator, this.user().Result.Id, model, "Driver", ModelState);
+                return Redirect("/");
+            }
 
-            return Redirect("/");
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
@@ -116,10 +155,20 @@ namespace GtRacingNews.Areas.Premium.Controllers
         {
             bool isModerator = this.User.IsInRole("Moderator");
 
-            var result = await engine.AddChampionship(isModerator, this.user().Result.Id, model, "Championship", ModelState);
-            if (result.Count() > 0) return View("./Error", result);
+            try
+            {
+                var result = await engine.AddChampionship(isModerator, this.user().Result.Id, model, "Championship", ModelState);
+                return Redirect("/");
+            }
 
-            return Redirect("/");
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return View("./Error", errors);
+            }
         }
 
         [HttpPost]
