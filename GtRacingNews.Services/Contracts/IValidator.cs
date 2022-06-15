@@ -5,12 +5,11 @@ namespace GtRacingNews.Services.Contracts
 {
     public interface IValidator
     {
-        ICollection<string> AgainstNull(params string[] args);
+        ICollection<Exception> AgainstNull(params string[] args);
+        IEnumerable<Exception> ValidateUserLogin(LoginUserFormModel model);
+        IEnumerable<Exception> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary ModelState);
 
-        IEnumerable<string> ValidateUserLogin(LoginUserFormModel model);
-        IEnumerable<string> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary ModelState);
-
-        ICollection<string> ValidateObject(string dbset, string check, ModelStateDictionary ModelState);
+        ICollection<Exception> ValidateObject(string dbset, string check, ModelStateDictionary ModelState);
         
     }
 }
