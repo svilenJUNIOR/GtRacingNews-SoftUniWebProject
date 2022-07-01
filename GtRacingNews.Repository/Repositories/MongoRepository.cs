@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels.MongoModels;
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace GtRacingNews.Repository.Repositories
@@ -12,17 +13,16 @@ namespace GtRacingNews.Repository.Repositories
             => this.mongoDbContext = mongoDbContext;
 
 
-        public IMongoCollection<T> GettAll<T>(string name) =>
-           mongoDbContext.GetCollection<T>(name);
-
-        public Task AddAsync<T>(T newItem) where T : class
+        public async Task AddAsync(string collectionName, BsonDocument item)
         {
-            throw new NotImplementedException();
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            await collection.InsertOneAsync(item);
         }
 
-        public Task AddRangeAsync<T>(List<T> newItems) where T : class
+        public async Task AddRangeAsync(string collectionName, List<BsonDocument> ItemsToAdd)
         {
-            throw new NotImplementedException();
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            await collection.InsertManyAsync(ItemsToAdd);
         }
 
         public Championship FindChampionshipById(string? Id)

@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DBContext;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace GtRaacingNews.Test
 {
@@ -15,7 +16,7 @@ namespace GtRaacingNews.Test
             connection.Open();
 
             dbContextOptions = new DbContextOptionsBuilder<SqlDBContext>()
-                .UseSqlServer(connection)
+                .UseSqlite(connection)
                 .Options;
 
             using var context = new SqlDBContext(dbContextOptions);

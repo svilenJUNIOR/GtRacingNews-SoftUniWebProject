@@ -25,7 +25,7 @@ namespace GtRacingNews.Services.Service
                 if (string.IsNullOrEmpty(arg) || string.IsNullOrWhiteSpace(arg))
                     check = true;
 
-            if (check) errors.Add(new ArgumentException(Messages.NullField));
+            if (check) errors.Add(new ArgumentNullException(Messages.NullField));
 
             return ThrowErrors(errors);
         }

@@ -9,7 +9,6 @@ namespace GtRacingNews.Repository.Contracts
         Task AddAsync<T>(T newItem) where T : class;
         Task AddRangeAsync<T>(List<T> newItems) where T : class;
         Task RemoveAsync<T>(T Item) where T : class;
-        IMongoCollection<T> GettAll<T>(string name);
 
         Team FindTeamById(string Id);
         Profile FindProfileByUserId(string Id);

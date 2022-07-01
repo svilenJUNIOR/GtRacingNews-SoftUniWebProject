@@ -13,10 +13,7 @@ namespace GtRacingNews.Data.DBContext
         public SqlDBContext(DbContextOptions<SqlDBContext> options)
            : base(options)
         {
-        }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
         }
 
         public DbSet<Driver> Drivers { get; set; }
