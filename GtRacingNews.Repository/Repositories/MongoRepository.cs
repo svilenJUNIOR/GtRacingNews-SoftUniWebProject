@@ -24,6 +24,7 @@ namespace GtRacingNews.Repository.Repositories
             var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
             await collection.InsertManyAsync(ItemsToAdd);
         }
+
         public BsonDocument FindById(string collectionName, string Id)
         {
             var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
@@ -42,34 +43,29 @@ namespace GtRacingNews.Repository.Repositories
             return item;
         }
 
-        public Championship FindChampionshipByName(string name)
+        public BsonDocument FindByName(string collectionName, string name)
         {
-            throw new NotImplementedException();
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("Name", name);
+            var item = collection.Find(filter).FirstOrDefault();
+
+            return item;
         }
 
-        public Driver FindDriverByName(string name)
+        public BsonDocument FindNewsByHeading(string collectionName, string heading)
         {
-            throw new NotImplementedException();
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("Heading", heading);
+            var item = collection.Find(filter).FirstOrDefault();
+
+            return item;
         }
 
-        public News FindNewsByName(string name)
+        public async Task RemoveAsync(string collectionName, string Id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Race FindRaceByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Team FindTeamByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RemoveAsync<T>(T Item) where T : class
-        {
-            throw new NotImplementedException();
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            var deleteFilter = Builders<BsonDocument>.Filter.Eq("_id", Id);
+            await collection.DeleteOneAsync(deleteFilter);
         }
     }
 }
