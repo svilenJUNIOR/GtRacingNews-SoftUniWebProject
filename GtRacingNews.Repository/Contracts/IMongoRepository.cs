@@ -1,27 +1,21 @@
-﻿using GtRacingNews.Data.DataModels.MongoModels;
-using MongoDB.Driver;
+﻿using MongoDB.Bson;
 
 namespace GtRacingNews.Repository.Contracts
 {
     public interface IMongoRepository
     {
-        void SaveChangesAsync();
-        Task AddAsync<T>(T newItem) where T : class;
-        Task AddRangeAsync<T>(List<T> newItems) where T : class;
-        Task RemoveAsync<T>(T Item) where T : class;
+        public async Task AddAsync(string collectionName, BsonDocument item);
 
-        Team FindTeamById(string Id);
-        Profile FindProfileByUserId(string Id);
-        Championship FindChampionshipById(string? Id);
-        Driver FindDriverById(string Id);
-        Comment FindCommentById(string Id);
-        Race FindRaceById(string Id);
-        News FindNewsById(string Id);
+        public async Task AddRangeAsync(string collectionName, List<BsonDocument> ItemsToAdd);
 
-        Team FindTeamByName(string name);
-        Championship FindChampionshipByName(string name);
-        Driver FindDriverByName(string name);
-        Race FindRaceByName(string name);
-        News FindNewsByName(string name);
+        public BsonDocument FindById(string collectionName, string Id);
+
+        public BsonDocument FindProfileByUserId(string collectionName, string Id);
+
+        public BsonDocument FindByName(string collectionName, string name);
+
+        public BsonDocument FindNewsByHeading(string collectionName, string heading);
+
+        public async Task RemoveAsync(string collectionName, string Id);
     }
 }
