@@ -21,5 +21,6 @@ namespace GtRacingNews.Data.DataModels.MongoModels
         public int Age { get; set; }
         public string ProfileType { get; set; }
         public string Address { get; set; }
+        public ObjectId UserId { get; set; }
     }
 }

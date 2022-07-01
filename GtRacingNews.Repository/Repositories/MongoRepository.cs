@@ -24,23 +24,25 @@ namespace GtRacingNews.Repository.Repositories
             var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
             await collection.InsertManyAsync(ItemsToAdd);
         }
-
-        public Championship FindChampionshipById(string? Id)
+        public BsonDocument FindById(string collectionName, string Id)
         {
-            throw new NotImplementedException();
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", Id);
+            var item = collection.Find(filter).FirstOrDefault();
+
+            return item;
+        }
+
+        public BsonDocument FindProfileByUserId(string collectionName, string Id)
+        {
+            var collection = mongoDbContext.GetCollection<BsonDocument>(collectionName);
+            var filter = Builders<BsonDocument>.Filter.Eq("UserId", Id);
+            var item = collection.Find(filter).FirstOrDefault();
+
+            return item;
         }
 
         public Championship FindChampionshipByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Comment FindCommentById(string Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Driver FindDriverById(string Id)
         {
             throw new NotImplementedException();
         }
@@ -50,32 +52,12 @@ namespace GtRacingNews.Repository.Repositories
             throw new NotImplementedException();
         }
 
-        public News FindNewsById(string Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public News FindNewsByName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public Profile FindProfileByUserId(string Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Race FindRaceById(string Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Race FindRaceByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Team FindTeamById(string Id)
         {
             throw new NotImplementedException();
         }
@@ -86,11 +68,6 @@ namespace GtRacingNews.Repository.Repositories
         }
 
         public Task RemoveAsync<T>(T Item) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
