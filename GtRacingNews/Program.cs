@@ -22,13 +22,8 @@ builder.Services.AddControllersWithViews()
 
     });
 
-////////////////// MONGO MONGO MONGO //////////////////
-builder.Services.Configure<MongoSetUp>(
-    builder.Configuration.GetSection("MongoSettings"));
-////////////////// MONGO MONGO MONGO //////////////////
 
 
-builder.Services.AddScoped<MongoDbContext, MongoDbContext>();
 builder.Services.AddScoped<IHasher, Hasher>();
 builder.Services.AddScoped<IEngine, Engine>();
 builder.Services.AddScoped<IBindService, BindService>();
@@ -39,8 +34,6 @@ builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
-builder.Services.AddScoped<IMongoRepository, MongoRepository>();
-builder.Services.AddScoped<IMongoSeeder, MongoSeeder>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 
 var app = builder.Build();

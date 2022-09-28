@@ -18,8 +18,6 @@ namespace GtRacingNews.Services.Service
         public ISqlSeeder seeder { get; set; }
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
-        public IMongoRepository mongoRepository { get; set; }
-        public IMongoSeeder mongoSeeder { get; set; }
         public IProfileService profileService { get; set; }
         public IUserService userService { get; set; }
 
@@ -32,8 +30,6 @@ namespace GtRacingNews.Services.Service
                 ISqlSeeder seeder,
                 IValidator validator,
                 ISqlRepository sqlRepository,
-                IMongoRepository mongoRepository,
-                IMongoSeeder mongoSeeder,
                 IProfileService profileService,
                 IUserService userService
             )
@@ -45,8 +41,6 @@ namespace GtRacingNews.Services.Service
             this.seeder = seeder;
             this.validator = validator;
             this.sqlRepository = sqlRepository;
-            this.mongoRepository = mongoRepository;
-            this.mongoSeeder = mongoSeeder;
             this.profileService = profileService;
             this.userService = userService;
         }

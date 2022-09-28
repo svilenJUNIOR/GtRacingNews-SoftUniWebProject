@@ -50,6 +50,7 @@ namespace GtRacingNews.Repository.Repositories
         public Profile FindProfileByUserId(string Id) => context.Profiles.Where(x => x.UserId == Id).FirstOrDefault();
         public List<T> GettAll<T>() where T : class => context.Set<T>().ToList();
 
+
         public Team FindTeamById(string Id) => context.Teams.Where(x => x.Id == Id).FirstOrDefault();
         public Championship FindChampionshipById(string? Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();
         public Driver FindDriverById(string Id) => context.Drivers.Where(x => x.Id == Id).FirstOrDefault();

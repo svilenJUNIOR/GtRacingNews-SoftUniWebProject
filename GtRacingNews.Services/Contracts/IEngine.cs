@@ -19,8 +19,6 @@ namespace GtRacingNews.Services.Contracts
         public IProfileService profileService { get; set; }
         public ISqlRepository sqlRepository { get; set; }
         public IUserService userService { get; set; }
-        public IMongoSeeder mongoSeeder { get; set; }
-        public IMongoRepository mongoRepository { get; set; }
 
         Task<ICollection<Exception>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddNews(bool isModerator, string userId, AddNewFormModel model, string type, ModelStateDictionary modelState);
