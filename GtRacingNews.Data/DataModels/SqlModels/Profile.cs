@@ -14,9 +14,8 @@ namespace GtRacingNews.Data.DataModels.SqlModels
             this.Address = Address;
             this.ProfilePicture = profilePicture;
         }
+
         [Key]
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string ProfilePicture { get; set; }
         public int Age { get; set; }

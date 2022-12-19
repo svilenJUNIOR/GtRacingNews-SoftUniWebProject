@@ -16,8 +16,6 @@ namespace GtRacingNews.Data.DataModels.SqlModels
             this.TeamId = teamId;
         }
         [Key]
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
