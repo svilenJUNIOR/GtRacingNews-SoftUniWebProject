@@ -25,7 +25,6 @@ namespace GTRaacingNews.Test
 
             serviceProvider = serviceCollection
                 .AddSingleton(sp => context.CreateContext())
-                .AddSingleton<MongoDbContext, MongoDbContext>()
                 .AddSingleton<IHasher, Hasher>()
                 .AddSingleton<IEngine, Engine>()
                 .AddSingleton<IBindService, BindService>()
@@ -36,8 +35,6 @@ namespace GTRaacingNews.Test
                 .AddSingleton<IReturnAll, ReturnAll>()
                 .AddSingleton<ISqlSeeder, SqlSeeder>()
                 .AddSingleton<ISqlRepository, SqlRepository>()
-                .AddSingleton<IMongoRepository, MongoRepository>()
-                .AddSingleton<IMongoSeeder, MongoSeeder>()
                 .AddSingleton<IProfileService, ProfileService>()
                 .AddSingleton<RoleManager<IdentityRole>, RoleManager<IdentityRole>>()
                 .BuildServiceProvider();
