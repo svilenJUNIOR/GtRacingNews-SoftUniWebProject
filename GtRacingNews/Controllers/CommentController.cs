@@ -26,7 +26,7 @@ namespace GtRacingNews.Controllers
         {
             var user = await userManager.GetUserAsync(User);
 
-            var nullErrors = engine.validator.AgainstNull(user.UserName, model.Description);
+            var nullErrors = engine.guard.AgainstNull(user.UserName, model.Description);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 

@@ -93,7 +93,7 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var nullErrors = engine.validator.AgainstNull(model.Address, model.Age.ToString());
+                var nullErrors = engine.guard.AgainstNull(model.Address, model.Age.ToString());
                 var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
                 await this.userManager.AddToRoleAsync(currentUser, model.Role);

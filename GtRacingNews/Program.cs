@@ -30,6 +30,7 @@ builder.Services.AddScoped<IBindService, BindService>();
 builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator, Validator>();
+builder.Services.AddScoped<IGuard, Guard>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();

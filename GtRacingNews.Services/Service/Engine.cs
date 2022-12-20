@@ -16,6 +16,7 @@ namespace GtRacingNews.Services.Service
         public IDeleteService deleteService { get; set; }
         public IReturnAll returnAll { get; set; }
         public ISqlSeeder seeder { get; set; }
+        public IGuard guard { get; set; }
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
         public IUserService userService { get; set; }
@@ -29,7 +30,8 @@ namespace GtRacingNews.Services.Service
                 ISqlSeeder seeder,
                 IValidator validator,
                 ISqlRepository sqlRepository,
-                IUserService userService
+                IUserService userService,
+                IGuard guard
             )
         {
             this.addService = addService;
@@ -40,86 +42,49 @@ namespace GtRacingNews.Services.Service
             this.validator = validator;
             this.sqlRepository = sqlRepository;
             this.userService = userService;
+            this.guard = guard;
         }
 
         public async Task<ICollection<Exception>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState)
         {
-            var nullErrors = validator.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
-            var dataErrors = validator.ValidateObject(type, model.Name, modelState);
-
-            var errors = CollectErrors(dataErrors, nullErrors, modelState);
+            ICollection<Exception> errors = this.validator.ValidateTeam(model, type, modelState);
 
             if (errors.Count() == 0) await addService.AddNewTeam(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName, isModerator, userId);
 
             return errors;
         }
-
         public async Task<ICollection<Exception>> AddNews(bool isModerator, string userId, AddNewFormModel model, string type, ModelStateDictionary modelState)
         {
-            var nullErrors = validator.AgainstNull(model.Heading, model.Description, model.PictureUrl);
-            var dataErrors = validator.ValidateObject("News", model.Heading, modelState);
-
-            var errors = CollectErrors(dataErrors, nullErrors, modelState);
+            ICollection<Exception> errors = this.validator.ValidateNews(model, modelState);
 
             if (errors.Count() == 0) await addService.AddNews(model.Heading, model.Description, model.PictureUrl, isModerator, userId);
 
             return errors;
         }
-
         public async Task<ICollection<Exception>> AddRace(bool isModerator, string userId, AddNewRaceFormModel model, string type, ModelStateDictionary modelState)
         {
-            var nullErrors = validator.AgainstNull(model.Name, model.Date);
-            var dataErrors = validator.ValidateObject("Race", model.Name, modelState);
-
-            var errors = CollectErrors(dataErrors, nullErrors, modelState);
+            ICollection<Exception> errors = this.validator.ValidateRace(model, modelState);
 
             if (errors.Count() == 0) await addService.AddNewRace(model.Name, model.Date, isModerator, userId);
 
             return errors;
         }
-
         public async Task<ICollection<Exception>> AddDriver(bool isModerator, string userId, AddNewDriverFormModel model, string type, ModelStateDictionary modelState)
         {
-            var nullErrors = validator.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
-            var dataErrors = validator.ValidateObject("Driver", model.Name, modelState);
-
-            var errors = CollectErrors(dataErrors, nullErrors, modelState);
+            ICollection<Exception> errors = this.validator.ValidateDriver(model, modelState);
 
             if (errors.Count() == 0) await addService.AddNewDriver(model.Name, model.Cup, model.ImageUrl, model.Age, model.TeamName, isModerator, userId);
 
             return errors;
         }
-
         public async Task<ICollection<Exception>> AddChampionship(bool isModerator, string userId, AddNewChampionshipFormModel model, string type, ModelStateDictionary modelState)
         {
-            var nullErrors = validator.AgainstNull(model.Name, model.LogoUrl);
-            var dataErrors = validator.ValidateObject("Championship", model.Name, modelState);
-
-            var errors = CollectErrors(dataErrors, nullErrors, modelState);
+            ICollection<Exception> errors = this.validator.ValidateChampionship(model, modelState);
 
             if (errors.Count() == 0) await addService.AddNewChampionship(model.Name, model.LogoUrl, isModerator, userId);
 
             return errors;
         }
 
-        public ICollection<Exception> CollectErrors(IEnumerable<Exception> dataErrors, IEnumerable<Exception> nullErrors, ModelStateDictionary modelState)
-        {
-            var errors = new List<Exception>();
-
-            if (dataErrors.Count() > 0)
-                foreach (var error in dataErrors) errors.Add(new ArgumentException(error.Message));
-
-            if (nullErrors.Count() > 0)
-                foreach (var error in nullErrors) errors.Add(new ArgumentException(error.Message));
-
-            if (!modelState.IsValid)
-                foreach (var values in modelState.Values)
-                    foreach (var modelError in values.Errors)
-                        errors.Add(new ArgumentException(modelError.ErrorMessage));
-
-            if (errors.Count == 0) return new List<Exception>();
-
-            throw new AggregateException(errors);
-        }
     }
 }

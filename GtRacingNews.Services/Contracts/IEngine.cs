@@ -18,13 +18,12 @@ namespace GtRacingNews.Services.Contracts
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
         public IUserService userService { get; set; }
+        public IGuard guard { get; set; }
 
         Task<ICollection<Exception>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddNews(bool isModerator, string userId, AddNewFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddRace(bool isModerator, string userId, AddNewRaceFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddDriver(bool isModerator, string userId, AddNewDriverFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddChampionship(bool isModerator, string userId, AddNewChampionshipFormModel model, string type, ModelStateDictionary modelState);
-
-        ICollection<Exception> CollectErrors(IEnumerable<Exception> dataErrors, IEnumerable<Exception> nullErrors, ModelStateDictionary modelState);
     }
 }
