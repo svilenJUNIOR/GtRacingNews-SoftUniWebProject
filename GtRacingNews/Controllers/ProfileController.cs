@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> MyProfile()
         {
             var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
-            var userProfile = engine.sqlRepository.FindProfileByUserId(currentUser.Id);
+            var userProfile = engine.sqlRepository.FindById<Profile>(currentUser.Id);
 
             var model = engine.profileService.ProfileBind(currentUser, userProfile);
 

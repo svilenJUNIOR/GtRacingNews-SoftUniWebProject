@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.User;
@@ -34,19 +35,19 @@ namespace GtRacingNews.Services.Service
             var errors = new List<Exception>();
 
             if (dbset == "Team")
-                if (sqlRepository.FindTeamByName(check) != null) errors.Add(new ArgumentException(Messages.ExistingTeam));
+                if (sqlRepository.FindByName<Team>(check) != null) errors.Add(new ArgumentException(Messages.ExistingTeam));
 
             if (dbset == "Championship")
-                if (sqlRepository.FindChampionshipByName(check) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
+                if (sqlRepository.FindByName<Championship>(check) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
 
             if (dbset == "News")
-                if (sqlRepository.FindNewsByName(check) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
+                if (sqlRepository.FindByName<News>(check) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
 
             if (dbset == "Race")
-                if (sqlRepository.FindRaceByName(check) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
+                if (sqlRepository.FindByName<Race>(check) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
 
             if (dbset == "Driver")
-                if (sqlRepository.FindDriverByName(check) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
+                if (sqlRepository.FindByName<Driver>(check) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
 
             var modelStateErrors = CheckModelState(modelState);
 

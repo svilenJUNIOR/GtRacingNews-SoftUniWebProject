@@ -9,23 +9,14 @@ namespace GtRacingNews.Repository.Contracts
         Task AddAsync<T>(T newItem) where T : class;
         Task AddRangeAsync<T>(List<T> newItems) where T : class;
         Task RemoveAsync<T>(T Item) where T : class;
+      
+        List<T> GettAll<T>() where T : class;
+
         IdentityUser FindUserByEmail(string email);
         IdentityUser FindUserById(string Id);
         IdentityRole FindRoleById(string Id);
-        List<T> GettAll<T>() where T : class;
 
         T FindById<T>(string Id) where T : class;
-        Profile FindProfileByUserId(string Id);
-        //Championship FindChampionshipById(string? Id);
-        //Driver FindDriverById(string Id);
-        //Comment FindCommentById(string Id);
-        //Race FindRaceById(string Id);
-        //News FindNewsById(string Id);
-
-        Team FindTeamByName(string name);
-        Championship FindChampionshipByName(string name);
-        Driver FindDriverByName(string name);
-        Race FindRaceByName(string name);
-        News FindNewsByName(string name);
+        T FindByName<T>(string Name) where T : class;
     }
 }
