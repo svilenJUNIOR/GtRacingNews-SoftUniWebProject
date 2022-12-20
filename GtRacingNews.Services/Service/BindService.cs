@@ -85,7 +85,7 @@ namespace GtRacingNews.Services.Service
             {
                 Name = x.Name,
                 CarModel = x.CarModel,
-                ChampionshipName = this.sqlRepository.FindChampionshipById(x.ChampionshipId).Name,
+                ChampionshipName = this.sqlRepository.FindById<Championship>(x.Id).Name,
                 Drivers = drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList(),
                 Id = x.Id,
                 LogoUrl = x.LogoUrl,

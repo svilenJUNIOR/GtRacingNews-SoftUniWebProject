@@ -2,6 +2,7 @@
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GtRacingNews.Repository.Repositories
 {
@@ -51,12 +52,16 @@ namespace GtRacingNews.Repository.Repositories
         public List<T> GettAll<T>() where T : class => context.Set<T>().ToList();
 
 
-        public Team FindTeamById(string Id) => context.Teams.Where(x => x.Id == Id).FirstOrDefault();
-        public Championship FindChampionshipById(string? Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();
-        public Driver FindDriverById(string Id) => context.Drivers.Where(x => x.Id == Id).FirstOrDefault();
-        public Comment FindCommentById(string Id) => context.Comments.Where(x => x.Id == Id).FirstOrDefault();
-        public Race FindRaceById(string Id) => context.Races.Where(x => x.Id == Id).FirstOrDefault();
-        public News FindNewsById(string Id) => context.News.Where(x => x.Id == Id).FirstOrDefault();
+        public T FindById<T> (string Id) where T : class
+        {
+            DbSet<T> table = context.Set<T>();
+            return table.Find(Id);
+        }
+        //public Championship FindChampionshipById(string? Id) => context.Championships.Where(x => x.Id == Id).FirstOrDefault();
+        //public Driver FindDriverById(string Id) => context.Drivers.Where(x => x.Id == Id).FirstOrDefault();
+        //public Comment FindCommentById(string Id) => context.Comments.Where(x => x.Id == Id).FirstOrDefault();
+        //public Race FindRaceById(string Id) => context.Races.Where(x => x.Id == Id).FirstOrDefault();
+        //public News FindNewsById(string Id) => context.News.Where(x => x.Id == Id).FirstOrDefault();
 
         public Team FindTeamByName(string name) => context.Teams.Where(x => x.Name == name).FirstOrDefault();
         public Championship FindChampionshipByName(string name) => context.Championships.Where(x => x.Name == name).FirstOrDefault();

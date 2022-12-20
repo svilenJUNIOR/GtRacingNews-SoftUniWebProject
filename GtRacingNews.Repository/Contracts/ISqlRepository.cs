@@ -14,13 +14,13 @@ namespace GtRacingNews.Repository.Contracts
         IdentityRole FindRoleById(string Id);
         List<T> GettAll<T>() where T : class;
 
-        Team FindTeamById(string Id);
+        T FindById<T>(string Id) where T : class;
         Profile FindProfileByUserId(string Id);
-        Championship FindChampionshipById(string? Id);
-        Driver FindDriverById(string Id);
-        Comment FindCommentById(string Id);
-        Race FindRaceById(string Id);
-        News FindNewsById(string Id);
+        //Championship FindChampionshipById(string? Id);
+        //Driver FindDriverById(string Id);
+        //Comment FindCommentById(string Id);
+        //Race FindRaceById(string Id);
+        //News FindNewsById(string Id);
 
         Team FindTeamByName(string name);
         Championship FindChampionshipByName(string name);

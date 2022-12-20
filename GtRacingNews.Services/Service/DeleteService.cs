@@ -12,12 +12,12 @@ namespace GtRacingNews.Services.Service
         public DeleteService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
         public async Task Delete(string collection, string id)
         {
-            if (collection == "Team") await sqlRepository.RemoveAsync<Team>(sqlRepository.FindTeamById(id));
-            if (collection == "Championship") await sqlRepository.RemoveAsync<Championship>(sqlRepository.FindChampionshipById(id));
-            if (collection == "Driver") await sqlRepository.RemoveAsync<Driver>(sqlRepository.FindDriverById(id));
-            if (collection == "Comment") await sqlRepository.RemoveAsync<Comment>(sqlRepository.FindCommentById(id));
-            if (collection == "Race") await sqlRepository.RemoveAsync<Race>(sqlRepository.FindRaceById(id));
-            if (collection == "News") await sqlRepository.RemoveAsync<News>(sqlRepository.FindNewsById(id));
+            if (collection == "Team") await sqlRepository.RemoveAsync<Team>((Team)sqlRepository.FindById<Team>(id));
+            if (collection == "Championship") await sqlRepository.RemoveAsync<Championship>((Championship)sqlRepository.FindById<Championship>(id));
+            if (collection == "Driver") await sqlRepository.RemoveAsync<Driver>((Driver)sqlRepository.FindById<Driver>(id));
+            if (collection == "Comment") await sqlRepository.RemoveAsync<Comment>((Comment)sqlRepository.FindById<Comment>(id));
+            if (collection == "Race") await sqlRepository.RemoveAsync<Race>((Race)sqlRepository.FindById<Race>(id));
+            if (collection == "News") await sqlRepository.RemoveAsync<News>((News)sqlRepository.FindById<News>(id));
         }
         public async Task DeleteUserOrRole(string type, string id)
         {
