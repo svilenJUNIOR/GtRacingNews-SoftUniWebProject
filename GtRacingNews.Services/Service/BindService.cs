@@ -8,6 +8,7 @@ using GtRacingNews.ViewModels.Profile;
 using GtRacingNews.ViewModels.Race;
 using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Identity;
+using System.Globalization;
 
 namespace GtRacingNews.Services.Service
 {
@@ -71,11 +72,11 @@ namespace GtRacingNews.Services.Service
 
             for (int i = 0; i < bindedRaces.Count(); i++)
             {
-                DateTime date = DateTime.Parse(bindedRaces[i].Date);
+                DateTime date = DateTime.ParseExact(bindedRaces[i].Date, "dd/MM/yyyy", null);
                 if (date < DateTime.Now) bindedRaces[i].HasFinishied = true;
             }
 
-            bindedRaces = bindedRaces.OrderBy(x => DateTime.Parse(x.Date)).ToList();
+            bindedRaces = bindedRaces.OrderBy(x => DateTime.ParseExact(x.Date, "dd/MM/yyyy",null)).ToList();
             return bindedRaces;
         }
 
@@ -87,7 +88,7 @@ namespace GtRacingNews.Services.Service
             {
                 Name = x.Name,
                 CarModel = x.CarModel,
-                ChampionshipName = this.sqlRepository.FindById<Championship>(x.Id).Name,
+                ChampionshipName = this.sqlRepository.FindById<Championship>(x.ChampionshipId).Name,
                 Drivers = drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList(),
                 Id = x.Id,
                 LogoUrl = x.LogoUrl,
