@@ -18,7 +18,6 @@ namespace GtRacingNews.Services.Service
         public ISqlSeeder seeder { get; set; }
         public IValidator validator { get; set; }
         public ISqlRepository sqlRepository { get; set; }
-        public IProfileService profileService { get; set; }
         public IUserService userService { get; set; }
 
         public Engine
@@ -30,7 +29,6 @@ namespace GtRacingNews.Services.Service
                 ISqlSeeder seeder,
                 IValidator validator,
                 ISqlRepository sqlRepository,
-                IProfileService profileService,
                 IUserService userService
             )
         {
@@ -41,7 +39,6 @@ namespace GtRacingNews.Services.Service
             this.seeder = seeder;
             this.validator = validator;
             this.sqlRepository = sqlRepository;
-            this.profileService = profileService;
             this.userService = userService;
         }
 

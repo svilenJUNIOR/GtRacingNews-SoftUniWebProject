@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Data.DBContext;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ namespace GtRacingNews.Repository.Repositories
             DbSet<T> table = context.Set<T>();
             return table.Find(Id);
         }
+
+        public Profile FindByUserId(string UserId) => context.Profiles.Where(x => x.UserId == UserId).FirstOrDefault();
 
         public T FindByName<T>(string name) where T : class
         {

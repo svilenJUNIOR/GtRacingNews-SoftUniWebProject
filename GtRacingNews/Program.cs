@@ -34,7 +34,6 @@ builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
-builder.Services.AddScoped<IProfileService, ProfileService>();
 
 var app = builder.Build();
 

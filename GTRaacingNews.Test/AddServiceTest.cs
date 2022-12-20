@@ -35,7 +35,6 @@ namespace GTRaacingNews.Test
                 .AddSingleton<IReturnAll, ReturnAll>()
                 .AddSingleton<ISqlSeeder, SqlSeeder>()
                 .AddSingleton<ISqlRepository, SqlRepository>()
-                .AddSingleton<IProfileService, ProfileService>()
                 .AddSingleton<RoleManager<IdentityRole>, RoleManager<IdentityRole>>()
                 .BuildServiceProvider();
         }

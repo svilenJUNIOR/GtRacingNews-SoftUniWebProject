@@ -16,6 +16,7 @@ namespace GtRacingNews.Repository.Contracts
         IdentityUser FindUserById(string Id);
         IdentityRole FindRoleById(string Id);
 
+        Profile FindByUserId(string UserId);
         T FindById<T>(string Id) where T : class;
         T FindByName<T>(string Name) where T : class;
     }

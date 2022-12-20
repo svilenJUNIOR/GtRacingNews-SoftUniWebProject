@@ -16,7 +16,6 @@ namespace GtRacingNews.Services.Contracts
         public IReturnAll returnAll { get; set; }
         public ISqlSeeder seeder { get; set; }
         public IValidator validator { get; set; }
-        public IProfileService profileService { get; set; }
         public ISqlRepository sqlRepository { get; set; }
         public IUserService userService { get; set; }
 

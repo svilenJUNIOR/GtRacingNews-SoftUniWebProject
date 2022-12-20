@@ -2,8 +2,10 @@
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
+using GtRacingNews.ViewModels.Profile;
 using GtRacingNews.ViewModels.Race;
 using GtRacingNews.ViewModels.Team;
+using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Services.Contracts
 {
@@ -15,5 +17,6 @@ namespace GtRacingNews.Services.Contracts
         ICollection<ViewAllRacesViewModel> RaceBind(ICollection<Race> racesToBind);
         ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind);
         ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind);
+        MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile);
     }
 }
