@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.Common.Constants;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@ namespace GtRacingNews.Services.Service
         public SqlSeeder(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
         public async Task SeedDriver()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Driver.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Drivers);// SEED FILES PATH CLASS COMES FROM THE COMMON CONSTANTS USING
 
             var toAdd = JsonConvert.DeserializeObject<List<Driver>>(jsonString);
 
@@ -21,7 +22,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedTeams()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Team.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Teams);
 
             var toAdd = JsonConvert.DeserializeObject<List<Team>>(jsonString);
 
@@ -30,7 +31,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedChampionship()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Championship.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Championships);
 
             var toAdd = JsonConvert.DeserializeObject<List<Championship>>(jsonString);
 
@@ -39,7 +40,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedComments()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Comment.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Comments);
 
             var toAdd = JsonConvert.DeserializeObject<List<Comment>>(jsonString);
 
@@ -48,7 +49,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedNews()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\News.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.News);
 
             var toAdd = JsonConvert.DeserializeObject<List<News>>(jsonString);
 
@@ -57,7 +58,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedRaces()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Race.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Races);
 
             var toAdd = JsonConvert.DeserializeObject<List<Race>>(jsonString);
 
@@ -66,7 +67,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedRoles()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Role.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Roles);
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityRole>>(jsonString);
 
@@ -75,7 +76,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedUser()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\User.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Users);
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityUser>>(jsonString);
 
@@ -84,7 +85,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedUserRoles()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\UserRole.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.UserRoles);
 
             var toAdd = JsonConvert.DeserializeObject<List<IdentityUserRole<string>>>(jsonString);
 
@@ -93,7 +94,7 @@ namespace GtRacingNews.Services.Service
 
         public async Task SeedProfiles()
         {
-            var jsonString = File.ReadAllText(@"C:\Users\svilen\Desktop\programing\Csharp\PROJECTS\GtRacingNews-SoftUniWebProject\GtRacingNews.Common\SeederData\Profile.json");
+            var jsonString = File.ReadAllText(SeedFilesPaths.Profiles);
 
             var toAdd = JsonConvert.DeserializeObject<List<Profile>>(jsonString);
 

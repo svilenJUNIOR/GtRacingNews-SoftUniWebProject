@@ -19,7 +19,7 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Seed()
         {
 
-            //await this.engine.seeder.SeedUser();
+            await this.engine.seeder.SeedUser();
             await this.engine.seeder.SeedRoles();
             await this.engine.seeder.SeedUserRoles();
 
