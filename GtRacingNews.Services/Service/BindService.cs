@@ -103,7 +103,7 @@ namespace GtRacingNews.Services.Service
                   Id = x.Id,
                   Heading = x.Heading,
                   Description = x.Description
-              }).ToList();
+              }).Take(5).ToList();
 
             return bindedNews;
         }

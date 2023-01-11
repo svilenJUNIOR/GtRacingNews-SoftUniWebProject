@@ -1,17 +1,12 @@
-﻿ul {
-    list-style-type: none;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a {
+﻿a {
     color: white;
     padding: 14px 16px;
     text-decoration: none;
 }
+
+    a:hover {
+        color: black;
+    }
 
 body {
     background-image: url("https://github.com/svilenJUNIOR/GTNews_Resources/blob/main/GuestHomePageBackground.jpeg?raw=true");
