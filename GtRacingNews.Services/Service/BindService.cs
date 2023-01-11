@@ -65,8 +65,6 @@ namespace GtRacingNews.Services.Service
                 Name = x.Name,
                 Date = x.Date,
                 Id = x.Id,
-                ChampionshipName = this.sqlRepository.GettAll<Championship>()
-                .Where(c => c.Id == x.ChampionshipId).Select(x => x.Name).FirstOrDefault(),
                 HasFinishied = false
             }).ToList();
 
