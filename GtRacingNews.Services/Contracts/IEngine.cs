@@ -11,14 +11,7 @@ namespace GtRacingNews.Services.Contracts
     public  interface IEngine
     {
         public IAddService addService { get; set; }
-        public IBindService bindService { get; set; }
-        public IDeleteService deleteService { get; set; }
-        public IReturnAll returnAll { get; set; }
-        public ISqlSeeder seeder { get; set; }
         public IValidator validator { get; set; }
-        public ISqlRepository sqlRepository { get; set; }
-        public IUserService userService { get; set; }
-        public IGuard guard { get; set; }
 
         Task<ICollection<Exception>> AddTeam(bool isModerator, string userId, AddTeamFormModel model, string type, ModelStateDictionary modelState);
         Task<ICollection<Exception>> AddNews(bool isModerator, string userId, AddNewFormModel model, string type, ModelStateDictionary modelState);
