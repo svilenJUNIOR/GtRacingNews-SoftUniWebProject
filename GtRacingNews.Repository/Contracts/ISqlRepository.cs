@@ -18,6 +18,5 @@ namespace GtRacingNews.Repository.Contracts
 
         Profile FindByUserId(string UserId);
         T FindById<T>(string Id) where T : class;
-        T FindByName<T>(string Name) where T : class;
     }
 }

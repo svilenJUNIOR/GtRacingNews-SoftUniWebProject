@@ -2,8 +2,6 @@
 using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
-using GtRacingNews.ViewModels.User;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Service
@@ -34,16 +32,16 @@ namespace GtRacingNews.Services.Service
                 if (sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingTeam));
 
             if (dbset == "Championship")
-                if (sqlRepository.FindByName<Championship>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
+                if (sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
 
             if (dbset == "News")
-                if (sqlRepository.FindByName<News>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
+                if (sqlRepository.GettAll<News>().FirstOrDefault(x => x.Heading == Name) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
 
             if (dbset == "Race")
-                if (sqlRepository.FindByName<Race>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
+                if (sqlRepository.GettAll<Race>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
 
             if (dbset == "Driver")
-                if (sqlRepository.FindByName<Driver>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
+                if (sqlRepository.GettAll<Driver>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
 
             var modelStateErrors = CheckModelState(modelState);
 

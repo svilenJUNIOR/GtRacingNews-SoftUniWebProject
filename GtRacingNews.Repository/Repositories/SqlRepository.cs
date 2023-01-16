@@ -45,11 +45,5 @@ namespace GtRacingNews.Repository.Repositories
         }
 
         public Profile FindByUserId(string UserId) => context.Profiles.Where(x => x.UserId == UserId).FirstOrDefault();
-
-        public T FindByName<T>(string name) where T : class
-        {
-            DbSet<T> table = context.Set<T>();
-            return table.Find(name);
-        }
     }
 }
