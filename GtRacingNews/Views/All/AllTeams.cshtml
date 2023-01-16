@@ -1,114 +1,30 @@
-﻿@model List<GtRacingNews.ViewModels.Team.ViewAllTeamsViewModel>
-
-<div class="box">
-    <h2 style="text-align:center; font-size: 30px">GT Europe Challenge By Fanatec</h2>
-</div>
+﻿@using GtRacingNews.ViewModels.Team;
+@model ViewTeamsAndChampsViewModel
 
 <div class="row" style="margin-left: 150px">
-    @foreach (var team in Model)
+
+    @foreach (var champName in Model.Championships)
     {
-        @if (@team.ChampionshipName == "GT Europe Challenge By Fanatec")
+        <div class="box">
+            <h2 style="text-align:center; font-size: 30px">@champName.Name</h2>
+        </div>
+
+        @foreach (var team in Model.Teams)
         {
-            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
-                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
-                <div class="card-body">
-                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
-                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
-                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
-                </div>
-            </div>
-        }
-
-    }
-
-</div>
-
-<div class="box">
-    <h2 style="text-align:center; font-size: 30px">Super GT</h2>
-</div>
-
-<div class="row" style="margin-left: 150px">
-    @foreach (var team in Model)
-    {
-        @if (@team.ChampionshipName == "Super GT")
-        {
-            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
-                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
-                <div class="card-body">
-                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
-                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
-                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
-                </div>
-            </div>
-        }
-
-    }
-</div>
-
-<div class="box">
-    <h2 style="text-align:center; font-size: 30px">DTM</h2>
-</div>
-
-<div class="row" style="margin-left: 150px">
-    @foreach (var team in Model)
-    {
-        @if (@team.ChampionshipName == "DTM")
-        {
-            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
-                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
-                <div class="card-body">
-                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
-                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
-                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
-                </div>
-            </div>
-        }
-
-    }
-</div>
-
-<div class="box">
-    <h2 style="text-align:center; font-size: 30px">International GT Open</h2>
-</div>
-
-<div class="row" style="margin-left: 150px">
-    @foreach (var team in Model)
-    {
-        @if (@team.ChampionshipName == "International GT Open")
-        {
-            <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
-                <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
-                <div class="card-body">
-                    <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
-                    <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
-                    <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
-                </div>
-            </div>
-        }
-
-    }
-</div>
-
-<div class="box">
-    <h2 style="text-align:center; font-size: 30px">ADAC GT Masters</h2>
-</div>
-
-<div class="row" style="margin-left: 150px">
-    @foreach (var team in Model)
-    {
-        @if (@team.ChampionshipName == "ADAC GT Masters")
-        {
-                    <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
-                        <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
-                            <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
-                            <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
-                        </div>
+            @if (@team.ChampionshipName == @champName.Name)
+            {
+                <div class="card" style="width: 20rem; margin-left: 10px; margin-top: 10px;">
+                    <img src="@team.LogoUrl" class="card-img-top" style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
+                        <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
+                        <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
                     </div>
+                </div>
+            }
         }
-
     }
+
 </div>
 
 <style>

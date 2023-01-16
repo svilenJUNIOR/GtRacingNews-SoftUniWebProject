@@ -2,6 +2,7 @@
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.News;
+using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Service
 {
@@ -14,11 +15,11 @@ namespace GtRacingNews.Services.Service
             this.sqlRepository = sqlRepository;
             this.bindService = bindService;
         }
+
+        public ViewTeamsAndChampsViewModel AllTeams()
+            => this.bindService.TeamsAndChampsBind(sqlRepository.GettAll<Team>());
         public IEnumerable<object> All(string Entity)
         {
-
-            if (Entity == "Teams") return this.bindService.TeamBind(sqlRepository.GettAll<Team>());
-
             if (Entity == "Races") return this.bindService.RaceBind(sqlRepository.GettAll<Race>());
 
             if (Entity == "News") return this.bindService.NewsBind(sqlRepository.GettAll<News>());

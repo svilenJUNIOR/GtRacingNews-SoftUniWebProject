@@ -16,6 +16,6 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> AllNews() => View(returnAll.All("News"));
         public async Task<IActionResult> NewsDetails(string Id) => View(returnAll.NewsDeatils(Id));
         public async Task<IActionResult> AllRaces() => View(returnAll.All("Races"));
-        public async Task<IActionResult> AllTeams() => View(returnAll.All("Teams"));
+        public async Task<IActionResult> AllTeams() => View(returnAll.AllTeams());
     }
 }

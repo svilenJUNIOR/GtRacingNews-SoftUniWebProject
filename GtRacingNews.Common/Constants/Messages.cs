@@ -24,7 +24,7 @@
 
         public const string NullField = "The form contains empty fields!";
 
-        public const string ExistingNews = "News with that name already exists!";
+        public const string ExistingNews = "News with that heading already exists!";
 
         public const string ExistingTeam = "Team with that name already exists!";
 
