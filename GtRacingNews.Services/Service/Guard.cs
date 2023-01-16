@@ -26,24 +26,24 @@ namespace GtRacingNews.Services.Service
 
             return ThrowErrors(errors);
         }
-        public IEnumerable<Exception> ValidateObject(string dbset, string check, ModelStateDictionary modelState)
+        public IEnumerable<Exception> ValidateObject(string dbset, string Name, ModelStateDictionary modelState)
         {
             var errors = new List<Exception>();
 
             if (dbset == "Team")
-                if (sqlRepository.FindByName<Team>(check) != null) errors.Add(new ArgumentException(Messages.ExistingTeam));
+                if (sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingTeam));
 
             if (dbset == "Championship")
-                if (sqlRepository.FindByName<Championship>(check) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
+                if (sqlRepository.FindByName<Championship>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
 
             if (dbset == "News")
-                if (sqlRepository.FindByName<News>(check) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
+                if (sqlRepository.FindByName<News>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
 
             if (dbset == "Race")
-                if (sqlRepository.FindByName<Race>(check) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
+                if (sqlRepository.FindByName<Race>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
 
             if (dbset == "Driver")
-                if (sqlRepository.FindByName<Driver>(check) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
+                if (sqlRepository.FindByName<Driver>(Name) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
 
             var modelStateErrors = CheckModelState(modelState);
 

@@ -10,8 +10,8 @@ namespace GtRacingNews.Services.Service
         public AddService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
         public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
         {
-            var championship = sqlRepository.FindByName<Championship>(championshipName);
-            var team = new Team(name, carModel, logoUrl, championship.Id);
+            var championshipId = sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == championshipName).Id;
+            var team = new Team(name, carModel, logoUrl, championshipId);
 
             if (isModerator) team.UserId = userId;
 
@@ -25,8 +25,8 @@ namespace GtRacingNews.Services.Service
         }
         public async Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName, bool isModerator, string userId)
         {
-            var team = sqlRepository.FindByName<Team>(teamName);
-            var driver = new Driver(name, age, cup, imageUrl, team.Id);
+            var teamId = sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == teamName).Id;
+            var driver = new Driver(name, age, cup, imageUrl, teamId);
 
             if (isModerator) driver.UserId = userId;
 
