@@ -3,6 +3,7 @@ using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using GtRacingNews.Common.Constants;
 
 namespace GtRacingNews.Controllers
 {
@@ -29,7 +30,6 @@ namespace GtRacingNews.Controllers
             CreatePremiumFormModel model = new CreatePremiumFormModel();
 
             var roles = this.roleManager.Roles.Select(x => x.Name).ToList();
-
             model.Roles = roles;
 
             return View(model);
@@ -75,6 +75,14 @@ namespace GtRacingNews.Controllers
                 var loggedInUser = await this.userManager.FindByEmailAsync(model.Email);
                 await this.signInManager.SignInAsync(loggedInUser, true);
 
+                CookieOptions cookieOptions = new CookieOptions();
+
+                cookieOptions.Secure = true;
+                cookieOptions.Expires = DateTime.Now.AddDays(3);
+
+                // UserCookieKey comes from Common.Constants
+                Response.Cookies.Append(Values.UserCookieKey, model.Email, cookieOptions);
+
                 return Redirect("/");
             }
             catch (AggregateException exception)
@@ -115,6 +123,14 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();
+
+            CookieOptions cookieOptions = new CookieOptions();
+
+            cookieOptions.Secure = true;
+            cookieOptions.Expires = DateTime.Now.AddDays(-1);
+
+            // UserCookieKey comes from Common.Constants
+            Response.Cookies.Delete(Values.UserCookieKey, cookieOptions);
 
             return Redirect("/");
         }
