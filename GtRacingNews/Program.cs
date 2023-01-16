@@ -34,6 +34,7 @@ builder.Services.AddScoped<IGuard, Guard>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
+builder.Services.AddScoped<ICookieService, CookieService>();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
 
 var app = builder.Build();

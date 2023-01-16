@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GtRacingNews.Services.Contracts;
 
 namespace GtRacingNews.Services.Service
 {
-    internal class CookieService
+    public class CookieService : ICookieService
     {
+        public void Create()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Read()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
