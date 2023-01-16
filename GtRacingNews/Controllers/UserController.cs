@@ -9,19 +9,26 @@ namespace GtRacingNews.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IEngine engine;
+        private IGuard guard;
+        private IAddService addService;
+        private IValidator validator;
+        private IUserService userService;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IEngine engine)
+            RoleManager<IdentityRole> roleManager, IGuard guard, IAddService addService, IValidator validator, 
+            IUserService userService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.engine = engine;
             this.roleManager = roleManager;
+            this.guard = guard;
+            this.addService = addService;
+            this.validator = validator;
+            this.userService = userService;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
@@ -40,15 +47,15 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var dataErrors = engine.validator.ValidateUserRegister(model, ModelState);
+                var dataErrors = validator.ValidateUserRegister(model, ModelState);
 
                 model.Email = model.Email.Trim();
                 model.Password = model.Password.Trim();
                 model.Username = model.Username.Trim();
                 model.ConfirmPassword = model.ConfirmPassword.Trim();
 
-                await userManager.CreateAsync(engine.userService.RegisterUser(model));
-                await signInManager.SignInAsync(engine.userService.RegisterUser(model), isPersistent: false);
+                await userManager.CreateAsync(userService.RegisterUser(model));
+                await signInManager.SignInAsync(userService.RegisterUser(model), isPersistent: false);
 
                 return Redirect("/");
             }
@@ -67,7 +74,7 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var dataErrors = engine.validator.ValidateUserLogin(model);
+                var dataErrors = validator.ValidateUserLogin(model);
 
                 model.Email = model.Email.Trim();
                 model.Password = model.Password.Trim();
@@ -101,11 +108,11 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var nullErrors = engine.guard.AgainstNull(model.Address, model.Age.ToString());
+                var nullErrors = guard.AgainstNull(model.Address, model.Age.ToString());
                 var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
                 await this.userManager.AddToRoleAsync(currentUser, model.Role);
-                await this.engine.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
+                await this.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
                
                 return Redirect("/");
             }

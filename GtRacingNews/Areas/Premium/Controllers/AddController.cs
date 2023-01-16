@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
@@ -17,24 +18,26 @@ namespace GtRacingNews.Areas.Premium.Controllers
     public class AddController : Controller
     {
         private readonly IEngine engine;
+        private readonly ISqlRepository sqlRepository;
+
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        public AddController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, IEngine engine)
+        public AddController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, 
+            IEngine engine, ISqlRepository sqlRepository)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             this.engine = engine;
+            this.sqlRepository = sqlRepository;
         }
-        private async Task<IdentityUser> user()
-            => await this.userManager.FindByNameAsync(this.User.Identity.Name);
+        private async Task<IdentityUser> user() => await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddTeam()
         {
             AddTeamFormModel model = new AddTeamFormModel();
 
-            var championships = engine.sqlRepository.GettAll<Championship>().ToList();
-
+            var championships = sqlRepository.GettAll<Championship>().ToList();
             model.Championships = championships;
 
             return View(model);
@@ -52,9 +55,11 @@ namespace GtRacingNews.Areas.Premium.Controllers
         [Authorize(Roles = "Moderator, Admin")]
         public async Task<IActionResult> AddDriver()
         {
-            var teams = engine.sqlRepository.GettAll<Team>().Where(x => x.Drivers.Count() < 3).ToList();
+            var teams = sqlRepository.GettAll<Team>().Where(x => x.Drivers.Count() < 3).ToList();
+
             AddNewDriverFormModel model = new AddNewDriverFormModel();
             model.Teams = teams;
+
             return View(model);
         }
 

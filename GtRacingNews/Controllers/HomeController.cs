@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Data.DBContext;
-using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,27 +8,27 @@ namespace GtRacingNews.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> logger;
-        private readonly IEngine engine;
-        public HomeController(ILogger<HomeController> logger,IEngine engine)
+        private ISqlSeeder seeder;
+        public HomeController(ILogger<HomeController> logger, ISqlSeeder seeder)
         {
             this.logger = logger;
-            this.engine = engine;
+            this.seeder = seeder;
         }
 
         public async Task<IActionResult> Seed()
         {
 
-            await this.engine.seeder.SeedUser();
-            await this.engine.seeder.SeedRoles();
-            await this.engine.seeder.SeedUserRoles();
+            await this.seeder.SeedUser();
+            await this.seeder.SeedRoles();
+            await this.seeder.SeedUserRoles();
 
-            await this.engine.seeder.SeedChampionship();
-            await this.engine.seeder.SeedTeams();
-            await this.engine.seeder.SeedDriver();
-            await this.engine.seeder.SeedNews();
-            await this.engine.seeder.SeedComments();
-            await this.engine.seeder.SeedRaces();
-            await this.engine.seeder.SeedProfiles();
+            await this.seeder.SeedChampionship();
+            await this.seeder.SeedTeams();
+            await this.seeder.SeedDriver();
+            await this.seeder.SeedNews();
+            await this.seeder.SeedComments();
+            await this.seeder.SeedRaces();
+            await this.seeder.SeedProfiles();
 
             return Redirect("/");
         }

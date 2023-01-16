@@ -8,13 +8,16 @@ namespace GtRacingNews.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly IEngine engine;
+        private IGuard guard;
+        private IAddService addService;
 
-        public CommentController(UserManager<IdentityUser> userManager, IEngine engine)
+        private readonly UserManager<IdentityUser> userManager;
+
+        public CommentController(IGuard guard, IAddService addService, UserManager<IdentityUser> userManager)
         {
+            this.guard = guard;
+            this.addService = addService;
             this.userManager = userManager;
-            this.engine = engine;
         }
 
         [Authorize]
@@ -25,12 +28,11 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Add(AddNewCommentFormModel model, string newsId)
         {
             var user = await userManager.GetUserAsync(User);
-
-            var nullErrors = engine.guard.AgainstNull(user.UserName, model.Description);
+            var nullErrors = guard.AgainstNull(user.UserName, model.Description);
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await engine.addService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
+            else await addService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
         }
     }
 }
