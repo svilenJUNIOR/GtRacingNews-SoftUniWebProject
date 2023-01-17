@@ -36,5 +36,10 @@ namespace GtRacingNews.Controllers
             await deleteService.Delete(collection, Id);
             return Redirect("MyProfile");
         }
+
+        public async Task<IActionResult> Edit(string collection, string Id)
+        {
+            return View();
+        }
     }
 }

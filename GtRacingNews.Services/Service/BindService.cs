@@ -100,6 +100,7 @@ namespace GtRacingNews.Services.Service
 
             return teamsAndChamps;
         }
+        
         public ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind)
         {
             var drivers = sqlRepository.GettAll<Driver>();
@@ -116,6 +117,7 @@ namespace GtRacingNews.Services.Service
 
             return bindedTeams;
         }
+       
         public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind)
         {
             var bindedNews = newsToBind

@@ -21,14 +21,14 @@ namespace GtRacingNews.Controllers
             //await this.seeder.SeedUser();
             //await this.seeder.SeedRoles();
             //await this.seeder.SeedUserRoles();
-            //
+
             //await this.seeder.SeedChampionship();
             //await this.seeder.SeedTeams();
             //await this.seeder.SeedDriver();
-            await this.seeder.SeedNews();
-            await this.seeder.SeedComments();
-            await this.seeder.SeedRaces();
-            await this.seeder.SeedProfiles();
+            //await this.seeder.SeedNews();
+            //await this.seeder.SeedComments();
+            //await this.seeder.SeedRaces();
+            //await this.seeder.SeedProfiles();
 
             return Redirect("/");
         }

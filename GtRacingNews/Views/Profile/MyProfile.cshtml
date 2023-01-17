@@ -26,6 +26,7 @@
                     <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
                     <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
                     <h5 class="card-title"><a href="/Profile/Delete?id=@team.Id&collection=@Model.DeleteViewModel.CollectionNames.TeamCollection" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/Edit?id=@team.Id&collection=@Model.DeleteViewModel.CollectionNames.TeamCollection" class="btn btn-primary">Edit</a></h5>
                 </div>
             </div>
         }
