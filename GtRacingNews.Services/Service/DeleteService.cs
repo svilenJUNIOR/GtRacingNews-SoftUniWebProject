@@ -1,5 +1,6 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Repository.Repositories;
 using GtRacingNews.Services.Contracts;
 using GtRacingNews.ViewModels.Delete;
 using Microsoft.AspNetCore.Identity;
@@ -10,21 +11,15 @@ namespace GtRacingNews.Services.Service
     {
         private readonly ISqlRepository sqlRepository;
         public DeleteService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
-        public async Task Delete(string collection, string id)
-        {
-            if (collection == "Team") await sqlRepository.RemoveAsync<Team>((Team)sqlRepository.FindById<Team>(id));
-            if (collection == "Championship") await sqlRepository.RemoveAsync<Championship>((Championship)sqlRepository.FindById<Championship>(id));
-            if (collection == "Driver") await sqlRepository.RemoveAsync<Driver>((Driver)sqlRepository.FindById<Driver>(id));
-            if (collection == "Comment") await sqlRepository.RemoveAsync<Comment>((Comment)sqlRepository.FindById<Comment>(id));
-            if (collection == "Race") await sqlRepository.RemoveAsync<Race>((Race)sqlRepository.FindById<Race>(id));
-            if (collection == "News") await sqlRepository.RemoveAsync<News>((News)sqlRepository.FindById<News>(id));
-        }
-        public async Task DeleteUserOrRole(string type, string id)
-        {
-            if (type == "User") await sqlRepository.RemoveAsync<IdentityUser>(sqlRepository.FindUserById(id));
+        public async Task Delete<T>(string id) where T : class
+            => await sqlRepository.RemoveAsync<T>((T)sqlRepository.FindById<T>(id));
 
-            if (type == "Role") await sqlRepository.RemoveAsync<IdentityRole>(sqlRepository.FindRoleById(id));
-        }
+        public async Task DeleteUser(string id)
+          => await sqlRepository.RemoveAsync(sqlRepository.FindUserById(id));
+
+        public async Task DeleteRole(string id)
+          => await sqlRepository.RemoveAsync(sqlRepository.FindRoleById(id));
+
         public DeleteFormModel GetItemsForDeletion()
         {
             var deleteModel = new DeleteFormModel();

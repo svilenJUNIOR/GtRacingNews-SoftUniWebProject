@@ -25,8 +25,8 @@
                     <h5 class="card-title"><strong>Name:</strong> @team.Name</h5>
                     <h5 class="card-title"><strong>Car:</strong> @team.CarModel</h5>
                     <h5 class="card-title"><strong>Drivers:</strong> @string.Join(", ", @team.Drivers)</h5>
-                    <h5 class="card-title"><a href="/Profile/Delete?id=@team.Id&collection=@Model.DeleteViewModel.CollectionNames.TeamCollection" class="btn btn-primary">Delete</a></h5>
-                    <h5 class="card-title"><a href="/Profile/Edit?id=@team.Id&collection=@Model.DeleteViewModel.CollectionNames.TeamCollection" class="btn btn-primary">Edit</a></h5>
+                    <h5 class="card-title"><a href="/Profile/DeleteTeam?id=@team.Id" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/EditTeam?id=@team.Id" class="btn btn-primary">Edit</a></h5>
                 </div>
             </div>
         }
@@ -44,7 +44,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><strong>Name:</strong> @championship.Name</h5>
                     <h5 class="card-title"><strong>Teams:</strong> @string.Join(", ", @championship.Teams)</h5>
-                    <h5 class="card-title"><a href="/Profile/Delete?id=@championship.ChampionshipId&collection=@Model.DeleteViewModel.CollectionNames.ChampionshipCollection" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/DeleteChampionship?id=@championship.ChampionshipId" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/EditChampionship?id=@championship.ChampionshipId" class="btn btn-primary">Edit</a></h5>
                 </div>
             </div>
         }
@@ -65,7 +66,8 @@
                     <h5 class="card-title">Name: @driver.Name</h5>
                     <h5 class="card-title">Age: @driver.Age</h5>
                     <h5 class="card-title">Cup: @driver.Cup</h5>
-                    <h5 class="card-title"><a href="/Profile/Delete?id=@driver.DriverId&collection=@Model.DeleteViewModel.CollectionNames.DriverCollection" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/DeleteDriver?id=@driver.DriverId" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/EditDriver?id=@driver.DriverId" class="btn btn-primary">Edit</a></h5>
                 </div>
             </div>
         }
@@ -85,7 +87,8 @@
                 <div class="card-body">
                     <h5 class="card-title">@news.Heading</h5>
                     <h5 class="card-title"><a href="/All/NewsDetails?id=@news.Id" class="btn btn-primary">Read...</a></h5>
-                    <h5 class="card-title"><a href="/Profile/Delete?id=@news.Id&collection=@Model.DeleteViewModel.CollectionNames.NewsCollection" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/DeleteNews?id=@news.Id" class="btn btn-primary">Delete</a></h5>
+                    <h5 class="card-title"><a href="/Profile/EditNews?id=@news.Id" class="btn btn-primary">Edit</a></h5>
                 </div>
             </div>
         }
@@ -101,7 +104,8 @@
         <ul class="list-group">
             @foreach (var race in Model.Races)
             {
-                <li class="list-group-item" style="width: 200px; margin-left: 100px">@race.Name - @race.Date <a href="/Profile/Delete?id=@race.Id&collection=@Model.DeleteViewModel.CollectionNames.RaceCollection" class="btn btn-primary">Delete</a></li>
+                <li class="list-group-item" style="width: 200px; margin-left: 100px">@race.Name - @race.Date <a href="/Profile/DeleteRace?id=@race.Id" class="btn btn-primary">Delete</a></li>
+                <li class="list-group-item" style="width: 200px; margin-left: 100px">@race.Name - @race.Date <a href="/Profile/EditRace?id=@race.Id" class="btn btn-primary">Edit</a></li>
             }
         </ul>
     </div>

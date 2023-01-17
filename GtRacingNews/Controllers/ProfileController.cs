@@ -10,15 +10,18 @@ namespace GtRacingNews.Controllers
         private ISqlRepository sqlRepository;
         private IBindService bindService;
         private IDeleteService deleteService;
+        private IEditService editService;
 
         private readonly UserManager<IdentityUser> userManager;
 
-        public ProfileController(ISqlRepository sqlRepository, IBindService bindService, IDeleteService deleteService, UserManager<IdentityUser> userManager)
+        public ProfileController(ISqlRepository sqlRepository, IBindService bindService, 
+            IDeleteService deleteService, IEditService editService, UserManager<IdentityUser> userManager)
         {
             this.sqlRepository = sqlRepository;
             this.bindService = bindService;
             this.deleteService = deleteService;
             this.userManager = userManager;
+            this.editService = editService;
         }
 
         public async Task<IActionResult> MyProfile()
@@ -31,14 +34,38 @@ namespace GtRacingNews.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Delete(string collection, string Id)
+        //public async Task<IActionResult> Delete(string collection, string Id)
+        //{
+        //    await deleteService.Delete<>(collection, Id);
+        //    return Redirect("MyProfile");
+        //}
+
+        public async Task<IActionResult> EditTeam(string Id)
         {
-            await deleteService.Delete(collection, Id);
-            return Redirect("MyProfile");
+            this.editService.EditTeam(Id);
+            return View();
+        }
+        public async Task<IActionResult> EditDriver(string Id)
+        {
+            this.editService.EditDriver(Id);
+            return View();
         }
 
-        public async Task<IActionResult> Edit(string collection, string Id)
+        public async Task<IActionResult> EditChampionship(string Id)
         {
+            this.editService.EditChampionship(Id);
+            return View();
+        }
+
+        public async Task<IActionResult> EditNews(string Id)
+        {
+            this.editService.EditNews(Id);
+            return View();
+        }
+
+        public async Task<IActionResult> EditRace(string Id)
+        {
+            this.editService.EditRace(Id);
             return View();
         }
     }
