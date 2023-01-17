@@ -1,27 +1,27 @@
 ﻿[
   {
     "Id": "485d08fa-ba67-42cc-92d2-e8e937dcc44a",
-    "LogoUrl": "https://www.gt-world-challenge-europe.com/assets/img/fanatec-gtwc-europe-aws.png",
+    "LogoUrl": "https://github.com/svilenJUNIOR/GTNews_Resources/blob/main/Championships/fanatecLogo.jpg?raw=true",
     "Name": "GT Europe Challenge By Fanatec"
   },
   {
     "Id": "d26ee9f9-8d70-450e-bf42-f999c55da6db",
-    "LogoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/SUPER_GT_logo.svg/640px-SUPER_GT_logo.svg.png",
+    "LogoUrl": "https://github.com/svilenJUNIOR/GTNews_Resources/blob/main/Championships/SuperGtLogo.jpg?raw=true",
     "Name": "Super GT"
   },
   {
     "Id": "5669d00d-380c-47b0-be65-89e0a51ab203",
-    "LogoUrl": "https://pbs.twimg.com/profile_images/1218188754051047424/FB9rC_Zv_400x400.jpg",
+    "LogoUrl": "https://github.com/svilenJUNIOR/GTNews_Resources/blob/main/Championships/adacLogo.jpg?raw=true",
     "Name": "ADAC GT Masters"
   },
   {
     "Id": "cb26e725-66ed-4d14-8e40-8f674f24f477",
-    "LogoUrl": "https://pbs.twimg.com/media/Fi-aqnpXEAEuRfi.jpg",
+    "LogoUrl": "https://github.com/svilenJUNIOR/GTNews_Resources/blob/main/Championships/dtmLogo.jpg?raw=true",
     "Name": "DTM"
   },
   {
     "Id": "b931fa93-b68b-4ff6-9e97-d9ceba0d51eb",
-    "LogoUrl": "https://yt3.googleusercontent.com/ytc/AMLnZu848I2AqJkMWXGHTsKCBguzCWjIRBOFtb9b6AsJ=s900-c-k-c0x00ffffff-no-rj",
+    "LogoUrl": "https://github.com/svilenJUNIOR/GTNews_Resources/blob/main/Championships/gtOpenLogo.jpg?raw=true",
     "Name": "International GT Open"
   }
 ]
