@@ -4,10 +4,6 @@ namespace GtRacingNews.Services.Contracts
 {
     public interface IEditService
     {
-        Team EditTeam(string id);
-        News EditNews(string id);
-        Race EditRace(string id);
-        Driver EditDriver(string id);
-        Championship EditChampionship(string id);
+        T EditObject<T>(string id) where T : class;
     }
 }

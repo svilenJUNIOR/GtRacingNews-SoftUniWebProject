@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Repository.Contracts;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,30 +43,30 @@ namespace GtRacingNews.Controllers
 
         public async Task<IActionResult> EditTeam(string Id)
         {
-            this.editService.EditTeam(Id);
+            this.editService.EditObject<Team>(Id);
             return View();
         }
         public async Task<IActionResult> EditDriver(string Id)
         {
-            this.editService.EditDriver(Id);
+            this.editService.EditObject<Driver>(Id);
             return View();
         }
 
         public async Task<IActionResult> EditChampionship(string Id)
         {
-            this.editService.EditChampionship(Id);
+            this.editService.EditObject<Championship>(Id);
             return View();
         }
 
         public async Task<IActionResult> EditNews(string Id)
         {
-            this.editService.EditNews(Id);
+            this.editService.EditObject<News>(Id);
             return View();
         }
 
         public async Task<IActionResult> EditRace(string Id)
         {
-            this.editService.EditRace(Id);
+            this.editService.EditObject<Race>(Id);
             return View();
         }
     }
