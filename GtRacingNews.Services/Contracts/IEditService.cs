@@ -1,9 +1,9 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Contracts
 {
     public interface IEditService
     {
-        T EditObject<T>(string id) where T : class;
+        void EditTeam(string Id, AddTeamFormModel data);
     }
 }

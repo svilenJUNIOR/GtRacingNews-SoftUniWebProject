@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GtRacingNews.Data\GtRacingNews.Data.csproj" />
+    <ProjectReference Include="..\GtRacingNews.MVC\GtRacingNews.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

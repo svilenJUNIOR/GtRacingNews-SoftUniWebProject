@@ -1,0 +1,56 @@
+﻿<div class="box">
+    <form method="post">
+        <table style="height: 300px">
+            <tr>
+                <td>
+                    <label for="name">Name</label>
+                </td>
+                <td width="300px">
+                    <input type="text" class="form-control" id="name" name="name" value="@Model.Name" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="age">Age</label>
+                </td>
+                <td>
+                    <input type="number" class="form-control" id="age" name="age" value="@Model.Age" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="cup">Cup</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="cup" name="cup" value="@Model.Cup" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="imageUrl">ImageUrl</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="imageUrl" name="imageUrl" value="@Model.ImageUrl" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<link rel="stylesheet" href="~/css/DriverCss/AddDriver.css"></link>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="~/js/OpenSideMenu.js"></script>
+<script src="~/js/CloseSideMenu.js"></script>

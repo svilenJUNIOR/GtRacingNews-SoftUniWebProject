@@ -19,5 +19,6 @@ namespace GtRacingNews.Services.Contracts
         ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind);
         ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind);
         MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile);
+        AddTeamFormModel BindTeamForEdit(string Id);
     }
 }

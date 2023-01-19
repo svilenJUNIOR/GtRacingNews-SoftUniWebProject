@@ -1,0 +1,38 @@
+﻿<div class="box">
+    <form method="post">
+        <table style="height: 200px">
+            <tr>
+                <td>
+                    <label for="name">Name</label>
+                </td>
+                <td width="100px">
+                    <input type="text" class="form-control" id="name" name="name" value="@Model.Name" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="date">Date</label>
+                </td>
+                <td width="300px">
+                    <input type="text" class="form-control" id="date" name="date" value="@Model.Date" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<link rel="stylesheet" href="~/css/RaceCss/AddRaceCss.css"></link>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="~/js/OpenSideMenu.js"></script>
+<script src="~/js/CloseSideMenu.js"></script>

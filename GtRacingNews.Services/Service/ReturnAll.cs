@@ -32,7 +32,6 @@ namespace GtRacingNews.Services.Service
         }
         public ReadNewsViewModel NewsDeatils(string newsId)
         {
-
             var news = sqlRepository.GettAll<News>().Where(x => x.Id == newsId)
                 .Select(n => new ReadNewsViewModel
                 {

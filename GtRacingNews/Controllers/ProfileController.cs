@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,17 +11,15 @@ namespace GtRacingNews.Controllers
     {
         private ISqlRepository sqlRepository;
         private IBindService bindService;
-        private IDeleteService deleteService;
         private IEditService editService;
 
         private readonly UserManager<IdentityUser> userManager;
 
-        public ProfileController(ISqlRepository sqlRepository, IBindService bindService, 
-            IDeleteService deleteService, IEditService editService, UserManager<IdentityUser> userManager)
+        public ProfileController(ISqlRepository sqlRepository, IBindService bindService,
+           IEditService editService, UserManager<IdentityUser> userManager)
         {
             this.sqlRepository = sqlRepository;
             this.bindService = bindService;
-            this.deleteService = deleteService;
             this.userManager = userManager;
             this.editService = editService;
         }
@@ -34,40 +33,26 @@ namespace GtRacingNews.Controllers
 
             return View(model);
         }
-
-        //public async Task<IActionResult> Delete(string collection, string Id)
-        //{
-        //    await deleteService.Delete<>(collection, Id);
-        //    return Redirect("MyProfile");
-        //}
-
         public async Task<IActionResult> EditTeam(string Id)
+         => View(this.bindService.BindTeamForEdit(Id));
+
+        [HttpPost]
+        public async Task<IActionResult> EditTeam(string Id, AddTeamFormModel data)
         {
-            this.editService.EditObject<Team>(Id);
-            return View();
-        }
-        public async Task<IActionResult> EditDriver(string Id)
-        {
-            this.editService.EditObject<Driver>(Id);
-            return View();
+            this.editService.EditTeam(Id, data);
+            return RedirectToAction("MyProfile", "Profile");
         }
 
-        public async Task<IActionResult> EditChampionship(string Id)
-        {
-            this.editService.EditObject<Championship>(Id);
-            return View();
-        }
+        //public async Task<IActionResult> EditDriver(string Id)
+        //=> View(this.editService.EditObject<Driver>(Id));
 
-        public async Task<IActionResult> EditNews(string Id)
-        {
-            this.editService.EditObject<News>(Id);
-            return View();
-        }
+        //public async Task<IActionResult> EditChampionship(string Id)
+        //=> View(this.editService.EditObject<Championship>(Id));
 
-        public async Task<IActionResult> EditRace(string Id)
-        {
-            this.editService.EditObject<Race>(Id);
-            return View();
-        }
+        //public async Task<IActionResult> EditNews(string Id)
+        //=> View(this.editService.EditObject<News>(Id));
+
+        //public async Task<IActionResult> EditRace(string Id)
+        //=> View(this.editService.EditObject<Race>(Id));
     }
 }

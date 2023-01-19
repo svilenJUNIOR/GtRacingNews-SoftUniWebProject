@@ -1,6 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Service
 {
@@ -11,10 +12,17 @@ namespace GtRacingNews.Services.Service
         public EditService(ISqlRepository sqlRepository) 
             => this.sqlRepository = sqlRepository;
 
-        public T EditObject<T>(string id) where T : class
+        public void EditTeam(string Id, AddTeamFormModel data)
         {
-            var objectToEdit = this.sqlRepository.FindById<T>(id);
-            return objectToEdit;
+            var team = this.sqlRepository.FindById<Team>(Id);
+
+            team.Name = data.Name;
+            team.LogoUrl = data.LogoUrl;
+            team.CarModel = data.CarModel;
+            team.ChampionshipId = this.sqlRepository.GettAll<Championship>().
+                FirstOrDefault(x => x.Name == data.ChampionshipName).Id;
+
+            this.sqlRepository.SaveChangesAsync();
         }
     }
 }

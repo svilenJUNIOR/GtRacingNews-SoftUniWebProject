@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Repository.Contracts

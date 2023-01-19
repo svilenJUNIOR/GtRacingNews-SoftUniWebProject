@@ -8,7 +8,6 @@ using GtRacingNews.ViewModels.Profile;
 using GtRacingNews.ViewModels.Race;
 using GtRacingNews.ViewModels.Team;
 using Microsoft.AspNetCore.Identity;
-using System.Globalization;
 
 namespace GtRacingNews.Services.Service
 {
@@ -161,6 +160,22 @@ namespace GtRacingNews.Services.Service
             model.ProfilePicture = userProfile.ProfilePicture;
 
             return model;
+        }
+
+        public AddTeamFormModel BindTeamForEdit(string Id)
+        {
+            var objectToEdit = this.sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Id == Id);
+
+            AddTeamFormModel obj = new AddTeamFormModel()
+            {
+                CarModel = objectToEdit.CarModel,
+                ChampionshipName = this.sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Id == objectToEdit.ChampionshipId).Name,
+                Championships = this.sqlRepository.GettAll<Championship>(),
+                LogoUrl = objectToEdit.LogoUrl,
+                Name = objectToEdit.Name,
+            };
+
+            return obj;
         }
     }
 }
