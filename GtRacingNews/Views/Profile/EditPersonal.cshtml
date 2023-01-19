@@ -1,0 +1,44 @@
+﻿<div class="box">
+    <form method="post">
+        <table style="height: 300px">
+
+            <tr>
+                <td>
+                    <label for="age">Age</label>
+                </td>
+                <td>
+                    <input type="number" class="form-control" id="age" name="age" value="@Model.Age"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="address">Address</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="address" name="address" value="@Model.Address" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="profilePicture">ProfilePicture</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="profilePicture" name="profilePicture" value="@Model.ProfilePicture" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>Submit</p>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<link rel="stylesheet" href="~/css/UserCss/AddProfile.css"></link>

@@ -6,6 +6,7 @@ using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;
 using GtRacingNews.ViewModels.Team;
+using GtRacingNews.ViewModels.User;
 
 namespace GtRacingNews.Services.Service
 {
@@ -45,6 +46,17 @@ namespace GtRacingNews.Services.Service
             news.PictureUrl = data.PictureUrl;
             news.Description = data.Description;
             news.Heading = data.Heading;
+
+            this.sqlRepository.SaveChangesAsync();
+        }
+
+        public void EditProfileInfo(string Id, CreatePremiumFormModel data)
+        {
+            var profile = this.sqlRepository.FindByUserId(Id);
+
+            profile.Address = data.Address;
+            profile.Age = data.Age;
+            profile.ProfilePicture = data.ProfilePicture;
 
             this.sqlRepository.SaveChangesAsync();
         }

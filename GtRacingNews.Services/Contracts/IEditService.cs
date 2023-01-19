@@ -3,6 +3,7 @@ using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
 using GtRacingNews.ViewModels.Race;
 using GtRacingNews.ViewModels.Team;
+using GtRacingNews.ViewModels.User;
 
 namespace GtRacingNews.Services.Contracts
 {
@@ -13,5 +14,6 @@ namespace GtRacingNews.Services.Contracts
         void EditDriver(string Id, AddNewDriverFormModel data);
         void EditRace(string Id, AddNewRaceFormModel data);
         void EditNews(string Id, AddNewFormModel data);
+        void EditProfileInfo(string Id, CreatePremiumFormModel data);
     }
 }
