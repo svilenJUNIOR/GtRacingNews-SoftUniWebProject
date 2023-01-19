@@ -7,6 +7,7 @@ namespace GtRacingNews.Services.Contracts
     {
         ViewTeamsAndChampsViewModel AllTeams();
         public IEnumerable<object> All(string Entity);
-        public ReadNewsViewModel NewsDeatils(string newsId);
+
+        ReadNewsViewModel NewsDetails(string Id);
     }
 }

@@ -15,10 +15,12 @@ namespace GtRacingNews.Services.Contracts
         ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind);
         ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind);
         ICollection<ViewAllRacesViewModel> RaceBind(ICollection<Race> racesToBind);
-        ViewTeamsAndChampsViewModel TeamsAndChampsBind(ICollection<Team> teamsAndChampsToBind);
         ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind);
         ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind);
+
+        ReadNewsViewModel NewsDetails(string newsId);
         MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile);
+        ViewTeamsAndChampsViewModel TeamsAndChampsBind(ICollection<Team> teamsAndChampsToBind);
         AddTeamFormModel BindTeamForEdit(string Id);
         AddNewDriverFormModel BindDriverForEdit(string Id);
     }

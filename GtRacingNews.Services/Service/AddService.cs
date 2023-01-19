@@ -1,13 +1,20 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.ViewModels.User;
+using Microsoft.AspNetCore.Identity;
 
 namespace GtRacingNews.Services.Service
 {
     public class AddService : IAddService
     {
         private readonly ISqlRepository sqlRepository;
-        public AddService(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
+        private readonly IHasher hasher;
+        public AddService(ISqlRepository sqlRepository, IHasher hasher)
+        {
+            this.sqlRepository = sqlRepository;
+            this.hasher = hasher;
+        }
         public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
         {
             var championshipId = sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == championshipName).Id;
@@ -53,6 +60,16 @@ namespace GtRacingNews.Services.Service
         {
             var comment = new Comment(Description, newsId, UserName);
             await sqlRepository.AddAsync<Comment>((Comment)comment);
+        }
+        public IdentityUser RegisterUser(RegisterUserFormModel model)
+        {
+            var user = new IdentityUser();
+
+            user.Email = model.Email;
+            user.UserName = model.Username;
+            user.PasswordHash = hasher.Hash(model.Password);
+
+            return user;
         }
     }
 }

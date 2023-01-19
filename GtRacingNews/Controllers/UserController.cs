@@ -12,15 +12,13 @@ namespace GtRacingNews.Controllers
         private IGuard guard;
         private IAddService addService;
         private IValidator validator;
-        private IUserService userService;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IGuard guard, IAddService addService, IValidator validator, 
-            IUserService userService)
+            RoleManager<IdentityRole> roleManager, IGuard guard, IAddService addService, IValidator validator)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -28,7 +26,6 @@ namespace GtRacingNews.Controllers
             this.guard = guard;
             this.addService = addService;
             this.validator = validator;
-            this.userService = userService;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
@@ -54,8 +51,8 @@ namespace GtRacingNews.Controllers
                 model.Username = model.Username.Trim();
                 model.ConfirmPassword = model.ConfirmPassword.Trim();
 
-                await userManager.CreateAsync(userService.RegisterUser(model));
-                await signInManager.SignInAsync(userService.RegisterUser(model), isPersistent: false);
+                await userManager.CreateAsync(addService.RegisterUser(model));
+                await signInManager.SignInAsync(addService.RegisterUser(model), isPersistent: false);
 
                 return Redirect("/");
             }

@@ -32,7 +32,6 @@ namespace GtRacingNews.Services.Service
 
             return CollectErrors(dataErrors, nullErrors, modelState);
         }
-
         public ICollection<Exception> ValidateDriver(AddNewDriverFormModel model, ModelStateDictionary modelState)
         {
             var nullErrors = guard.AgainstNull(model.TeamName, model.Age.ToString(), model.ImageUrl, model.Cup);
@@ -40,7 +39,6 @@ namespace GtRacingNews.Services.Service
 
             return CollectErrors(dataErrors, nullErrors, modelState);
         }
-
         public ICollection<Exception> ValidateNews(AddNewFormModel model, ModelStateDictionary modelState)
         {
             var nullErrors = guard.AgainstNull(model.Heading, model.Description, model.PictureUrl);
@@ -48,7 +46,6 @@ namespace GtRacingNews.Services.Service
 
             return CollectErrors(dataErrors, nullErrors, modelState);
         }
-
         public ICollection<Exception> ValidateRace(AddNewRaceFormModel model, ModelStateDictionary modelState)
         {
             var nullErrors = guard.AgainstNull(model.Name, model.Date);
@@ -56,7 +53,6 @@ namespace GtRacingNews.Services.Service
 
             return CollectErrors(dataErrors, nullErrors, modelState);
         }
-
         public ICollection<Exception> ValidateTeam(AddTeamFormModel model, string type, ModelStateDictionary modelState)
         {
             var nullErrors = guard.AgainstNull(model.Name, model.CarModel, model.LogoUrl, model.ChampionshipName);
@@ -64,7 +60,7 @@ namespace GtRacingNews.Services.Service
 
             return CollectErrors(dataErrors, nullErrors, modelState);
         }
-
+        
         public IEnumerable<Exception> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary modelState)
         {
             var nullErrors = this.guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
@@ -85,7 +81,6 @@ namespace GtRacingNews.Services.Service
 
             return this.guard.ThrowErrors(errors);
         }
-        
         public IEnumerable<Exception> ValidateUserLogin(LoginUserFormModel model)
         {
             var nullErrors = this.guard.AgainstNull(model.Password, model.Email);
@@ -99,7 +94,7 @@ namespace GtRacingNews.Services.Service
 
             return this.guard.ThrowErrors(errors);
         }
-
+        
         public ICollection<Exception> CollectErrors(IEnumerable<Exception> dataErrors, IEnumerable<Exception> nullErrors, ModelStateDictionary modelState)
         {
             var errors = new List<Exception>();

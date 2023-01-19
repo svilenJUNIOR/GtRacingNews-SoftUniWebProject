@@ -26,7 +26,6 @@ namespace GtRacingNews.Services.Service
 
             this.sqlRepository.SaveChangesAsync();
         }
-
         public void EditDriver(string Id, AddNewDriverFormModel data)
         {
             var driver = this.sqlRepository.FindById<Driver>(Id);
@@ -38,7 +37,6 @@ namespace GtRacingNews.Services.Service
 
             this.sqlRepository.SaveChangesAsync();
         }
-
         public void EditNews(string Id, AddNewFormModel data)
         {
             var news = this.sqlRepository.FindById<News>(Id);
@@ -49,7 +47,6 @@ namespace GtRacingNews.Services.Service
 
             this.sqlRepository.SaveChangesAsync();
         }
-
         public void EditProfileInfo(string Id, CreatePremiumFormModel data)
         {
             var profile = this.sqlRepository.FindByUserId(Id);
@@ -60,7 +57,6 @@ namespace GtRacingNews.Services.Service
 
             this.sqlRepository.SaveChangesAsync();
         }
-
         public void EditRace(string Id, AddNewRaceFormModel data)
         {
             var race = this.sqlRepository.FindById<Race>(Id);
@@ -70,7 +66,6 @@ namespace GtRacingNews.Services.Service
 
             this.sqlRepository.SaveChangesAsync();
         }
-
         public void EditTeam(string Id, AddTeamFormModel data)
         {
             var team = this.sqlRepository.FindById<Team>(Id);

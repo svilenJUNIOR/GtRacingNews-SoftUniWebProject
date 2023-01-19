@@ -18,6 +18,7 @@ namespace GtRacingNews.Services.Service
 
         public ViewTeamsAndChampsViewModel AllTeams()
             => this.bindService.TeamsAndChampsBind(sqlRepository.GettAll<Team>());
+
         public IEnumerable<object> All(string Entity)
         {
             if (Entity == "Races") return this.bindService.RaceBind(sqlRepository.GettAll<Race>());
@@ -28,19 +29,11 @@ namespace GtRacingNews.Services.Service
 
             if (Entity == "Championships") return this.bindService.ChampionshipBind(sqlRepository.GettAll<Championship>());
 
+
             return null;
         }
-        public ReadNewsViewModel NewsDeatils(string newsId)
-        {
-            var news = sqlRepository.GettAll<News>().Where(x => x.Id == newsId)
-                .Select(n => new ReadNewsViewModel
-                {
-                    NewsId = n.Id,
-                    Description = n.Description,
-                    Comments = sqlRepository.GettAll<Comment>().Where(x => x.NewsId == n.Id).ToList()
-                }).FirstOrDefault();
 
-            return news;
-        }
-}
+        public ReadNewsViewModel NewsDetails(string Id)
+            => this.bindService.NewsDetails(Id);
+    }
 }

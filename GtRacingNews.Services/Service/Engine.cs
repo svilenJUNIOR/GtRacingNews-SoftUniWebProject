@@ -58,6 +58,5 @@ namespace GtRacingNews.Services.Service
 
             return errors;
         }
-
     }
 }

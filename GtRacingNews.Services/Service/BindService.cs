@@ -27,7 +27,6 @@ namespace GtRacingNews.Services.Service
 
             return bindedNews;
         }
-
         public ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind)
         {
             var teams = sqlRepository.GettAll<Team>();
@@ -42,7 +41,6 @@ namespace GtRacingNews.Services.Service
 
             return bindedChampionships;
         }
-
         public ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind)
         {
             var bindedDrivers = driversToBind.Select(x => new ViewAllDriversViewModel
@@ -56,7 +54,6 @@ namespace GtRacingNews.Services.Service
 
             return bindedDrivers;
         }
-
         public ICollection<ViewAllRacesViewModel> RaceBind(ICollection<Race> racesToBind)
         {
             var bindedRaces = racesToBind.Select(x => new ViewAllRacesViewModel
@@ -76,7 +73,47 @@ namespace GtRacingNews.Services.Service
             bindedRaces = bindedRaces.OrderBy(x => DateTime.ParseExact(x.Date, "dd/MM/yyyy", null)).ToList();
             return bindedRaces;
         }
+        public ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind)
+        {
+            var drivers = sqlRepository.GettAll<Driver>();
 
+            var bindedTeams = teamsToBind.Select(x => new ViewAllTeamsViewModel
+            {
+                Name = x.Name,
+                CarModel = x.CarModel,
+                ChampionshipName = this.sqlRepository.FindById<Championship>(x.ChampionshipId).Name,
+                Drivers = drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList(),
+                Id = x.Id,
+                LogoUrl = x.LogoUrl,
+            }).ToList();
+
+            return bindedTeams;
+        }
+        public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind)
+        {
+            var bindedNews = newsToBind
+              .Select(x => new ShowGuestNews
+              {
+                  Id = x.Id,
+                  Heading = x.Heading,
+                  Description = x.Description
+              }).Take(5).ToList();
+
+            return bindedNews;
+        }
+
+        public ReadNewsViewModel NewsDetails(string newsId)
+        {
+            var news = sqlRepository.GettAll<News>().Where(x => x.Id == newsId)
+                .Select(n => new ReadNewsViewModel
+                {
+                    NewsId = n.Id,
+                    Description = n.Description,
+                    Comments = sqlRepository.GettAll<Comment>().Where(x => x.NewsId == n.Id).ToList()
+                }).FirstOrDefault();
+
+            return news;
+        }
         public ViewTeamsAndChampsViewModel TeamsAndChampsBind(ICollection<Team> teamsToBind)
         {
             var drivers = sqlRepository.GettAll<Driver>();
@@ -99,37 +136,6 @@ namespace GtRacingNews.Services.Service
 
             return teamsAndChamps;
         }
-
-        public ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind)
-        {
-            var drivers = sqlRepository.GettAll<Driver>();
-
-            var bindedTeams = teamsToBind.Select(x => new ViewAllTeamsViewModel
-            {
-                Name = x.Name,
-                CarModel = x.CarModel,
-                ChampionshipName = this.sqlRepository.FindById<Championship>(x.ChampionshipId).Name,
-                Drivers = drivers.Where(d => d.TeamId == x.Id).Select(x => x.Name).ToList(),
-                Id = x.Id,
-                LogoUrl = x.LogoUrl,
-            }).ToList();
-
-            return bindedTeams;
-        }
-
-        public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind)
-        {
-            var bindedNews = newsToBind
-              .Select(x => new ShowGuestNews
-              {
-                  Id = x.Id,
-                  Heading = x.Heading,
-                  Description = x.Description
-              }).Take(5).ToList();
-
-            return bindedNews;
-        }
-
         public MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile)
         {
             var model = new MyProfileViewModel();
@@ -161,7 +167,6 @@ namespace GtRacingNews.Services.Service
 
             return model;
         }
-
         public AddTeamFormModel BindTeamForEdit(string Id)
         {
             var team = this.sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Id == Id);

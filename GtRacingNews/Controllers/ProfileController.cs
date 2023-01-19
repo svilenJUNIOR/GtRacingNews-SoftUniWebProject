@@ -42,15 +42,6 @@ namespace GtRacingNews.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> EditPersonal()
-        {
-            var userName = this.User.Identity.Name;
-            var user = await this.userManager.FindByNameAsync(userName);
-            var id = user.Id;
-
-            return View(this.sqlRepository.FindByUserId(id));
-        }
-
         public async Task<IActionResult> DeleteTeam(string Id)
         {
             await this.deleteService.Delete<Team>(Id);
@@ -79,6 +70,15 @@ namespace GtRacingNews.Controllers
         {
             await this.deleteService.Delete<News>(Id);
             return RedirectToAction("MyProfile", "Profile");
+        }
+
+        public async Task<IActionResult> EditPersonal()
+        {
+            var userName = this.User.Identity.Name;
+            var user = await this.userManager.FindByNameAsync(userName);
+            var id = user.Id;
+
+            return View(this.sqlRepository.FindByUserId(id));
         }
 
         public async Task<IActionResult> EditTeam(string Id)
