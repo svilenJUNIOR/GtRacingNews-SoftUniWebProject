@@ -39,6 +39,21 @@
 
             <tr>
                 <td>
+                    <label for="teamName">TeamName</label>
+                </td>
+                <td>
+                    <select name="teamName" id="teamName">
+                        @foreach (var team in @Model.Teams)
+                        {
+                            <option value="@team.Name">@team.Name</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
                     <p>Submit</p>
                 </td>
                 <td>

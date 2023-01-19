@@ -1,6 +1,10 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Contracts;
+using GtRacingNews.ViewModels.Championship;
+using GtRacingNews.ViewModels.Driver;
+using GtRacingNews.ViewModels.News;
+using GtRacingNews.ViewModels.Race;
 using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Service
@@ -11,6 +15,49 @@ namespace GtRacingNews.Services.Service
 
         public EditService(ISqlRepository sqlRepository) 
             => this.sqlRepository = sqlRepository;
+
+        public void EditChampionship(string Id, AddNewChampionshipFormModel data)
+        {
+            var champ = this.sqlRepository.FindById<Championship>(Id);
+
+            champ.LogoUrl = data.LogoUrl;
+            champ.Name = data.Name;
+
+            this.sqlRepository.SaveChangesAsync();
+        }
+
+        public void EditDriver(string Id, AddNewDriverFormModel data)
+        {
+            var driver = this.sqlRepository.FindById<Driver>(Id);
+
+            driver.ImageUrl = data.ImageUrl;
+            driver.Name = data.Name;
+            driver.Age = data.Age;
+            driver.Cup = data.Cup;
+
+            this.sqlRepository.SaveChangesAsync();
+        }
+
+        public void EditNews(string Id, AddNewFormModel data)
+        {
+            var news = this.sqlRepository.FindById<News>(Id);
+
+            news.PictureUrl = data.PictureUrl;
+            news.Description = data.Description;
+            news.Heading = data.Heading;
+
+            this.sqlRepository.SaveChangesAsync();
+        }
+
+        public void EditRace(string Id, AddNewRaceFormModel data)
+        {
+            var race = this.sqlRepository.FindById<Race>(Id);
+
+            race.Date = data.Date;
+            race.Name = data.Name;
+
+            this.sqlRepository.SaveChangesAsync();
+        }
 
         public void EditTeam(string Id, AddTeamFormModel data)
         {

@@ -73,7 +73,7 @@ namespace GtRacingNews.Services.Service
                 if (date < DateTime.Now) bindedRaces[i].HasFinishied = true;
             }
 
-            bindedRaces = bindedRaces.OrderBy(x => DateTime.ParseExact(x.Date, "dd/MM/yyyy",null)).ToList();
+            bindedRaces = bindedRaces.OrderBy(x => DateTime.ParseExact(x.Date, "dd/MM/yyyy", null)).ToList();
             return bindedRaces;
         }
 
@@ -99,7 +99,7 @@ namespace GtRacingNews.Services.Service
 
             return teamsAndChamps;
         }
-        
+
         public ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind)
         {
             var drivers = sqlRepository.GettAll<Driver>();
@@ -116,7 +116,7 @@ namespace GtRacingNews.Services.Service
 
             return bindedTeams;
         }
-       
+
         public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind)
         {
             var bindedNews = newsToBind
@@ -164,18 +164,35 @@ namespace GtRacingNews.Services.Service
 
         public AddTeamFormModel BindTeamForEdit(string Id)
         {
-            var objectToEdit = this.sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Id == Id);
+            var team = this.sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Id == Id);
 
-            AddTeamFormModel obj = new AddTeamFormModel()
+            AddTeamFormModel objToEdit = new AddTeamFormModel()
             {
-                CarModel = objectToEdit.CarModel,
-                ChampionshipName = this.sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Id == objectToEdit.ChampionshipId).Name,
+                CarModel = team.CarModel,
+                ChampionshipName = this.sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Id == team.ChampionshipId).Name,
                 Championships = this.sqlRepository.GettAll<Championship>(),
-                LogoUrl = objectToEdit.LogoUrl,
-                Name = objectToEdit.Name,
+                LogoUrl = team.LogoUrl,
+                Name = team.Name,
             };
 
-            return obj;
+            return objToEdit;
+        }
+        public AddNewDriverFormModel BindDriverForEdit(string Id)
+        {
+            var driver = this.sqlRepository.FindById<Driver>(Id);
+
+            var driverToEdit = new AddNewDriverFormModel()
+            {
+                Age = driver.Age,
+                Cup = driver.Cup,
+                ImageUrl = driver.ImageUrl,
+                Name = driver.Name,
+                TeamName = this.sqlRepository.GettAll<Team>().
+                FirstOrDefault(x => x.Id == driver.TeamId).Name,
+                Teams = this.sqlRepository.GettAll<Team>()
+            };
+
+            return driverToEdit;
         }
     }
 }
