@@ -1,5 +1,4 @@
-﻿using GtRacingNews.Repository.Repositories;
-using GtRacingNews.ViewModels.Delete;
+﻿using GtRacingNews.ViewModels.Delete;
 
 namespace GtRacingNews.Services.Contracts
 {

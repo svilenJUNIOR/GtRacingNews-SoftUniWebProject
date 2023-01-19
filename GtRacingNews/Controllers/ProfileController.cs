@@ -17,16 +17,19 @@ namespace GtRacingNews.Controllers
         private ISqlRepository sqlRepository;
         private IBindService bindService;
         private IEditService editService;
+        private IDeleteService deleteService;
 
         private readonly UserManager<IdentityUser> userManager;
 
         public ProfileController(ISqlRepository sqlRepository, IBindService bindService,
-           IEditService editService, UserManager<IdentityUser> userManager)
+           IEditService editService, IDeleteService deleteService,
+           UserManager<IdentityUser> userManager)
         {
             this.sqlRepository = sqlRepository;
             this.bindService = bindService;
             this.userManager = userManager;
             this.editService = editService;
+            this.deleteService = deleteService;
         }
 
         public async Task<IActionResult> MyProfile()
@@ -47,6 +50,37 @@ namespace GtRacingNews.Controllers
 
             return View(this.sqlRepository.FindByUserId(id));
         }
+
+        public async Task<IActionResult> DeleteTeam(string Id)
+        {
+            await this.deleteService.Delete<Team>(Id);
+            return RedirectToAction("MyProfile", "Profile");
+        }
+
+        public async Task<IActionResult> DeleteChampionship(string Id)
+        {
+            await this.deleteService.Delete<Championship>(Id);
+            return RedirectToAction("MyProfile", "Profile");
+        }
+
+        public async Task<IActionResult> DeleteDriver(string Id)
+        {
+            await this.deleteService.Delete<Driver>(Id);
+            return RedirectToAction("MyProfile", "Profile");
+        }
+
+        public async Task<IActionResult> DeleteRace(string Id)
+        {
+            await this.deleteService.Delete<Race>(Id);
+            return RedirectToAction("MyProfile", "Profile");
+        }
+
+        public async Task<IActionResult> DeleteNews(string Id)
+        {
+            await this.deleteService.Delete<News>(Id);
+            return RedirectToAction("MyProfile", "Profile");
+        }
+
         public async Task<IActionResult> EditTeam(string Id)
          => View(this.bindService.BindTeamForEdit(Id));
 
