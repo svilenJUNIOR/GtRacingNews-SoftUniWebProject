@@ -1,10 +1,15 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Teams
 {
     public class TeamService : ITeamService
     {
+        private ISqlRepository sqlRepository;
+        public TeamService(ISqlRepository sqlRepository)
+        => this.sqlRepository = sqlRepository;
+
         public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
         {
             var championshipId = sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == championshipName).Id;
@@ -78,11 +83,6 @@ namespace GtRacingNews.Services.Teams
             };
 
             return objToEdit;
-        }
-
-        public ICollection<Team> GetTeamsAndChamps()
-        {
-            TeamsAndChampsBind(sqlRepository.GettAll<Team>());
         }
     }
 }
