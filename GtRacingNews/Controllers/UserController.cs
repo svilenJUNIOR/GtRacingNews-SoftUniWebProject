@@ -1,9 +1,9 @@
-﻿using GtRacingNews.Services.Contracts;
-using GtRacingNews.ViewModels.User;
+﻿using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using GtRacingNews.Common.Constants;
+using GtRacingNews.Services.Others.Contracts;
 
 namespace GtRacingNews.Controllers
 {

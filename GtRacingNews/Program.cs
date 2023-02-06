@@ -1,8 +1,8 @@
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Repository.Repositories;
-using GtRacingNews.Services.Contracts;
-using GtRacingNews.Services.Service;
+using GtRacingNews.Services.Others;
+using GtRacingNews.Services.Others.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,14 +26,10 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddScoped<IHasher, Hasher>();
 builder.Services.AddScoped<IEngine, Engine>();
-builder.Services.AddScoped<IBindService, BindService>();
-builder.Services.AddScoped<IAddService, AddService>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<IGuard, Guard>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();
-builder.Services.AddScoped<IReturnAll, ReturnAll>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
-builder.Services.AddScoped<IEditService, EditService>();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
 
 var app = builder.Build();

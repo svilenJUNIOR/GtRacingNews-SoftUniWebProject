@@ -1,4 +1,4 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Comments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
