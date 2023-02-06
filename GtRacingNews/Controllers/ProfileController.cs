@@ -1,6 +1,13 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Championships;
+using GtRacingNews.Services.Comments;
+using GtRacingNews.Services.Drivers;
+using GtRacingNews.Services.Newss;
 using GtRacingNews.Services.Others.Contracts;
+using GtRacingNews.Services.Profiles;
+using GtRacingNews.Services.Races;
+using GtRacingNews.Services.Teams;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
@@ -15,21 +22,29 @@ namespace GtRacingNews.Controllers
     public class ProfileController : Controller
     {
         private ISqlRepository sqlRepository;
-        private IBindService bindService;
-        private IEditService editService;
         private IDeleteService deleteService;
+        private IProfileService profileService;
+        private IChampionshipService championshipService;
+        private ICommentService commentService;
+        private IDriverService driverService;
+        private INewsService newsService;
+        private IRaceService raceService;
+        private ITeamService teamService;
 
         private readonly UserManager<IdentityUser> userManager;
 
-        public ProfileController(ISqlRepository sqlRepository, IBindService bindService,
-           IEditService editService, IDeleteService deleteService,
-           UserManager<IdentityUser> userManager)
+        public ProfileController(ISqlRepository sqlRepository, IDeleteService deleteService, IProfileService profileService, IChampionshipService championshipService, ICommentService commentService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService, UserManager<IdentityUser> userManager)
         {
             this.sqlRepository = sqlRepository;
-            this.bindService = bindService;
-            this.userManager = userManager;
-            this.editService = editService;
             this.deleteService = deleteService;
+            this.profileService = profileService;
+            this.championshipService = championshipService;
+            this.commentService = commentService;
+            this.driverService = driverService;
+            this.newsService = newsService;
+            this.raceService = raceService;
+            this.teamService = teamService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> MyProfile()
@@ -37,7 +52,7 @@ namespace GtRacingNews.Controllers
             var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
             var userProfile = sqlRepository.FindByUserId(currentUser.Id);
 
-            var model = bindService.ProfileBind(currentUser, userProfile);
+            var model = profileService.ProfileBind(currentUser, userProfile);
 
             return View(model);
         }
@@ -82,10 +97,10 @@ namespace GtRacingNews.Controllers
         }
 
         public async Task<IActionResult> EditTeam(string Id)
-         => View(this.bindService.BindTeamForEdit(Id));
+         => View(this.teamService.BindTeamForEdit(Id));
 
         public async Task<IActionResult> EditDriver(string Id)
-        => View(this.bindService.BindDriverForEdit(Id));
+        => View(this.driverService.BindDriverForEdit(Id));
 
         public async Task<IActionResult> EditChampionship(string Id)
         => View(this.sqlRepository.FindById<Championship>(Id));
@@ -99,35 +114,35 @@ namespace GtRacingNews.Controllers
         [HttpPost]
         public async Task<IActionResult> EditTeam(string Id, AddTeamFormModel data)
         {
-            this.editService.EditTeam(Id, data);
+            this.teamService.EditTeam(Id, data);
             return RedirectToAction("MyProfile", "Profile");
         }
 
         [HttpPost]
         public async Task<IActionResult> EditDriver(string Id, AddNewDriverFormModel data)
         {
-            this.editService.EditDriver(Id, data);
+            this.driverService.EditDriver(Id, data);
             return RedirectToAction("MyProfile", "Profile");
         }
 
         [HttpPost]
         public async Task<IActionResult> EditRace(string Id, AddNewRaceFormModel data)
         {
-            this.editService.EditRace(Id, data);
+            this.raceService.EditRace(Id, data);
             return RedirectToAction("MyProfile", "Profile");
         }
 
         [HttpPost]
         public async Task<IActionResult> EditNews(string Id, AddNewFormModel data)
         {
-            this.editService.EditNews(Id, data);
+            this.newsService.EditNews(Id, data);
             return RedirectToAction("MyProfile", "Profile");
         }
 
         [HttpPost]
         public async Task<IActionResult> EditChampionship(string Id, AddNewChampionshipFormModel data)
         {
-            this.editService.EditChampionship(Id, data);
+            this.championshipService.EditChampionship(Id, data);
             return RedirectToAction("MyProfile", "Profile");
         }
 
@@ -138,7 +153,7 @@ namespace GtRacingNews.Controllers
             var user = await this.userManager.FindByNameAsync(userName);
             var Id = user.Id;
 
-            this.editService.EditProfileInfo(Id, data);
+            this.profileService.EditProfileInfo(Id, data);
             return RedirectToAction("MyProfile", "Profile");
         }
     }
