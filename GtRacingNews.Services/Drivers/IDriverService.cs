@@ -1,8 +1,7 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
-using GtRacingNews.Repository.Repositories;
 using GtRacingNews.ViewModels.Driver;
 
-namespace GtRacingNews.Services.Driver
+namespace GtRacingNews.Services.Drivers
 {
     public interface IDriverService
     {

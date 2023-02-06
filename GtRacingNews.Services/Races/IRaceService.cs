@@ -1,6 +1,7 @@
-﻿using GtRacingNews.ViewModels.Race;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.ViewModels.Race;
 
-namespace GtRacingNews.Services.Race
+namespace GtRacingNews.Services.Races
 {
     public interface IRaceService
     {

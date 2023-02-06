@@ -1,6 +1,7 @@
-﻿using GtRacingNews.ViewModels.News;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.ViewModels.News;
 
-namespace GtRacingNews.Services.News
+namespace GtRacingNews.Services.Newss
 {
     public class NewsService : INewsService
     {

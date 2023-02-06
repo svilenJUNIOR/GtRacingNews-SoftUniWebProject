@@ -1,6 +1,7 @@
-﻿using GtRacingNews.ViewModels.Team;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.ViewModels.Team;
 
-namespace GtRacingNews.Services.Team
+namespace GtRacingNews.Services.Teams
 {
     public interface ITeamService
     {

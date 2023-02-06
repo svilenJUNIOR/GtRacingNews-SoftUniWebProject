@@ -1,9 +1,15 @@
-﻿using GtRacingNews.ViewModels.Championship;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
+using GtRacingNews.ViewModels.Championship;
 
-namespace GtRacingNews.Services.Championship
+namespace GtRacingNews.Services.Championships
 {
     public class ChampionshipService : IChampionshipService
     {
+        private readonly ISqlRepository sqlRepository;
+        public ChampionshipService(ISqlRepository sqlRepository)
+            => this.sqlRepository = sqlRepository;
+
         public async Task AddNewChampionship(string name, string logoUrl, bool isModerator, string userId)
         {
             var championship = new Championship(name, logoUrl);
@@ -33,9 +39,7 @@ namespace GtRacingNews.Services.Championship
 
             return bindedChampionships;
         }
-        public ICollection<Championship> GetAll()
-        {
-            this.bindService.ChampionshipBind(sqlRepository.GettAll<Championship>());
-        }
+        public ICollection<ViewAllChampionshipsViewModel> GetAll()
+            => this.ChampionshipBind(sqlRepository.GettAll<Championship>());
     }
 }

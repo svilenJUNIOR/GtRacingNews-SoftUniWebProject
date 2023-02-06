@@ -11,7 +11,7 @@ namespace GtRacingNews.Repository.Contracts
         Task AddRangeAsync<T>(List<T> newItems) where T : class;
         Task RemoveAsync<T>(T Item) where T : class;
       
-        List<T> GettAll<T>() where T : class;
+        ICollection<T> GettAll<T>() where T : class;
 
         IdentityUser FindUserByEmail(string email);
         IdentityUser FindUserById(string Id);

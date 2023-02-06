@@ -32,7 +32,7 @@ namespace GtRacingNews.Repository.Repositories
             await context.SaveChangesAsync();
         }
         public void SaveChangesAsync() => this.context.SaveChangesAsync();
-        public List<T> GettAll<T>() where T : class => context.Set<T>().ToList();
+        public ICollection<T> GettAll<T>() where T : class => context.Set<T>().ToList();
 
         public IdentityUser FindUserByEmail(string email) => context.Users.Where(x => x.Email == email).FirstOrDefault();
         public IdentityUser FindUserById(string Id) => context.Users.Where(x => x.Id == Id).FirstOrDefault();

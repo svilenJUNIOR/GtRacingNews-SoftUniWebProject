@@ -1,4 +1,6 @@
-﻿namespace GtRacingNews.Services.Comment
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+
+namespace GtRacingNews.Services.Comments
 {
     public class CommentService : ICommentService
     {

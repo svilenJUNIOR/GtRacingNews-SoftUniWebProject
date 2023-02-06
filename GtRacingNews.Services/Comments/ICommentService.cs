@@ -1,4 +1,4 @@
-﻿namespace GtRacingNews.Services.Comment
+﻿namespace GtRacingNews.Services.Comments
 {
     public interface ICommentService
     {

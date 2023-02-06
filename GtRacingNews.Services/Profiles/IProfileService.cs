@@ -1,8 +1,9 @@
-﻿using GtRacingNews.ViewModels.Profile;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.ViewModels.Profile;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
 
-namespace GtRacingNews.Services.Profile
+namespace GtRacingNews.Services.Profiles
 {
     public interface IProfileService
     {
