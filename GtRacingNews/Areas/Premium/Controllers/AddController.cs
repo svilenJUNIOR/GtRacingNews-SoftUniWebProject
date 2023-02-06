@@ -1,6 +1,12 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
-using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Championships;
+using GtRacingNews.Services.Comments;
+using GtRacingNews.Services.Drivers;
+using GtRacingNews.Services.Newss;
+using GtRacingNews.Services.Profiles;
+using GtRacingNews.Services.Races;
+using GtRacingNews.Services.Teams;
 using GtRacingNews.ViewModels.Championship;
 using GtRacingNews.ViewModels.Driver;
 using GtRacingNews.ViewModels.News;
@@ -17,19 +23,33 @@ namespace GtRacingNews.Areas.Premium.Controllers
     [Authorize(Roles = "Moderator, Admin")]
     public class AddController : Controller
     {
-        private readonly IEngine engine;
         private readonly ISqlRepository sqlRepository;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        public AddController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, 
-            IEngine engine, ISqlRepository sqlRepository)
+
+        private IProfileService profileService;
+        private IChampionshipService championshipService;
+        private ICommentService commentService;
+        private IDriverService driverService;
+        private INewsService newsService;
+        private IRaceService raceService;
+        private ITeamService teamService;
+
+        public AddController(ISqlRepository sqlRepository, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IProfileService profileService, IChampionshipService championshipService, ICommentService commentService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService)
         {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-            this.engine = engine;
             this.sqlRepository = sqlRepository;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+            this.profileService = profileService;
+            this.championshipService = championshipService;
+            this.commentService = commentService;
+            this.driverService = driverService;
+            this.newsService = newsService;
+            this.raceService = raceService;
+            this.teamService = teamService;
         }
+
         private async Task<IdentityUser> user() => await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
         [Authorize(Roles = "Moderator, Admin")]
@@ -75,7 +95,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await engine.AddTeam(isModerator, this.user().Result.Id, model, "Team", ModelState);
+                var result = await teamService.Add(isModerator, this.user().Result.Id, model, "Team", ModelState);
                 return Redirect("/");
             }
             catch (AggregateException exception)
@@ -96,7 +116,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await engine.AddNews(isModerator, this.user().Result.Id, model, "News", ModelState);
+                var result = await newsService.AddNews(isModerator, this.user().Result.Id, model, "News", ModelState);
                 return Redirect("/");
 
             }
@@ -118,7 +138,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await engine.AddRace(isModerator, this.user().Result.Id, model, "Race", ModelState);
+                var result = await raceService.AddRace(isModerator, this.user().Result.Id, model, "Race", ModelState);
                 return Redirect("/");
             }
 
@@ -140,7 +160,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await engine.AddDriver(isModerator, this.user().Result.Id, model, "Driver", ModelState);
+                var result = await driverService.AddDriver(isModerator, this.user().Result.Id, model, "Driver", ModelState);
                 return Redirect("/");
             }
 
@@ -162,7 +182,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await engine.AddChampionship(isModerator, this.user().Result.Id, model, "Championship", ModelState);
+                var result = await championshipService.AddChampionship(isModerator, this.user().Result.Id, model, "Championship", ModelState);
                 return Redirect("/");
             }
 

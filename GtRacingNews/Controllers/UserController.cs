@@ -4,28 +4,33 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using GtRacingNews.Common.Constants;
 using GtRacingNews.Services.Others.Contracts;
+using GtRacingNews.Services.User;
+using GtRacingNews.Services.Profiles;
 
 namespace GtRacingNews.Controllers
 {
     public class UserController : Controller
     {
         private IGuard guard;
-        private IAddService addService;
         private IValidator validator;
+        private IUserService userService;
+        private IProfileService profileService;
 
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IGuard guard, IAddService addService, IValidator validator)
+            RoleManager<IdentityRole> roleManager, IGuard guard, IValidator validator, IUserService userService,
+            IProfileService profileService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.guard = guard;
-            this.addService = addService;
             this.validator = validator;
+            this.userService = userService;
+            this.profileService = profileService;
         }
         public IActionResult Register() => View();
         public IActionResult Login() => View();
@@ -51,8 +56,8 @@ namespace GtRacingNews.Controllers
                 model.Username = model.Username.Trim();
                 model.ConfirmPassword = model.ConfirmPassword.Trim();
 
-                await userManager.CreateAsync(addService.RegisterUser(model));
-                await signInManager.SignInAsync(addService.RegisterUser(model), isPersistent: false);
+                await userManager.CreateAsync(userService.RegisterUser(model));
+                await signInManager.SignInAsync(userService.RegisterUser(model), isPersistent: false);
 
                 return Redirect("/");
             }
@@ -109,7 +114,7 @@ namespace GtRacingNews.Controllers
                 var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
                 await this.userManager.AddToRoleAsync(currentUser, model.Role);
-                await this.addService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
+                await this.profileService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
                
                 return Redirect("/");
             }

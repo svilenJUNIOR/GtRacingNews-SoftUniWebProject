@@ -1,6 +1,6 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
-using GtRacingNews.Services.Contracts;
+using GtRacingNews.Services.Newss;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GtRacingNews.Areas.Guest.Controllers
@@ -9,17 +9,17 @@ namespace GtRacingNews.Areas.Guest.Controllers
     public class HomeController : Controller
     {
         private readonly ISqlRepository sqlRepository;
-        private readonly IBindService bindService;
-        public HomeController(ISqlRepository sqlRepository, IBindService bindService)
+        private INewsService newsService;
+        public HomeController(INewsService newsService)
         {
             this.sqlRepository = sqlRepository;
-            this.bindService = bindService;
+            this.newsService = newsService;
         }
 
         public IActionResult Index()
         {
             var newsToBind = sqlRepository.GettAll<News>();
-            var bindedNews = bindService.GuestNewsBind(newsToBind);
+            var bindedNews = newsService.GuestNewsBind(newsToBind);
 
             return View(bindedNews);
         }
