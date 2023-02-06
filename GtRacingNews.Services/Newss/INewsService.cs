@@ -10,5 +10,6 @@ namespace GtRacingNews.Services.Newss
         public ICollection<ShowAllNewsViewModel> NewsBind(ICollection<News> newsToBind);
         public ReadNewsViewModel NewsDetails(string newsId);
         public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind);
+        public ICollection<ShowAllNewsViewModel> GetAll();
     }
 }

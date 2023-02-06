@@ -1,16 +1,22 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.ViewModels.News;
 
 namespace GtRacingNews.Services.Newss
 {
     public class NewsService : INewsService
     {
+        private ISqlRepository sqlRepository;
+        public NewsService(ISqlRepository sqlRepository)
+            => this.sqlRepository = sqlRepository;
+
         public async Task AddNews(string heading, string description, string pictureUrl, bool isModerator, string userId)
         {
             var news = new News(heading, description, pictureUrl);
             if (isModerator) news.UserId = userId;
             await sqlRepository.AddAsync<News>((News)news);
         }
+      
         public void EditNews(string Id, AddNewFormModel data)
         {
             var news = this.sqlRepository.FindById<News>(Id);
@@ -21,6 +27,7 @@ namespace GtRacingNews.Services.Newss
 
             this.sqlRepository.SaveChangesAsync();
         }
+       
         public ICollection<ShowAllNewsViewModel> NewsBind(ICollection<News> newsToBind)
         {
             var bindedNews = newsToBind.Select(x => new ShowAllNewsViewModel
@@ -32,6 +39,7 @@ namespace GtRacingNews.Services.Newss
 
             return bindedNews;
         }
+        
         public ReadNewsViewModel NewsDetails(string newsId)
         {
             var news = sqlRepository.GettAll<News>().Where(x => x.Id == newsId)
@@ -57,9 +65,8 @@ namespace GtRacingNews.Services.Newss
 
             return bindedNews;
         }
-        public ICollection<News> GetAll()
-        {
-            this.bindService.NewsBind(sqlRepository.GettAll<News>());
-        }
+        
+        public ICollection<ShowAllNewsViewModel> GetAll()
+         => this.NewsBind(sqlRepository.GettAll<News>());
     }
 }
