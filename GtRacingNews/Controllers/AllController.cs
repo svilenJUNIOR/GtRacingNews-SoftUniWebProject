@@ -1,4 +1,8 @@
-﻿using GtRacingNews.Services.Contracts;
+﻿using GtRacingNews.Services.Championships;
+using GtRacingNews.Services.Drivers;
+using GtRacingNews.Services.Newss;
+using GtRacingNews.Services.Races;
+using GtRacingNews.Services.Teams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,15 +11,25 @@ namespace GtRacingNews.Controllers
     [Authorize]
     public class AllController : Controller
     {
-        private IReturnAll returnAll;
-        
-        public AllController(IReturnAll returnAll ) => this.returnAll = returnAll;
+        private IChampionshipService championshipService;
+        private IDriverService driverService;
+        private INewsService newsService;
+        private IRaceService raceService;
+        private ITeamService teamService;
+        public AllController(IChampionshipService championshipService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService)
+        {
+            this.championshipService = championshipService;
+            this.driverService = driverService;
+            this.newsService = newsService;
+            this.raceService = raceService;
+            this.teamService = teamService;
+        }
 
-        public async Task<IActionResult> AllChampionships() => View(returnAll.All("Championships"));
-        public async Task<IActionResult> AllDrivers() => View(returnAll.All("Drivers"));
-        public async Task<IActionResult> AllNews() => View(returnAll.All("News"));
-        public async Task<IActionResult> NewsDetails(string Id) => View(returnAll.NewsDetails(Id));
-        public async Task<IActionResult> AllRaces() => View(returnAll.All("Races"));
-        public async Task<IActionResult> AllTeams() => View(returnAll.AllTeams());
+        public async Task<IActionResult> AllChampionships() => View(championshipService.GetAll());
+        public async Task<IActionResult> AllDrivers() => View(driverService.GetAll());
+        public async Task<IActionResult> AllNews() => View(newsService.GetAll());
+        public async Task<IActionResult> NewsDetails(string Id) => View(newsService.NewsDetails(Id));
+        public async Task<IActionResult> AllRaces() => View(raceService.GetAll());
+        public async Task<IActionResult> AllTeams() => View(teamService.GetAll());
     }
 }

@@ -84,5 +84,7 @@ namespace GtRacingNews.Services.Teams
 
             return objToEdit;
         }
+        public ICollection<ViewAllTeamsViewModel> GetAll()
+            => TeamBind(sqlRepository.GettAll<Team>());
     }
 }

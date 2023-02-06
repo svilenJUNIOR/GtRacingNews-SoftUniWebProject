@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Others.Contracts;
+﻿using GtRacingNews.Services.Comments;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Comments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,14 +10,14 @@ namespace GtRacingNews.Controllers
     public class CommentController : Controller
     {
         private IGuard guard;
-        private IAddService addService;
+        private ICommentService commentService;
 
         private readonly UserManager<IdentityUser> userManager;
 
-        public CommentController(IGuard guard, IAddService addService, UserManager<IdentityUser> userManager)
+        public CommentController(IGuard guard, ICommentService commentService, UserManager<IdentityUser> userManager)
         {
             this.guard = guard;
-            this.addService = addService;
+            this.commentService = commentService;
             this.userManager = userManager;
         }
 
@@ -32,7 +33,7 @@ namespace GtRacingNews.Controllers
 
             if (nullErrors.Count() > 0) return View("./Error", nullErrors);
 
-            else await addService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
+            else await commentService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
         }
     }
 }

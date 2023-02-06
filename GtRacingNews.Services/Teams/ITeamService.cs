@@ -10,5 +10,6 @@ namespace GtRacingNews.Services.Teams
         public ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind);
         public ViewTeamsAndChampsViewModel TeamsAndChampsBind(ICollection<Team> teamsToBind);
         public AddTeamFormModel BindTeamForEdit(string Id);
+        public ICollection<ViewAllTeamsViewModel> GetAll();
     }
 }
