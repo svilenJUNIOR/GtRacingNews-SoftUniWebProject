@@ -24,9 +24,6 @@ namespace GtRacingNews.Services.Service
             if (Entity == "Races") return this.bindService.RaceBind(sqlRepository.GettAll<Race>());
 
 
-            if (Entity == "Championships") return this.bindService.ChampionshipBind(sqlRepository.GettAll<Championship>());
-
-
             return null;
         }
 
