@@ -16,6 +16,7 @@ namespace GtRacingNews.Services.Championships
             if (isModerator) championship.UserId = userId;
             await sqlRepository.AddAsync<Championship>((Championship)championship);
         }
+        
         public void EditChampionship(string Id, AddNewChampionshipFormModel data)
         {
             var champ = this.sqlRepository.FindById<Championship>(Id);
@@ -25,6 +26,7 @@ namespace GtRacingNews.Services.Championships
 
             this.sqlRepository.SaveChangesAsync();
         }
+       
         public ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind)
         {
             var teams = sqlRepository.GettAll<Team>();
@@ -39,6 +41,7 @@ namespace GtRacingNews.Services.Championships
 
             return bindedChampionships;
         }
+       
         public ICollection<ViewAllChampionshipsViewModel> GetAll()
             => this.ChampionshipBind(sqlRepository.GettAll<Championship>());
     }

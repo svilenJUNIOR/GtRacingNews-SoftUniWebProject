@@ -1,10 +1,15 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.ViewModels.Driver;
 
 namespace GtRacingNews.Services.Drivers
 {
     public class DriverService : IDriverService
     {
+        private ISqlRepository sqlRepository;
+        public DriverService(ISqlRepository sqlRepository)
+            => this.sqlRepository = sqlRepository;
+
         public async Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName, bool isModerator, string userId)
         {
             var teamId = sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == teamName).Id;
@@ -14,6 +19,7 @@ namespace GtRacingNews.Services.Drivers
 
             await sqlRepository.AddAsync<Driver>((Driver)driver);
         }
+       
         public void EditDriver(string Id, AddNewDriverFormModel data)
         {
             var driver = this.sqlRepository.FindById<Driver>(Id);
@@ -25,6 +31,7 @@ namespace GtRacingNews.Services.Drivers
 
             this.sqlRepository.SaveChangesAsync();
         }
+       
         public ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind)
         {
             var bindedDrivers = driversToBind.Select(x => new ViewAllDriversViewModel
@@ -38,7 +45,7 @@ namespace GtRacingNews.Services.Drivers
 
             return bindedDrivers;
         }
-
+       
         public AddNewDriverFormModel BindDriverForEdit(string Id)
         {
             var driver = this.sqlRepository.FindById<Driver>(Id);
@@ -57,9 +64,7 @@ namespace GtRacingNews.Services.Drivers
             return driverToEdit;
         }
 
-        public ICollection<Driver> GetAll()
-        {
-            this.bindService.DriverBind(sqlRepository.GettAll<Driver>());
-        }
+        public ICollection<ViewAllDriversViewModel> GetAll()
+            => DriverBind(sqlRepository.GettAll<Driver>());
     }
 }

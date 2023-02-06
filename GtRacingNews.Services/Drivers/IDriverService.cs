@@ -9,6 +9,6 @@ namespace GtRacingNews.Services.Drivers
         public void EditDriver(string Id, AddNewDriverFormModel data);
         public ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind);
         public AddNewDriverFormModel BindDriverForEdit(string Id);
-        public ICollection<Driver> GetAll();
+        public ICollection<ViewAllDriversViewModel> GetAll();
     }
 }
