@@ -1,8 +1,16 @@
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Repository.Repositories;
+using GtRacingNews.Services.Championship;
+using GtRacingNews.Services.Comment;
+using GtRacingNews.Services.Driver;
+using GtRacingNews.Services.News;
 using GtRacingNews.Services.Others;
 using GtRacingNews.Services.Others.Contracts;
+using GtRacingNews.Services.Profile;
+using GtRacingNews.Services.Race;
+using GtRacingNews.Services.Team;
+using GtRacingNews.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,15 +30,21 @@ builder.Services.AddControllersWithViews()
 
     });
 
-
-
 builder.Services.AddScoped<IHasher, Hasher>();
-builder.Services.AddScoped<IEngine, Engine>();
 builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<IGuard, Guard>();
-builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
+builder.Services.AddScoped<IDeleteService, DeleteService>();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
+
+builder.Services.AddScoped<IChampionshipService, ChampionshipService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IRaceService, RaceService>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
