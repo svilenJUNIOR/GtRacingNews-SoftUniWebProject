@@ -52,9 +52,24 @@ namespace GtRacingNews.Services.Contracts
 
             return news;
         }
+
+        public ICollection<ShowGuestNews> GuestNewsBind(ICollection<News> newsToBind)
+        {
+            var bindedNews = newsToBind
+              .Select(x => new ShowGuestNews
+              {
+                  Id = x.Id,
+                  Heading = x.Heading,
+                  Description = x.Description
+              }).Take(5).ToList();
+
+            return bindedNews;
+        }
         //get
 
         public ReadNewsViewModel NewsDetails(string Id)
             => this.bindService.NewsDetails(Id);
+
+        this.bindService.NewsBind(sqlRepository.GettAll<News>());
     }
 }

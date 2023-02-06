@@ -23,9 +23,6 @@ namespace GtRacingNews.Services.Service
         {
             if (Entity == "Races") return this.bindService.RaceBind(sqlRepository.GettAll<Race>());
 
-            if (Entity == "News") return this.bindService.NewsBind(sqlRepository.GettAll<News>());
-
-            if (Entity == "Drivers") return this.bindService.DriverBind(sqlRepository.GettAll<Driver>());
 
             if (Entity == "Championships") return this.bindService.ChampionshipBind(sqlRepository.GettAll<Championship>());
 
@@ -33,7 +30,6 @@ namespace GtRacingNews.Services.Service
             return null;
         }
 
-        public ReadNewsViewModel NewsDetails(string Id)
-            => this.bindService.NewsDetails(Id);
+        
     }
 }
