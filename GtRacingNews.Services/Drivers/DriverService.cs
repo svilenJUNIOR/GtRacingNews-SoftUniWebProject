@@ -26,10 +26,13 @@ namespace GtRacingNews.Services.Drivers
             ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
 
             var doesExist = this.sqlRepository.GettAll<Driver>().Any(x => x.Name == model.Name);
+            if (doesExist)
+            {
+                Errors.Add(new ArgumentException(Messages.ExistingDriver));
+                this.guard.ThrowErrors(Errors);
+            }
+
             var teamId = this.sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == model.TeamName).Id;
-
-            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingDriver));
-
             var driver = new Driver(model.Name, model.Age, model.Cup, model.ImageUrl, teamId);
 
             if (isModerator) driver.UserId = userId;

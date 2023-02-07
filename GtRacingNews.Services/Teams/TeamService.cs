@@ -25,10 +25,13 @@ namespace GtRacingNews.Services.Teams
             ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
 
             var doesExist = this.sqlRepository.GettAll<Team>().Any(x => x.Name == model.Name);
+            if (doesExist)
+            {
+                Errors.Add(new ArgumentException(Messages.ExistingTeam));
+                this.guard.ThrowErrors(Errors);
+            }
+
             var championshipId = this.sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == model.ChampionshipName).Id;
-
-            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingTeam));
-
             var team = new Team(model.Name, model.CarModel, model.LogoUrl, championshipId);
 
             if (isModerator) team.UserId = userId;

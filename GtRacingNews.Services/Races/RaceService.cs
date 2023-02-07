@@ -26,11 +26,13 @@ namespace GtRacingNews.Services.Races
             ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
 
             var doesExist = this.sqlRepository.GettAll<Race>().Any(x => x.Name == model.Name);
-
-            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingRace));
+            if (doesExist)
+            {
+                Errors.Add(new ArgumentException(Messages.ExistingRace));
+                this.guard.ThrowErrors(Errors);
+            }
 
             var race = new Race(model.Name, model.Date);
-
             if (isModerator) race.UserId = userId;
 
             await sqlRepository.AddAsync<Race>((Race)race);

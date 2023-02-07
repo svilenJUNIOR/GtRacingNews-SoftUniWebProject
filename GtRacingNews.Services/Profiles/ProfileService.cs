@@ -37,6 +37,8 @@ namespace GtRacingNews.Services.Profiles
         {
             IEnumerable<Exception> Errors = this.guard.AgainstNull(model.Address, model.Age.ToString(), model.Role);
 
+            if (Errors.Any()) this.guard.ThrowErrors((ICollection<Exception>)Errors);
+
             var profile = new Profile(model.Age, model.Role, userId, model.Address, model.ProfilePicture);
 
             await sqlRepository.AddAsync<Profile>((Profile)profile);

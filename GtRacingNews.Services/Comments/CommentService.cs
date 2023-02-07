@@ -23,6 +23,8 @@ namespace GtRacingNews.Services.Comments
 
             ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
 
+            if (Errors.Any()) this.guard.ThrowErrors(Errors);
+
             var comment = new Comment(model.Description, newsId, userName);
 
             await sqlRepository.AddAsync<Comment>((Comment)comment);
