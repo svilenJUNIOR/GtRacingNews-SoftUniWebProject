@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Repository.Contracts;
+﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Delete;
 using Microsoft.AspNetCore.Identity;

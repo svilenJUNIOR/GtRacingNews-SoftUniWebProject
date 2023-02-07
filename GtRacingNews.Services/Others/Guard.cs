@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,15 @@ namespace GtRacingNews.Services.Others
 {
     public class Guard : IGuard
     {
+        private ISqlRepository sqlRepository;
+        private IHasher hasher;
+
+        public Guard(ISqlRepository sqlRepository, IHasher hasher)
+        {
+            this.sqlRepository = sqlRepository;
+            this.hasher = hasher;
+        }
+
         public IEnumerable<Exception> AgainstNull(params string[] args)
         {
             var errors = new List<Exception>();
@@ -54,7 +64,7 @@ namespace GtRacingNews.Services.Others
 
         public IEnumerable<Exception> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary modelState)
         {
-            var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
+            var nullErrors = this.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
             if (nullErrors.Count() > 0) return nullErrors;
 
             var errors = new List<Exception>();
@@ -66,15 +76,15 @@ namespace GtRacingNews.Services.Others
             if (model.Username.Length < Values.MinUsernameLength && model.Username.Length > Values.MaxUsernameLength)
                 errors.Add(new ArgumentException(string.Format(Messages.WrongUsernameFormat, Values.MinUsernameLength, Values.MaxUsernameLength)));
 
-            var modelStateErrors = guard.CheckModelState(modelState);
+            var modelStateErrors = this.CheckModelState(modelState);
 
             if (modelStateErrors.Count() > 0) errors.AddRange(modelStateErrors);
 
-            return guard.ThrowErrors(errors);
+            return this.ThrowErrors(errors);
         }
         public IEnumerable<Exception> ValidateUserLogin(LoginUserFormModel model)
         {
-            var nullErrors = guard.AgainstNull(model.Password, model.Email);
+            var nullErrors = this.AgainstNull(model.Password, model.Email);
             if (nullErrors.Count() > 0) return nullErrors;
 
             var errors = new List<Exception>();
@@ -83,7 +93,7 @@ namespace GtRacingNews.Services.Others
             if (!users.Any(x => x.Email == model.Email)) errors.Add(new ArgumentException(Messages.UnExistingEmail));
             if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(new ArgumentException(Messages.UnExistingPassword));
 
-            return guard.ThrowErrors(errors);
+            return this.ThrowErrors(errors);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace GtRacingNews.Services.Teams
         Task AddNewTeam(AddTeamFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
         void EditTeam(string Id, AddTeamFormModel data);
         ICollection<ViewAllTeamsViewModel> TeamBind(ICollection<Team> teamsToBind);
-        ViewTeamsAndChampsViewModel TeamsAndChampsBind(ICollection<Team> teamsToBind);
+        ViewTeamsAndChampsViewModel TeamsAndChampsBind();
         AddTeamFormModel BindTeamForEdit(string Id);
         ICollection<ViewAllTeamsViewModel> GetAll();
     }

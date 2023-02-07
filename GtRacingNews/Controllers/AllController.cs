@@ -1,4 +1,5 @@
-﻿using GtRacingNews.Services.Championships;
+﻿using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Championships;
 using GtRacingNews.Services.Drivers;
 using GtRacingNews.Services.Newss;
 using GtRacingNews.Services.Races;
@@ -30,6 +31,6 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> AllNews() => View(newsService.GetAll());
         public async Task<IActionResult> NewsDetails(string Id) => View(newsService.NewsDetails(Id));
         public async Task<IActionResult> AllRaces() => View(raceService.GetAll());
-        public async Task<IActionResult> AllTeams() => View(teamService.GetAll());
+        public async Task<IActionResult> AllTeams() => View(teamService.TeamsAndChampsBind());
     }
 }

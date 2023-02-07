@@ -10,7 +10,7 @@ namespace GtRacingNews.Areas.Guest.Controllers
     {
         private readonly ISqlRepository sqlRepository;
         private INewsService newsService;
-        public HomeController(INewsService newsService)
+        public HomeController(INewsService newsService, ISqlRepository sqlRepository)
         {
             this.sqlRepository = sqlRepository;
             this.newsService = newsService;
@@ -18,7 +18,7 @@ namespace GtRacingNews.Areas.Guest.Controllers
 
         public IActionResult Index()
         {
-            var newsToBind = sqlRepository.GettAll<News>();
+            var newsToBind = this.sqlRepository.GettAll<News>();
             var bindedNews = newsService.GuestNewsBind(newsToBind);
 
             return View(bindedNews);

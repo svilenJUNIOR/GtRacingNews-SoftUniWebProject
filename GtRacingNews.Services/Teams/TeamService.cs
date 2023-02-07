@@ -66,8 +66,9 @@ namespace GtRacingNews.Services.Teams
 
             return bindedTeams;
         }
-        public ViewTeamsAndChampsViewModel TeamsAndChampsBind(ICollection<Team> teamsToBind)
+        public ViewTeamsAndChampsViewModel TeamsAndChampsBind()
         {
+            var teamsToBind = this.sqlRepository.GettAll<Team>();
             var drivers = sqlRepository.GettAll<Driver>();
             var championships = sqlRepository.GettAll<Championship>();
 
@@ -83,7 +84,7 @@ namespace GtRacingNews.Services.Teams
 
             ViewTeamsAndChampsViewModel teamsAndChamps = new ViewTeamsAndChampsViewModel();
 
-            teamsAndChamps.Championships = championships;
+            teamsAndChamps.Championships = championships.ToList();
             teamsAndChamps.Teams = bindedTeams;
 
             return teamsAndChamps;
