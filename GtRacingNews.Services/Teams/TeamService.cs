@@ -1,5 +1,6 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Team;
 
 namespace GtRacingNews.Services.Teams
@@ -7,8 +8,13 @@ namespace GtRacingNews.Services.Teams
     public class TeamService : ITeamService
     {
         private ISqlRepository sqlRepository;
-        public TeamService(ISqlRepository sqlRepository)
-        => this.sqlRepository = sqlRepository;
+        private IValidator validator;
+        public TeamService(ISqlRepository sqlRepository, IValidator validator)
+        {
+            this.sqlRepository = sqlRepository;
+            this.validator = validator;
+        }
+
 
         public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
         {

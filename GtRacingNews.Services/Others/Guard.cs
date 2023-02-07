@@ -3,6 +3,7 @@ using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Others.Contracts;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Xml.Linq;
 
 namespace GtRacingNews.Services.Others
 {
@@ -24,32 +25,60 @@ namespace GtRacingNews.Services.Others
 
             return ThrowErrors(errors);
         }
-        public IEnumerable<Exception> ValidateObject(string dbset, string Name, ModelStateDictionary modelState)
+        public IEnumerable<Exception> ValidateTeam(string Name)
         {
             var errors = new List<Exception>();
 
-            if (dbset == "Team")
-                if (sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingTeam));
+            if (sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == Name) != null)
+                errors.Add(new ArgumentException(Messages.ExistingTeam));
 
-            if (dbset == "Championship")
-                if (sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingChampionship));
+            return ThrowErrors(errors);
+        }
+        public IEnumerable<Exception> ValidateChampionship(string Name)
+        {
+            var errors = new List<Exception>();
 
-            if (dbset == "News")
-                if (sqlRepository.GettAll<News>().FirstOrDefault(x => x.Heading == Name) != null) errors.Add(new ArgumentException(Messages.ExistingNews));
+            if (sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == Name) != null)
+                errors.Add(new ArgumentException(Messages.ExistingChampionship));
 
-            if (dbset == "Race")
-                if (sqlRepository.GettAll<Race>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingRace));
+            return ThrowErrors(errors);
+        }
+        public IEnumerable<Exception> ValidateNews(string Heading)
+        {
+            var errors = new List<Exception>();
 
-            if (dbset == "Driver")
-                if (sqlRepository.GettAll<Driver>().FirstOrDefault(x => x.Name == Name) != null) errors.Add(new ArgumentException(Messages.ExistingDriver));
+            if (sqlRepository.GettAll<News>().FirstOrDefault(x => x.Heading == Heading) != null)
+                errors.Add(new ArgumentException(Messages.ExistingNews));
+
+            return ThrowErrors(errors);
+        }
+        public IEnumerable<Exception> ValidateRace(string Name)
+        {
+            var errors = new List<Exception>();
+
+            if (sqlRepository.GettAll<Race>().FirstOrDefault(x => x.Name == Name) != null)
+                errors.Add(new ArgumentException(Messages.ExistingRace));
+
+            return ThrowErrors(errors);
+        }
+        public IEnumerable<Exception> ValidateDriver(string Name)
+        {
+            var errors = new List<Exception>();
+
+            if (sqlRepository.GettAll<Driver>().FirstOrDefault(x => x.Name == Name) != null)
+                errors.Add(new ArgumentException(Messages.ExistingDriver));
+
+            return ThrowErrors(errors);
+        }
+        public IEnumerable<Exception> CollectModelStateErrors(ModelStateDictionary modelState)
+        {
+            var errors = new List<Exception>();
 
             var modelStateErrors = CheckModelState(modelState);
-
             if (modelStateErrors.Count() > 0) errors.AddRange(modelStateErrors);
 
             return ThrowErrors(errors);
         }
-
         public IEnumerable<Exception> CheckModelState(ModelStateDictionary modelState)
         {
             var errors = new List<Exception>();
