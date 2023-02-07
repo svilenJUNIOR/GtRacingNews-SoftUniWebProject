@@ -138,7 +138,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await raceService.AddRace(isModerator, this.user().Result.Id, model, "Race", ModelState);
+                await raceService.AddNewRace(model, ModelState, isModerator, this.user().Result.Id);
                 return Redirect("/");
             }
 

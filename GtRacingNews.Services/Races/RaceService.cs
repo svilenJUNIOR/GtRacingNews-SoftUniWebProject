@@ -1,19 +1,38 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Race;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Races
 {
     public class RaceService : IRaceService
     {
         private ISqlRepository sqlRepository;
-        public RaceService(ISqlRepository sqlRepository)
-            => this.sqlRepository = sqlRepository;
+        private IGuard guard;
 
-        public async Task AddNewRace(string name, string date, bool isModerator, string userId)
+        public RaceService(ISqlRepository sqlRepository, IGuard guard)
         {
-            var race = new Race(name, date);
+            this.sqlRepository = sqlRepository;
+            this.guard = guard;
+        }
+
+        public async Task AddNewRace(AddNewRaceFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
+        {
+            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.ChampionshipName, model.Date);
+            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
+
+            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+
+            var doesExist = this.sqlRepository.GettAll<Race>().Any(x => x.Name == model.Name);
+
+            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingRace));
+
+            var race = new Race(model.Name, model.Date);
+
             if (isModerator) race.UserId = userId;
+
             await sqlRepository.AddAsync<Race>((Race)race);
         }
        
