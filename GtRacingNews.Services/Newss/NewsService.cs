@@ -21,9 +21,12 @@ namespace GtRacingNews.Services.Newss
         {
             ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
 
+            if (Errors.Any()) this.guard.ThrowErrors(Errors);
+
             var doesExist = this.sqlRepository.GettAll<News>().Any(x => x.Heading == model.Heading);
             if (doesExist)
             {
+                Errors.Clear();
                 Errors.Add(new ArgumentException(Messages.ExistingNews));
                 this.guard.ThrowErrors(Errors);
             }

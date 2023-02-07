@@ -22,9 +22,12 @@ namespace GtRacingNews.Services.Races
         {
             ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
 
+            if (Errors.Any()) this.guard.ThrowErrors(Errors);
+
             var doesExist = this.sqlRepository.GettAll<Race>().Any(x => x.Name == model.Name);
             if (doesExist)
             {
+                Errors.Clear();
                 Errors.Add(new ArgumentException(Messages.ExistingRace));
                 this.guard.ThrowErrors(Errors);
             }
