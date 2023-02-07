@@ -19,10 +19,7 @@ namespace GtRacingNews.Services.Newss
 
         public async Task AddNews(AddNewFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
         {
-            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.PictureUrl, model.Description, model.Heading);
-            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
-
-            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+            ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
 
             var doesExist = this.sqlRepository.GettAll<News>().Any(x => x.Heading == model.Heading);
             if (doesExist)

@@ -10,6 +10,7 @@ using GtRacingNews.Services.Teams;
 using GtRacingNews.ViewModels.Profile;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Profiles
 {
@@ -33,11 +34,11 @@ namespace GtRacingNews.Services.Profiles
             this.guard = guard;
         }
 
-        public async Task AddNewProfile(CreatePremiumFormModel model, string userId)
+        public async Task AddNewProfile(CreatePremiumFormModel model, ModelStateDictionary modelState, string userId)
         {
-            IEnumerable<Exception> Errors = this.guard.AgainstNull(model.Address, model.Age.ToString(), model.Role);
+            ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
 
-            if (Errors.Any()) this.guard.ThrowErrors((ICollection<Exception>)Errors);
+            if (Errors.Any()) this.guard.ThrowErrors(Errors);
 
             var profile = new Profile(model.Age, model.Role, userId, model.Address, model.ProfilePicture);
 

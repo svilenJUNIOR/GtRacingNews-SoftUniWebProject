@@ -111,7 +111,7 @@ namespace GtRacingNews.Controllers
                 var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
                 await this.userManager.AddToRoleAsync(currentUser, model.Role);
 
-                await this.profileService.AddNewProfile(model, currentUser.Id);
+                await this.profileService.AddNewProfile(model, ModelState,currentUser.Id);
                
                 return Redirect("/");
             }

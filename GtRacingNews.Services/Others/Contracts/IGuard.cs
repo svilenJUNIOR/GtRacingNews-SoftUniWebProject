@@ -6,7 +6,7 @@ namespace GtRacingNews.Services.Others.Contracts
     public interface IGuard
     {
         IEnumerable<Exception> AgainstNull(params string[] args);
-        IEnumerable<Exception> CheckModelState(ModelStateDictionary modelState);
+        ICollection<Exception> CheckModelState(ModelStateDictionary modelState);
         IEnumerable<Exception> ThrowErrors(ICollection<Exception> errors);
         ICollection<Exception> CollectErrors(IEnumerable<Exception> nullErrors, IEnumerable<Exception> modelStateErrors);
 

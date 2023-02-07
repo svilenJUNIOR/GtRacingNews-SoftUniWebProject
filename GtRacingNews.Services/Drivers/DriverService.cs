@@ -20,10 +20,7 @@ namespace GtRacingNews.Services.Drivers
 
         public async Task AddNewDriver(AddNewDriverFormModel model, ModelStateDictionary modelState,bool isModerator, string userId)
         {
-            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.TeamName, model.ImageUrl, model.Age.ToString(), model.Cup);
-            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
-
-            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+            ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
 
             var doesExist = this.sqlRepository.GettAll<Driver>().Any(x => x.Name == model.Name);
             if (doesExist)

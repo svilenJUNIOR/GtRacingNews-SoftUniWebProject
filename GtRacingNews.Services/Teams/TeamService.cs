@@ -19,14 +19,14 @@ namespace GtRacingNews.Services.Teams
 
         public async Task AddNewTeam(AddTeamFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
         {
-            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.ChampionshipName, model.CarModel, model.LogoUrl);
-            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
+            ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
 
-            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+            if (Errors.Any()) this.guard.ThrowErrors(Errors);
 
             var doesExist = this.sqlRepository.GettAll<Team>().Any(x => x.Name == model.Name);
             if (doesExist)
             {
+                Errors.Clear();
                 Errors.Add(new ArgumentException(Messages.ExistingTeam));
                 this.guard.ThrowErrors(Errors);
             }

@@ -18,6 +18,7 @@ namespace GtRacingNews.Services.Others
             this.hasher = hasher;
         }
 
+        // currently not used method may delete after
         public IEnumerable<Exception> AgainstNull(params string[] args)
         {
             var errors = new List<Exception>();
@@ -31,7 +32,7 @@ namespace GtRacingNews.Services.Others
 
             return errors;
         }
-        public IEnumerable<Exception> CheckModelState(ModelStateDictionary modelState)
+        public ICollection<Exception> CheckModelState(ModelStateDictionary modelState)
         {
             var errors = new List<Exception>();
 
@@ -47,6 +48,8 @@ namespace GtRacingNews.Services.Others
             if (errors.Count == 0) return new List<Exception>();
             throw new AggregateException(errors);
         }
+        
+        // currently not used method may delete after
         public ICollection<Exception> CollectErrors(IEnumerable<Exception> nullErrors, IEnumerable<Exception> modelStateErrors)
         {
             var errors = new List<Exception>();

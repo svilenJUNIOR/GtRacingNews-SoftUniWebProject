@@ -20,11 +20,7 @@ namespace GtRacingNews.Services.Championships
 
         public async Task AddNewChampionship(AddNewChampionshipFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
         {
-            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.LogoUrl);
-            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
-
-            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
-
+            ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
             var doesExist = this.sqlRepository.GettAll<Championship>().Any(x => x.Name == model.Name);
             if (doesExist)
             {

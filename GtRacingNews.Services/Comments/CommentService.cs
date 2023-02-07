@@ -18,11 +18,7 @@ namespace GtRacingNews.Services.Comments
 
         public async Task AddNewComment(AddNewCommentFormModel model, ModelStateDictionary modelState,string newsId, string userName)
         {
-            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Description);
-            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
-
-            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
-
+            ICollection<Exception> Errors = this.guard.CheckModelState(modelState);
             if (Errors.Any()) this.guard.ThrowErrors(Errors);
 
             var comment = new Comment(model.Description, newsId, userName);
