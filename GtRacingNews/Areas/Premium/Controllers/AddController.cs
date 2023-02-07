@@ -182,7 +182,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await championshipService.AddChampionship(isModerator, this.user().Result.Id, model, "Championship", ModelState);
+                await championshipService.AddNewChampionship(model, ModelState, isModerator, this.user().Result.Id);
                 return Redirect("/");
             }
 

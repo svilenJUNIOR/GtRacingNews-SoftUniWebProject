@@ -1,22 +1,41 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Championship;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Championships
 {
     public class ChampionshipService : IChampionshipService
     {
         private readonly ISqlRepository sqlRepository;
-        public ChampionshipService(ISqlRepository sqlRepository)
-            => this.sqlRepository = sqlRepository;
+        private IGuard guard;
 
-        public async Task AddNewChampionship(string name, string logoUrl, bool isModerator, string userId)
+        public ChampionshipService(ISqlRepository sqlRepository, IGuard guard)
         {
-            var championship = new Championship(name, logoUrl);
+            this.sqlRepository = sqlRepository;
+            this.guard = guard;
+        }
+
+        public async Task AddNewChampionship(AddNewChampionshipFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
+        {
+            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.LogoUrl);
+            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
+
+            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+
+            var doesExist = this.sqlRepository.GettAll<Championship>().Any(x => x.Name == model.Name);
+
+            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingChampionship));
+
+            var championship = new Championship(model.Name, model.LogoUrl);
+
             if (isModerator) championship.UserId = userId;
+
             await sqlRepository.AddAsync<Championship>((Championship)championship);
         }
-        
+
         public void EditChampionship(string Id, AddNewChampionshipFormModel data)
         {
             var champ = this.sqlRepository.FindById<Championship>(Id);
@@ -26,7 +45,7 @@ namespace GtRacingNews.Services.Championships
 
             this.sqlRepository.SaveChangesAsync();
         }
-       
+
         public ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind)
         {
             var teams = sqlRepository.GettAll<Team>();
@@ -41,7 +60,7 @@ namespace GtRacingNews.Services.Championships
 
             return bindedChampionships;
         }
-       
+
         public ICollection<ViewAllChampionshipsViewModel> GetAll()
             => this.ChampionshipBind(sqlRepository.GettAll<Championship>());
     }
