@@ -29,11 +29,21 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> Add(AddNewCommentFormModel model, string newsId)
         {
             var user = await userManager.GetUserAsync(User);
-            var nullErrors = guard.AgainstNull(user.UserName, model.Description);
 
-            if (nullErrors.Count() > 0) return View("./Error", nullErrors);
+            try
+            {
+                await commentService.AddNewComment(model, ModelState, newsId, user.UserName);
+                return Redirect("/");
+            }
 
-            else await commentService.AddNewComment(model.Description, newsId, user.UserName); return Redirect($"/All/NewsDetails?id={newsId}");
+            catch (AggregateException exception)
+            {
+                HashSet<string> errors = new HashSet<string>();
+
+                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
+
+                return Redirect($"/All/NewsDetails?id={newsId}");
+            }
         }
     }
 }
