@@ -1,19 +1,36 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Driver;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Drivers
 {
     public class DriverService : IDriverService
     {
         private ISqlRepository sqlRepository;
-        public DriverService(ISqlRepository sqlRepository)
-            => this.sqlRepository = sqlRepository;
+        private IGuard guard;
 
-        public async Task AddNewDriver(string name, string cup, string imageUrl, int age, string teamName, bool isModerator, string userId)
+        public DriverService(ISqlRepository sqlRepository, IGuard guard)
         {
-            var teamId = sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == teamName).Id;
-            var driver = new Driver(name, age, cup, imageUrl, teamId);
+            this.sqlRepository = sqlRepository;
+            this.guard = guard;
+        }
+
+        public async Task AddNewDriver(AddNewDriverFormModel model, ModelStateDictionary modelState,bool isModerator, string userId)
+        {
+            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.TeamName, model.ImageUrl, model.Age.ToString(), model.Cup);
+            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
+
+            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+
+            var doesExist = this.sqlRepository.GettAll<Driver>().Any(x => x.Name == model.Name);
+            var teamId = this.sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == model.TeamName).Id;
+
+            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingDriver));
+
+            var driver = new Driver(model.Name, model.Age, model.Cup, model.ImageUrl, teamId);
 
             if (isModerator) driver.UserId = userId;
 

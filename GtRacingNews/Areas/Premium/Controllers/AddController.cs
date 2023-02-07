@@ -160,7 +160,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await driverService.AddDriver(isModerator, this.user().Result.Id, model, "Driver", ModelState);
+                await driverService.AddNewDriver(model, ModelState, isModerator, this.user().Result.Id);
                 return Redirect("/");
             }
 
