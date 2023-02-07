@@ -1,17 +1,16 @@
 ﻿using GtRacingNews.Common.Constants;
-using GtRacingNews.Data.DataModels.SqlModels;
-using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Repository.Repositories;
 using GtRacingNews.Services.Others.Contracts;
+using GtRacingNews.ViewModels.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Xml.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace GtRacingNews.Services.Others
 {
     public class Guard : IGuard
     {
-        private readonly ISqlRepository sqlRepository;
-        public Guard(ISqlRepository sqlRepository) => this.sqlRepository = sqlRepository;
-
         public IEnumerable<Exception> AgainstNull(params string[] args)
         {
             var errors = new List<Exception>();
@@ -23,61 +22,7 @@ namespace GtRacingNews.Services.Others
 
             if (check) errors.Add(new ArgumentNullException(Messages.NullField));
 
-            return ThrowErrors(errors);
-        }
-        public IEnumerable<Exception> ValidateTeam(string Name)
-        {
-            var errors = new List<Exception>();
-
-            if (sqlRepository.GettAll<Team>().FirstOrDefault(x => x.Name == Name) != null)
-                errors.Add(new ArgumentException(Messages.ExistingTeam));
-
-            return ThrowErrors(errors);
-        }
-        public IEnumerable<Exception> ValidateChampionship(string Name)
-        {
-            var errors = new List<Exception>();
-
-            if (sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == Name) != null)
-                errors.Add(new ArgumentException(Messages.ExistingChampionship));
-
-            return ThrowErrors(errors);
-        }
-        public IEnumerable<Exception> ValidateNews(string Heading)
-        {
-            var errors = new List<Exception>();
-
-            if (sqlRepository.GettAll<News>().FirstOrDefault(x => x.Heading == Heading) != null)
-                errors.Add(new ArgumentException(Messages.ExistingNews));
-
-            return ThrowErrors(errors);
-        }
-        public IEnumerable<Exception> ValidateRace(string Name)
-        {
-            var errors = new List<Exception>();
-
-            if (sqlRepository.GettAll<Race>().FirstOrDefault(x => x.Name == Name) != null)
-                errors.Add(new ArgumentException(Messages.ExistingRace));
-
-            return ThrowErrors(errors);
-        }
-        public IEnumerable<Exception> ValidateDriver(string Name)
-        {
-            var errors = new List<Exception>();
-
-            if (sqlRepository.GettAll<Driver>().FirstOrDefault(x => x.Name == Name) != null)
-                errors.Add(new ArgumentException(Messages.ExistingDriver));
-
-            return ThrowErrors(errors);
-        }
-        public IEnumerable<Exception> CollectModelStateErrors(ModelStateDictionary modelState)
-        {
-            var errors = new List<Exception>();
-
-            var modelStateErrors = CheckModelState(modelState);
-            if (modelStateErrors.Count() > 0) errors.AddRange(modelStateErrors);
-
-            return ThrowErrors(errors);
+            return errors;
         }
         public IEnumerable<Exception> CheckModelState(ModelStateDictionary modelState)
         {
@@ -94,6 +39,54 @@ namespace GtRacingNews.Services.Others
         {
             if (errors.Count == 0) return new List<Exception>();
             throw new AggregateException(errors);
+        }
+        public ICollection<Exception> CollectErrors(IEnumerable<Exception> nullErrors, IEnumerable<Exception> modelStateErrors)
+        {
+            var errors = new List<Exception>();
+
+            if (nullErrors.Count() > 0)
+                foreach (var error in nullErrors) errors.Add(new ArgumentException(error.Message));
+
+            if (modelStateErrors.Count() > 0)
+                foreach (var modelError in modelStateErrors) errors.Add(new ArgumentException(modelError.Message));
+
+            if (errors.Count == 0) return new List<Exception>();
+
+            throw new AggregateException(errors);
+        }
+
+        public IEnumerable<Exception> ValidateUserRegister(RegisterUserFormModel model, ModelStateDictionary modelState)
+        {
+            var nullErrors = guard.AgainstNull(model.Username, model.Password, model.Email, model.ConfirmPassword);
+            if (nullErrors.Count() > 0) return nullErrors;
+
+            var errors = new List<Exception>();
+            var users = sqlRepository.GettAll<IdentityUser>();
+
+            if (users.Any(x => x.Email == model.Email)) errors.Add(new ArgumentException(Messages.ExistingEmail));
+            if (users.Any(x => x.UserName == model.Username)) errors.Add(new ArgumentException(Messages.ExistingUsername));
+            if (!model.Email.EndsWith("@email.com")) errors.Add(new ArgumentException(string.Format(Messages.WrongEmailFormat, Values.EndOfAnEmail)));
+            if (model.Username.Length < Values.MinUsernameLength && model.Username.Length > Values.MaxUsernameLength)
+                errors.Add(new ArgumentException(string.Format(Messages.WrongUsernameFormat, Values.MinUsernameLength, Values.MaxUsernameLength)));
+
+            var modelStateErrors = guard.CheckModelState(modelState);
+
+            if (modelStateErrors.Count() > 0) errors.AddRange(modelStateErrors);
+
+            return guard.ThrowErrors(errors);
+        }
+        public IEnumerable<Exception> ValidateUserLogin(LoginUserFormModel model)
+        {
+            var nullErrors = guard.AgainstNull(model.Password, model.Email);
+            if (nullErrors.Count() > 0) return nullErrors;
+
+            var errors = new List<Exception>();
+            var users = sqlRepository.GettAll<IdentityUser>();
+
+            if (!users.Any(x => x.Email == model.Email)) errors.Add(new ArgumentException(Messages.UnExistingEmail));
+            if (!users.Any(x => x.PasswordHash == hasher.Hash(model.Password))) errors.Add(new ArgumentException(Messages.UnExistingPassword));
+
+            return guard.ThrowErrors(errors);
         }
     }
 }

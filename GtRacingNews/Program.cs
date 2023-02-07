@@ -1,15 +1,15 @@
 using GtRacingNews.Data.DBContext;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Repository.Repositories;
-using GtRacingNews.Services.Championship;
-using GtRacingNews.Services.Comment;
-using GtRacingNews.Services.Driver;
-using GtRacingNews.Services.News;
+using GtRacingNews.Services.Championships;
+using GtRacingNews.Services.Comments;
+using GtRacingNews.Services.Drivers;
+using GtRacingNews.Services.Newss;
 using GtRacingNews.Services.Others;
 using GtRacingNews.Services.Others.Contracts;
-using GtRacingNews.Services.Profile;
-using GtRacingNews.Services.Race;
-using GtRacingNews.Services.Team;
+using GtRacingNews.Services.Profiles;
+using GtRacingNews.Services.Races;
+using GtRacingNews.Services.Teams;
 using GtRacingNews.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +31,6 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddScoped<IHasher, Hasher>();
-builder.Services.AddScoped<IValidator, Validator>();
 builder.Services.AddScoped<IGuard, Guard>();
 builder.Services.AddScoped<ISqlSeeder, SqlSeeder>();
 builder.Services.AddScoped<IDeleteService, DeleteService>();

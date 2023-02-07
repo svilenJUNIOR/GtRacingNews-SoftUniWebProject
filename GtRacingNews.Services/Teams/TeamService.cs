@@ -1,25 +1,36 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.Team;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Teams
 {
     public class TeamService : ITeamService
     {
         private ISqlRepository sqlRepository;
-        private IValidator validator;
-        public TeamService(ISqlRepository sqlRepository, IValidator validator)
+        private IGuard guard;
+        public TeamService(ISqlRepository sqlRepository, IGuard guard)
         {
             this.sqlRepository = sqlRepository;
-            this.validator = validator;
+            this.guard = guard;
         }
 
 
-        public async Task AddNewTeam(string name, string carModel, string logoUrl, string championshipName, bool isModerator, string userId)
+        public async Task AddNewTeam(AddTeamFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
         {
-            var championshipId = sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == championshipName).Id;
-            var team = new Team(name, carModel, logoUrl, championshipId);
+            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.ChampionshipName, model.CarModel, model.LogoUrl);
+            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
+
+            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+
+            var doesExist = this.sqlRepository.GettAll<Team>().Any(x => x.Name == model.Name);
+            var championshipId = this.sqlRepository.GettAll<Championship>().FirstOrDefault(x => x.Name == model.ChampionshipName).Id;
+
+            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingTeam));
+
+            var team = new Team(model.Name, model.CarModel, model.LogoUrl, championshipId);
 
             if (isModerator) team.UserId = userId;
 
