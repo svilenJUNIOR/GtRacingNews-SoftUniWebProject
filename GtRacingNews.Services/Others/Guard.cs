@@ -1,11 +1,8 @@
 ﻿using GtRacingNews.Common.Constants;
-using GtRacingNews.Repository.Repositories;
 using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Collections.Generic;
-using System;
 
 namespace GtRacingNews.Services.Others
 {

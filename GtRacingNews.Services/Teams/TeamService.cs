@@ -17,7 +17,6 @@ namespace GtRacingNews.Services.Teams
             this.guard = guard;
         }
 
-
         public async Task AddNewTeam(AddTeamFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
         {
             IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.Name, model.ChampionshipName, model.CarModel, model.LogoUrl);

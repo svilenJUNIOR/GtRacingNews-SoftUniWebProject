@@ -95,7 +95,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await teamService.AddNewTeam(model, ModelState, isModerator, this.user().Result.Id);
+                await teamService.AddNewTeam(model, ModelState, isModerator, this.user().Result.Id);
                 return Redirect("/");
             }
             catch (AggregateException exception)
@@ -116,7 +116,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             try
             {
-                var result = await newsService.AddNews(isModerator, this.user().Result.Id, model, "News", ModelState);
+                await newsService.AddNews(model, ModelState, isModerator, this.user().Result.Id);
                 return Redirect("/");
 
             }

@@ -1,19 +1,37 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.ViewModels.News;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace GtRacingNews.Services.Newss
 {
     public class NewsService : INewsService
     {
         private ISqlRepository sqlRepository;
-        public NewsService(ISqlRepository sqlRepository)
-            => this.sqlRepository = sqlRepository;
-
-        public async Task AddNews(string heading, string description, string pictureUrl, bool isModerator, string userId)
+        private IGuard guard;
+        public NewsService(ISqlRepository sqlRepository, IGuard guard)
         {
-            var news = new News(heading, description, pictureUrl);
+            this.sqlRepository = sqlRepository;
+            this.guard = guard;
+        }
+
+        public async Task AddNews(AddNewFormModel model, ModelStateDictionary modelState, bool isModerator, string userId)
+        {
+            IEnumerable<Exception> NullErrors = this.guard.AgainstNull(model.PictureUrl, model.Description, model.Heading);
+            IEnumerable<Exception> ModelStateErrorsErrors = this.guard.CheckModelState(modelState);
+
+            ICollection<Exception> Errors = this.guard.CollectErrors(NullErrors, ModelStateErrorsErrors);
+
+            var doesExist = this.sqlRepository.GettAll<News>().Any(x => x.Heading == model.Heading);
+
+            if (doesExist) Errors.Add(new ArgumentException(Messages.ExistingNews));
+
+            var news = new News(model.PictureUrl, model.Description, model.Heading);
+
             if (isModerator) news.UserId = userId;
+
             await sqlRepository.AddAsync<News>((News)news);
         }
       
