@@ -7,7 +7,7 @@ namespace GtRacingNews.Services.Profiles
 {
     public interface IProfileService
     {
-        public Task AddNewProfile(string address, int age, string userId, string profileType, string profilePicture);
+        public Task AddNewProfile(CreatePremiumFormModel model, string userId);
         public void EditProfileInfo(string Id, CreatePremiumFormModel data);
         public MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile);
     }

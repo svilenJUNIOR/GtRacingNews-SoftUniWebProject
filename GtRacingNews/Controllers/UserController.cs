@@ -12,7 +12,6 @@ namespace GtRacingNews.Controllers
     public class UserController : Controller
     {
         private IGuard guard;
-        private IValidator validator;
         private IUserService userService;
         private IProfileService profileService;
 
@@ -21,14 +20,13 @@ namespace GtRacingNews.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
 
         public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, IGuard guard, IValidator validator, IUserService userService,
+            RoleManager<IdentityRole> roleManager, IGuard guard, IUserService userService,
             IProfileService profileService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.guard = guard;
-            this.validator = validator;
             this.userService = userService;
             this.profileService = profileService;
         }
@@ -49,7 +47,7 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var dataErrors = validator.ValidateUserRegister(model, ModelState);
+                var dataErrors = guard.ValidateUserRegister(model, ModelState);
 
                 model.Email = model.Email.Trim();
                 model.Password = model.Password.Trim();
@@ -76,7 +74,7 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var dataErrors = validator.ValidateUserLogin(model);
+                var dataErrors = guard.ValidateUserLogin(model);
 
                 model.Email = model.Email.Trim();
                 model.Password = model.Password.Trim();
@@ -110,11 +108,10 @@ namespace GtRacingNews.Controllers
         {
             try
             {
-                var nullErrors = guard.AgainstNull(model.Address, model.Age.ToString());
                 var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
-
                 await this.userManager.AddToRoleAsync(currentUser, model.Role);
-                await this.profileService.AddNewProfile(model.Address, model.Age, currentUser.Id, model.Role, model.ProfilePicture);
+
+                await this.profileService.AddNewProfile(model, currentUser.Id);
                
                 return Redirect("/");
             }

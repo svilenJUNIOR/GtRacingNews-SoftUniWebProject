@@ -1,8 +1,10 @@
-﻿using GtRacingNews.Data.DataModels.SqlModels;
+﻿using GtRacingNews.Common.Constants;
+using GtRacingNews.Data.DataModels.SqlModels;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Championships;
 using GtRacingNews.Services.Drivers;
 using GtRacingNews.Services.Newss;
+using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.Services.Races;
 using GtRacingNews.Services.Teams;
 using GtRacingNews.ViewModels.Profile;
@@ -19,8 +21,8 @@ namespace GtRacingNews.Services.Profiles
         private INewsService newsService;
         private IRaceService raceService;
         private ITeamService teamService;
-
-        public ProfileService(ISqlRepository sqlRepository, IChampionshipService championshipService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService)
+        private IGuard guard;
+        public ProfileService(ISqlRepository sqlRepository, IChampionshipService championshipService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService, IGuard guard)
         {
             this.sqlRepository = sqlRepository;
             this.championshipService = championshipService;
@@ -28,11 +30,15 @@ namespace GtRacingNews.Services.Profiles
             this.newsService = newsService;
             this.raceService = raceService;
             this.teamService = teamService;
+            this.guard = guard;
         }
 
-        public async Task AddNewProfile(string address, int age, string userId, string profileType, string profilePicture)
+        public async Task AddNewProfile(CreatePremiumFormModel model, string userId)
         {
-            var profile = new Profile(age, profileType, userId, address, profilePicture);
+            IEnumerable<Exception> Errors = this.guard.AgainstNull(model.Address, model.Age.ToString(), model.Role);
+
+            var profile = new Profile(model.Age, model.Role, userId, model.Address, model.ProfilePicture);
+
             await sqlRepository.AddAsync<Profile>((Profile)profile);
         }
         public void EditProfileInfo(string Id, CreatePremiumFormModel data)
