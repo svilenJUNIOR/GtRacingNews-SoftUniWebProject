@@ -8,8 +8,9 @@ namespace GtRacingNews.Services.Profiles
 {
     public interface IProfileService
     {
-        public Task AddNewProfile(CreatePremiumFormModel model, ModelStateDictionary modelState, string userId);
-        public void EditProfileInfo(string Id, CreatePremiumFormModel data);
-        public MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile);
+        Task AddNewProfile(CreatePremiumFormModel model, ModelStateDictionary modelState, string userId);
+        void EditProfileInfo(string Id, CreatePremiumFormModel data);
+        MyProfileViewModel ProfileBind(IdentityUser currentUser, Profile userProfile);
+        CreatePremiumFormModel AddRolesToModel(List<IdentityRole> data);
     }
 }

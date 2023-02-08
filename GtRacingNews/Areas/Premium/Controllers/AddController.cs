@@ -28,22 +28,18 @@ namespace GtRacingNews.Areas.Premium.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        private IProfileService profileService;
         private IChampionshipService championshipService;
-        private ICommentService commentService;
         private IDriverService driverService;
         private INewsService newsService;
         private IRaceService raceService;
         private ITeamService teamService;
 
-        public AddController(ISqlRepository sqlRepository, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IProfileService profileService, IChampionshipService championshipService, ICommentService commentService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService)
+        public AddController(ISqlRepository sqlRepository, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IChampionshipService championshipService, IDriverService driverService, INewsService newsService, IRaceService raceService, ITeamService teamService)
         {
             this.sqlRepository = sqlRepository;
             this.userManager = userManager;
             this.roleManager = roleManager;
-            this.profileService = profileService;
             this.championshipService = championshipService;
-            this.commentService = commentService;
             this.driverService = driverService;
             this.newsService = newsService;
             this.raceService = raceService;

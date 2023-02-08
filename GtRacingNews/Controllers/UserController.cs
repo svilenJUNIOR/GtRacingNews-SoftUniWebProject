@@ -34,10 +34,8 @@ namespace GtRacingNews.Controllers
         public IActionResult Login() => View();
         public IActionResult Profile()
         {
-            CreatePremiumFormModel model = new CreatePremiumFormModel();
-
-            var roles = this.roleManager.Roles.Select(x => x.Name).ToList();
-            model.Roles = roles;
+            var roles = this.roleManager.Roles.ToList();
+            var model = this.profileService.AddRolesToModel(roles);
 
             return View(model);
         }

@@ -85,5 +85,14 @@ namespace GtRacingNews.Services.Profiles
 
             return model;
         }
+        public CreatePremiumFormModel AddRolesToModel(List<IdentityRole> data)
+        {
+            CreatePremiumFormModel model = new CreatePremiumFormModel();
+
+            var roles = data.Select(x => x.Name).ToList();
+            model.Roles = roles;
+
+            return model;
+        }
     }
 }
