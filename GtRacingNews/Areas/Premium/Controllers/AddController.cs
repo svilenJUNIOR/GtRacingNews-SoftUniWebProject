@@ -1,4 +1,5 @@
 ﻿using GtRacingNews.Data.DataModels.SqlModels;
+using GtRacingNews.Extensions;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Championships;
 using GtRacingNews.Services.Comments;
@@ -95,13 +96,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
                 return Redirect("/");
             }
             catch (AggregateException exception)
-            {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
-            }
+                return this.CatchErrors(exception);
         }
 
         [HttpPost]
