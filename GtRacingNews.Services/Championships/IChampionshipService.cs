@@ -6,10 +6,9 @@ namespace GtRacingNews.Services.Championships
 {
     public interface IChampionshipService
     {
-        public Task AddNewChampionship(AddNewChampionshipFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
-        public void EditChampionship(string Id, AddNewChampionshipFormModel data);
-        public ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind);
-        public ICollection<ViewAllChampionshipsViewModel> GetAll();
-
+       Task AddNewChampionship(AddNewChampionshipFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
+       void EditChampionship(string Id, AddNewChampionshipFormModel data);
+       ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind);
+       ICollection<ViewAllChampionshipsViewModel> GetAll();
     }
 }

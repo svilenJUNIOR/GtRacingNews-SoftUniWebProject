@@ -6,9 +6,9 @@ namespace GtRacingNews.Services.Races
 {
     public interface IRaceService
     {
-        public Task AddNewRace(AddNewRaceFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
-        public void EditRace(string Id, AddNewRaceFormModel data);
-        public ICollection<ViewAllRacesViewModel> RaceBind(ICollection<Race> racesToBind);
-        public ICollection<ViewAllRacesViewModel> GetAll();
+        Task AddNewRace(AddNewRaceFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
+        void EditRace(string Id, AddNewRaceFormModel data);
+        ICollection<ViewAllRacesViewModel> RaceBind(ICollection<Race> racesToBind);
+        ICollection<ViewAllRacesViewModel> GetAll();
     }
 }

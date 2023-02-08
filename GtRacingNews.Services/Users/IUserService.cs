@@ -5,6 +5,6 @@ namespace GtRacingNews.Services.User
 {
     public interface IUserService
     {
-        public IdentityUser RegisterUser(RegisterUserFormModel model);
+        IdentityUser RegisterUser(RegisterUserFormModel model);
     }
 }

@@ -2,10 +2,8 @@
 using GtRacingNews.Extensions;
 using GtRacingNews.Repository.Contracts;
 using GtRacingNews.Services.Championships;
-using GtRacingNews.Services.Comments;
 using GtRacingNews.Services.Drivers;
 using GtRacingNews.Services.Newss;
-using GtRacingNews.Services.Profiles;
 using GtRacingNews.Services.Races;
 using GtRacingNews.Services.Teams;
 using GtRacingNews.ViewModels.Championship;
@@ -96,7 +94,9 @@ namespace GtRacingNews.Areas.Premium.Controllers
                 return Redirect("/");
             }
             catch (AggregateException exception)
+            {
                 return this.CatchErrors(exception);
+            }
         }
 
         [HttpPost]
@@ -113,11 +113,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
             }
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception);
             }
         }
 
@@ -135,11 +131,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception);
             }
         }
 
@@ -157,11 +149,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception);
             }
         }
 
@@ -179,11 +167,7 @@ namespace GtRacingNews.Areas.Premium.Controllers
 
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception); 
             }
         }
 

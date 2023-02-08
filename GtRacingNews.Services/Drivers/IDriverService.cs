@@ -6,10 +6,10 @@ namespace GtRacingNews.Services.Drivers
 {
     public interface IDriverService
     {
-        public  Task AddNewDriver(AddNewDriverFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
-        public void EditDriver(string Id, AddNewDriverFormModel data);
-        public ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind);
-        public AddNewDriverFormModel BindDriverForEdit(string Id);
-        public ICollection<ViewAllDriversViewModel> GetAll();
+        Task AddNewDriver(AddNewDriverFormModel model, ModelStateDictionary modelState, bool isModerator, string userId);
+        void EditDriver(string Id, AddNewDriverFormModel data);
+        ICollection<ViewAllDriversViewModel> DriverBind(ICollection<Driver> driversToBind);
+        AddNewDriverFormModel BindDriverForEdit(string Id);
+        ICollection<ViewAllDriversViewModel> GetAll();
     }
 }

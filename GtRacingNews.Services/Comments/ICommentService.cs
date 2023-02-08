@@ -5,6 +5,6 @@ namespace GtRacingNews.Services.Comments
 {
     public interface ICommentService
     {
-        public Task AddNewComment(AddNewCommentFormModel model, ModelStateDictionary modelState, string newsId, string UserName);
+        Task AddNewComment(AddNewCommentFormModel model, ModelStateDictionary modelState, string newsId, string UserName);
     }
 }
