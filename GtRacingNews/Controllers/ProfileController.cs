@@ -52,6 +52,7 @@ namespace GtRacingNews.Controllers
             var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
             var userProfile = sqlRepository.FindByUserId(currentUser.Id);
 
+
             var model = profileService.ProfileBind(currentUser, userProfile);
 
             return View(model);

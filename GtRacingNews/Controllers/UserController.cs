@@ -131,7 +131,7 @@ namespace GtRacingNews.Controllers
             CookieOptions cookieOptions = new CookieOptions();
 
             cookieOptions.Secure = true;
-            cookieOptions.Expires = DateTime.Now.AddDays(-1);
+            cookieOptions.Expires = DateTime.Now.AddDays(-3);
 
             // UserCookieKey comes from Common.Constants
             Response.Cookies.Delete(Values.UserCookieKey, cookieOptions);

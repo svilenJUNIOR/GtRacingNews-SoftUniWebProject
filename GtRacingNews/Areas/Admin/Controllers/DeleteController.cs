@@ -10,9 +10,11 @@ namespace GtRacingNews.Areas.Admin.Controllers
     public class DeleteController : Controller
     {
         private IDeleteService deleteService;
-        public DeleteController(IDeleteService deleteService) => this.deleteService = deleteService;
+        public DeleteController(IDeleteService deleteService) 
+            => this.deleteService = deleteService;
 
-        public async Task<IActionResult> DeleteView() => View(deleteService.GetItemsForDeletion());
+        public async Task<IActionResult> DeleteView() 
+            => View(deleteService.GetItemsForDeletion());
 
         public async Task<IActionResult> DeleteTeam(string Id)
         {
