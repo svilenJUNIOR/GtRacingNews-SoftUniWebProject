@@ -6,6 +6,7 @@ using GtRacingNews.Common.Constants;
 using GtRacingNews.Services.Others.Contracts;
 using GtRacingNews.Services.User;
 using GtRacingNews.Services.Profiles;
+using GtRacingNews.Extensions;
 
 namespace GtRacingNews.Controllers
 {
@@ -59,11 +60,7 @@ namespace GtRacingNews.Controllers
             }
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception);
             }
         }
 
@@ -92,11 +89,7 @@ namespace GtRacingNews.Controllers
             }
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception);
             }
         }
 
@@ -109,17 +102,13 @@ namespace GtRacingNews.Controllers
                 var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
                 await this.userManager.AddToRoleAsync(currentUser, model.Role);
 
-                await this.profileService.AddNewProfile(model, ModelState,currentUser.Id);
-               
+                await this.profileService.AddNewProfile(model, ModelState, currentUser.Id);
+
                 return Redirect("/");
             }
             catch (AggregateException exception)
             {
-                HashSet<string> errors = new HashSet<string>();
-
-                foreach (var error in exception.InnerExceptions) errors.Add(error.Message);
-
-                return View("./Error", errors);
+                return this.CatchErrors(exception);
             }
         }
 
