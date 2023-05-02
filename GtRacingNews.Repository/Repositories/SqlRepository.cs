@@ -44,6 +44,6 @@ namespace GtRacingNews.Repository.Repositories
             return table.Find(Id);
         }
 
-        public Profile FindByUserId(string UserId) => context.Profiles.Where(x => x.UserId == UserId).FirstOrDefault();
+        public Profile FindProfileByUserId(string UserId) => context.Profiles.Where(x => x.UserId == UserId).FirstOrDefault();
     }
 }

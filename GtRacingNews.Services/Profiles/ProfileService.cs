@@ -39,7 +39,7 @@ namespace GtRacingNews.Services.Profiles
 
             if (Errors.Any()) this.guard.ThrowErrors(Errors);
 
-            var Age = this.CalculateAge(DateTime.Today, model.BirthDate);
+            var Age = model.Age;
 
             var profile = new Profile(Age, model.Role, userId, model.Address, model.ProfilePicture);
 
@@ -48,10 +48,10 @@ namespace GtRacingNews.Services.Profiles
         public void EditProfileInfo(string Id, CreatePremiumFormModel data)
         {
 
-            var profile = this.sqlRepository.FindByUserId(Id);
+            var profile = this.sqlRepository.FindProfileByUserId(Id);
 
             profile.Address = data.Address;
-            profile.Age = this.CalculateAge(DateTime.Today, data.BirthDate);
+            profile.Age = data.Age;
             profile.ProfilePicture = data.ProfilePicture;
 
             this.sqlRepository.SaveChangesAsync();
@@ -96,14 +96,14 @@ namespace GtRacingNews.Services.Profiles
 
             return model;
         }
-        private int CalculateAge(DateTime now, DateTime before)
-        {
-            var Age = now.Year - before.Year;
+        //private int CalculateAge(DateTime now, DateTime before)
+        //{
+        //    var Age = now.Year - before.Year;
 
-            if (now.Month < before.Month) Age--;
-            else if ((now.Month == before.Month) || (now.Day < before.Day)) Age--;
+        //    if (now.Month < before.Month) Age--;
+        //    else if ((now.Month == before.Month) || (now.Day < before.Day)) Age--;
 
-            return Age;
-        }
+        //    return Age;
+        //}
     }
 }

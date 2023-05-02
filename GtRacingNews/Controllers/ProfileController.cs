@@ -50,7 +50,7 @@ namespace GtRacingNews.Controllers
         public async Task<IActionResult> MyProfile()
         {
             var currentUser = await this.userManager.FindByNameAsync(this.User.Identity.Name);
-            var userProfile = sqlRepository.FindByUserId(currentUser.Id);
+            var userProfile = sqlRepository.FindProfileByUserId(currentUser.Id);
 
 
             var model = profileService.ProfileBind(currentUser, userProfile);
@@ -94,7 +94,7 @@ namespace GtRacingNews.Controllers
             var user = await this.userManager.FindByNameAsync(userName);
             var id = user.Id;
 
-            return View(this.sqlRepository.FindByUserId(id));
+            return View(this.sqlRepository.FindProfileByUserId(id));
         }
 
         public async Task<IActionResult> EditTeam(string Id)

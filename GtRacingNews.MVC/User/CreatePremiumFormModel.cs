@@ -5,7 +5,7 @@ namespace GtRacingNews.ViewModels.User
     public class CreatePremiumFormModel
     {
         [Required]
-        public DateTime BirthDate { get; set; }
+        public int Age { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
