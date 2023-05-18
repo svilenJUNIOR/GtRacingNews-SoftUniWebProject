@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews.Repository", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GtRacingNews.Services", "GtRacingNews.Services\GtRacingNews.Services.csproj", "{474BBD57-DA2B-45E5-8EA5-5FB31B2032A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{0C4F461D-1914-425E-8635-D2B9790734AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{474BBD57-DA2B-45E5-8EA5-5FB31B2032A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{474BBD57-DA2B-45E5-8EA5-5FB31B2032A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{474BBD57-DA2B-45E5-8EA5-5FB31B2032A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C4F461D-1914-425E-8635-D2B9790734AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C4F461D-1914-425E-8635-D2B9790734AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C4F461D-1914-425E-8635-D2B9790734AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C4F461D-1914-425E-8635-D2B9790734AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

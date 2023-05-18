@@ -48,7 +48,7 @@ namespace GtRacingNews.Services.Championships
             this.sqlRepository.SaveChangesAsync();
         }
 
-        public ICollection<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind)
+        public List<ViewAllChampionshipsViewModel> ChampionshipBind(ICollection<Championship> championshipsToBind)
         {
             var teams = sqlRepository.GettAll<Team>();
 
@@ -63,7 +63,7 @@ namespace GtRacingNews.Services.Championships
             return bindedChampionships;
         }
 
-        public ICollection<ViewAllChampionshipsViewModel> GetAll()
+        public List<ViewAllChampionshipsViewModel> GetAll()
             => this.ChampionshipBind(sqlRepository.GettAll<Championship>());
     }
 }
